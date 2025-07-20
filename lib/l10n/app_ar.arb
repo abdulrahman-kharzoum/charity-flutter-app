@@ -1,0 +1,102 @@
+{
+  "@@locale": "ar",
+
+  "organizationName": "جمعية الشيخ محي الدين",
+  "loginWelcomeBack": "مرحباً بعودتك!",
+  "loginPhoneNumberLabel": "رقم الهاتف",
+  "loginPhoneNumberHint": "9XXXXXXXX",
+  "loginPasswordLabel": "كلمة المرور",
+  "loginPasswordHint": "أدخل كلمة المرور",
+  "loginForgotPassword": "هل نسيت كلمة المرور؟",
+  "loginButton": "تسجيل الدخول",
+  "loginValidationPhoneNumberInvalid": "أحرف غير صالحة في رقم الهاتف.",
+  "loginValidationPhoneNumberRequired": "يرجى إدخال رقم هاتفك",
+  "loginValidationPasswordRequired": "يرجى إدخال كلمة المرور الخاصة بك",
+  "loginValidationPhoneNumberStartsWith9": "يجب أن يبدأ رقم الهاتف بالرقم 9.",
+  "loginValidationPhoneNumberLength": "يجب أن يتكون رقم الهاتف من 9 أرقام.",
+  "loginValidationPasswordMinLength": "يجب أن لا تقل كلمة المرور عن 8 أحرف.",
+
+
+  "loginErrorNoInternet": "لا يوجد اتصال بالإنترنت. يرجى التحقق من شبكتك.",
+  "loginErrorGeneric": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+  "loginErrorInvalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
+
+  "loginSuccessMessage": "تم تسجيل الدخول بنجاح!",
+
+  "language": "اللغة",
+  "homeScreenTitle": "الصفحة الرئيسية",
+  "homeQuickAccess": "وصول سريع",
+  "homeServiceDispensaryTitle": "قسم المستوصف",
+  "homeServiceDispensarySubtitle": "نحرص على صحتكم\nتفضلوا بالاطلاع على خدمات العيادة المتوفرة",
+  "homeServiceEducationTitle": "قسم التعليم",
+  "homeServiceEducationSubtitle": "نسعى لتمكينكم بالعلم\nقم بزيارة قسم التعليم",
+  "homeQuickAccessPharmacies": "الصيدليات المناوبة",
+  "homeQuickAccessAppointment": "حجز موعد",
+  "homeQuickAccessFamilyInfo": "عرض معلومات العائلة",
+  "homeQuickAccessCourses": "تصفح أحدث الدورات",
+  "bottomNavMenu": "القائمة",
+  "bottomNavHelp": "المساعدة",
+  "bottomNavHome": "الرئيسية",
+  "bottomNavScan": "مسح",
+  "bottomNavNotifications": "الإشعارات",
+  "homeNoImages": "لا توجد صور لعرضها",
+
+  "myRequestsTitle": "طلباتي",
+  "requestHistoryLabel": "سجل الطلبات",
+  "@myRequestsTitle": {
+    "description": "Title for the My Requests screen"
+  },
+  "myRequestsNoRequests": "لا يوجد طلبات حالياً",
+  "@myRequestsNoRequests": {
+    "description": "عذرًا، لا توجد طلبات لعرضها! أضف طلبًا"
+  },
+  "myRequestsErrorPrefix": "خطأ: ",
+  "@myRequestsErrorPrefix": {
+    "description": "خطأ في الشبكة"
+  },
+  "myRequestsUnknownState": "حالة غير معروفة",
+  "@myRequestsUnknownState": {
+    "description": "حالة غير معروفة على شاشة طلباتي"
+  },
+  "addRequestButtonLabel": "إضافة طلب",
+
+  "addRequestScreenTitle": "طلب مساعدة مالية",
+  "amountLabel": "المبلغ",
+  "amountHint": "أدخل المبلغ",
+  "amountValidationErrorRequired": "الرجاء إدخال المبلغ",
+  "amountValidationErrorInvalid": "مبلغ غير صحيح",
+  "currencyUnitThousand": "ألف",
+  "currencyUnitMillion": "مليون",
+  "reasonLabel": "السبب",
+  "reasonHint": "أذكر سبب طلبك للمساعدة...",
+  "reasonValidationError": "الرجاء إدخال سبب الطلب",
+  "descriptionLabel": "الوصف",
+  "descriptionHint": "أضف وصفاً تفصيلياً...",
+  "descriptionValidationError": "الرجاء إدخال الوصف",
+  "notesLabel": "ملاحظات",
+  "notesHint": "أي ملاحظات إضافية...",
+  "submitRequestButton": "طلب المساعدة المالية",
+  "requestSuccessMessage": "تم إرسال طلبك بنجاح!",
+  "requestFailureMessageGeneric": "فشل إرسال الطلب. حاول مرة أخرى.",
+  "reasonTooShortError": "يجب أن يكون سبب الطلب {minLength} أحرف على الأقل.",
+  "@reasonTooShortError": {
+    "description": "رسالة خطأ التحقق من أن سبب الطلب قصير جداً.",
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "descriptionTooShortError": "يجب أن يكون الوصف التفصيلي {minLength} أحرف على الأقل.",
+  "@descriptionTooShortError": {
+    "description": "رسالة خطأ التحقق من أن الوصف التفصيلي قصير جداً.",
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "amountValidationErrorPositive": "يجب أن يكون المبلغ رقماً موجباً."
+}

@@ -1,0 +1,105 @@
+{
+  "@@locale": "en",
+
+  "organizationName": "Sheikh Muhyiddin Charity",
+  "@organizationName": {
+    "description": "The name of the charitable organization"
+  },
+
+  "loginWelcomeBack": "Welcome Back!",
+  "loginPhoneNumberLabel": "Phone Number",
+  "loginPhoneNumberHint": "9XXXXXXXX",
+  "loginPasswordLabel": "Password",
+  "loginPasswordHint": "Enter your password",
+  "loginForgotPassword": "Forget the password?",
+  "loginButton": "Login",
+  "loginValidationPhoneNumberInvalid": "Invalid characters in phone number.",
+  "loginValidationPhoneNumberRequired": "Please enter your phone number",
+  "loginValidationPasswordRequired": "Please enter your password",
+  "loginValidationPhoneNumberStartsWith9": "Phone number must start with 9.",
+  "loginValidationPhoneNumberLength": "Phone number must be 9 digits long.",
+  "loginValidationPasswordMinLength": "Password must be at least 8 characters.",
+
+
+  "loginErrorNoInternet": "No internet connection. Please check your network.",
+  "loginErrorGeneric": "Login failed. Please try again.",
+  "loginErrorInvalidCredentials": "Invalid phone number or password. Please try again.",
+
+  "loginSuccessMessage": "Login Successful!",
+
+  "language": "Language",
+
+  "homeScreenTitle": "Home Page",
+  "homeQuickAccess": "Quick Access",
+  "homeServiceDispensaryTitle": "Clinic Section",
+  "homeServiceDispensarySubtitle": "We care for your health\nCheck out the available clinic services",
+  "homeServiceEducationTitle": "Education Section",
+  "homeServiceEducationSubtitle": "We strive to empower you with knowledge\nVisit the education section",
+  "homeQuickAccessPharmacies": "On-Duty Pharmacies",
+  "homeQuickAccessAppointment": "Book Appointment",
+  "homeQuickAccessFamilyInfo": "View Family Info",
+  "homeQuickAccessCourses": "Browse Latest Courses",
+  "bottomNavMenu": "Menu",
+  "bottomNavHelp": "Help",
+  "bottomNavHome": "Home",
+  "bottomNavScan": "Scan",
+  "bottomNavNotifications": "Alerts",
+  "homeNoImages": "No images to display",
+  "myRequestsTitle": "My Requests",
+  "@myRequestsTitle": {
+    "description": "Title for the My Requests screen"
+  },
+  "myRequestsNoRequests": "No requests currently",
+  "@myRequestsNoRequests": {
+    "description": "Sorry no requests to display! Add a request"
+  },
+  "myRequestsErrorPrefix": "Error: ",
+  "@myRequestsErrorPrefix": {
+    "description": "Network Error"
+  },
+  "myRequestsUnknownState": "Unknown state",
+  "@myRequestsUnknownState": {
+    "description": "unknown state on My Requests screen"
+  },
+  "addRequestButtonLabel": "Add Request",
+  "requestHistoryLabel": "Request History",
+  "addRequestScreenTitle": "Request Financial Aid",
+  "amountLabel": "Amount",
+  "amountHint": "Enter the amount",
+  "amountValidationErrorRequired": "Please enter the amount",
+  "amountValidationErrorInvalid": "Invalid amount",
+  "currencyUnitThousand": "Thousand",
+  "currencyUnitMillion": "Million",
+  "reasonLabel": "Reason",
+  "reasonHint": "State the reason for your request...",
+  "reasonValidationError": "Please enter the reason for the request",
+  "descriptionLabel": "Description",
+  "descriptionHint": "Add a detailed description...",
+  "descriptionValidationError": "Please enter the description",
+  "notesLabel": "Notes",
+  "notesHint": "Any additional notes...",
+  "submitRequestButton": "Request Financial Aid",
+  "requestSuccessMessage": "Your request has been submitted successfully!",
+  "requestFailureMessageGeneric": "Failed to submit request. Please try again.",
+  "reasonTooShortError": "Reason must be at least {minLength} characters long.",
+  "@reasonTooShortError": {
+    "description": "Validation error for reason being too short.",
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "descriptionTooShortError": "Description must be at least {minLength} characters long.",
+  "@descriptionTooShortError": {
+    "description": "Validation error for description being too short.",
+    "placeholders": {
+      "minLength": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "amountValidationErrorPositive": "Amount must be a positive number."
+}

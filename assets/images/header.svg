@@ -1,0 +1,17 @@
+<svg width="445" height="288" xmlns="http://www.w3.org/2000/svg" fill="none">
+ <defs>
+  <filter id="svg_1_blur">
+   <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+  </filter>
+  <linearGradient id="paint0_linear_81_798" x1="0.5" y1="0" x2="0.5" y2="1">
+   <stop stop-color="#44A5FC"/>
+   <stop offset="1" stop-color="#0088FF"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1" stroke-width="0" filter="url(#svg_1_blur)">
+   <path d="m-1,-2.08455l0,246.29967c14.89119,-12.914 19.94069,-28.768 69.00899,-40.881c61.3351,-15.142 118.6491,35.762 194.3551,63.016c60.565,21.804 144.946,5.328 185.566,-22.135l0,-247.21512l-404.2565,0.91545l-44.67359,0z" fill="url(#paint0_linear_81_798)" id="svg_2"/>
+  </g>
+ </g>
+</svg>
