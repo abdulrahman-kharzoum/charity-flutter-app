@@ -1,4 +1,3 @@
-// lib/theme/color.dart
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -89,10 +88,34 @@ class AppColors {
   static const Color requestStatusAccepted = Color(0xFF10B981);
   static const Color requestStatusRejected = Color(0xFFEF4444);
 
- static const Color myRequestsBackground = slate100;
- static const Color myRequestsTimelineBorder = slate300;
-static const Color myRequestsDateText = slate500;
- static const Color myRequestsDescriptionText = slate600;
- static const Color myRequestsBackButton = slate700;
- static const Color myRequestsTitleText = slate800;
+  static const Color myRequestsBackground = slate100;
+  static const Color myRequestsTimelineBorder = slate300;
+  static const Color myRequestsDateText = slate500;
+  static const Color myRequestsDescriptionText = slate600;
+  static const Color myRequestsBackButton = slate700;
+  static const Color myRequestsTitleText = slate800;
+
+  // From index.css
+  static const Color sky400 = Color(0xFF38BDF8);
+  static const Color purple900 = Color(0xFF581C87);
+
+  static const Gradient darkGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      AppColors.slate900,
+      AppColors.purple900,
+      AppColors.slate900,
+    ],
+  );
+
+  static const Gradient lightGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      AppColors.primary50,
+      AppColors.indigo50,
+      Color(0xFFF5EAFC),
+    ],
+  );
 }

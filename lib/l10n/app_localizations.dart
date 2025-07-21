@@ -466,6 +466,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Amount must be a positive number.'**
   String get amountValidationErrorPositive;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get theme;
+
+  /// No description provided for @aboutUs.
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get aboutUs;
+
+  /// No description provided for @customizeYourExperience.
+  ///
+  /// In en, this message translates to:
+  /// **'Customize your experience'**
+  String get customizeYourExperience;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @enabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Enabled'**
+  String get enabled;
+
+  /// No description provided for @disabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Disabled'**
+  String get disabled;
+
+  /// No description provided for @dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
+  /// No description provided for @appInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'App information and support'**
+  String get appInfo;
+
+  /// No description provided for @johnDoe.
+  ///
+  /// In en, this message translates to:
+  /// **'John Doe'**
+  String get johnDoe;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @personalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Info'**
+  String get personalInfo;
+
+  /// No description provided for @addresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Addresses'**
+  String get addresses;
+
+  /// No description provided for @contactInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Info'**
+  String get contactInfo;
+
+  /// No description provided for @emailPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Preferences'**
+  String get emailPreferences;
+
+  /// No description provided for @profileSections.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Sections'**
+  String get profileSections;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTitle;
+
+  /// No description provided for @profileEditProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get profileEditProfile;
+
+  /// No description provided for @profilePersonalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get profilePersonalInfo;
+
+  /// No description provided for @profileFamilyInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Family Information'**
+  String get profileFamilyInfo;
+
+  /// No description provided for @profileDependentsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Dependents Information'**
+  String get profileDependentsInfo;
+
+  /// No description provided for @profileGroupInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Group Information'**
+  String get profileGroupInfo;
+
+  /// No description provided for @profileAvailableAid.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Aid'**
+  String get profileAvailableAid;
+
+  /// No description provided for @profileRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My Requests'**
+  String get profileRequests;
+
+  /// No description provided for @profileLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get profileLogout;
+
+  /// No description provided for @profileUserNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'User Name'**
+  String get profileUserNamePlaceholder;
+
+  /// No description provided for @profileUserPhonePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'098XXXXXXX'**
+  String get profileUserPhonePlaceholder;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

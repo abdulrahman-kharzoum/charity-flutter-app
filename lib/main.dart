@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/cubits/auth/login/login_cubit.dart';
 import 'package:charity/cubits/localization/localization_cubit.dart';
+import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
+import 'package:charity/cubits/profile_cubit/profile_cubit.dart';
+import 'package:charity/core/shared/settings_repository.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/routes/routes.dart' as app_routes;
@@ -34,7 +37,12 @@ class MyApp extends StatelessWidget {
         BlocProvider<LocalizationCubit>(
           create: (context) => LocalizationCubit(),
         ),
-        // Add other global Blocs/Cubits if needed
+        BlocProvider<SettingsCubit>(
+          create: (context) => SettingsCubit(SettingsRepository()),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(),
+        ),
       ],
       child: BlocBuilder<LocalizationCubit, LocalizationState>(
         builder: (context, localizationState) {

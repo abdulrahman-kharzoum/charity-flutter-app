@@ -6,6 +6,11 @@ import 'package:charity/screens/home/home_screen.dart';
 import 'package:charity/cubits/splash/splash_cubit.dart';
 import 'package:charity/cubits/auth/login/login_cubit.dart';
 import 'package:charity/cubits/navigation_cubit/navigation_cubit.dart';
+import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
+import 'package:charity/cubits/profile_cubit/profile_cubit.dart';
+import 'package:charity/screens/settings_screen/settings_screen.dart';
+import 'package:charity/screens/profile_screen/profile_screen.dart';
+import 'package:charity/core/shared/settings_repository.dart';
 
 final Map<String, WidgetBuilder> routes = {
   // ======splash Screen=====//
@@ -24,4 +29,18 @@ final Map<String, WidgetBuilder> routes = {
   '/login_screen':
       (context) =>
           BlocProvider(create: (context) => LoginCubit(), child: LoginScreen()),
+  // ======Settings Screen=====//
+  '/settings': (context) => BlocProvider(
+        create: (context) => SettingsCubit(SettingsRepository()),
+        child: const SettingsScreen(),
+      ),
+  // ======Profile Screen=====//
+  '/profile': (context) => BlocProvider(
+        create: (context) => ProfileCubit(),
+        child: const ProfileScreen(),
+      ),
+  '/edit-profile': (context) => BlocProvider(
+    create: (context) => ProfileCubit(),
+    child: const ProfileScreen(),
+  ),
 };

@@ -197,4 +197,118 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get amountValidationErrorPositive => 'يجب أن يكون المبلغ رقماً موجباً.';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get theme => 'المظهر';
+
+  @override
+  String get aboutUs => 'حول التطبيق';
+
+  @override
+  String get customizeYourExperience => 'خصص تجربتك';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get enabled => 'مفعل';
+
+  @override
+  String get disabled => 'معطل';
+
+  @override
+  String get dark => 'داكن';
+
+  @override
+  String get light => 'فاتح';
+
+  @override
+  String get appInfo => 'معلومات التطبيق والدعم';
+
+  @override
+  String get johnDoe => 'جون دو';
+
+  @override
+  String get firstName => 'الاسم الأول';
+
+  @override
+  String get lastName => 'اسم العائلة';
+
+  @override
+  String get email => 'البريد الإلكتروني';
+
+  @override
+  String get phone => 'رقم الهاتف';
+
+  @override
+  String get location => 'الموقع';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get edit => 'تعديل';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
+
+  @override
+  String get personalInfo => 'المعلومات الشخصية';
+
+  @override
+  String get addresses => 'العناوين';
+
+  @override
+  String get contactInfo => 'معلومات الاتصال';
+
+  @override
+  String get emailPreferences => 'تفضيلات البريد الإلكتروني';
+
+  @override
+  String get profileSections => 'أقسام الملف الشخصي';
+
+  @override
+  String get profileTitle => 'الملف الشخصي';
+
+  @override
+  String get profileEditProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get profilePersonalInfo => 'معلومات شخصية';
+
+  @override
+  String get profileFamilyInfo => 'معلومات العائلة';
+
+  @override
+  String get profileDependentsInfo => 'معلومات المعالين';
+
+  @override
+  String get profileGroupInfo => 'معلومات الفئة';
+
+  @override
+  String get profileAvailableAid => 'المساعدات المتوفرة';
+
+  @override
+  String get profileRequests => 'طلباتي';
+
+  @override
+  String get profileLogout => 'تسجيل الخروج';
+
+  @override
+  String get profileUserNamePlaceholder => 'اسم المستخدم';
+
+  @override
+  String get profileUserPhonePlaceholder => '098XXXXXXX';
 }

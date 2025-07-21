@@ -197,4 +197,118 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get amountValidationErrorPositive => 'Amount must be a positive number.';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get aboutUs => 'About Us';
+
+  @override
+  String get customizeYourExperience => 'Customize your experience';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get enabled => 'Enabled';
+
+  @override
+  String get disabled => 'Disabled';
+
+  @override
+  String get dark => 'Dark';
+
+  @override
+  String get light => 'Light';
+
+  @override
+  String get appInfo => 'App information and support';
+
+  @override
+  String get johnDoe => 'John Doe';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get personalInfo => 'Personal Info';
+
+  @override
+  String get addresses => 'Addresses';
+
+  @override
+  String get contactInfo => 'Contact Info';
+
+  @override
+  String get emailPreferences => 'Email Preferences';
+
+  @override
+  String get profileSections => 'Profile Sections';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileEditProfile => 'Edit Profile';
+
+  @override
+  String get profilePersonalInfo => 'Personal Information';
+
+  @override
+  String get profileFamilyInfo => 'Family Information';
+
+  @override
+  String get profileDependentsInfo => 'Dependents Information';
+
+  @override
+  String get profileGroupInfo => 'Group Information';
+
+  @override
+  String get profileAvailableAid => 'Available Aid';
+
+  @override
+  String get profileRequests => 'My Requests';
+
+  @override
+  String get profileLogout => 'Logout';
+
+  @override
+  String get profileUserNamePlaceholder => 'User Name';
+
+  @override
+  String get profileUserPhonePlaceholder => '098XXXXXXX';
 }

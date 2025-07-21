@@ -1,11 +1,10 @@
-// lib/screens/home/home_screen.dart
+
 import 'dart:async';
 import 'package:charity/screens/my_requests/my_requests_screen.dart';
+import 'package:charity/screens/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
-// If you are using SVG files, uncomment the line below and ensure you have the flutter_svg package
-// import 'package:flutter_svg/flutter_svg.dart';
-import 'package:charity/theme/color.dart'; // Make sure this path is correct
-import 'package:charity/l10n/app_localizations.dart'; // Make sure this path is correct
+import 'package:charity/theme/color.dart'; 
+import 'package:charity/l10n/app_localizations.dart';
 
 // Helper class for Image Properties
 class ImageAssetConfig {
@@ -118,7 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(Icons.settings_outlined, color: AppColors.white, size: 28),
-            onPressed: () { /* TODO: Settings action */ },
+            onPressed: () { 
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
+             },
           ),
           title: Text(
             l10n.homeScreenTitle,
