@@ -95,6 +95,18 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
+  /// No description provided for @english.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get english;
+
+  /// No description provided for @arabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get arabic;
+
   /// The name of the charitable organization
   ///
   /// In en, this message translates to:

@@ -2,14 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
+import 'package:charity/cubits/localization/localization_cubit.dart'; // Import LocalizationCubit
 import 'package:charity/theme/color.dart';
 import 'package:charity/l10n/app_localizations.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
+
+  // Helper method similar to LoginScreen to build dropdown items
+  List<DropdownMenuItem<String>> _buildLanguageDropdownItems(BuildContext context) {
+    // You can get this map from LocalizationCubit or define it here
+    // For consistency, consider having a shared source for supported languages
+    final Map<String, String> supportedLanguages = {
+      'en': 'English', // Assuming AppLocalizations.of(context)!.english,
+      'ar': 'العربية', // Assuming AppLocalizations.of(context)!.arabic,
+    };
+    return supportedLanguages.entries.map((entry) {
+      return DropdownMenuItem<String>(
+        value: entry.key,
+        child: Text(entry.value),
+      );
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
+    // Listen to LocalizationCubit for current locale
+    final localizationCubit = context.watch<LocalizationCubit>();
+    final currentLocaleCode = localizationCubit.state.locale.languageCode;
 
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
@@ -63,18 +84,21 @@ class SettingsScreen extends StatelessWidget {
                       children: [
                         _buildProfileCard(context, isDark, localizations),
                         const SizedBox(height: 24),
-                        ..._buildSettingsItems(context, settingsState, localizations)
+                        // Add the Language Dropdown
+                        _buildLanguageDropdown(context, isDark, currentLocaleCode, localizations),
+                        const SizedBox(height: 16), // Spacing
+                        ..._buildSettingsItems(context, settingsState, localizations, currentLocaleCode) // Pass currentLocaleCode
                             .map((widget) => Animate(
-                                  effects: const [
-                                    SlideEffect(
-                                      begin: Offset(0, 0.2),
-                                      duration: Duration(milliseconds: 400),
-                                      curve: Curves.easeOut,
-                                    ),
-                                    FadeEffect(duration: Duration(milliseconds: 400))
-                                  ],
-                                  child: widget,
-                                ))
+                          effects: const [
+                            SlideEffect(
+                              begin: Offset(0, 0.2),
+                              duration: Duration(milliseconds: 400),
+                              curve: Curves.easeOut,
+                            ),
+                            FadeEffect(duration: Duration(milliseconds: 400))
+                          ],
+                          child: widget,
+                        ))
                             .toList(),
                       ],
                     ),
@@ -85,6 +109,82 @@ class SettingsScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildLanguageDropdown(BuildContext context, bool isDark, String currentLanguageCode, AppLocalizations localizations) {
+    final localizationCubit = context.read<LocalizationCubit>();
+
+    // Determine the display name for the current language
+    // You might want to get this from your localization files or a map
+    String currentLanguageDisplay;
+    if (currentLanguageCode == 'en') {
+      currentLanguageDisplay = localizations.english;
+    } else if (currentLanguageCode == 'ar') {
+      currentLanguageDisplay = localizations.arabic;
+    } else {
+      currentLanguageDisplay = currentLanguageCode.toUpperCase();
+    }
+
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.slate800.withOpacity(0.5) : AppColors.white.withOpacity(0.7),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: isDark ? AppColors.slate700.withOpacity(0.5) : AppColors.white.withOpacity(0.5)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColors.sky400, AppColors.primaryBlue],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.language, color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    localizations.language, // Title "Language"
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: isDark ? AppColors.white : AppColors.slate800,
+                    ),
+                  ),
+                  // Current language display can be part of the DropdownButton itself
+                ],
+              ),
+            ),
+            DropdownButton<String>(
+              value: currentLanguageCode,
+              icon: Icon(Icons.arrow_drop_down, color: isDark ? AppColors.slate400 : AppColors.slate500),
+              dropdownColor: isDark ? AppColors.slate700 : AppColors.white,
+              underline: const SizedBox(), // Removes the default underline
+              style: TextStyle(color: isDark ? AppColors.white : AppColors.slate800, fontSize: 14),
+              items: _buildLanguageDropdownItems(context),
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  localizationCubit.changeLanguage(newValue);
+                  // Optional: If SettingsCubit also needs to know, you might need to sync
+                  // context.read<SettingsCubit>().updateLanguagePreference(newValue);
+                }
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -154,25 +254,35 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
       ).animate().scale(
-            duration: 400.ms,
-            curve: Curves.easeOut,
-          ),
+        duration: 400.ms,
+        curve: Curves.easeOut,
+      ),
     );
   }
 
-  List<Widget> _buildSettingsItems(BuildContext context, SettingsLoaded state, AppLocalizations localizations) {
+  // Updated to remove the language tile if you're replacing it with the dropdown
+  List<Widget> _buildSettingsItems(BuildContext context, SettingsLoaded state, AppLocalizations localizations, String currentLocaleCode) {
     final settingsCubit = context.read<SettingsCubit>();
     final isDark = state.themeMode == ThemeMode.dark;
-    final isEnglish = state.locale.languageCode == 'en';
+    // final isEnglish = currentLocaleCode == 'en'; // Use currentLocaleCode from LocalizationCubit
 
+    // Remove the old language tile if you're replacing it with the new dropdown.
+    // If you want to keep both for some reason, adjust accordingly.
     return [
+      // The _buildLanguageDropdown is now added separately above.
+      // If you had a _buildSettingsTile for language, remove or comment it out:
+      /*
       _buildSettingsTile(
         isDark: isDark,
         icon: Icons.language,
         title: localizations.language,
-        subtitle: isEnglish ? 'English' : 'العربية',
-        onTap: () => settingsCubit.changeLanguage(),
+        subtitle: isEnglish ? localizations.english : localizations.arabic, // Use localized strings
+        onTap: () {
+          // This would now be handled by the Dropdown.
+          // If you want a dialog or separate screen, this logic would differ.
+        },
       ),
+      */
       _buildSettingsTile(
         isDark: isDark,
         icon: state.notificationsEnabled ? Icons.notifications_active : Icons.notifications_off,
@@ -206,6 +316,7 @@ class SettingsScreen extends StatelessWidget {
     required VoidCallback onTap,
     bool hasChevron = false,
   }) {
+    // ... your existing code ...
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(

@@ -1,6 +1,7 @@
 {
   "@@locale": "ar",
-
+  "english": "English",
+  "arabic": "العربية",
   "organizationName": "جمعية الشيخ محي الدين",
   "loginWelcomeBack": "مرحباً بعودتك!",
   "loginPhoneNumberLabel": "رقم الهاتف",

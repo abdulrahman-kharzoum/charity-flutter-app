@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
-
+  "english": "English",
+  "arabic": "Arabic",
   "organizationName": "Sheikh Muhyiddin Charity",
   "@organizationName": {
     "description": "The name of the charitable organization"
