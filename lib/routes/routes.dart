@@ -12,6 +12,9 @@ import 'package:charity/screens/settings_screen/settings_screen.dart';
 import 'package:charity/screens/profile_screen/profile_screen.dart';
 import 'package:charity/core/shared/settings_repository.dart';
 
+import '../cubits/aids_cubit/aids_cubit.dart';
+import '../screens/aids_screen/aids_screen.dart';
+
 final Map<String, WidgetBuilder> routes = {
   // ======splash Screen=====//
   '/':
@@ -42,5 +45,10 @@ final Map<String, WidgetBuilder> routes = {
   '/edit-profile': (context) => BlocProvider(
     create: (context) => ProfileCubit(),
     child: const ProfileScreen(),
+  ),
+  // ====== Aids Screen (NEW) =====//
+  '/aids_screen': (context) => BlocProvider(
+    create: (context) => AidsCubit()..fetchAids(),
+    child: const AidsScreen(),
   ),
 };

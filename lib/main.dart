@@ -29,8 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // LoginCubit is provided in the LoginScreen route in routes.dart
-        // If it needs to be global, keep it here.
+
         // BlocProvider<LoginCubit>(
         //   create: (context) => LoginCubit(),
         // ),
@@ -47,22 +46,22 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<LocalizationCubit, LocalizationState>(
         builder: (context, localizationState) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false, // Disable debug banner
-            // navigatorKey: navigatorKey, // If needed for specific scenarios
-            title: 'Charity App', // This could also be localized later
+            debugShowCheckedModeBanner: false,
+            // navigatorKey: navigatorKey,
+            title: 'Charity App',
 
-            theme: lightThemeData, // Use your custom light theme
-            darkTheme: darkThemeData, // Use your custom dark theme
-            themeMode: ThemeMode.system, // Or control with another Cubit/setting
+            theme: lightThemeData,
+            darkTheme: darkThemeData,
+            themeMode: ThemeMode.system,
 
             locale: localizationState.locale,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
 
-            initialRoute: '/', // Set initial route (e.g., SplashScreen or LoginScreen)
-            routes: app_routes.routes, // Use routes from routes.dart
+            initialRoute: '/',
+            routes: app_routes.routes,
 
-            // home: LoginScreen(), // Remove this if using initialRoute and routes
+            // home: LoginScreen(),
           );
         },
       ),

@@ -41,7 +41,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 2; // Default to Home
+  int _selectedIndex = 2;
   int _currentCarouselPage = 0;
   late PageController _pageController;
   Timer? _timer;
@@ -94,12 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
     // Navigate based on index
-    if (index == 1 || index == 2) { // Navigate to RequestsScreen for 'Help' or 'Home'
-      // Assuming RequestsScreen is the intended destination for 'Help' (index 1) and 'Home' (index 2 can be adjusted if Home has a different screen)
-      // If 'Home' should stay on HomeScreen, you might adjust the condition to `if (index == 1)`
-      // and handle index 2 (Home) separately if it's just to re-render or stay.
-      // For now, let's assume index 1 (Help) and index 2 (Home, if it leads to a request-like view) go to RequestsScreen.
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const MyRequestsScreen()));
+    if (index == 1) {
+     Navigator.push(context, MaterialPageRoute(builder: (context) => const MyRequestsScreen()));
+    }else if (index == 4 ){
+      Navigator.pushNamed(context, '/aids_screen');
     }
   }
 

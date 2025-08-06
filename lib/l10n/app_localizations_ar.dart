@@ -317,4 +317,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get profileUserPhonePlaceholder => '098XXXXXXX';
+
+  @override
+  String get availableAidsTitle => 'المساعدات المتوفرة';
+
+  @override
+  String get aidHistoryLabel => 'سجل المساعدات';
+
+  @override
+  String get noAidsAvailable => 'لا توجد مساعدات مدرجة حالياً.';
+
+  @override
+  String get aidsErrorPrefix => 'خطأ في تحميل المساعدات: ';
+
+  @override
+  String get aidsUnknownState => 'حالة مساعدات غير معروفة.';
 }

@@ -10,7 +10,7 @@ import 'package:intl_phone_field/phone_number.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/core/functions/snackbar_function.dart';
 import 'package:charity/core/functions/validate_input.dart';
-import 'package:charity/theme/color.dart'; // Import your AppColors
+import 'package:charity/theme/color.dart';
 
 // Convert LoginScreen to a StatefulWidget
 class LoginScreen extends StatefulWidget {

@@ -206,8 +206,8 @@ class _ProfileScreenState extends State<ProfileScreen>
         required bool isDarkTheme,
         bool isMirror = false,
         Animation<double>? opacityAnimation}) {
-    // Define the desired space between drawer and screen
-    const double drawerScreenSpacing = -30.0; // Your current value
+
+    const double drawerScreenSpacing = -30.0;
 
     return AnimatedBuilder(
       animation: _drawerAnimationController,
@@ -216,7 +216,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         double effectiveSlide;
 
         if (isMirror) {
-          double mirrorOffsetFactor = 4; // Your current value
+          double mirrorOffsetFactor = 4;
           rawSlide = slideAnimationValue.value * (drawerActualWidth * mirrorOffsetFactor);
           effectiveSlide = (isRtl ? -1 : 1) * (rawSlide - (drawerScreenSpacing * slideAnimationValue.value * 0.5));
         } else {
@@ -224,22 +224,22 @@ class _ProfileScreenState extends State<ProfileScreen>
         }
 
         if (!isRtl && effectiveSlide < 0) effectiveSlide = 0;
-        if (isRtl && effectiveSlide > 0) effectiveSlide = 0;
+        if (isRtl && effectiveSlide > 0) effectiveSlide = -312;
 
-        // --- Border Logic (kept from your code) ---
+        // --- Border Logic ---
         Color borderColor = Colors.transparent;
         if (_drawerAnimationController.value > 0.1) {
           borderColor = isDarkTheme ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.1);
         }
 
-        // --- Shadow Logic (NEW) ---
+        // --- Shadow Logic  ---
         List<BoxShadow> activeShadows = [];
         // Apply shadow only to the main screen, not the mirror, and only when the drawer is somewhat open.
         if (!isMirror && _drawerAnimationController.value > 0.1) {
           activeShadows = [
             BoxShadow(
               // Animate shadow opacity with drawer opening for a smoother effect
-              color: Colors.black.withOpacity(0.12 * _drawerAnimationController.value), // Adjusted opacity
+              color: Colors.black.withOpacity(0.12 * _drawerAnimationController.value),
               // Animate blurRadius with drawer opening
               blurRadius: 7.0 * _drawerAnimationController.value, // Adjusted blur
               // Animate spreadRadius slightly if desired
@@ -265,9 +265,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                     borderRadius: BorderRadius.circular(borderRadiusAnimationValue.value),
                     border: Border.all( // Your existing border
                       color: borderColor,
-                      width: 5.0, // Your existing border width
+                      width: 5.0,
                     ),
-                    boxShadow: activeShadows, // <--- ADDED SHADOWS HERE
+                    boxShadow: activeShadows,
                   ),
                   child: child),
             ),
@@ -299,11 +299,8 @@ class _ProfileScreenState extends State<ProfileScreen>
         if (profileState is ProfileCurrentState) {
           isDrawerOpen = profileState.isDrawerOpen;
         }
-        // If you are transitioning to ProfileLoaded for form data,
-        // ensure isDrawerOpen is also part of ProfileLoaded or fetch from ProfileCubit's main state.
 
 
-        // The base background of the Scaffold when drawer is open
         Color baseScreenBackgroundColor = isDark ? AppColors.slate900 : AppColors.slate200;
 
         Widget profileContent = _buildProfileContent(context, profileState);
@@ -312,11 +309,9 @@ class _ProfileScreenState extends State<ProfileScreen>
           backgroundColor: baseScreenBackgroundColor, // This will be visible behind the scaled screens
           body: Stack(
             children: [
-              // Drawer (remains mostly the same)
+              // Drawer
               ProfileDrawer(
                 drawerWidth: drawerActualWidth,
-                // Assuming ProfileDrawer uses an animation that can be driven by _drawerAnimationController
-                // Or pass a specific fade animation for its content if needed
                 contentFadeAnimation: CurvedAnimation(parent: _drawerAnimationController, curve: const Interval(0.3, 1.0)),
               ),
 

@@ -44,7 +44,7 @@
   "bottomNavHelp": "Help",
   "bottomNavHome": "Home",
   "bottomNavScan": "Scan",
-  "bottomNavNotifications": "Alerts",
+  "bottomNavNotifications": "Aids",
   "homeNoImages": "No images to display",
   "myRequestsTitle": "My Requests",
   "@myRequestsTitle": {
@@ -140,5 +140,10 @@
   "profileRequests": "My Requests",
   "profileLogout": "Logout",
   "profileUserNamePlaceholder": "User Name",
-  "profileUserPhonePlaceholder": "098XXXXXXX"
+  "profileUserPhonePlaceholder": "098XXXXXXX",
+  "availableAidsTitle": "Available Aids",
+  "aidHistoryLabel": "Aid History",
+  "noAidsAvailable": "No aids are currently listed.",
+  "aidsErrorPrefix": "Error loading aids: ",
+  "aidsUnknownState": "Unknown aids state."
 }

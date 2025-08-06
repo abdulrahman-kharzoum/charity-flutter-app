@@ -317,4 +317,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileUserPhonePlaceholder => '098XXXXXXX';
+
+  @override
+  String get availableAidsTitle => 'Available Aids';
+
+  @override
+  String get aidHistoryLabel => 'Aid History';
+
+  @override
+  String get noAidsAvailable => 'No aids are currently listed.';
+
+  @override
+  String get aidsErrorPrefix => 'Error loading aids: ';
+
+  @override
+  String get aidsUnknownState => 'Unknown aids state.';
 }

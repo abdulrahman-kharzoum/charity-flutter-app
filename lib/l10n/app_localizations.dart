@@ -706,6 +706,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'098XXXXXXX'**
   String get profileUserPhonePlaceholder;
+
+  /// No description provided for @availableAidsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Aids'**
+  String get availableAidsTitle;
+
+  /// No description provided for @aidHistoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Aid History'**
+  String get aidHistoryLabel;
+
+  /// No description provided for @noAidsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No aids are currently listed.'**
+  String get noAidsAvailable;
+
+  /// No description provided for @aidsErrorPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading aids: '**
+  String get aidsErrorPrefix;
+
+  /// No description provided for @aidsUnknownState.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown aids state.'**
+  String get aidsUnknownState;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

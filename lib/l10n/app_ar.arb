@@ -39,7 +39,7 @@
   "bottomNavHelp": "المساعدة",
   "bottomNavHome": "الرئيسية",
   "bottomNavScan": "مسح",
-  "bottomNavNotifications": "الإشعارات",
+  "bottomNavNotifications": "المساعدات",
   "homeNoImages": "لا توجد صور لعرضها",
 
   "myRequestsTitle": "طلباتي",
@@ -137,5 +137,10 @@
   "profileRequests": "طلباتي",
   "profileLogout": "تسجيل الخروج",
   "profileUserNamePlaceholder": "اسم المستخدم",
-  "profileUserPhonePlaceholder": "098XXXXXXX"
+  "profileUserPhonePlaceholder": "098XXXXXXX",
+  "availableAidsTitle": "المساعدات المتوفرة",
+  "aidHistoryLabel": "سجل المساعدات",
+  "noAidsAvailable": "لا توجد مساعدات مدرجة حالياً.",
+  "aidsErrorPrefix": "خطأ في تحميل المساعدات: ",
+  "aidsUnknownState": "حالة مساعدات غير معروفة."
 }
