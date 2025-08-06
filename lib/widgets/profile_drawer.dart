@@ -60,20 +60,20 @@ class ProfileDrawer extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(Icons.edit_outlined, color: AppColors.white, size: 22),
-              tooltip: l10n.editProfile, // e.g., "Edit Profile"
+              tooltip: l10n.editProfile,
               onPressed: () {
-                context.read<ProfileCubit>().toggleEdit(); // Signal to main screen to enter edit mode
-                context.read<ProfileCubit>().closeDrawer(); // Close drawer to show the form
+                context.read<ProfileCubit>().toggleEdit();
+                context.read<ProfileCubit>().closeDrawer();
               },
             ),
           ],
           if (!isRtl) ...[
             IconButton(
               icon: const Icon(Icons.edit_outlined, color: AppColors.white, size: 22),
-              tooltip: l10n.editProfile, // e.g., "Edit Profile"
+              tooltip: l10n.editProfile,
               onPressed: () {
-                context.read<ProfileCubit>().toggleEdit(); // Signal to main screen to enter edit mode
-                context.read<ProfileCubit>().closeDrawer(); // Close drawer to show the form
+                context.read<ProfileCubit>().toggleEdit();
+                context.read<ProfileCubit>().closeDrawer();
               },
             ),
             Expanded(
@@ -88,7 +88,7 @@ class ProfileDrawer extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
-                  if (phone.isNotEmpty) // Only show phone if available
+                  if (phone.isNotEmpty)
                     Text(
                       phone,
                       style: const TextStyle(color: AppColors.lightGrey, fontSize: 14, fontFamily: 'Lexend'),
@@ -120,17 +120,14 @@ class ProfileDrawer extends StatelessWidget {
         splashColor: AppColors.primary100.withOpacity(0.2),
         highlightColor: AppColors.primary100.withOpacity(0.1),
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 6), // Reduced vertical margin slightly
-          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 14.0), // Adjusted padding
+          margin: const EdgeInsets.symmetric(vertical: 6),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 14.0),
           decoration: BoxDecoration(
-            color: AppColors.white.withOpacity(0.08), // Slightly adjusted opacity
+            color: AppColors.white.withOpacity(0.08),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
             children: [
-              // For LTR: Icon on left, Text, Arrow on right
-              // For RTL: Arrow on left, Text, Icon on right (conceptually)
-              // Let's simplify: always put arrow on the "end" side based on text direction.
               if (!isRtl) Icon(iconData, color: AppColors.white.withOpacity(0.9), size: 20),
               if (!isRtl) const SizedBox(width: 15),
 
@@ -163,7 +160,7 @@ class ProfileDrawer extends StatelessWidget {
       padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
       child: Center(
         child: OutlinedButton.icon(
-          icon: Icon(isRtl ? Icons.login_outlined : Icons.exit_to_app, color: AppColors.white, size: 20), // Icons swapped for RTL consistency
+          icon: Icon(isRtl ? Icons.login_outlined : Icons.exit_to_app, color: AppColors.white, size: 20),
           label: Text(
             l10n.profileLogout, // Generic "Logout" key
             style: const TextStyle(color: AppColors.white, fontSize: 15, fontFamily: 'Lexend', fontWeight: FontWeight.w600),
@@ -176,10 +173,10 @@ class ProfileDrawer extends StatelessWidget {
           ),
           onPressed: () {
             // TODO: Implement actual logout logic
-            // e.g., context.read<AuthCubit>().logout();
-            // Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+
+            Navigator.of(context).pushNamedAndRemoveUntil('/login_screen', (route) => false);
             ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.profileLogout)) // Localized message
+                SnackBar(content: Text(l10n.profileLogout))
             );
           },
         ),
@@ -203,10 +200,9 @@ class ProfileDrawer extends StatelessWidget {
         // For simplicity, we'll let the header show placeholders
       }
     }
-    // Add other state checks if necessary (e.g., ProfileLoaded if it's a distinct state)
 
     return Material(
-      color: Colors.transparent, // Drawer container itself is part of the animated stack
+      color: Colors.transparent,
       child: Align(
         alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
         child: FadeTransition(
@@ -214,16 +210,15 @@ class ProfileDrawer extends StatelessWidget {
           child: Container(
             width: drawerWidth,
             height: double.infinity,
-            // The actual visual background of the drawer's content area
+
             decoration: BoxDecoration(
-              color: AppColors.slate800.withOpacity(0.95), // Example dark background
-              // You could use a gradient here as well
+              color: AppColors.slate800.withOpacity(0.95),
               // gradient: AppColors.darkDrawerGradient,
             ),
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 10, // Reduced top padding a bit
-              left: isRtl ? 15 : 20, // Adjusted padding
-              right: isRtl ? 20 : 15, // Adjusted padding
+              top: MediaQuery.of(context).padding.top + 10,
+              left: isRtl ? 15 : 20,
+              right: isRtl ? 20 : 15,
               bottom: MediaQuery.of(context).padding.bottom + 10,
             ),
             child: Column(
@@ -235,7 +230,7 @@ class ProfileDrawer extends StatelessWidget {
                   child: ListView(
                     padding: EdgeInsets.zero,
                     children: [
-                      // Ensure these l10n keys are generic or update them
+
                       _buildDrawerItem(context, l10n.profilePersonalInfo, Icons.person_outline, () { /* TODO: Navigate or show relevant screen part */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
                       _buildDrawerItem(context, l10n.profileFamilyInfo, Icons.people_outline, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
                       _buildDrawerItem(context, l10n.profileDependentsInfo, Icons.child_care_outlined, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),

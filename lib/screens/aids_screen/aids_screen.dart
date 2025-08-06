@@ -205,7 +205,7 @@ class AidsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  aid.statusText, // Use the specific statusText from AidModel
+                  aid.statusText,
                   textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
                   style: TextStyle(
                     fontFamily: 'Lexend',

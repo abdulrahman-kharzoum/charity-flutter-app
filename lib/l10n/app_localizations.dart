@@ -308,7 +308,7 @@ abstract class AppLocalizations {
   /// No description provided for @bottomNavNotifications.
   ///
   /// In en, this message translates to:
-  /// **'Alerts'**
+  /// **'Aids'**
   String get bottomNavNotifications;
 
   /// No description provided for @homeNoImages.

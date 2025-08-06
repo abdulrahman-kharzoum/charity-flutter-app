@@ -114,7 +114,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get bottomNavScan => 'مسح';
 
   @override
-  String get bottomNavNotifications => 'الإشعارات';
+  String get bottomNavNotifications => 'المساعدات';
 
   @override
   String get homeNoImages => 'لا توجد صور لعرضها';

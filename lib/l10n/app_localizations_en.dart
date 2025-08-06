@@ -114,7 +114,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavScan => 'Scan';
 
   @override
-  String get bottomNavNotifications => 'Alerts';
+  String get bottomNavNotifications => 'Aids';
 
   @override
   String get homeNoImages => 'No images to display';
