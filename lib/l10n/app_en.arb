@@ -145,5 +145,25 @@
   "aidHistoryLabel": "Aid History",
   "noAidsAvailable": "No aids are currently listed.",
   "aidsErrorPrefix": "Error loading aids: ",
-  "aidsUnknownState": "Unknown aids state."
+  "aidsUnknownState": "Unknown aids state.",
+  "requestDetailsTitle": "Request Details",
+  "@requestDetailsTitle": {
+    "description": "Title for the screen showing details of a single request"
+  },
+  "aidDetailsTitle": "Aid Details",
+  "@aidDetailsTitle": {
+    "description": "Title for the screen showing details of a single aid item"
+  },
+  "qrError": "Error displaying QR Code. Please try again.",
+  "@qrError": {
+    "description": "Error message when the QR code fails to generate or display"
+  },
+  "dateLabel": "Date",
+  "@dateLabel": {
+    "description": "Label for the date field"
+  },
+  "providedByLabel": "Provided by",
+  "@providedByLabel": {
+    "description": "Label for the provider of an aid item"
+  }
 }

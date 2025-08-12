@@ -20,40 +20,40 @@ class AidsCubit extends Cubit<AidsState> {
       // Dummy Data for Aids
       final List<AidModel> dummyAids = [
         AidModel(
-          id: 'aid101',
-          title: 'Food Basket - Ramadan Campaign',
-          description: 'Contains essential food items like rice, sugar, oil, dates, and lentils for families.',
+          id: 'aid101', // المعرف
+          title: 'سلة غذائية - حملة رمضان', // العنوان
+          description: 'تحتوي على مواد غذائية أساسية مثل الأرز والسكر والزيت والتمر والعدس للعائلات.', // الوصف
           date: DateTime(2024, 4, 5),
-          status: AidStatus.ready,
-          statusText: 'Ready for Pickup', // More specific status text
-          providedBy: 'Global Charity Org',
+          status: AidStatus.readyForPickup, // الحالة: جاهز
+          statusText: 'جاهزة للاستلام', // نص الحالة: جاهزة للاستلام
+          providedBy: 'منظمة خيرية عالمية', // مقدمة من
         ),
         AidModel(
-          id: 'aid102',
-          title: 'Winter Clothing Drive - Vouchers',
-          description: 'Vouchers for purchasing warm clothes for children and adults.',
+          id: 'aid102', // المعرف
+          title: 'حملة ملابس الشتاء - قسائم', // العنوان
+          description: 'قسائم لشراء ملابس دافئة للأطفال والكبار.', // الوصف
           date: DateTime(2023, 12, 15),
-          status:AidStatus.ready,
-          statusText: 'Distributed',
-          providedBy: 'Local Community Support',
+          status:AidStatus.received, // الحالة: جاهز (ولكن تم التوزيع)
+          statusText: 'تم التوزيع', // نص الحالة: تم التوزيع
+          providedBy: 'دعم المجتمع المحلي', // مقدمة من
         ),
         AidModel(
-          id: 'aid103',
-          title: 'School Supplies Kit',
-          description: 'Awaiting final count of beneficiaries before distribution.',
+          id: 'aid103', // المعرف
+          title: 'مجموعة اللوازم المدرسية', // العنوان
+          description: 'في انتظار العدد النهائي للمستفيدين قبل التوزيع.', // الوصف
           date: DateTime(2024, 8, 1), // Future date, so 'waiting'
-          status: AidStatus.waiting, // Using 'pending' as 'waiting'
-          statusText: 'Waiting Confirmation',
-          providedBy: 'Education For All Foundation',
+          status: AidStatus.waiting, // الحالة: في الانتظار
+          statusText: 'في انتظار التأكيد', // نص الحالة: في انتظار التأكيد
+          providedBy: 'مؤسسة التعليم للجميع', // مقدمة من
         ),
         AidModel(
-          id: 'aid104',
-          title: 'Emergency Medical Aid Application',
-          description: 'Application did not meet eligibility criteria for specialized treatment.',
+          id: 'aid104', // المعرف
+          title: 'طلب مساعدة طبية طارئة', // العنوان
+          description: 'لم يستوف الطلب معايير الأهلية للعلاج المتخصص.', // الوصف
           date: DateTime(2024, 3, 20),
-          status: AidStatus.rejected,
-          statusText: 'Not Eligible',
-          providedBy: 'Healthcare Assistance Program',
+          status: AidStatus.rejected, // الحالة: مرفوض
+          statusText: 'غير مؤهل', // نص الحالة: غير مؤهل
+          providedBy: 'برنامج المساعدة الصحية', // مقدمة من
         ),
       ];
 

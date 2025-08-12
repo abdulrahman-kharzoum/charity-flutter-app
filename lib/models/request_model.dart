@@ -1,4 +1,5 @@
 enum RequestStatus {
+  received,
   accepted,
   pending,
   rejected,
@@ -10,7 +11,8 @@ class RequestModel {
   final String description;
   final DateTime date;
   final RequestStatus status;
-  final String statusText; // To match "تمت الموافقة", "قيد المراجعة", "تم الرفض"
+  final String statusText;
+  final String? encryptedQrDataField;
 
   RequestModel({
     required this.id,
@@ -19,5 +21,7 @@ class RequestModel {
     required this.date,
     required this.status,
     required this.statusText,
+    this.encryptedQrDataField,
   });
+
 }

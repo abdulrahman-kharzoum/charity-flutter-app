@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       } else if (!state.isDrawerOpen && (_drawerAnimationController.isCompleted || _drawerAnimationController.isAnimating)) {
         _drawerAnimationController.reverse();
       }
-    } else if (state is ProfileLoaded) { // If you still use ProfileLoaded for form data
+    } else if (state is ProfileLoaded) {
       if (_firstNameController.text != state.firstName) {
         _firstNameController.text = state.firstName;
       }
@@ -143,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         (themeMode == ThemeMode.system &&
             MediaQuery.of(context).platformBrightness == Brightness.dark);
 
-    String currentFirstName = ""; // From controllers now
+    String currentFirstName = "";
     String currentLastName = "";
     String currentPhone = "";
     bool currentIsEditing = false;
@@ -151,7 +151,6 @@ class _ProfileScreenState extends State<ProfileScreen>
 
     if (profileState is ProfileCurrentState) {
       currentIsEditing = profileState.isEditing;
-      // avatarUrl = profileState.userProfile?.avatarUrl ?? avatarUrl; // If using UserProfile model for this
 
       if (profileState.isLoadingProfile && profileState.firstName.isEmpty) { // Or check controller.text
         return const Center(child: CircularProgressIndicator());
@@ -159,16 +158,16 @@ class _ProfileScreenState extends State<ProfileScreen>
       if (profileState.error != null) {
         return Center(child: Text('Error: ${profileState.error}'));
       }
-    } else if (profileState is ProfileLoaded) { // If using ProfileLoaded for form
+    } else if (profileState is ProfileLoaded) {
       currentIsEditing = profileState.isEditing;
     }
     else if (profileState is ProfileInitial) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    // Form content structure
+
     return Scaffold(
-      backgroundColor: Colors.transparent, // Important for animated background
+      backgroundColor: Colors.transparent,
       body: CustomScrollView(
         slivers: [
           _buildAppBar(context, isDark, localizations),
@@ -178,8 +177,8 @@ class _ProfileScreenState extends State<ProfileScreen>
               child: Column(
                 children: [
                   _buildProfileHeader(
-                      _firstNameController.text, // Use controller text
-                      _lastNameController.text,  // Use controller text
+                      _firstNameController.text,
+                      _lastNameController.text,
                       avatarUrl,
                       localizations,
                       isDark),
@@ -328,7 +327,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                 isMirror: true,
               ),
 
-              // 1. Main Profile Screen (Slides and scales)
               GestureDetector(
                 onTap: () {
                   if (isDrawerOpen) {
@@ -336,7 +334,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   }
                 },
                 onHorizontalDragUpdate: (details) {
-                  // Your existing drag logic for opening/closing drawer
+
                   if (_drawerAnimationController.isAnimating) return;
                   const int sensitivity = 8;
                   if (isDrawerOpen) {

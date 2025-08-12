@@ -17,13 +17,13 @@ class ProfileDrawer extends StatelessWidget {
   });
 
   Widget _buildDrawerHeader(BuildContext context, AppLocalizations l10n, bool isRtl, UserProfile? userProfile) {
-    // Using more generic placeholders, ensure these exist in your .arb files or adjust
-    final name = userProfile?.name ?? l10n.profileUserNamePlaceholder; // e.g., "User Name"
-    final phone = userProfile?.phone ?? l10n.profileUserPhonePlaceholder; // e.g., "Phone Number"
+
+    final name = userProfile?.name ?? l10n.profileUserNamePlaceholder;
+    final phone = userProfile?.phone ?? l10n.profileUserPhonePlaceholder;
     final avatarUrl = userProfile?.avatarUrl;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0, top: 10.0), // Added some vertical padding
+      padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +48,7 @@ class ProfileDrawer extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
-                  if (phone.isNotEmpty) // Only show phone if available
+                  if (phone.isNotEmpty)
                     Text(
                       phone,
                       style: const TextStyle(color: AppColors.lightGrey, fontSize: 14, fontFamily: 'Lexend'),
@@ -197,7 +197,7 @@ class ProfileDrawer extends StatelessWidget {
       userProfile = profileState.userProfile;
       if (profileState.isLoadingProfile && userProfile == null) {
         // Optionally show a loading indicator within the drawer header
-        // For simplicity, we'll let the header show placeholders
+
       }
     }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AidStatus { ready, waiting, rejected }
+enum AidStatus {readyForPickup,received, waiting, rejected }
 
 
 class AidModel {
@@ -11,6 +11,7 @@ class AidModel {
   final AidStatus status;
   final String statusText;
   final String providedBy;
+  final String? encryptedQrDataField;
 
   AidModel({
     required this.id,
@@ -19,6 +20,7 @@ class AidModel {
     required this.date,
     required this.status,
     required this.statusText,
+    this.encryptedQrDataField,
     required this.providedBy,
   });
 
@@ -36,7 +38,8 @@ factory AidModel.fromJson(Map<String, dynamic> json) {
 
 static AidStatus _parseStatus(String status) {
   // Implement parsing logic based on your API response
-  if (status.toLowerCase() == 'accepted' || status.toLowerCase() == 'ready') return AidStatus.ready;
+  if (status.toLowerCase() == 'ready for pickup' || status.toLowerCase() == 'ready') return AidStatus.readyForPickup;
+  if (status.toLowerCase() == 'received' || status.toLowerCase() == 'ready') return AidStatus.received;
   if (status.toLowerCase() == 'pending' || status.toLowerCase() == 'waiting') return AidStatus.waiting;
   if (status.toLowerCase() == 'rejected') return AidStatus.rejected;
   return AidStatus.rejected;

@@ -8,7 +8,8 @@ import 'package:charity/theme/color.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../cubits/my_requests_cubit/my_requests_cubit.dart';
-
+import 'package:charity/models/common_item_details_model.dart';
+import 'package:charity/screens/item_details/item_details_screen.dart';
 import '../add_request_screen/add_request_screen.dart';
 
 
@@ -21,9 +22,9 @@ class MyRequestsScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => MyRequestsCubit()..fetchMyRequests(),
-      // Use a Builder to get a context that is descendant of BlocProvider
-      child: Builder( //  <--- ADDED BUILDER HERE
-          builder: (innerContext) { // innerContext can now find MyRequestsCubit
+
+      child: Builder(
+          builder: (innerContext) {
             return Scaffold(
               backgroundColor: AppColors.myRequestsBackground,
               appBar: AppBar(
@@ -66,7 +67,7 @@ class MyRequestsScreen extends StatelessWidget {
                     child: BlocBuilder<MyRequestsCubit, MyRequestsState>(
                       builder: (context, state) {
                         if (state is MyRequestsLoading || state is MyRequestsInitial) {
-                          // return const Center(child: CircularProgressIndicator(color: AppColors.primaryColor));
+
                           return _buildSkeletonList(context, 3);
                         } else if (state is MyRequestsLoaded) {
                           if (state.requests.isEmpty) {
@@ -107,14 +108,12 @@ class MyRequestsScreen extends StatelessWidget {
                       print("MyRequestsScreen: Received new request - ${newRequest.title}");
                       innerContext.read<MyRequestsCubit>().addNewRequestLocally(newRequest);
                     } else if (result == true) {
-                      // Fallback for older logic or if AddRequestScreen still pops 'true' for some reason
-                      // This part might become redundant if AddRequestScreen always pops a RequestModel on success.
-                      print("MyRequestsScreen: AddRequestScreen popped 'true', attempting generic fetch.");
+                     print("MyRequestsScreen: AddRequestScreen popped 'true', attempting generic fetch.");
                       innerContext.read<MyRequestsCubit>().fetchMyRequests();
                     }
                   });
                 },
-                // ... rest of your FAB properties
+
                 label: Text(
                   l10n.addRequestButtonLabel,
                   style: TextStyle(fontFamily: 'Lexend', color: AppColors.white, fontWeight: FontWeight.bold),
@@ -162,35 +161,59 @@ class MyRequestsScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             final request = requests[index];
             // The context here from ListView.builder is also fine as it's a descendant
-            return _buildRequestItem(context, request, context.read<MyRequestsCubit>().getFormattedDate(request.date, currentLocale));
+            final String formattedDate = context.read<MyRequestsCubit>().getFormattedDate(request.date, currentLocale);
+            Color statusColor;
+            IconData statusIconData;
+            switch (request.status) {
+              case RequestStatus.accepted:
+                statusColor = AppColors.requestStatusAccepted;
+                statusIconData = Icons.inventory_2_outlined;
+                break;
+              case RequestStatus.received:
+                statusColor = AppColors.requestStatusAccepted;
+                statusIconData = Icons.task_alt_outlined;
+                break;
+              case RequestStatus.pending:
+                statusColor = AppColors.requestStatusPending;
+                statusIconData = Icons.hourglass_empty_rounded;
+                break;
+              case RequestStatus.rejected:
+                statusColor = AppColors.requestStatusRejected;
+                statusIconData = Icons.close_rounded;
+                break;
+              default:
+                statusColor = AppColors.gray500;
+                statusIconData = Icons.help_outline;
+                break;
+            }
+            return GestureDetector(
+                onTap: () {
+                  final details = CommonItemDetailsModel(
+                    id: request.id,
+                    title: request.title,
+                    description: request.description,
+                    statusText: request.statusText,
+                    statusColor: statusColor,
+                    statusIcon: statusIconData,
+                    dateFormatted: formattedDate,
+                    encryptedQRCodeData: request.encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_REQUEST_${request.id}", // Fallback
+                    itemType: ItemType.request,
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ItemDetailsScreen(itemDetails: details),
+                    ),
+                  );
+                },
+                child: _buildRequestItem(context, request, formattedDate, statusColor, statusIconData));
           },
         ),
       ],
     );
   }
 
-  Widget _buildRequestItem(BuildContext context, RequestModel request, String formattedDate) {
-    Color statusColor;
-    IconData statusIconData;
-
-    switch (request.status) {
-      case RequestStatus.accepted:
-        statusColor = AppColors.requestStatusAccepted;
-        statusIconData = Icons.check_rounded;
-        break;
-      case RequestStatus.pending:
-        statusColor = AppColors.requestStatusPending;
-        statusIconData = Icons.hourglass_empty_rounded;
-        break;
-      case RequestStatus.rejected:
-        statusColor = AppColors.requestStatusRejected;
-        statusIconData = Icons.close_rounded;
-        break;
-      default:
-        statusColor = AppColors.gray500;
-        statusIconData = Icons.help_outline;
-        break;
-    }
+  Widget _buildRequestItem(BuildContext context, RequestModel request, String formattedDate, Color statusColor, IconData statusIconData) {
 
     const bool isDataRtl = true;
 
@@ -297,6 +320,7 @@ class MyRequestsScreen extends StatelessWidget {
           ? [contentWidget, const SizedBox(width: 24), statusIconWidget]
           : [statusIconWidget, const SizedBox(width: 24), contentWidget],
     );
+
   }
 
   Widget _buildSkeletonRequestItem(BuildContext context) {
@@ -332,16 +356,16 @@ class MyRequestsScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(width: 80, height: 14, color: baseColor), // Status text placeholder
-                Container(width: 60, height: 14, color: baseColor), // Date placeholder
+                Container(width: 80, height: 14, color: baseColor),
+                Container(width: 60, height: 14, color: baseColor),
               ],
             ),
-            const SizedBox(height: 10), // Increased spacing slightly
-            Container(width: double.infinity, height: 20, color: baseColor), // Title placeholder (taller)
+            const SizedBox(height: 10),
+            Container(width: double.infinity, height: 20, color: baseColor),
             const SizedBox(height: 8), // Increased spacing
-            Container(width: MediaQuery.of(context).size.width * 0.6, height: 12, color: baseColor), // Description line 1
+            Container(width: MediaQuery.of(context).size.width * 0.6, height: 12, color: baseColor),
             const SizedBox(height: 6),
-            Container(width: MediaQuery.of(context).size.width * 0.5, height: 12, color: baseColor), // Description line 2
+            Container(width: MediaQuery.of(context).size.width * 0.5, height: 12, color: baseColor),
           ],
         ),
       ),
@@ -350,7 +374,7 @@ class MyRequestsScreen extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: baseColor,
       highlightColor: highlightColor,
-      child: Row( // This Row is the direct equivalent of the Row in _buildRequestItem
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: isRtl
             ? [contentPlaceholder, const SizedBox(width: 24), statusIconPlaceholder]
@@ -361,15 +385,16 @@ class MyRequestsScreen extends StatelessWidget {
 
   // Helper method to build the list of skeleton items
   Widget _buildSkeletonList(BuildContext context, int itemCount) {
-    // This ListView.separated will now correctly mimic your actual list's structure and spacing
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0), // Match horizontal padding of real content
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 24.0), // Match vertical padding of real content's ListView
+        padding: const EdgeInsets.symmetric(vertical: 24.0),
         itemCount: itemCount,
         itemBuilder: (context, index) => _buildSkeletonRequestItem(context),
-        separatorBuilder: (context, index) => const SizedBox(height: 24), // Match separator of real content
+        separatorBuilder: (context, index) => const SizedBox(height: 24),
       ),
     );
   }
+
 }

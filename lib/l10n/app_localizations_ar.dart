@@ -332,4 +332,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get aidsUnknownState => 'حالة مساعدات غير معروفة.';
+
+  @override
+  String get requestDetailsTitle => 'تفاصيل الطلب';
+
+  @override
+  String get aidDetailsTitle => 'تفاصيل المساعدة';
+
+  @override
+  String get qrError => 'خطأ في عرض رمز الاستجابة السريعة. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get dateLabel => 'التاريخ';
+
+  @override
+  String get providedByLabel => 'مقدمة من';
 }

@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Navigate based on index
     if (index == 1) {
      Navigator.push(context, MaterialPageRoute(builder: (context) => const MyRequestsScreen()));
-    }else if (index == 4 ){
+    }else if (index == 2 ){
       Navigator.pushNamed(context, '/aids_screen');
     }
   }
@@ -578,23 +578,17 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+
             _buildBottomNavItem(
-                icon: Icons.list_alt_outlined,
-                label: l10n.bottomNavMenu,
-                index: 0),
-            _buildBottomNavItem(
-                icon: Icons.help_center_outlined, // This is the 'Help' button which might navigate to requests
+                icon: Icons.help_center_outlined,
                 label: l10n.bottomNavHelp,
                 index: 1),
             _buildFloatingHomeButton(index: 2, label: l10n.bottomNavHome),
-            _buildBottomNavItem(
-                icon: Icons.qr_code_scanner_rounded,
-                label: l10n.bottomNavScan,
-                index: 3),
+
             _buildBottomNavItem(
                 icon: Icons.notifications_active_outlined,
                 label: l10n.bottomNavNotifications,
-                index: 4),
+                index: 2),
           ],
         ),
       ),

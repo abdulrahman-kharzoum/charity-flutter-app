@@ -142,5 +142,25 @@
   "aidHistoryLabel": "سجل المساعدات",
   "noAidsAvailable": "لا توجد مساعدات مدرجة حالياً.",
   "aidsErrorPrefix": "خطأ في تحميل المساعدات: ",
-  "aidsUnknownState": "حالة مساعدات غير معروفة."
+  "aidsUnknownState": "حالة مساعدات غير معروفة.",
+  "requestDetailsTitle": "تفاصيل الطلب",
+  "@requestDetailsTitle": {
+    "description": "عنوان شاشة عرض تفاصيل طلب واحد"
+  },
+  "aidDetailsTitle": "تفاصيل المساعدة",
+  "@aidDetailsTitle": {
+    "description": "عنوان شاشة عرض تفاصيل عنصر مساعدة واحد"
+  },
+  "qrError": "خطأ في عرض رمز الاستجابة السريعة. يرجى المحاولة مرة أخرى.",
+  "@qrError": {
+    "description": "رسالة خطأ عند فشل إنشاء أو عرض رمز الاستجابة السريعة"
+  },
+  "dateLabel": "التاريخ",
+  "@dateLabel": {
+    "description": "تسمية حقل التاريخ"
+  },
+  "providedByLabel": "مقدمة من",
+  "@providedByLabel": {
+    "description": "تسمية لمقدم عنصر المساعدة"
+  }
 }

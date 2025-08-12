@@ -736,6 +736,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown aids state.'**
   String get aidsUnknownState;
+
+  /// Title for the screen showing details of a single request
+  ///
+  /// In en, this message translates to:
+  /// **'Request Details'**
+  String get requestDetailsTitle;
+
+  /// Title for the screen showing details of a single aid item
+  ///
+  /// In en, this message translates to:
+  /// **'Aid Details'**
+  String get aidDetailsTitle;
+
+  /// Error message when the QR code fails to generate or display
+  ///
+  /// In en, this message translates to:
+  /// **'Error displaying QR Code. Please try again.'**
+  String get qrError;
+
+  /// Label for the date field
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get dateLabel;
+
+  /// Label for the provider of an aid item
+  ///
+  /// In en, this message translates to:
+  /// **'Provided by'**
+  String get providedByLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

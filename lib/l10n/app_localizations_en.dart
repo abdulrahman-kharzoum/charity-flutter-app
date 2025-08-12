@@ -332,4 +332,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get aidsUnknownState => 'Unknown aids state.';
+
+  @override
+  String get requestDetailsTitle => 'Request Details';
+
+  @override
+  String get aidDetailsTitle => 'Aid Details';
+
+  @override
+  String get qrError => 'Error displaying QR Code. Please try again.';
+
+  @override
+  String get dateLabel => 'Date';
+
+  @override
+  String get providedByLabel => 'Provided by';
 }
