@@ -1,3 +1,4 @@
+import 'package:charity/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/screens/start/splash_screen.dart';
@@ -26,7 +27,7 @@ final Map<String, WidgetBuilder> routes = {
   '/home_screen':
       (context) => BlocProvider(
         create: (context) => NavigationCubit(),
-        child: const HomeScreen(),
+        child: const MainScreen(),
       ),
   // ======Login Screen=====//
   '/login_screen':

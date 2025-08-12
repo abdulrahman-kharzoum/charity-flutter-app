@@ -347,4 +347,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get providedByLabel => 'مقدمة من';
+
+  @override
+  String get bottomNavMyRequests => 'طلباتي';
+
+  @override
+  String get bottomNavAids => 'المساعدات';
 }

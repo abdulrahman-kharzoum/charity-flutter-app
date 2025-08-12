@@ -766,6 +766,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Provided by'**
   String get providedByLabel;
+
+  /// No description provided for @bottomNavMyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My Requests'**
+  String get bottomNavMyRequests;
+
+  /// No description provided for @bottomNavAids.
+  ///
+  /// In en, this message translates to:
+  /// **'Aids'**
+  String get bottomNavAids;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

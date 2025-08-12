@@ -23,30 +23,7 @@ class AidsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AidsCubit()..fetchAids(),
       child: Builder(builder: (innerContext) { // Added Builder for consistent context if needed
-        return Scaffold(
-          backgroundColor: AppColors.myRequestsBackground, // Same background
-          appBar: AppBar(
-            backgroundColor: AppColors.white,
-            elevation: 1.0,
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new, color: AppColors.myRequestsBackButton, size: 24),
-              onPressed: () => Navigator.of(innerContext).pop(),
-            ),
-            title: Text(
-              l10n.availableAidsTitle, // Specific title for Aids
-              style: TextStyle(
-                fontFamily: 'Lexend',
-                color: AppColors.myRequestsTitleText,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            centerTitle: true,
-            actions: const [ // Same structure as MyRequestsScreen
-              SizedBox(width: 40),
-            ],
-          ),
-          body: Column(
+        return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -93,11 +70,8 @@ class AidsScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          // No FloatingActionButton for AidsScreen as per MyRequestsScreen's structure
-          // If you were to add one, it would go here, similar to MyRequestsScreen,
-          // but typically you don't "add an aid" from this screen.
-        );
+          );
+
       }),
     );
   }

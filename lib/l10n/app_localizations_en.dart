@@ -347,4 +347,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providedByLabel => 'Provided by';
+
+  @override
+  String get bottomNavMyRequests => 'My Requests';
+
+  @override
+  String get bottomNavAids => 'Aids';
 }

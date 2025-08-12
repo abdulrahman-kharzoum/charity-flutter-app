@@ -33,15 +33,15 @@ class ImageAssetConfig {
   });
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreenContent extends StatefulWidget {
+  const HomeScreenContent({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenContent> createState() => _HomeScreenContentState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 2;
+class _HomeScreenContentState extends State<HomeScreenContent> {
+
   int _currentCarouselPage = 0;
   late PageController _pageController;
   Timer? _timer;
@@ -89,82 +89,38 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Navigate based on index
-    if (index == 1) {
-     Navigator.push(context, MaterialPageRoute(builder: (context) => const MyRequestsScreen()));
-    }else if (index == 2 ){
-      Navigator.pushNamed(context, '/aids_screen');
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final textDirection = Directionality.of(context);
 
-    return Directionality(
-      textDirection: textDirection,
-      child: Scaffold(
-        backgroundColor: AppColors.slate100,
-        appBar: AppBar(
-          backgroundColor: AppColors.primary500,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.settings_outlined, color: AppColors.white, size: 28),
-            onPressed: () { 
-               Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
-             },
-          ),
-          title: Text(
-            l10n.homeScreenTitle,
-            style: const TextStyle(
-              color: AppColors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'Amiri',
-            ),
-          ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.notifications_outlined, color: AppColors.white, size: 28),
-              onPressed: () { /* TODO: Notifications action */ },
-            ),
-            const SizedBox(width: 4),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildImageCarousel(l10n),
-              const SizedBox(height: 10),
-              _buildServiceSections(context, l10n),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 12.0),
-                child: Text(
-                  l10n.homeQuickAccess,
-                  style: const TextStyle(
-                    color: AppColors.slate900,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Lexend',
-                  ),
+    return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildImageCarousel(l10n),
+            const SizedBox(height: 10),
+            _buildServiceSections(context, l10n),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 12.0),
+              child: Text(
+                l10n.homeQuickAccess,
+                style: const TextStyle(
+                  color: AppColors.slate900,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Lexend',
                 ),
               ),
-              _buildQuickAccessGrid(context, l10n),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ),
+            _buildQuickAccessGrid(context, l10n),
+            const SizedBox(height: 20),
+          ],
         ),
-        bottomNavigationBar: _buildBottomNavigationBar(l10n),
-      ),
-    );
+      );
   }
+
 
   Widget _buildImageCarousel(AppLocalizations l10n) {
     if (_imageUrls.isEmpty) {
@@ -545,136 +501,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-
-  Widget _buildBottomNavigationBar(AppLocalizations l10n) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            spreadRadius: 0,
-            blurRadius: 5,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(
-            left: 8.0,
-            right: 8.0,
-            top: 8.0,
-            bottom: MediaQuery.of(context).padding.bottom > 0
-                ? MediaQuery.of(context).padding.bottom - 5
-                : 12.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-            _buildBottomNavItem(
-                icon: Icons.help_center_outlined,
-                label: l10n.bottomNavHelp,
-                index: 1),
-            _buildFloatingHomeButton(index: 2, label: l10n.bottomNavHome),
-
-            _buildBottomNavItem(
-                icon: Icons.notifications_active_outlined,
-                label: l10n.bottomNavNotifications,
-                index: 2),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBottomNavItem(
-      {required IconData icon,
-        required String label,
-        required int index}) {
-    final color =
-    _selectedIndex == index ? AppColors.primary500 : AppColors.slate500;
-    return Expanded(
-      child: InkWell(
-        onTap: () => _onItemTapped(index),
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon,
-                  color: color, size: _selectedIndex == index ? 28 : 26),
-              const SizedBox(height: 5),
-              Text(
-                label,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 10.5,
-                  fontWeight: _selectedIndex == index
-                      ? FontWeight.bold
-                      : FontWeight.w500,
-                  fontFamily: 'Lexend',
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFloatingHomeButton(
-      {required int index, required String label}) {
-    final bool isSelected = _selectedIndex == index;
-    return Expanded(
-      child: InkWell(
-        onTap: () => _onItemTapped(index),
-        customBorder: const CircleBorder(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Transform.translate(
-              offset: const Offset(0, -18),
-              child: Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: AppColors.primary500,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary300.withOpacity(0.8),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: const Icon(Icons.home_filled,
-                    color: Colors.white, size: 30),
-              ),
-            ),
-            Transform.translate(
-              offset: const Offset(0, -8),
-              child: Text(
-                label, // Use the passed label
-                style: TextStyle(
-                  color:
-                  isSelected ? AppColors.primary500 : AppColors.slate500,
-                  fontSize: 10.5,
-                  fontWeight:
-                  isSelected ? FontWeight.bold : FontWeight.w500,
-                  fontFamily: 'Lexend',
-                ),
-              ),
             ),
           ],
         ),

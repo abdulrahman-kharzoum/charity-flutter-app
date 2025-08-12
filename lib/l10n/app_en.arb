@@ -165,5 +165,8 @@
   "providedByLabel": "Provided by",
   "@providedByLabel": {
     "description": "Label for the provider of an aid item"
-  }
+  },
+  "bottomNavHome": "Home",
+  "bottomNavMyRequests": "My Requests",
+  "bottomNavAids": "Aids"
 }

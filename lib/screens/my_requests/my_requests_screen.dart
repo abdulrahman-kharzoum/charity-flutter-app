@@ -27,27 +27,6 @@ class MyRequestsScreen extends StatelessWidget {
           builder: (innerContext) {
             return Scaffold(
               backgroundColor: AppColors.myRequestsBackground,
-              appBar: AppBar(
-                backgroundColor: AppColors.white,
-                elevation: 1.0,
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back_ios_new, color: AppColors.myRequestsBackButton, size: 24),
-                  onPressed: () => Navigator.of(innerContext).pop(), // Use innerContext if needed for Nav
-                ),
-                title: Text(
-                  l10n.myRequestsTitle,
-                  style: TextStyle(
-                    fontFamily: 'Lexend',
-                    color: AppColors.myRequestsTitleText,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                centerTitle: true,
-                actions: [
-                  SizedBox(width: 40),
-                ],
-              ),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -95,7 +74,7 @@ class MyRequestsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-// In MyRequestsScreen's FAB onPressed:
+                // In MyRequestsScreen's FAB onPressed:
               floatingActionButton: FloatingActionButton.extended(
                 onPressed: () {
                   Navigator.push(
