@@ -6,7 +6,9 @@ import 'package:charity/models/child_model.dart';
 
 import 'package:charity/theme/color.dart';
 
+import '../../../cubits/education/child_profile/child_profile_cubit.dart';
 import '../../../cubits/education/home_screen_education_cubit/home_screen_education_cubit.dart';
+import '../child_profile_screen/child_profile_screen.dart';
 
 class EduHomeScreen extends StatefulWidget {
   const EduHomeScreen({super.key});
@@ -71,7 +73,19 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
                         context,
                         l10n,
                         state.children,
-                            (child) => _buildChildCard(context, l10n, child),
+                            (child) => GestureDetector(
+                                onTap: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) => ChildProfileCubit(),
+                                        child: ChildProfileScreen(childId: child.id),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: _buildChildCard(context, l10n, child)),
                       ),
                       _buildSectionTitle(context, l10n.newCourses),
                       _buildHorizontalCardList<CourseModel>(
@@ -105,16 +119,18 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 48,
+              width: 48, // flex size-12 shrink-0 items-center
               height: 48,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
+              child: Align(
+                alignment: Alignment.centerLeft, // Default but explicit
+                child: CircleAvatar(
+                  radius: 16, // size-8 (32px / 2)
+                  backgroundColor: AppColors.lightGreyBackground, // Placeholder color
+                  backgroundImage: const NetworkImage( //Directly from HTML
+                      "https://lh3.googleusercontent.com/aida-public/AB6AXuAxxemeKv1q4vXWk0wQf_5jqYuoNCmXfZzO1Kv1edZtp16AlCIvIf8LNGrCE_nzlasCo6Fv8PWgye59ZCF-UI5UCEzuDnUlSITzXVkz8BHcP-KKF2E-_pjg7yj19gRZWwXU8BX91vPe-37sodJXq8yMmy6lD79zH14SZd-GtG_RVIEGFLYe7UgxZc5-z2RjBrFz_4TTs6hD2ElVTxQzBObKMTxTfLXV4IgWtLPPpk9LtOI9-GNhnUzcIuyFFadWp5StNIb3bnmYQ8lu"),
+                  onBackgroundImageError: (_, __) { /* Handle error, e.g. show placeholder */ },
                 ),
+              ),
             ),
             Text(
               l10n.appName,

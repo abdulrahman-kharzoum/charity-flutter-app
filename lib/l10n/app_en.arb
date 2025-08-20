@@ -219,5 +219,54 @@
   "courseArtDesignSubtitle": "Learn the basics of art and design with our introductory course.",
   "loadingCourses": "Loading courses...",
   "errorLoadingCourses": "Error loading courses. Please try again.",
-  "errorLabel": "Error"
+  "errorLabel": "Error",
+  "childProfileTitle": "Child Profile",
+  "childIdLabel": "ID: {studentId}",
+  "@childIdLabel": {
+    "placeholders": {
+      "studentId": {
+        "type": "String",
+        "example": "123456"
+      }
+    }
+  },
+  "coursesTab": "Courses",
+  "academicProgressTab": "Academic Progress",
+  "financialStatementTab": "Financial Statement",
+  "currentSectionTitle": "Current",
+  "pastSectionTitle": "Past",
+  "noCoursesAvailable": "No courses available for this section.",
+  "noDataAvailable": "No data available.",
+  "gradeLevelLabel": "Grade {level}",
+  "@gradeLevelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "5"
+      }
+    }
+  },
+  "attendanceRecordTitle": "Attendance Record",
+  "attendanceLabel": "Attendance",
+  "last30DaysLabel": "Last 30 Days",
+  "gradesAndViolationsTitle": "Grades and Violations",
+  "violationLabel": "Violation",
+  "positiveAndNegativeNotesTitle": "Positive and Negative Notes",
+  "positiveNoteLabel": "Positive Note",
+  "negativeNoteLabel": "Negative Note",
+  "financialOverviewTitle": "Overview",
+  "amountDueLabel": "Amount Due",
+  "amountPaidLabel": "Amount Paid",
+  "paymentHistoryTitle": "Payment History",
+  "paymentReceivedLabel": "Payment Received",
+  "mondayShort": "Mon",
+  "tuesdayShort": "Tue",
+  "wednesdayShort": "Wed",
+  "thursdayShort": "Thu",
+  "fridayShort": "Fri",
+  "noAcademicData": "No academic data available for this child.",
+  "noFinancialData": "No financial data available for this child.",
+  "studentIdLabel": "رقم الطالب"
+
+
 }

@@ -445,4 +445,101 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errorLabel => 'خطأ';
+
+  @override
+  String get childProfileTitle => 'ملف الطفل';
+
+  @override
+  String childIdLabel(String studentId) {
+    return 'المعرف: $studentId';
+  }
+
+  @override
+  String get coursesTab => 'الدورات';
+
+  @override
+  String get academicProgressTab => 'التقدم الأكاديمي';
+
+  @override
+  String get financialStatementTab => 'البيان المالي';
+
+  @override
+  String get currentSectionTitle => 'الحالية';
+
+  @override
+  String get pastSectionTitle => 'السابقة';
+
+  @override
+  String get noCoursesAvailable => 'لا توجد دورات متاحة لهذا القسم.';
+
+  @override
+  String get noDataAvailable => 'لا توجد بيانات متاحة.';
+
+  @override
+  String gradeLevelLabel(String level) {
+    return 'الصف $level';
+  }
+
+  @override
+  String get attendanceRecordTitle => 'سجل الحضور';
+
+  @override
+  String get attendanceLabel => 'الحضور';
+
+  @override
+  String get last30DaysLabel => 'آخر ٣٠ يومًا';
+
+  @override
+  String get gradesAndViolationsTitle => 'الدرجات والمخالفات';
+
+  @override
+  String get violationLabel => 'مخالفة';
+
+  @override
+  String get positiveAndNegativeNotesTitle => 'الملاحظات الإيجابية والسلبية';
+
+  @override
+  String get positiveNoteLabel => 'ملاحظة إيجابية';
+
+  @override
+  String get negativeNoteLabel => 'ملاحظة سلبية';
+
+  @override
+  String get financialOverviewTitle => 'نظرة عامة';
+
+  @override
+  String get amountDueLabel => 'المبلغ المستحق';
+
+  @override
+  String get amountPaidLabel => 'المبلغ المدفوع';
+
+  @override
+  String get paymentHistoryTitle => 'سجل المدفوعات';
+
+  @override
+  String get paymentReceivedLabel => 'تم استلام الدفعة';
+
+  @override
+  String get mondayShort => 'إثن';
+
+  @override
+  String get tuesdayShort => 'ثلا';
+
+  @override
+  String get wednesdayShort => 'أرب';
+
+  @override
+  String get thursdayShort => 'خمي';
+
+  @override
+  String get fridayShort => 'جمعة';
+
+  @override
+  String get noAcademicData => 'لا توجد بيانات أكاديمية متاحة لهذا الطفل.';
+
+  @override
+  String get noFinancialData => 'لا توجد بيانات مالية متاحة لهذا الطفل.';
+
+  @override
+  String get studentIdLabel => 'رقم الطالب';
 }

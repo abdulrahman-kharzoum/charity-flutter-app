@@ -946,6 +946,192 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get errorLabel;
+
+  /// No description provided for @childProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Child Profile'**
+  String get childProfileTitle;
+
+  /// No description provided for @childIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ID: {studentId}'**
+  String childIdLabel(String studentId);
+
+  /// No description provided for @coursesTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Courses'**
+  String get coursesTab;
+
+  /// No description provided for @academicProgressTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Academic Progress'**
+  String get academicProgressTab;
+
+  /// No description provided for @financialStatementTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Financial Statement'**
+  String get financialStatementTab;
+
+  /// No description provided for @currentSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get currentSectionTitle;
+
+  /// No description provided for @pastSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Past'**
+  String get pastSectionTitle;
+
+  /// No description provided for @noCoursesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No courses available for this section.'**
+  String get noCoursesAvailable;
+
+  /// No description provided for @noDataAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No data available.'**
+  String get noDataAvailable;
+
+  /// No description provided for @gradeLevelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Grade {level}'**
+  String gradeLevelLabel(String level);
+
+  /// No description provided for @attendanceRecordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance Record'**
+  String get attendanceRecordTitle;
+
+  /// No description provided for @attendanceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance'**
+  String get attendanceLabel;
+
+  /// No description provided for @last30DaysLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Last 30 Days'**
+  String get last30DaysLabel;
+
+  /// No description provided for @gradesAndViolationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Grades and Violations'**
+  String get gradesAndViolationsTitle;
+
+  /// No description provided for @violationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Violation'**
+  String get violationLabel;
+
+  /// No description provided for @positiveAndNegativeNotesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive and Negative Notes'**
+  String get positiveAndNegativeNotesTitle;
+
+  /// No description provided for @positiveNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive Note'**
+  String get positiveNoteLabel;
+
+  /// No description provided for @negativeNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Negative Note'**
+  String get negativeNoteLabel;
+
+  /// No description provided for @financialOverviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get financialOverviewTitle;
+
+  /// No description provided for @amountDueLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount Due'**
+  String get amountDueLabel;
+
+  /// No description provided for @amountPaidLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount Paid'**
+  String get amountPaidLabel;
+
+  /// No description provided for @paymentHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment History'**
+  String get paymentHistoryTitle;
+
+  /// No description provided for @paymentReceivedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Received'**
+  String get paymentReceivedLabel;
+
+  /// No description provided for @mondayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Mon'**
+  String get mondayShort;
+
+  /// No description provided for @tuesdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Tue'**
+  String get tuesdayShort;
+
+  /// No description provided for @wednesdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Wed'**
+  String get wednesdayShort;
+
+  /// No description provided for @thursdayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Thu'**
+  String get thursdayShort;
+
+  /// No description provided for @fridayShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Fri'**
+  String get fridayShort;
+
+  /// No description provided for @noAcademicData.
+  ///
+  /// In en, this message translates to:
+  /// **'No academic data available for this child.'**
+  String get noAcademicData;
+
+  /// No description provided for @noFinancialData.
+  ///
+  /// In en, this message translates to:
+  /// **'No financial data available for this child.'**
+  String get noFinancialData;
+
+  /// No description provided for @studentIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'رقم الطالب'**
+  String get studentIdLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

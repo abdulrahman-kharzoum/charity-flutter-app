@@ -215,5 +215,52 @@
   "courseArtDesignSubtitle": "تعلم أساسيات الفن والتصميم من خلال دورتنا التمهيدية.",
   "loadingCourses": "جاري تحميل الدورات...",
   "errorLoadingCourses": "خطأ في تحميل الدورات. يرجى المحاولة مرة أخرى.",
-  "errorLabel": "خطأ"
+  "errorLabel": "خطأ",
+  "childProfileTitle": "ملف الطفل",
+  "childIdLabel": "المعرف: {studentId}",
+  "@childIdLabel": {
+    "placeholders": {
+      "studentId": {
+        "type": "String",
+        "example": "123456"
+      }
+    }
+  },
+  "coursesTab": "الدورات",
+  "academicProgressTab": "التقدم الأكاديمي",
+  "financialStatementTab": "البيان المالي",
+  "currentSectionTitle": "الحالية",
+  "pastSectionTitle": "السابقة",
+  "noCoursesAvailable": "لا توجد دورات متاحة لهذا القسم.",
+  "noDataAvailable": "لا توجد بيانات متاحة.",
+  "gradeLevelLabel": "الصف {level}",
+  "@gradeLevelLabel": {
+    "placeholders": {
+      "level": {
+        "type": "String",
+        "example": "الخامس"
+      }
+    }
+  },
+  "attendanceRecordTitle": "سجل الحضور",
+  "attendanceLabel": "الحضور",
+  "last30DaysLabel": "آخر ٣٠ يومًا",
+  "gradesAndViolationsTitle": "الدرجات والمخالفات",
+  "violationLabel": "مخالفة",
+  "positiveAndNegativeNotesTitle": "الملاحظات الإيجابية والسلبية",
+  "positiveNoteLabel": "ملاحظة إيجابية",
+  "negativeNoteLabel": "ملاحظة سلبية",
+  "financialOverviewTitle": "نظرة عامة",
+  "amountDueLabel": "المبلغ المستحق",
+  "amountPaidLabel": "المبلغ المدفوع",
+  "paymentHistoryTitle": "سجل المدفوعات",
+  "paymentReceivedLabel": "تم استلام الدفعة",
+  "mondayShort": "إثن",
+  "tuesdayShort": "ثلا",
+  "wednesdayShort": "أرب",
+  "thursdayShort": "خمي",
+  "fridayShort": "جمعة",
+  "noAcademicData": "لا توجد بيانات أكاديمية متاحة لهذا الطفل.",
+  "noFinancialData": "لا توجد بيانات مالية متاحة لهذا الطفل.",
+  "studentIdLabel": "رقم الطالب"
 }
