@@ -247,7 +247,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
               top: 58, // Example of vertical adjustment
             ),
             onTap: () {
-              Navigator.pushNamed(context, '/education_home');
+              Navigator.pushNamed(context, '/education_main');
             },
           ),
         ],

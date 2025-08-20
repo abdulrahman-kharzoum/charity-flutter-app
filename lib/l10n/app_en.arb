@@ -166,10 +166,10 @@
   "@providedByLabel": {
     "description": "Label for the provider of an aid item"
   },
-  "bottomNavHome": "Home",
+
   "bottomNavMyRequests": "My Requests",
   "bottomNavAids": "Aids",
-  "appName": "Education and Courses Department",
+  "appName": "Education and Courses ",
   "greeting": "Hello, {userName}",
   "@greeting": {
     "description": "Greeting message on the home screen",
@@ -204,5 +204,20 @@
     }
   },
   "agesLabel": "Ages {range}",
-  "noItemsAvailable": "No items available at the moment."
+  "noItemsAvailable": "No items available at the moment.",
+  "allCoursesScreenTitle": "New Courses",
+  "exploreNewCoursesTitle": "Explore New Courses",
+  "exploreNewCoursesSubtitle": "Discover the latest courses designed to enhance your child's learning journey. Each course is crafted by expert educators to provide engaging and effective educational content.",
+  "requestSubscriptionButton": "Request Subscription",
+  "courseMathExplorersTitle": "Math Explorers",
+  "courseMathExplorersSubtitle": "A fun and interactive course to build foundational math skills.",
+  "courseCreativeWritingTitle": "Creative Writing Workshop",
+  "courseCreativeWritingSubtitle": "Unleash your child's imagination with our creative writing course.",
+  "courseScienceAdventuresTitle": "Science Adventures",
+  "courseScienceAdventuresSubtitle": "Explore the wonders of science through hands-on experiments.",
+  "courseArtDesignTitle": "Art & Design Fundamentals",
+  "courseArtDesignSubtitle": "Learn the basics of art and design with our introductory course.",
+  "loadingCourses": "Loading courses...",
+  "errorLoadingCourses": "Error loading courses. Please try again.",
+  "errorLabel": "Error"
 }

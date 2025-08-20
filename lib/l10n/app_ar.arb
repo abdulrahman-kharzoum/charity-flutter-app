@@ -200,5 +200,20 @@
     }
   },
   "agesLabel": "الأعمار {range}",
-  "noItemsAvailable": "لا توجد عناصر متاحة في الوقت الحالي."
+  "noItemsAvailable": "لا توجد عناصر متاحة في الوقت الحالي.",
+  "allCoursesScreenTitle": "دورات جديدة",
+  "exploreNewCoursesTitle": "استكشف الدورات الجديدة",
+  "exploreNewCoursesSubtitle": "اكتشف أحدث الدورات المصممة لتعزيز رحلة تعلم طفلك. تم تصميم كل دورة من قبل معلمين خبراء لتوفير محتوى تعليمي جذاب وفعال.",
+  "requestSubscriptionButton": "طلب اشتراك",
+  "courseMathExplorersTitle": "مستكشفو الرياضيات",
+  "courseMathExplorersSubtitle": "دورة ممتعة وتفاعلية لبناء مهارات الرياضيات الأساسية.",
+  "courseCreativeWritingTitle": "ورشة الكتابة الإبداعية",
+  "courseCreativeWritingSubtitle": "أطلق العنان لخيال طفلك من خلال دورة الكتابة الإبداعية لدينا.",
+  "courseScienceAdventuresTitle": "مغامرات العلوم",
+  "courseScienceAdventuresSubtitle": "استكشف عجائب العلوم من خلال التجارب العملية.",
+  "courseArtDesignTitle": "أساسيات الفن والتصميم",
+  "courseArtDesignSubtitle": "تعلم أساسيات الفن والتصميم من خلال دورتنا التمهيدية.",
+  "loadingCourses": "جاري تحميل الدورات...",
+  "errorLoadingCourses": "خطأ في تحميل الدورات. يرجى المحاولة مرة أخرى.",
+  "errorLabel": "خطأ"
 }

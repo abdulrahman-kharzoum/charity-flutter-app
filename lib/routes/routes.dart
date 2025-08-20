@@ -1,3 +1,5 @@
+import 'package:charity/cubits/education/all_courses_cubit/all_courses_cubit.dart';
+import 'package:charity/screens/Education_section/education_main_screen/education_main_screen.dart';
 import 'package:charity/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,14 +51,26 @@ final Map<String, WidgetBuilder> routes = {
     create: (context) => ProfileCubit(),
     child: const ProfileScreen(),
   ),
-  // ====== Aids Screen (NEW) =====//
+  // ====== Aids Screen =====//
   '/aids_screen': (context) => BlocProvider(
     create: (context) => AidsCubit()..fetchAids(),
     child: const AidsScreen(),
   ),
-  // ====== Education Home Screen (NEW) =====//
+  // ====== Education Home Screen =====//
   '/education_home': (context) => BlocProvider(
     create: (context) => HomeScreenEducationCubit()..loadHomeScreenData(),
     child: const EduHomeScreen(),
+  ),
+  // ====== Education Main  =====//
+  '/education_main': (context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => HomeScreenEducationCubit()..loadHomeScreenData(),
+      ),
+      BlocProvider(
+        create: (context) => AllCoursesCubit()..fetchAllCourses(),
+      ),
+    ],
+    child: const EducationMainScreen(),
   ),
 };

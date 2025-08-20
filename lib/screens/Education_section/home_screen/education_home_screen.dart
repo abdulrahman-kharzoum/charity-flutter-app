@@ -91,7 +91,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
           return const SizedBox.shrink(); // Fallback for unhandled states
         },
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context, l10n),
+      // bottomNavigationBar: _buildBottomNavigationBar(context, l10n),
     );
   }
 
@@ -105,18 +105,16 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 48, // flex size-12 shrink-0 items-center
+              width: 48,
               height: 48,
-              child: Align(
-                alignment: Alignment.centerLeft, // Default but explicit
-                child: CircleAvatar(
-                  radius: 16, // size-8 (32px / 2)
-                  backgroundColor: AppColors.lightGreyBackground, // Placeholder color
-                  backgroundImage: const NetworkImage( //Directly from HTML
-                      "https://lh3.googleusercontent.com/aida-public/AB6AXuAxxemeKv1q4vXWk0wQf_5jqYuoNCmXfZzO1Kv1edZtp16AlCIvIf8LNGrCE_nzlasCo6Fv8PWgye59ZCF-UI5UCEzuDnUlSITzXVkz8BHcP-KKF2E-_pjg7yj19gRZWwXU8BX91vPe-37sodJXq8yMmy6lD79zH14SZd-GtG_RVIEGFLYe7UgxZc5-z2RjBrFz_4TTs6hD2ElVTxQzBObKMTxTfLXV4IgWtLPPpk9LtOI9-GNhnUzcIuyFFadWp5StNIb3bnmYQ8lu"),
-                  onBackgroundImageError: (_, __) { /* Handle error, e.g. show placeholder */ },
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
                 ),
-              ),
             ),
             Text(
               l10n.appName,
@@ -125,11 +123,11 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
                 fontSize: 18, // text-lg
                 fontWeight: FontWeight.bold, // font-bold
                 fontFamily: 'Lexend',
-                letterSpacing: -0.015 * 18, // tracking-[-0.015em]
+                letterSpacing: -0.015 * 18,
               ),
             ),
             SizedBox(
-              width: 48, // flex w-12 items-center justify-end
+              width: 48,
               height: 48,
               child: Align(
                 alignment: Alignment.centerRight,
@@ -150,18 +148,25 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
   }
 
   Widget _buildGreeting(BuildContext context, AppLocalizations l10n, String userName) {
+    // Determine text alignment based on language direction
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    final textAlign = isRtl ? TextAlign.right : TextAlign.left;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 8), // px-4 pt-5 pb-2
       child: Text(
         l10n.greeting(userName),
         style: const TextStyle(
           color: AppColors.textPrimary,
-          fontSize: 20,
+          fontSize: 20, // text-xl (20px)
           fontWeight: FontWeight.bold,
           fontFamily: 'Lexend',
-
+          // letterSpacing: -0.015 * 20, // tracking-[-0.015em] - Not specified for this element in HTML
+          // HTML specific: leading-[30px] line-height: 1.5 (20px * 1.5 = 30px)
+          // Flutter uses height multiplier for TextStyle.height
+          height: 1.5,
         ),
-        textAlign: TextAlign.left,
+        textAlign: textAlign,
       ),
     );
   }
@@ -195,7 +200,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
       );
     }
     return SizedBox(
-      height: 250,
+      height: 232,
 
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -208,10 +213,6 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
       ),
     );
   }
-
-// In lib/screens/Education_section/home_screen/education_home_screen.dart
-
-// ... inside _EduHomeScreenState class ...
 
   Widget _buildChildCard(BuildContext context, AppLocalizations l10n, ChildModel child) {
     return Container(
@@ -252,13 +253,13 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 4.0),
             child: Text(
-              "${l10n.coursesLabel(child.courseCount)} | ${l10n.balanceLabel(child.balance.toStringAsFixed(0))}",
+              "${l10n.coursesLabel(child.courseCount)}",
               style: const TextStyle(
                   color: AppColors.textSecondary,
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
                   fontFamily: 'Lexend'),
-              maxLines: 2, // Allow two lines for potentially longer text
+              // maxLines: 2, // Allow two lines for potentially longer text
               overflow: TextOverflow.ellipsis,
             ),
           ),

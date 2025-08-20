@@ -400,4 +400,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noItemsAvailable => 'لا توجد عناصر متاحة في الوقت الحالي.';
+
+  @override
+  String get allCoursesScreenTitle => 'دورات جديدة';
+
+  @override
+  String get exploreNewCoursesTitle => 'استكشف الدورات الجديدة';
+
+  @override
+  String get exploreNewCoursesSubtitle => 'اكتشف أحدث الدورات المصممة لتعزيز رحلة تعلم طفلك. تم تصميم كل دورة من قبل معلمين خبراء لتوفير محتوى تعليمي جذاب وفعال.';
+
+  @override
+  String get requestSubscriptionButton => 'طلب اشتراك';
+
+  @override
+  String get courseMathExplorersTitle => 'مستكشفو الرياضيات';
+
+  @override
+  String get courseMathExplorersSubtitle => 'دورة ممتعة وتفاعلية لبناء مهارات الرياضيات الأساسية.';
+
+  @override
+  String get courseCreativeWritingTitle => 'ورشة الكتابة الإبداعية';
+
+  @override
+  String get courseCreativeWritingSubtitle => 'أطلق العنان لخيال طفلك من خلال دورة الكتابة الإبداعية لدينا.';
+
+  @override
+  String get courseScienceAdventuresTitle => 'مغامرات العلوم';
+
+  @override
+  String get courseScienceAdventuresSubtitle => 'استكشف عجائب العلوم من خلال التجارب العملية.';
+
+  @override
+  String get courseArtDesignTitle => 'أساسيات الفن والتصميم';
+
+  @override
+  String get courseArtDesignSubtitle => 'تعلم أساسيات الفن والتصميم من خلال دورتنا التمهيدية.';
+
+  @override
+  String get loadingCourses => 'جاري تحميل الدورات...';
+
+  @override
+  String get errorLoadingCourses => 'خطأ في تحميل الدورات. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get errorLabel => 'خطأ';
 }

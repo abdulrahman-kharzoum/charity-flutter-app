@@ -355,7 +355,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bottomNavAids => 'Aids';
 
   @override
-  String get appName => 'Education and Courses Department';
+  String get appName => 'Education and Courses ';
 
   @override
   String greeting(String userName) {
@@ -400,4 +400,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noItemsAvailable => 'No items available at the moment.';
+
+  @override
+  String get allCoursesScreenTitle => 'New Courses';
+
+  @override
+  String get exploreNewCoursesTitle => 'Explore New Courses';
+
+  @override
+  String get exploreNewCoursesSubtitle => 'Discover the latest courses designed to enhance your child\'s learning journey. Each course is crafted by expert educators to provide engaging and effective educational content.';
+
+  @override
+  String get requestSubscriptionButton => 'Request Subscription';
+
+  @override
+  String get courseMathExplorersTitle => 'Math Explorers';
+
+  @override
+  String get courseMathExplorersSubtitle => 'A fun and interactive course to build foundational math skills.';
+
+  @override
+  String get courseCreativeWritingTitle => 'Creative Writing Workshop';
+
+  @override
+  String get courseCreativeWritingSubtitle => 'Unleash your child\'s imagination with our creative writing course.';
+
+  @override
+  String get courseScienceAdventuresTitle => 'Science Adventures';
+
+  @override
+  String get courseScienceAdventuresSubtitle => 'Explore the wonders of science through hands-on experiments.';
+
+  @override
+  String get courseArtDesignTitle => 'Art & Design Fundamentals';
+
+  @override
+  String get courseArtDesignSubtitle => 'Learn the basics of art and design with our introductory course.';
+
+  @override
+  String get loadingCourses => 'Loading courses...';
+
+  @override
+  String get errorLoadingCourses => 'Error loading courses. Please try again.';
+
+  @override
+  String get errorLabel => 'Error';
 }

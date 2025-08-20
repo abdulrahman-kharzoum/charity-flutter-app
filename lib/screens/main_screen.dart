@@ -1,4 +1,3 @@
-// lib/screens/main_screen.dart
 import 'package:flutter/material.dart';
 import 'package:charity/screens/home/home_screen.dart';
 import 'package:charity/screens/my_requests/my_requests_screen.dart';

@@ -1,5 +1,10 @@
 part of 'navigation_cubit.dart';
 
-abstract class NavigationState {}
+class NavigationState extends Equatable {
+  final int currentIndex;
 
-class NavigationInitial extends NavigationState {}
+  const NavigationState({required this.currentIndex});
+
+  @override
+  List<Object> get props => [currentIndex];
+}

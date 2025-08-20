@@ -782,7 +782,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Education and Courses Department'**
+  /// **'Education and Courses '**
   String get appName;
 
   /// Greeting message on the home screen
@@ -856,6 +856,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No items available at the moment.'**
   String get noItemsAvailable;
+
+  /// No description provided for @allCoursesScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Courses'**
+  String get allCoursesScreenTitle;
+
+  /// No description provided for @exploreNewCoursesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore New Courses'**
+  String get exploreNewCoursesTitle;
+
+  /// No description provided for @exploreNewCoursesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover the latest courses designed to enhance your child\'s learning journey. Each course is crafted by expert educators to provide engaging and effective educational content.'**
+  String get exploreNewCoursesSubtitle;
+
+  /// No description provided for @requestSubscriptionButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Subscription'**
+  String get requestSubscriptionButton;
+
+  /// No description provided for @courseMathExplorersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Math Explorers'**
+  String get courseMathExplorersTitle;
+
+  /// No description provided for @courseMathExplorersSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A fun and interactive course to build foundational math skills.'**
+  String get courseMathExplorersSubtitle;
+
+  /// No description provided for @courseCreativeWritingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Creative Writing Workshop'**
+  String get courseCreativeWritingTitle;
+
+  /// No description provided for @courseCreativeWritingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Unleash your child\'s imagination with our creative writing course.'**
+  String get courseCreativeWritingSubtitle;
+
+  /// No description provided for @courseScienceAdventuresTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Science Adventures'**
+  String get courseScienceAdventuresTitle;
+
+  /// No description provided for @courseScienceAdventuresSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore the wonders of science through hands-on experiments.'**
+  String get courseScienceAdventuresSubtitle;
+
+  /// No description provided for @courseArtDesignTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Art & Design Fundamentals'**
+  String get courseArtDesignTitle;
+
+  /// No description provided for @courseArtDesignSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn the basics of art and design with our introductory course.'**
+  String get courseArtDesignSubtitle;
+
+  /// No description provided for @loadingCourses.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading courses...'**
+  String get loadingCourses;
+
+  /// No description provided for @errorLoadingCourses.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading courses. Please try again.'**
+  String get errorLoadingCourses;
+
+  /// No description provided for @errorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
