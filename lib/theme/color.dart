@@ -118,4 +118,12 @@ class AppColors {
       Color(0xFFF5EAFC),
     ],
   );
+
+  static const Color background = Colors.white;
+  static const Color textPrimary = Color(0xFF111418);
+  static const Color textSecondary = Color(0xFF60748A); 
+  static const Color lightGreyBackground = Color(0xFFF0F2F5);
+  static const Color border = Color(0xFFF0F2F5);
+
+
 }

@@ -14,6 +14,8 @@ import 'package:charity/screens/profile_screen/profile_screen.dart';
 import 'package:charity/core/shared/settings_repository.dart';
 
 import '../cubits/aids_cubit/aids_cubit.dart';
+import '../cubits/education/home_screen_education_cubit/home_screen_education_cubit.dart';
+import '../screens/Education_section/home_screen/education_home_screen.dart';
 import '../screens/aids_screen/aids_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
@@ -51,5 +53,10 @@ final Map<String, WidgetBuilder> routes = {
   '/aids_screen': (context) => BlocProvider(
     create: (context) => AidsCubit()..fetchAids(),
     child: const AidsScreen(),
+  ),
+  // ====== Education Home Screen (NEW) =====//
+  '/education_home': (context) => BlocProvider(
+    create: (context) => HomeScreenEducationCubit()..loadHomeScreenData(),
+    child: const EduHomeScreen(),
   ),
 };

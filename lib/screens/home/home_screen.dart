@@ -229,7 +229,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             title: l10n.homeServiceEducationTitle,
             subtitle: l10n.homeServiceEducationSubtitle,
             imageConfigLeft: ImageAssetConfig(
-              path: "assets/images/education.png", // Replace with your actual asset
+              path: "assets/images/education.png",
               width: 140,
               height: 140,
               opacity: 0.8,
@@ -247,7 +247,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
               top: 58, // Example of vertical adjustment
             ),
             onTap: () {
-              // TODO: Navigate to Education Section
+              Navigator.pushNamed(context, '/education_home');
             },
           ),
         ],

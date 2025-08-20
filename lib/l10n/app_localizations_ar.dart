@@ -353,4 +353,51 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get bottomNavAids => 'المساعدات';
+
+  @override
+  String get appName => 'قسم التعليم والدورات';
+
+  @override
+  String greeting(String userName) {
+    return 'مرحباً، $userName';
+  }
+
+  @override
+  String get myChildren => 'أطفالي';
+
+  @override
+  String get newCourses => 'دورات جديدة';
+
+  @override
+  String get viewAllNewCourses => 'عرض كل الدورات الجديدة';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get children => 'الأطفال';
+
+  @override
+  String get courses => 'الدورات';
+
+  @override
+  String get chat => 'الدردشة';
+
+  @override
+  String coursesLabel(int count) {
+    return '$count دورات';
+  }
+
+  @override
+  String balanceLabel(String amount) {
+    return 'الرصيد: \$$amount';
+  }
+
+  @override
+  String agesLabel(Object range) {
+    return 'الأعمار $range';
+  }
+
+  @override
+  String get noItemsAvailable => 'لا توجد عناصر متاحة في الوقت الحالي.';
 }

@@ -163,7 +163,42 @@
   "@providedByLabel": {
     "description": "تسمية لمقدم عنصر المساعدة"
   },
-  "bottomNavHome": "الرئيسية",
   "bottomNavMyRequests": "طلباتي",
-  "bottomNavAids": "المساعدات"
+  "bottomNavAids": "المساعدات",
+  "appName": "قسم التعليم والدورات",
+  "greeting": "مرحباً، {userName}",
+  "@greeting": {
+    "description": "رسالة ترحيب على الشاشة الرئيسية",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "صوفيا"
+      }
+    }
+  },
+  "myChildren": "أطفالي",
+  "newCourses": "دورات جديدة",
+  "viewAllNewCourses": "عرض كل الدورات الجديدة",
+  "home": "الرئيسية",
+  "children": "الأطفال",
+  "courses": "الدورات",
+  "chat": "الدردشة",
+  "coursesLabel": "{count} دورات",
+  "@coursesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "balanceLabel": "الرصيد: ${amount}",
+  "@balanceLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "agesLabel": "الأعمار {range}",
+  "noItemsAvailable": "لا توجد عناصر متاحة في الوقت الحالي."
 }

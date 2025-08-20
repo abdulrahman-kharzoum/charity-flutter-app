@@ -168,5 +168,41 @@
   },
   "bottomNavHome": "Home",
   "bottomNavMyRequests": "My Requests",
-  "bottomNavAids": "Aids"
+  "bottomNavAids": "Aids",
+  "appName": "Education and Courses Department",
+  "greeting": "Hello, {userName}",
+  "@greeting": {
+    "description": "Greeting message on the home screen",
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "Sophia"
+      }
+    }
+  },
+  "myChildren": "My Children",
+  "newCourses": "New Courses",
+  "viewAllNewCourses": "View All New Courses",
+  "home": "Home",
+  "children": "Children",
+  "courses": "Courses",
+  "chat": "Chat",
+  "coursesLabel": "{count} Courses",
+  "@coursesLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "balanceLabel": "Balance: ${amount}",
+  "@balanceLabel": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "agesLabel": "Ages {range}",
+  "noItemsAvailable": "No items available at the moment."
 }

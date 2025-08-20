@@ -353,4 +353,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bottomNavAids => 'Aids';
+
+  @override
+  String get appName => 'Education and Courses Department';
+
+  @override
+  String greeting(String userName) {
+    return 'Hello, $userName';
+  }
+
+  @override
+  String get myChildren => 'My Children';
+
+  @override
+  String get newCourses => 'New Courses';
+
+  @override
+  String get viewAllNewCourses => 'View All New Courses';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get children => 'Children';
+
+  @override
+  String get courses => 'Courses';
+
+  @override
+  String get chat => 'Chat';
+
+  @override
+  String coursesLabel(int count) {
+    return '$count Courses';
+  }
+
+  @override
+  String balanceLabel(String amount) {
+    return 'Balance: \$$amount';
+  }
+
+  @override
+  String agesLabel(Object range) {
+    return 'Ages $range';
+  }
+
+  @override
+  String get noItemsAvailable => 'No items available at the moment.';
 }

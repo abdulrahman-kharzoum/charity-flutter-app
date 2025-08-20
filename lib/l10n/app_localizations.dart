@@ -778,6 +778,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Aids'**
   String get bottomNavAids;
+
+  /// No description provided for @appName.
+  ///
+  /// In en, this message translates to:
+  /// **'Education and Courses Department'**
+  String get appName;
+
+  /// Greeting message on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Hello, {userName}'**
+  String greeting(String userName);
+
+  /// No description provided for @myChildren.
+  ///
+  /// In en, this message translates to:
+  /// **'My Children'**
+  String get myChildren;
+
+  /// No description provided for @newCourses.
+  ///
+  /// In en, this message translates to:
+  /// **'New Courses'**
+  String get newCourses;
+
+  /// No description provided for @viewAllNewCourses.
+  ///
+  /// In en, this message translates to:
+  /// **'View All New Courses'**
+  String get viewAllNewCourses;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @children.
+  ///
+  /// In en, this message translates to:
+  /// **'Children'**
+  String get children;
+
+  /// No description provided for @courses.
+  ///
+  /// In en, this message translates to:
+  /// **'Courses'**
+  String get courses;
+
+  /// No description provided for @chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chat;
+
+  /// No description provided for @coursesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Courses'**
+  String coursesLabel(int count);
+
+  /// No description provided for @balanceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance: \${amount}'**
+  String balanceLabel(String amount);
+
+  /// No description provided for @agesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Ages {range}'**
+  String agesLabel(Object range);
+
+  /// No description provided for @noItemsAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No items available at the moment.'**
+  String get noItemsAvailable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
