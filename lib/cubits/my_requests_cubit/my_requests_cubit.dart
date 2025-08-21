@@ -79,6 +79,7 @@ class MyRequestsCubit extends Cubit<MyRequestsState> {
       emit(MyRequestsLoading());
       // Simulate network delay
       await Future.delayed(const Duration(seconds: 1));
+      if (isClosed) return;
 
       // Dummy Data based on the HTML structure
       final List<RequestModel> dummyRequests = [
@@ -126,6 +127,7 @@ class MyRequestsCubit extends Cubit<MyRequestsState> {
 
       emit(MyRequestsLoaded(dummyRequests));
     } catch (e) {
+      if (isClosed) return;
       emit(MyRequestsError('Failed to load requests: ${e.toString()}'));
     }
   }

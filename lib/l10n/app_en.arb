@@ -27,6 +27,13 @@
   "loginErrorInvalidCredentials": "Invalid phone number or password. Please try again.",
 
   "loginSuccessMessage": "Login Successful!",
+  "otpConfirmAccount": "Confirm account",
+  "otpMessage": "We sent an OTP code to the number you entered",
+  "otpResendCode": "Resend the code",
+  "otpSubmitButton": "Confirm account",
+  "otpInvalidCode": "Invalid OTP code. Please try again.",
+  "otpVerificationSuccess": "Account verified successfully!",
+  "otpVerificationFailure": "Account verification failed. Please try again.",
 
   "language": "Language",
 

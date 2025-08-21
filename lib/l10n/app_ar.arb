@@ -23,6 +23,13 @@
   "loginErrorInvalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
 
   "loginSuccessMessage": "تم تسجيل الدخول بنجاح!",
+  "otpConfirmAccount": "تأكيد الحساب",
+  "otpMessage": "لقد أرسلنا رمز OTP إلى الرقم الذي أدخلته",
+  "otpResendCode": "إعادة إرسال الرمز",
+  "otpSubmitButton": "تأكيد الحساب",
+  "otpInvalidCode": "رمز OTP غير صالح. يرجى المحاولة مرة أخرى.",
+  "otpVerificationSuccess": "تم التحقق من الحساب بنجاح!",
+  "otpVerificationFailure": "فشل التحقق من الحساب. يرجى المحاولة مرة أخرى.",
 
   "language": "اللغة",
   "homeScreenTitle": "الصفحة الرئيسية",
@@ -72,7 +79,7 @@
   "reasonHint": "أذكر سبب طلبك للمساعدة...",
   "reasonValidationError": "الرجاء إدخال سبب الطلب",
   "descriptionLabel": "الوصف",
-  "descriptionHint": "أضف وصفاً تفصيلياً...",
+  "descriptionHint": "أضف وصفاً تفصيليلاً...",
   "descriptionValidationError": "الرجاء إدخال الوصف",
   "notesLabel": "ملاحظات",
   "notesHint": "أي ملاحظات إضافية...",

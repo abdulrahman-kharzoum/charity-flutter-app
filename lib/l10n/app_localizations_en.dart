@@ -69,6 +69,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginSuccessMessage => 'Login Successful!';
 
   @override
+  String get otpConfirmAccount => 'Confirm account';
+
+  @override
+  String get otpMessage => 'We sent an OTP code to the number you entered';
+
+  @override
+  String get otpResendCode => 'Resend the code';
+
+  @override
+  String get otpSubmitButton => 'Confirm account';
+
+  @override
+  String get otpInvalidCode => 'Invalid OTP code. Please try again.';
+
+  @override
+  String get otpVerificationSuccess => 'Account verified successfully!';
+
+  @override
+  String get otpVerificationFailure => 'Account verification failed. Please try again.';
+
+  @override
   String get language => 'Language';
 
   @override

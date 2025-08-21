@@ -215,6 +215,48 @@ abstract class AppLocalizations {
   /// **'Login Successful!'**
   String get loginSuccessMessage;
 
+  /// No description provided for @otpConfirmAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm account'**
+  String get otpConfirmAccount;
+
+  /// No description provided for @otpMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We sent an OTP code to the number you entered'**
+  String get otpMessage;
+
+  /// No description provided for @otpResendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend the code'**
+  String get otpResendCode;
+
+  /// No description provided for @otpSubmitButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm account'**
+  String get otpSubmitButton;
+
+  /// No description provided for @otpInvalidCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid OTP code. Please try again.'**
+  String get otpInvalidCode;
+
+  /// No description provided for @otpVerificationSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Account verified successfully!'**
+  String get otpVerificationSuccess;
+
+  /// No description provided for @otpVerificationFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Account verification failed. Please try again.'**
+  String get otpVerificationFailure;
+
   /// No description provided for @language.
   ///
   /// In en, this message translates to:

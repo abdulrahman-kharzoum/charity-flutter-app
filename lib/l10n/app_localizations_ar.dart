@@ -69,6 +69,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginSuccessMessage => 'تم تسجيل الدخول بنجاح!';
 
   @override
+  String get otpConfirmAccount => 'تأكيد الحساب';
+
+  @override
+  String get otpMessage => 'لقد أرسلنا رمز OTP إلى الرقم الذي أدخلته';
+
+  @override
+  String get otpResendCode => 'إعادة إرسال الرمز';
+
+  @override
+  String get otpSubmitButton => 'تأكيد الحساب';
+
+  @override
+  String get otpInvalidCode => 'رمز OTP غير صالح. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get otpVerificationSuccess => 'تم التحقق من الحساب بنجاح!';
+
+  @override
+  String get otpVerificationFailure => 'فشل التحقق من الحساب. يرجى المحاولة مرة أخرى.';
+
+  @override
   String get language => 'اللغة';
 
   @override
@@ -171,7 +192,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get descriptionLabel => 'الوصف';
 
   @override
-  String get descriptionHint => 'أضف وصفاً تفصيلياً...';
+  String get descriptionHint => 'أضف وصفاً تفصيليلاً...';
 
   @override
   String get descriptionValidationError => 'الرجاء إدخال الوصف';

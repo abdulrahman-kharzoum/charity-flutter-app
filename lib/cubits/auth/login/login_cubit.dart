@@ -13,11 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   final phoneController = TextEditingController();
-  final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
-  bool _isPasswordVisible = false;
-  bool get isPasswordVisible => _isPasswordVisible; // Getter for UI to access
 
   // If you were using email before and now it's phone, you might not need emailController
   // final emailController = TextEditingController();
@@ -25,7 +21,6 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> loginUser({
     required String phone, // Changed from email to phone
-    required String password,
     // BuildContext context, // Usually not needed in Cubit, handle UI feedback in BlocListener
   }) async {
     try {
@@ -49,7 +44,6 @@ class LoginCubit extends Cubit<LoginState> {
       //   'YOUR_LOGIN_API_ENDPOINT',
       //   data: {
       //     'phone': phone,
-      //     'password': password,
       //   },
       // );
 
@@ -83,15 +77,9 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  void togglePasswordVisibility() {
-    _isPasswordVisible = !_isPasswordVisible;
-    emit(LoginPasswordVisibilityChanged(isPasswordVisible: _isPasswordVisible));
-  }
-
   @override
   Future<void> close() {
     phoneController.dispose();
-    passwordController.dispose();
     // emailController.dispose(); // If you had it
     return super.close();
   }

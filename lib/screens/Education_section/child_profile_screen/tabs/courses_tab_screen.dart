@@ -16,6 +16,7 @@ class CoursesTabScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final cubit = context.read<ChildProfileCubit>();
     final languageCode = l10n.localeName;
+    final isArabic = languageCode == 'ar';
 
     return BlocBuilder<ChildProfileCubit, ChildProfileState>(
       builder: (context, state) {
@@ -33,16 +34,16 @@ class CoursesTabScreen extends StatelessWidget {
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
-              _buildSectionTitle(l10n.currentSectionTitle, context),
+              _buildSectionTitle(l10n.currentSectionTitle, context, isArabic),
               if (currentCourses.isEmpty)
                 _buildNoCoursesMessage(l10n.noCoursesAvailable, context)
               else
                 ...currentCourses.map((course) => _buildCourseItem(course, context, cubit, languageCode)),
 
               const SizedBox(height: 16),
-              _buildSectionTitle(l10n.pastSectionTitle, context),
+              _buildSectionTitle(l10n.pastSectionTitle, context, isArabic),
               if (pastCourses.isEmpty)
                 _buildNoCoursesMessage(l10n.noCoursesAvailable, context)
               else
@@ -54,7 +55,7 @@ class CoursesTabScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionTitle(String title, BuildContext context) {
+  Widget _buildSectionTitle(String title, BuildContext context, bool isArabic) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Text(
@@ -62,9 +63,10 @@ class CoursesTabScreen extends StatelessWidget {
         style: TextStyle(
           color: AppColors.textPrimary, // text-[#111418]
           fontFamily: 'Lexend',
-          fontSize: 18, // text-lg
+          fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
+        textAlign: isArabic ? TextAlign.right : TextAlign.left,
       ),
     );
   }
@@ -111,7 +113,8 @@ class CoursesTabScreen extends StatelessWidget {
             ],
           ),
           child: Row(
-            children: [
+            textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+            children: [ // Children of the row
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(

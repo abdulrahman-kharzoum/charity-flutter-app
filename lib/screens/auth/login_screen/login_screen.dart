@@ -1,3 +1,5 @@
+import 'package:charity/cubits/auth/otp/otp_cubit.dart';
+import 'package:charity/screens/auth/otp_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -14,13 +16,14 @@ import 'package:charity/theme/color.dart';
 
 // Convert LoginScreen to a StatefulWidget
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> { // Create State class
+class _LoginScreenState extends State<LoginScreen> {
+  // Create State class
   String _completePhoneNumber = '';
   final FocusNode _phoneFocusNode = FocusNode(); // FocusNode for IntlPhoneField
 
@@ -29,7 +32,8 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
     super.initState();
     // Add listener to update UI when focus changes
     _phoneFocusNode.addListener(() {
-      if (mounted) { // Check if the widget is still in the tree
+      if (mounted) {
+        // Check if the widget is still in the tree
         setState(() {
           // The rebuild will use the new _phoneFocusNode.hasFocus value
         });
@@ -48,7 +52,8 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
     super.dispose();
   }
 
-  List<DropdownMenuItem<String>> _buildLanguageDropdownItems(BuildContext context) {
+  List<DropdownMenuItem<String>> _buildLanguageDropdownItems(
+      BuildContext context) {
     final Map<String, String> supportedLanguages = {
       'en': 'English',
       'ar': 'العربية',
@@ -69,10 +74,14 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
     final Validate validator = Validate(context: context, l10n: l10n);
     bool isArabic = l10n.localeName == 'ar';
 
-    InputDecoration fieldDecoration(String hintText, {Widget? suffixIcon, bool isPhoneField = false, bool isFocused = false}) {
+    InputDecoration fieldDecoration(String hintText,
+        {Widget? suffixIcon,
+        bool isPhoneField = false,
+        bool isFocused = false}) {
       return InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(color: AppColors.loginHintText, fontFamily: 'Lexend', fontSize: 15),
+        hintStyle: const TextStyle(
+            color: AppColors.loginHintText, fontFamily: 'Lexend', fontSize: 15),
         filled: true,
         fillColor: AppColors.loginFieldBackground,
         border: OutlineInputBorder(
@@ -81,11 +90,14 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(color: AppColors.loginFieldBorder, width: 5.0),
+          borderSide:
+              const BorderSide(color: AppColors.loginFieldBorder, width: 5.0),
         ),
-        focusedBorder: OutlineInputBorder( // This border is for the main field itself
+        focusedBorder: OutlineInputBorder(
+          // This border is for the main field itself
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(color: AppColors.loginFocusedBorder, width: 5.0),
+          borderSide: const BorderSide(
+              color: AppColors.loginFocusedBorder, width: 5.0),
         ),
         contentPadding: EdgeInsets.symmetric(
             horizontal: isPhoneField ? 8.0 : 16.0,
@@ -98,8 +110,15 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          showSnackBar(context, l10n.loginSuccessMessage);
-          Navigator.pushReplacementNamed(context, '/home_screen');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => BlocProvider(
+                create: (context) => OtpCubit(),
+                child: OtpScreen(phoneNumber: _completePhoneNumber),
+              ),
+            ),
+          );
         } else if (state is LoginFailure) {
           String errorMessage = state.errorMessage;
           if (errorMessage.toLowerCase().contains("no internet")) {
@@ -123,7 +142,8 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
           body: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox( // Header
+                SizedBox(
+                  // Header
                   width: double.infinity,
                   height: 250,
                   child: Stack(
@@ -162,7 +182,8 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0, vertical: 32.0),
                   child: Form(
                     key: loginCubit.formKey,
                     child: Column(
@@ -188,16 +209,18 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
                         ),
                         const SizedBox(height: 8),
                         IntlPhoneField(
-
                           focusNode: _phoneFocusNode, // Assign the FocusNode
                           initialCountryCode: 'SY',
                           // Main decoration - its focusedBorder will apply to the whole field
-                          decoration: fieldDecoration(
-                              l10n.loginPhoneNumberHint,
+                          decoration: fieldDecoration(l10n.loginPhoneNumberHint,
                               isPhoneField: true,
-                              isFocused: _phoneFocusNode.hasFocus // Pass focus state
-                          ),
-                          style: const TextStyle(fontFamily: 'Lexend', fontSize: 16, color: AppColors.textColorLight),
+                              isFocused:
+                                  _phoneFocusNode.hasFocus // Pass focus state
+                              ),
+                          style: const TextStyle(
+                              fontFamily: 'Lexend',
+                              fontSize: 16,
+                              color: AppColors.textColorLight),
                           dropdownDecoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8.0),
@@ -205,14 +228,20 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
                               // Dynamically change border color based on focus
                               color: _phoneFocusNode.hasFocus
                                   ? AppColors.loginFocusedBorder
-                                  : AppColors.loginFieldBorder.withOpacity(0.7),
+                                  : AppColors.loginFieldBorder
+                                      .withOpacity(0.7),
                               width: 5.0,
                             ),
                           ),
                           dropdownIconPosition: IconPosition.leading,
-                          dropdownTextStyle: const TextStyle(fontFamily: 'Lexend', fontSize: 16, color: AppColors.textColorLight),
-                          flagsButtonPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18.0),
-                          dropdownIcon: const Icon(Icons.arrow_drop_down, color: AppColors.loginLabelText, size: 20),
+                          dropdownTextStyle: const TextStyle(
+                              fontFamily: 'Lexend',
+                              fontSize: 16,
+                              color: AppColors.textColorLight),
+                          flagsButtonPadding: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 18.0),
+                          dropdownIcon: const Icon(Icons.arrow_drop_down,
+                              color: AppColors.loginLabelText, size: 20),
                           keyboardType: TextInputType.number,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
@@ -222,69 +251,10 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
                             _completePhoneNumber = phone.completeNumber;
                           },
                           validator: (PhoneNumber? phoneNumberObject) {
-                            return validator.validateSyrianPhoneNumber(phoneNumberObject?.number);
+                            return validator.validateSyrianPhoneNumber(
+                                phoneNumberObject?.number);
                           },
                           disableLengthCheck: true,
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          l10n.loginPasswordLabel,
-                          style: const TextStyle(
-                              fontFamily: 'Lexend',
-                              color: AppColors.loginLabelText,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16),
-                        ),
-                        const SizedBox(height: 8),
-                        BlocBuilder<LoginCubit, LoginState>(
-                          buildWhen: (previous, current) =>
-                          current is LoginPasswordVisibilityChanged ||
-                              (previous is LoginPasswordVisibilityChanged && current is! LoginPasswordVisibilityChanged) ||
-                              current is LoginInitial,
-                          builder: (context, specificLoginState) {
-                            bool currentShowPassword = context.select((LoginCubit cubit) => cubit.isPasswordVisible);
-                            return TextFormField(
-                              // You might want a separate FocusNode for the password field if you need similar logic
-                              controller: loginCubit.passwordController,
-                              obscureText: !currentShowPassword,
-                              style: const TextStyle(fontFamily: 'Lexend', fontSize: 16, color: AppColors.textColorLight),
-                              decoration: fieldDecoration(
-                                l10n.loginPasswordHint,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    currentShowPassword
-                                        ? Icons.visibility_outlined
-                                        : Icons.visibility_off_outlined,
-                                    color: AppColors.primaryBlue,
-                                  ),
-                                  onPressed: () {
-                                    loginCubit.togglePasswordVisibility();
-                                  },
-                                ),
-                              ),
-                              validator: validator.validatePassword,
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        Align(
-                          alignment: isArabic ? Alignment.centerRight : Alignment.centerLeft,
-                          child: TextButton(
-                            onPressed: () { /* Navigate to forgot password */ },
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              alignment: isArabic ? Alignment.centerRight : Alignment.centerLeft,
-                            ),
-                            child: Text(
-                              l10n.loginForgotPassword,
-                              style: const TextStyle(
-                                fontFamily: 'Lexend',
-                                color: AppColors.loginForgotPasswordText,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ),
                         ),
                         const SizedBox(height: 30),
                         ElevatedButton(
@@ -294,8 +264,9 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
                             minimumSize: const Size(double.infinity, 52),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(26.0),
-                              side: const BorderSide(color: AppColors.loginButtonBorder, width: 2
-                              ),
+                              side: const BorderSide(
+                                  color: AppColors.loginButtonBorder,
+                                  width: 2),
                             ),
                             elevation: 4,
                             textStyle: const TextStyle(
@@ -307,37 +278,46 @@ class _LoginScreenState extends State<LoginScreen> { // Create State class
                           onPressed: isLoading
                               ? null
                               : () {
-                            if (loginCubit.formKey.currentState!.validate()) {
-                              if (_completePhoneNumber.isEmpty) {
-                                showErrorSnackBar(context, l10n.loginValidationPhoneNumberRequired);
-                                return;
-                              }
-                              loginCubit.loginUser(
-                                phone: _completePhoneNumber,
-                                password: loginCubit.passwordController.text,
-                              );
-                            }
-                          },
+                                  if (loginCubit.formKey.currentState!
+                                      .validate()) {
+                                    if (_completePhoneNumber.isEmpty) {
+                                      showErrorSnackBar(context,
+                                          l10n.loginValidationPhoneNumberRequired);
+                                      return;
+                                    }
+                                    loginCubit.loginUser(
+                                      phone: _completePhoneNumber,
+                                    );
+                                  }
+                                },
                           child: isLoading
                               ? const SizedBox(
-                            height: 22,
-                            width: 22,
-                            child: CircularProgressIndicator(strokeWidth: 2.5, color: AppColors.loginButtonText),
-                          )
+                                  height: 22,
+                                  width: 22,
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      color: AppColors.loginButtonText),
+                                )
                               : Text(l10n.loginButton),
                         ),
                         const SizedBox(height: 24),
                         Center(
-                          child: BlocBuilder<LocalizationCubit, LocalizationState>(
+                          child: BlocBuilder<LocalizationCubit,
+                              LocalizationState>(
                             builder: (context, localizationState) {
                               return DropdownButton<String>(
                                 value: localizationState.locale.languageCode,
-                                icon: Icon(Icons.language, color: Theme.of(context).primaryColor),
+                                icon: Icon(Icons.language,
+                                    color: Theme.of(context).primaryColor),
                                 elevation: 16,
-                                style: TextStyle(color: Theme.of(context).primaryColor, fontFamily: 'Lexend'),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontFamily: 'Lexend'),
                                 underline: Container(
                                   height: 2,
-                                  color: Theme.of(context).primaryColor.withOpacity(0.5),
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withOpacity(0.5),
                                 ),
                                 onChanged: (String? newValue) {
                                   if (newValue != null) {

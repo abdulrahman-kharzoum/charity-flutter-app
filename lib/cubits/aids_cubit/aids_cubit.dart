@@ -16,6 +16,7 @@ class AidsCubit extends Cubit<AidsState> {
       emit(AidsLoading());
       // Simulate network delay
       await Future.delayed(const Duration(milliseconds: 1200)); // Slightly different delay
+      if (isClosed) return;
 
       // Dummy Data for Aids
       final List<AidModel> dummyAids = [
@@ -62,6 +63,7 @@ class AidsCubit extends Cubit<AidsState> {
 
       emit(AidsLoaded(dummyAids));
     } catch (e) {
+      if (isClosed) return;
       emit(AidsError('Failed to load aids: ${e.toString()}'));
     }
   }
@@ -83,4 +85,3 @@ class AidsCubit extends Cubit<AidsState> {
     }
   }
 }
-
