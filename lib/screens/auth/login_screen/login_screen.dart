@@ -1,4 +1,3 @@
-import 'package:charity/cubits/auth/otp/otp_cubit.dart';
 import 'package:charity/screens/auth/otp_screen/otp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +15,8 @@ import 'package:charity/features/auth/cubits/login_attempt_cubit/login_attempt_c
 import 'package:charity/features/auth/models/login_attempt_request_body_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:charity/core/services/status.dart'; // Added import for SubmissionStatus
+import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.dart';
+import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
 
 
 // Convert LoginScreen to a StatefulWidget
@@ -117,15 +118,31 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state.status == SubmissionStatus.success) {
             showSuccessSnackBar(context, l10n.otpVerificationCodeSent);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => BlocProvider(
-                  create: (context) => OtpCubit(),
-                  child: OtpScreen(phoneNumber: _completePhoneNumber),
+            final int? attemptId = state.data?.id; // Safely get attempt_id
+
+            if (attemptId != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider<VerifyOtpCubit>(
+                        create: (context) => GetIt.instance<VerifyOtpCubit>(),
+                      ),
+                      BlocProvider<ResendOtpCubit>(
+                        create: (context) => GetIt.instance<ResendOtpCubit>(),
+                      ),
+                    ],
+                    child: OtpScreen(
+                      phoneNumber: _completePhoneNumber,
+                      attemptId: attemptId,
+                    ),
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              showErrorSnackBar(context, l10n.loginErrorGeneric); // Handle case where attemptId is null
+            }
           } else if (state.status == SubmissionStatus.error) {
             String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
             if (errorMessage.toLowerCase().contains("no internet")) {

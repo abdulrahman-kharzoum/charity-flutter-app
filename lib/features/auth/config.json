@@ -3,7 +3,7 @@
   "apis": [
     {
       "name": "loginAttempt",
-      "endpoint": "auth/user/login_attempt",
+      "endpoint": "auth/user/login-attempt",
       "request_type": "POST",
       "body": {
         "phone_number": "String",
@@ -15,6 +15,78 @@
           { "name": "id", "type": "int" },
           { "name": "identifier", "type": "String" },
           { "name": "type", "type": "String" }
+        ]
+      }
+    },
+    {
+      "name": "verifyOtp",
+      "endpoint": "auth/attempt/otp/verify",
+      "request_type": "POST",
+      "body": {
+        "attempt_id": "int",
+        "otp": "String"
+      },
+      "response_model": {
+        "name": "VerifyOtpResponseModel",
+        "fields": [
+          { "name": "user", "type": "UserModel" },
+          { "name": "token", "type": "String" }
+        ]
+      },
+      "list_response_model": [
+        {
+          "name": "UserModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "firstName", "type": "String", "json_key": "first_name" },
+            { "name": "lastName", "type": "String", "json_key": "last_name" },
+            { "name": "fatherName", "type": "String", "json_key": "father_name" },
+            { "name": "motherName", "type": "String", "json_key": "mother_name" },
+            { "name": "gender", "type": "String" },
+            { "name": "birthDate", "type": "String", "json_key": "birth_date" },
+            { "name": "birthPlace", "type": "String", "json_key": "birth_place" },
+            { "name": "nationalNumber", "type": "String", "json_key": "national_number" },
+            { "name": "job", "type": "String" },
+            { "name": "healthStatus", "type": "String", "json_key": "health_status" },
+            { "name": "phoneNumber", "type": "String", "json_key": "phone_number" },
+            { "name": "mobileNumber", "type": "String", "json_key": "mobile_number" },
+            { "name": "address", "type": "String" },
+            { "name": "residenceType", "type": "String", "json_key": "residence_type" },
+            { "name": "monthlyIncome", "type": "int", "json_key": "monthly_income" },
+            { "name": "caseDescription", "type": "String", "json_key": "case_description" },
+            { "name": "groupId", "type": "int", "json_key": "group_id" },
+            { "name": "requestId", "type": "int", "json_key": "request_id" },
+            { "name": "requestStatus", "type": "String", "json_key": "request_status" },
+            { "name": "personalImageId", "type": "int", "json_key": "personal_image_id" },
+            { "name": "residenceDocumentId", "type": "int", "json_key": "residence_document_id" },
+            { "name": "createdAt", "type": "String", "json_key": "created_at" },
+            { "name": "updatedAt", "type": "String", "json_key": "updated_at" },
+            { "name": "personalImage", "type": "PersonalImageModel", "json_key": "personal_image" }
+          ]
+        },
+        {
+          "name": "PersonalImageModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "file", "type": "String" },
+            { "name": "extension", "type": "String" },
+            { "name": "createdAt", "type": "String", "json_key": "created_at" },
+            { "name": "updatedAt", "type": "String", "json_key": "updated_at" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "resendOtp",
+      "endpoint": "auth/attempt/otp/resend",
+      "request_type": "POST",
+      "query_parameters": [
+        { "type": "int", "name": "attemptId" }
+      ],
+      "response_model": {
+        "name": "ResendOtpResponseModel",
+        "fields": [
+          { "name": "message", "type": "String" }
         ]
       }
     }

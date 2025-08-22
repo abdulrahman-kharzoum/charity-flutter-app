@@ -93,6 +93,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpVerificationCodeSent => 'Verification code sent successfully!';
 
   @override
+  String get otpErrorInvalidCode => 'Invalid OTP code. Please try again.';
+
+  @override
+  String get otpResendCodeSuccess => 'OTP code re-sent successfully!';
+
+  @override
   String get language => 'Language';
 
   @override

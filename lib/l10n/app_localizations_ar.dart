@@ -93,6 +93,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get otpVerificationCodeSent => 'تم إرسال رمز التحقق بنجاح!';
 
   @override
+  String get otpErrorInvalidCode => 'رمز OTP غير صالح. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get otpResendCodeSuccess => 'تم إعادة إرسال رمز OTP بنجاح!';
+
+  @override
   String get language => 'اللغة';
 
   @override

@@ -19,8 +19,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.7.2
-
+#  sdk: ^3.7.2
+  sdk: '>=3.8.0 <4.0.0' # <--- EDIT 1: UPDATED SDK VERSION
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -53,12 +53,12 @@ dependencies:
   intl_phone_field: ^3.2.0
   encrypt: ^5.0.3
   pinput: ^5.0.1
-  w_builder: ^2.1.3
   qr_flutter: ^4.1.0
   dartz: ^0.10.1
   infinite_scroll_pagination: ^5.1.0
   get_it: ^8.2.0
   freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,8 +70,12 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
   build_runner: ^2.7.0
-  freezed: ^3.0.0-0.0.dev
+#  freezed: ^3.0.0-0.0.dev
   json_serializable: ^6.10.0
+  # --- FIXES ARE HERE ---
+  freezed: ^3.2.0  # Use a stable version of freezed
+  w_builder: ^2.1.3 # Moved to dev_dependencies
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

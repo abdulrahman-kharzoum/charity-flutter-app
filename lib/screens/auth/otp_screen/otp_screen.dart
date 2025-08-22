@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pinput/pinput.dart';
-import 'package:charity/cubits/auth/otp/otp_cubit.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/core/functions/snackbar_function.dart';
 import 'package:charity/theme/color.dart';
+import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.dart';
+import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
+import 'package:charity/features/auth/models/verify_otp_request_body_model.dart';
+import 'package:charity/core/services/status.dart'; // Import for SubmissionStatus
 
 
 class OtpScreen extends StatefulWidget {
   final String phoneNumber;
+  final int attemptId;
 
-  const OtpScreen({super.key, required this.phoneNumber});
+  const OtpScreen({super.key, required this.phoneNumber, required this.attemptId});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -23,15 +27,6 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _pinController.setText('123456');
-
-      Future.delayed(const Duration(milliseconds: 100), () {
-        if (mounted) {
-          context.read<OtpCubit>().verifyOtp('123456');
-        }
-      });
-    });
   }
 
   @override
@@ -44,19 +39,46 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return BlocListener<OtpCubit, OtpState>(
-      listener: (context, state) {
-        if (state is OtpSuccess) {
-          showSnackBar(context, l10n.otpVerificationSuccess);
-          Navigator.pushReplacementNamed(context, '/home_screen');
-        } else if (state is OtpFailure) {
-          showErrorSnackBar(context, state.errorMessage);
-        }
-      },
-      child: BlocBuilder<OtpCubit, OtpState>(
-        builder: (context, state) {
-          final otpCubit = context.read<OtpCubit>();
-          bool isLoading = state is OtpLoading;
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<VerifyOtpCubit, VerifyOtpState>(
+          listener: (context, state) {
+            if (state.status == SubmissionStatus.success) {
+              showSuccessSnackBar(context, l10n.otpVerificationSuccess);
+              Navigator.pushReplacementNamed(context, '/home_screen'); // Adjust as needed
+            } else if (state.status == SubmissionStatus.error) {
+              String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
+               if (errorMessage.toLowerCase().contains("no internet")) {
+                errorMessage = l10n.loginErrorNoInternet;
+              } else if (errorMessage.toLowerCase().contains("invalid") &&
+                  (errorMessage.toLowerCase().contains("credential") ||
+                      errorMessage.toLowerCase().contains("otp"))) {
+                errorMessage = l10n.otpErrorInvalidCode;
+              }
+              showErrorSnackBar(context, errorMessage);
+            }
+          },
+        ),
+        BlocListener<ResendOtpCubit, ResendOtpState>(
+          listener: (context, state) {
+            if (state.status == SubmissionStatus.success) {
+              showSuccessSnackBar(context, l10n.otpResendCodeSuccess);
+            } else if (state.status == SubmissionStatus.error) {
+              String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
+              if (errorMessage.toLowerCase().contains("no internet")) {
+                errorMessage = l10n.loginErrorNoInternet;
+              }
+              showErrorSnackBar(context, errorMessage);
+            }
+          },
+        ),
+      ],
+      child: BlocBuilder<VerifyOtpCubit, VerifyOtpState>(
+        builder: (context, verifyOtpState) {
+          final verifyOtpCubit = context.read<VerifyOtpCubit>();
+          final resendOtpCubit = context.read<ResendOtpCubit>();
+          bool isVerifying = verifyOtpState.status == SubmissionStatus.loading;
+          bool isResending = resendOtpCubit.state.status == SubmissionStatus.loading;
 
           return Scaffold(
             backgroundColor: AppColors.white,
@@ -137,24 +159,39 @@ class _OtpScreenState extends State<OtpScreen> {
                         const SizedBox(height: 32),
                         Pinput(
                           controller: _pinController,
-                          length: 6, // Changed to 6
+                          length: 6,
                           onCompleted: (pin) {
-                            otpCubit.verifyOtp(pin);
+                            verifyOtpCubit.verifyOtp(
+                              body: VerifyOtpRequestBodyModel(
+                                attempt_id: widget.attemptId,
+                                otp: pin,
+                              ),
+                            );
                           },
                         ),
                         const SizedBox(height: 24),
                         TextButton(
-                          onPressed: () {
-                            // Resend OTP logic
-                          },
-                          child: Text(
-                            l10n.otpResendCode,
-                            style: const TextStyle(
-                              fontFamily: 'Lexend',
-                              fontSize: 16,
-                              color: AppColors.primary500,
-                            ),
-                          ),
+                          onPressed: isResending
+                              ? null
+                              : () {
+                                  resendOtpCubit.resendOtp(attemptId: widget.attemptId);
+                                },
+                          child: isResending
+                              ? const SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: AppColors.primary500),
+                                ) 
+                              : Text(
+                                  l10n.otpResendCode,
+                                  style: const TextStyle(
+                                    fontFamily: 'Lexend',
+                                    fontSize: 16,
+                                    color: AppColors.primary500,
+                                  ),
+                                ),
                         ),
                         const SizedBox(height: 32),
                         ElevatedButton(
@@ -176,14 +213,19 @@ class _OtpScreenState extends State<OtpScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          onPressed: isLoading
+                          onPressed: isVerifying
                               ? null
                               : () {
                                   if (_pinController.length == 6) {
-                                    otpCubit.verifyOtp(_pinController.text);
+                                    verifyOtpCubit.verifyOtp(
+                                      body: VerifyOtpRequestBodyModel(
+                                        attempt_id: widget.attemptId,
+                                        otp: _pinController.text,
+                                      ),
+                                    );
                                   }
                                 },
-                          child: isLoading
+                          child: isVerifying
                               ? const SizedBox(
                                   height: 22,
                                   width: 22,

@@ -263,6 +263,18 @@ abstract class AppLocalizations {
   /// **'Verification code sent successfully!'**
   String get otpVerificationCodeSent;
 
+  /// No description provided for @otpErrorInvalidCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid OTP code. Please try again.'**
+  String get otpErrorInvalidCode;
+
+  /// No description provided for @otpResendCodeSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'OTP code re-sent successfully!'**
+  String get otpResendCodeSuccess;
+
   /// No description provided for @language.
   ///
   /// In en, this message translates to:

@@ -31,6 +31,8 @@
   "otpVerificationSuccess": "تم التحقق من الحساب بنجاح!",
   "otpVerificationFailure": "فشل التحقق من الحساب. يرجى المحاولة مرة أخرى.",
   "otpVerificationCodeSent": "تم إرسال رمز التحقق بنجاح!",
+  "otpErrorInvalidCode": "رمز OTP غير صالح. يرجى المحاولة مرة أخرى.",
+  "otpResendCodeSuccess": "تم إعادة إرسال رمز OTP بنجاح!",
 
   "language": "اللغة",
   "homeScreenTitle": "الصفحة الرئيسية",
@@ -171,6 +173,7 @@
   "@providedByLabel": {
     "description": "تسمية لمقدم عنصر المساعدة"
   },
+
   "bottomNavMyRequests": "طلباتي",
   "bottomNavAids": "المساعدات",
   "appName": "قسم التعليم والدورات",

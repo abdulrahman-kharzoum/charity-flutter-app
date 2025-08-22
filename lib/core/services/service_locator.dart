@@ -1,6 +1,11 @@
 import 'package:charity/features/auth/repo/auth_repository.dart';
 
+import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
+
+import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.dart';
+
 import 'package:charity/features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
+
 
 
 import 'package:dio/dio.dart';
@@ -55,5 +60,7 @@ Future<void> setupServiceLocator() async {
   sl.registerLazySingleton<ApiService>(() => ApiService(dio: sl()));
 
   sl.registerFactory(() => LoginAttemptCubit(sl()));
+  sl.registerFactory(() => VerifyOtpCubit(sl()));
+  sl.registerFactory(() => ResendOtpCubit(sl()));
   sl.registerLazySingleton(() => AuthRepository(sl()));
 }
