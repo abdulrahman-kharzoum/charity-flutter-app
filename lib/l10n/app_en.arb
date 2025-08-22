@@ -34,6 +34,7 @@
   "otpInvalidCode": "Invalid OTP code. Please try again.",
   "otpVerificationSuccess": "Account verified successfully!",
   "otpVerificationFailure": "Account verification failed. Please try again.",
+  "otpVerificationCodeSent": "Verification code sent successfully!",
 
   "language": "Language",
 
@@ -273,7 +274,7 @@
   "fridayShort": "Fri",
   "noAcademicData": "No academic data available for this child.",
   "noFinancialData": "No financial data available for this child.",
-  "studentIdLabel": "رقم الطالب"
+  "studentIdLabel": "Student ID"
 
 
 }

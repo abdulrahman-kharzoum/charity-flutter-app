@@ -86,6 +86,7 @@ class AppColors {
   // --- My Requests Screen ---
   static const Color requestStatusPending = Color(0xFFF59E0B);
   static const Color requestStatusAccepted = Color(0xFF10B981);
+  static const Color green = Color(0xFF10B981);
   static const Color requestStatusRejected = Color(0xFFEF4444);
 
   static const Color myRequestsBackground = slate100;

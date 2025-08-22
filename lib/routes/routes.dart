@@ -15,8 +15,10 @@ import 'package:charity/screens/settings_screen/settings_screen.dart';
 import 'package:charity/screens/profile_screen/profile_screen.dart';
 import 'package:charity/core/shared/settings_repository.dart';
 
+import '../core/services/service_locator.dart';
 import '../cubits/aids_cubit/aids_cubit.dart';
 import '../cubits/education/home_screen_education_cubit/home_screen_education_cubit.dart';
+import '../features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
 import '../screens/Education_section/home_screen/education_home_screen.dart';
 import '../screens/aids_screen/aids_screen.dart';
 
@@ -36,7 +38,10 @@ final Map<String, WidgetBuilder> routes = {
   // ======Login Screen=====//
   '/login_screen':
       (context) =>
-          BlocProvider(create: (context) => LoginCubit(), child: LoginScreen()),
+          BlocProvider(
+              create: (context) => sl<LoginAttemptCubit>(),
+              // create: (context) => LoginCubit(),
+              child: LoginScreen()),
   // ======Settings Screen=====//
   '/settings': (context) => BlocProvider(
         create: (context) => SettingsCubit(SettingsRepository()),

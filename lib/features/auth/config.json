@@ -1,0 +1,22 @@
+{
+  "feature_name": "Auth",
+  "apis": [
+    {
+      "name": "loginAttempt",
+      "endpoint": "auth/user/login_attempt",
+      "request_type": "POST",
+      "body": {
+        "phone_number": "String",
+        "fcm_token": "String"
+      },
+      "response_model": {
+        "name": "LoginAttemptResponseModel",
+        "fields": [
+          { "name": "id", "type": "int" },
+          { "name": "identifier", "type": "String" },
+          { "name": "type", "type": "String" }
+        ]
+      }
+    }
+  ]
+}

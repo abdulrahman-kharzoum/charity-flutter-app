@@ -257,6 +257,12 @@ abstract class AppLocalizations {
   /// **'Account verification failed. Please try again.'**
   String get otpVerificationFailure;
 
+  /// No description provided for @otpVerificationCodeSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code sent successfully!'**
+  String get otpVerificationCodeSent;
+
   /// No description provided for @language.
   ///
   /// In en, this message translates to:
@@ -1172,7 +1178,7 @@ abstract class AppLocalizations {
   /// No description provided for @studentIdLabel.
   ///
   /// In en, this message translates to:
-  /// **'رقم الطالب'**
+  /// **'Student ID'**
   String get studentIdLabel;
 }
 

@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:charity/cubits/auth/login/login_cubit.dart';
 import 'package:charity/cubits/localization/localization_cubit.dart';
 import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
 import 'package:charity/cubits/profile_cubit/profile_cubit.dart';
 import 'package:charity/core/shared/settings_repository.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/routes/routes.dart' as app_routes;
 import 'package:charity/theme/theme.dart';
 
-import 'core/shared/local_network.dart'; // Import your custom themes
+import 'core/shared/local_network.dart';
 
-// No global navigatorKey needed if routes handle context properly
+import 'core/services/service_locator.dart';
+
 // final navigatorKey = GlobalKey<NavigatorState>();
 
-Future<void> main() async { // main needs to be async for await
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheNetwork.cacheInit(); // Initialize SharedPreferences via CacheNetwork
-  // You might want to load the initial locale here as well or ensure cubit does it correctly.
+  await CacheNetwork.cacheInit();
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupServiceLocator();
+
   runApp(const MyApp());
 }
 

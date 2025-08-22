@@ -30,6 +30,7 @@
   "otpInvalidCode": "رمز OTP غير صالح. يرجى المحاولة مرة أخرى.",
   "otpVerificationSuccess": "تم التحقق من الحساب بنجاح!",
   "otpVerificationFailure": "فشل التحقق من الحساب. يرجى المحاولة مرة أخرى.",
+  "otpVerificationCodeSent": "تم إرسال رمز التحقق بنجاح!",
 
   "language": "اللغة",
   "homeScreenTitle": "الصفحة الرئيسية",

@@ -90,6 +90,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpVerificationFailure => 'Account verification failed. Please try again.';
 
   @override
+  String get otpVerificationCodeSent => 'Verification code sent successfully!';
+
+  @override
   String get language => 'Language';
 
   @override
@@ -562,5 +565,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noFinancialData => 'No financial data available for this child.';
 
   @override
-  String get studentIdLabel => 'رقم الطالب';
+  String get studentIdLabel => 'Student ID';
 }

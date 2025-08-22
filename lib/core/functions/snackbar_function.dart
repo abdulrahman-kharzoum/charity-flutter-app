@@ -34,3 +34,20 @@ void showErrorSnackBar(BuildContext context, String messageText) {
     ),
   );
 }
+
+void showSuccessSnackBar(BuildContext context, String messageText) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        messageText,
+        style: const TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+          color: Colors.white,
+        ),
+      ),
+      backgroundColor: AppColors.green,
+      duration: const Duration(seconds: 2),
+    ),
+  );
+}

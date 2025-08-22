@@ -90,6 +90,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get otpVerificationFailure => 'فشل التحقق من الحساب. يرجى المحاولة مرة أخرى.';
 
   @override
+  String get otpVerificationCodeSent => 'تم إرسال رمز التحقق بنجاح!';
+
+  @override
   String get language => 'اللغة';
 
   @override

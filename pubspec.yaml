@@ -38,22 +38,27 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_bloc: ^9.1.1
   flutter_lucide: ^1.6.2
-  equatable: ^2.0.5
+  equatable: ^2.0.7
   shimmer: ^3.0.0
-  shared_preferences: ^2.3.2
-  internet_connection_checker: ^1.0.0+1
+  shared_preferences: ^2.5.3
+  internet_connection_checker: ^3.0.1
   http: ^1.2.1
-  dio: ^5.4.3+1
-  google_fonts: ^6.2.1
-  flutter_animate: ^4.5.0
+  dio: ^5.9.0
+  google_fonts: ^6.3.0
+  flutter_animate: ^4.5.2
   intl: ^0.20.2
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1
   intl_phone_field: ^3.2.0
   encrypt: ^5.0.3
-  pinput: ^4.0.0
+  pinput: ^5.0.1
+  w_builder: ^2.1.3
   qr_flutter: ^4.1.0
+  dartz: ^0.10.1
+  infinite_scroll_pagination: ^5.1.0
+  get_it: ^8.2.0
+  freezed_annotation: ^3.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -63,7 +68,10 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
+  build_runner: ^2.7.0
+  freezed: ^3.0.0-0.0.dev
+  json_serializable: ^6.10.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
