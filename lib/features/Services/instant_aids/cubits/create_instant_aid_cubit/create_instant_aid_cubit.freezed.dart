@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'create_instant_ad_cubit.dart';
+part of 'create_instant_aid_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,20 +12,20 @@ part of 'create_instant_ad_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$CreateInstantAdState {
+mixin _$CreateInstantAidState {
 
- SubmissionStatus get status; CreateInstantAdResponseModel? get data; Failure? get failure;
-/// Create a copy of CreateInstantAdState
+ SubmissionStatus get status; InstantAidApiFullResponse? get data; Failure? get failure;
+/// Create a copy of CreateInstantAidState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$CreateInstantAdStateCopyWith<CreateInstantAdState> get copyWith => _$CreateInstantAdStateCopyWithImpl<CreateInstantAdState>(this as CreateInstantAdState, _$identity);
+$CreateInstantAidStateCopyWith<CreateInstantAidState> get copyWith => _$CreateInstantAidStateCopyWithImpl<CreateInstantAidState>(this as CreateInstantAidState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateInstantAdState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CreateInstantAidState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
@@ -34,60 +34,60 @@ int get hashCode => Object.hash(runtimeType,status,data,failure);
 
 @override
 String toString() {
-  return 'CreateInstantAdState(status: $status, data: $data, failure: $failure)';
+  return 'CreateInstantAidState(status: $status, data: $data, failure: $failure)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $CreateInstantAdStateCopyWith<$Res>  {
-  factory $CreateInstantAdStateCopyWith(CreateInstantAdState value, $Res Function(CreateInstantAdState) _then) = _$CreateInstantAdStateCopyWithImpl;
+abstract mixin class $CreateInstantAidStateCopyWith<$Res>  {
+  factory $CreateInstantAidStateCopyWith(CreateInstantAidState value, $Res Function(CreateInstantAidState) _then) = _$CreateInstantAidStateCopyWithImpl;
 @useResult
 $Res call({
- SubmissionStatus status, CreateInstantAdResponseModel? data, Failure? failure
+ SubmissionStatus status, InstantAidApiFullResponse? data, Failure? failure
 });
 
 
-$CreateInstantAdResponseModelCopyWith<$Res>? get data;
+$InstantAidApiFullResponseCopyWith<$Res>? get data;
 
 }
 /// @nodoc
-class _$CreateInstantAdStateCopyWithImpl<$Res>
-    implements $CreateInstantAdStateCopyWith<$Res> {
-  _$CreateInstantAdStateCopyWithImpl(this._self, this._then);
+class _$CreateInstantAidStateCopyWithImpl<$Res>
+    implements $CreateInstantAidStateCopyWith<$Res> {
+  _$CreateInstantAidStateCopyWithImpl(this._self, this._then);
 
-  final CreateInstantAdState _self;
-  final $Res Function(CreateInstantAdState) _then;
+  final CreateInstantAidState _self;
+  final $Res Function(CreateInstantAidState) _then;
 
-/// Create a copy of CreateInstantAdState
+/// Create a copy of CreateInstantAidState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? data = freezed,Object? failure = freezed,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as CreateInstantAdResponseModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as InstantAidApiFullResponse?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
-/// Create a copy of CreateInstantAdState
+/// Create a copy of CreateInstantAidState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$CreateInstantAdResponseModelCopyWith<$Res>? get data {
+$InstantAidApiFullResponseCopyWith<$Res>? get data {
     if (_self.data == null) {
     return null;
   }
 
-  return $CreateInstantAdResponseModelCopyWith<$Res>(_self.data!, (value) {
+  return $InstantAidApiFullResponseCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }
 }
 
 
-/// Adds pattern-matching-related methods to [CreateInstantAdState].
-extension CreateInstantAdStatePatterns on CreateInstantAdState {
+/// Adds pattern-matching-related methods to [CreateInstantAidState].
+extension CreateInstantAidStatePatterns on CreateInstantAidState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -100,10 +100,10 @@ extension CreateInstantAdStatePatterns on CreateInstantAdState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreateTeacherState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreateInstantAidState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _CreateInstantAidState() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -122,10 +122,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreateTeacherState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreateInstantAidState value)  $default,){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState():
+case _CreateInstantAidState():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -143,10 +143,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreateTeacherState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreateInstantAidState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _CreateInstantAidState() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -164,9 +164,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  CreateInstantAdResponseModel? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  InstantAidApiFullResponse? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _CreateInstantAidState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return orElse();
 
@@ -185,9 +185,9 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  CreateInstantAdResponseModel? data,  Failure? failure)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  InstantAidApiFullResponse? data,  Failure? failure)  $default,) {final _that = this;
 switch (_that) {
-case _CreateTeacherState():
+case _CreateInstantAidState():
 return $default(_that.status,_that.data,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
@@ -205,9 +205,9 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  CreateInstantAdResponseModel? data,  Failure? failure)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  InstantAidApiFullResponse? data,  Failure? failure)?  $default,) {final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _CreateInstantAidState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return null;
 
@@ -219,25 +219,25 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// @nodoc
 
 
-class _CreateTeacherState implements CreateInstantAdState {
-  const _CreateTeacherState({this.status = SubmissionStatus.initial, this.data, this.failure});
+class _CreateInstantAidState implements CreateInstantAidState {
+  const _CreateInstantAidState({this.status = SubmissionStatus.initial, this.data, this.failure});
   
 
 @override@JsonKey() final  SubmissionStatus status;
-@override final  CreateInstantAdResponseModel? data;
+@override final  InstantAidApiFullResponse? data;
 @override final  Failure? failure;
 
-/// Create a copy of CreateInstantAdState
+/// Create a copy of CreateInstantAidState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$CreateTeacherStateCopyWith<_CreateTeacherState> get copyWith => __$CreateTeacherStateCopyWithImpl<_CreateTeacherState>(this, _$identity);
+_$CreateInstantAidStateCopyWith<_CreateInstantAidState> get copyWith => __$CreateInstantAidStateCopyWithImpl<_CreateInstantAidState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateTeacherState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateInstantAidState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
@@ -246,53 +246,53 @@ int get hashCode => Object.hash(runtimeType,status,data,failure);
 
 @override
 String toString() {
-  return 'CreateInstantAdState(status: $status, data: $data, failure: $failure)';
+  return 'CreateInstantAidState(status: $status, data: $data, failure: $failure)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$CreateTeacherStateCopyWith<$Res> implements $CreateInstantAdStateCopyWith<$Res> {
-  factory _$CreateTeacherStateCopyWith(_CreateTeacherState value, $Res Function(_CreateTeacherState) _then) = __$CreateTeacherStateCopyWithImpl;
+abstract mixin class _$CreateInstantAidStateCopyWith<$Res> implements $CreateInstantAidStateCopyWith<$Res> {
+  factory _$CreateInstantAidStateCopyWith(_CreateInstantAidState value, $Res Function(_CreateInstantAidState) _then) = __$CreateInstantAidStateCopyWithImpl;
 @override @useResult
 $Res call({
- SubmissionStatus status, CreateInstantAdResponseModel? data, Failure? failure
+ SubmissionStatus status, InstantAidApiFullResponse? data, Failure? failure
 });
 
 
-@override $CreateInstantAdResponseModelCopyWith<$Res>? get data;
+@override $InstantAidApiFullResponseCopyWith<$Res>? get data;
 
 }
 /// @nodoc
-class __$CreateTeacherStateCopyWithImpl<$Res>
-    implements _$CreateTeacherStateCopyWith<$Res> {
-  __$CreateTeacherStateCopyWithImpl(this._self, this._then);
+class __$CreateInstantAidStateCopyWithImpl<$Res>
+    implements _$CreateInstantAidStateCopyWith<$Res> {
+  __$CreateInstantAidStateCopyWithImpl(this._self, this._then);
 
-  final _CreateTeacherState _self;
-  final $Res Function(_CreateTeacherState) _then;
+  final _CreateInstantAidState _self;
+  final $Res Function(_CreateInstantAidState) _then;
 
-/// Create a copy of CreateInstantAdState
+/// Create a copy of CreateInstantAidState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? data = freezed,Object? failure = freezed,}) {
-  return _then(_CreateTeacherState(
+  return _then(_CreateInstantAidState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as CreateInstantAdResponseModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as InstantAidApiFullResponse?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
 
-/// Create a copy of CreateInstantAdState
+/// Create a copy of CreateInstantAidState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$CreateInstantAdResponseModelCopyWith<$Res>? get data {
+$InstantAidApiFullResponseCopyWith<$Res>? get data {
     if (_self.data == null) {
     return null;
   }
 
-  return $CreateInstantAdResponseModelCopyWith<$Res>(_self.data!, (value) {
+  return $InstantAidApiFullResponseCopyWith<$Res>(_self.data!, (value) {
     return _then(_self.copyWith(data: value));
   });
 }

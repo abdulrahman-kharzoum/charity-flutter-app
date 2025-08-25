@@ -174,8 +174,8 @@ class AllCoursesScreen extends StatelessWidget {
             crossAxisAlignment: isArabic ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox( // Wrap with SizedBox to constrain width if needed, or ensure parent has finite width
-                width: double.infinity, // Or some other constraint
+              SizedBox(
+                width: double.infinity,
                 child: Text(
                   getLocalized(course.title),
                   textAlign: isArabic ? TextAlign.right : TextAlign.left,

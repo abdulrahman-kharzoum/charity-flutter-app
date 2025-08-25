@@ -201,7 +201,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get descriptionLabel => 'الوصف';
 
   @override
-  String get descriptionHint => 'أضف وصفاً تفصيليلاً...';
+  String get descriptionHint => 'أضف وصفاً تفصيلياً...';
 
   @override
   String get descriptionValidationError => 'الرجاء إدخال الوصف';
@@ -233,6 +233,39 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get amountValidationErrorPositive => 'يجب أن يكون المبلغ رقماً موجباً.';
+
+  @override
+  String get urgencyLevelLabel => 'مستوى الاستعجال';
+
+  @override
+  String get urgencyLevelNormal => 'عادي';
+
+  @override
+  String get urgencyLevelLow => 'منخفض';
+
+  @override
+  String get urgencyLevelMedium => 'متوسط';
+
+  @override
+  String get urgencyLevelHigh => 'عالي';
+
+  @override
+  String get selectDateHint => 'اختر التاريخ';
+
+  @override
+  String get receivedAtLabel => 'تاريخ الاستلام';
+
+  @override
+  String get warning => 'تحذير';
+
+  @override
+  String get receivedAtEmptyWarning => 'التاريخ والوقت فارغان. هل تريد المتابعة؟';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get continueText => 'متابعة';
 
   @override
   String get settings => 'الإعدادات';
@@ -293,9 +326,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get edit => 'تعديل';
-
-  @override
-  String get cancel => 'إلغاء';
 
   @override
   String get saveChanges => 'حفظ التغييرات';
@@ -550,16 +580,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paymentReceivedLabel => 'تم استلام الدفعة';
 
   @override
-  String get mondayShort => 'إثن';
+  String get mondayShort => 'إثنين';
 
   @override
-  String get tuesdayShort => 'ثلا';
+  String get tuesdayShort => 'ثلاثاء';
 
   @override
-  String get wednesdayShort => 'أرب';
+  String get wednesdayShort => 'أربعاء';
 
   @override
-  String get thursdayShort => 'خمي';
+  String get thursdayShort => 'خميس';
 
   @override
   String get fridayShort => 'جمعة';
@@ -572,4 +602,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get studentIdLabel => 'رقم الطالب';
+
+  @override
+  String get exitAppDialogTitle => 'الخروج من التطبيق';
+
+  @override
+  String get exitAppDialogContent => 'هل أنت متأكد أنك تريد الخروج من التطبيق؟';
+
+  @override
+  String get exitAppDialogCancel => 'إلغاء';
+
+  @override
+  String get exitAppDialogConfirm => 'تأكيد';
 }

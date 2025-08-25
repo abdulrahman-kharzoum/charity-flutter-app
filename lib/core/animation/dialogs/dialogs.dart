@@ -127,3 +127,89 @@ void successDialog({required BuildContext context, required String text}) {
         ),
   );
 }
+
+void confirmationDialog({
+  required BuildContext context,
+  required String title,
+  required String content,
+  required VoidCallback onConfirm,
+  required VoidCallback onCancel,
+  required String confirmText,
+  required String cancelText,
+}) {
+  const textStyle = TextStyle(
+    color: AppColors.primaryColor,
+    fontWeight: FontWeight.w600,
+  );
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: AppColors.dark,
+      title: Text(title),
+      content: Text(content),
+      actions: [
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(
+              AppColors.primaryColor.withOpacity(0.1),
+            ),
+          ),
+          onPressed: onCancel,
+          child: Text(cancelText, style: textStyle),
+        ),
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(
+              AppColors.primaryColor.withOpacity(0.1),
+            ),
+          ),
+          onPressed: onConfirm,
+          child: Text(confirmText, style: textStyle),
+        ),
+      ],
+    ),
+  );
+}
+
+void warningDialog({
+  required BuildContext context,
+  required String title,
+  required String content,
+  required VoidCallback onConfirm,
+  required VoidCallback onCancel,
+  required String confirmText,
+  required String cancelText,
+}) {
+  const textStyle = TextStyle(
+    color: AppColors.primaryColor,
+    fontWeight: FontWeight.w600,
+  );
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: AppColors.dark,
+      title: Text(title),
+      content: Text(content),
+      actions: [
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(
+              AppColors.primaryColor.withOpacity(0.1),
+            ),
+          ),
+          onPressed: onCancel,
+          child: Text(cancelText, style: textStyle),
+        ),
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStatePropertyAll(
+              AppColors.primaryColor.withOpacity(0.1),
+            ),
+          ),
+          onPressed: onConfirm,
+          child: Text(confirmText, style: textStyle),
+        ),
+      ],
+    ),
+  );
+}

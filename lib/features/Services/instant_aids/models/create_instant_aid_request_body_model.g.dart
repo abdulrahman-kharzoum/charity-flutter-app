@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_instant_ad_request_body_model.dart';
+part of 'create_instant_aid_request_body_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_CreateInstantAdRequestBodyModel _$CreateInstantAdRequestBodyModelFromJson(
+_CreateInstantAidRequestBodyModel _$CreateInstantAidRequestBodyModelFromJson(
   Map<String, dynamic> json,
-) => _CreateInstantAdRequestBodyModel(
+) => _CreateInstantAidRequestBodyModel(
   amount: (json['amount'] as num).toInt(),
   reason: json['reason'] as String,
   beneficiary_id: (json['beneficiary_id'] as num).toInt(),
@@ -16,8 +16,8 @@ _CreateInstantAdRequestBodyModel _$CreateInstantAdRequestBodyModelFromJson(
   urgency_level: json['urgency_level'] as String,
 );
 
-Map<String, dynamic> _$CreateInstantAdRequestBodyModelToJson(
-  _CreateInstantAdRequestBodyModel instance,
+Map<String, dynamic> _$CreateInstantAidRequestBodyModelToJson(
+  _CreateInstantAidRequestBodyModel instance,
 ) => <String, dynamic>{
   'amount': instance.amount,
   'reason': instance.reason,

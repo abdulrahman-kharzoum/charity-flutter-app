@@ -1,6 +1,12 @@
 import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
 
-import 'package:charity/features/Services/instant_aids/cubits/create_instant_ad_cubit/create_instant_ad_cubit.dart';
+import 'package:charity/features/Services/instant_aids/cubits/create_instant_aid_cubit/create_instant_aid_cubit.dart';
+
+import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
+
+
+import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
+
 
 import 'package:charity/features/education/repo/education_repository.dart';
 
@@ -77,6 +83,7 @@ Future<void> setupServiceLocator() async {
   sl.registerFactory(() => GetAllNewCoursesCubit(sl()));
   sl.registerLazySingleton(() => EducationRepository(sl()));
 
-  sl.registerFactory(() => CreateInstantAdCubit(sl()));
   sl.registerLazySingleton(() => InstantAidsRepository(sl()));
+  sl.registerFactory(() => CreateInstantAidCubit(sl()));
+
 }

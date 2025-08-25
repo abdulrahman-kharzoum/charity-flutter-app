@@ -17,6 +17,8 @@ import 'package:get_it/get_it.dart';
 import 'package:charity/core/services/status.dart'; // Added import for SubmissionStatus
 import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.dart';
 import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
+import 'package:charity/core/shared/dialogs/loading_dialog.dart'; // Import loading dialog
+import 'package:charity/core/shared/dialogs/error_dialog.dart'; // Import error dialog
 
 
 // Convert LoginScreen to a StatefulWidget
@@ -116,6 +118,11 @@ class _LoginScreenState extends State<LoginScreen> {
       create: (context) => GetIt.instance<LoginAttemptCubit>(),
       child: BlocConsumer<LoginAttemptCubit, LoginAttemptState>(
         listener: (context, state) {
+          if (state.status == SubmissionStatus.loading) {
+            showLoadingDialog(context);
+          } else {
+            Navigator.of(context).pop(); // Dismiss loading dialog
+          }
           if (state.status == SubmissionStatus.success) {
             showSuccessSnackBar(context, l10n.otpVerificationCodeSent);
             final int? attemptId = state.data?.id; // Safely get attempt_id
@@ -141,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               );
             } else {
-              showErrorSnackBar(context, l10n.loginErrorGeneric); // Handle case where attemptId is null
+              showErrorDialog(context, l10n.loginErrorGeneric); // Handle case where attemptId is null
             }
           } else if (state.status == SubmissionStatus.error) {
             String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
@@ -153,11 +160,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     errorMessage.toLowerCase().contains("password"))) {
               errorMessage = l10n.loginErrorInvalidCredentials;
             }
-            showErrorSnackBar(context, errorMessage);
+            showErrorDialog(context, errorMessage);
           }
         },
         builder: (context, loginAttemptState) {
-          bool isLoading = loginAttemptState.status == SubmissionStatus.loading;
 
           return Scaffold(
             backgroundColor: AppColors.white,
@@ -308,12 +314,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            onPressed: isLoading
-                                ? null
-                                : () async {
+                            onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       if (_completePhoneNumber.isEmpty) {
-                                        showErrorSnackBar(context,
+                                        showErrorDialog(context,
                                             l10n.loginValidationPhoneNumberRequired);
                                         return;
                                       }
@@ -327,15 +331,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       );
                                     }
                                   },
-                            child: isLoading
-                                ? const SizedBox(
-                                    height: 22,
-                                    width: 22,
-                                    child: CircularProgressIndicator(
-                                        strokeWidth: 2.5,
-                                        color: AppColors.loginButtonText),
-                                  )
-                                : Text(l10n.loginButton),
+                            child: Text(l10n.loginButton),
                           ),
                           const SizedBox(height: 24),
                           Center(

@@ -9,6 +9,5 @@ class EndPoints {
   static const String auth_attempt_otp_resend = 'auth/attempt/otp/resend';
   static const String mobile_education_home = 'mobile/education/home';
   static const String mobile_education_new_courses_all = 'mobile/education/new-courses/all';
-
-  static const String mobile_instant_ads_create = 'mobile/instant-ads/create';
+  static const String mobile_instant_aids_create = 'mobile/instant-aids/create';
 }

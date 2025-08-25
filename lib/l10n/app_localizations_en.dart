@@ -235,6 +235,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get amountValidationErrorPositive => 'Amount must be a positive number.';
 
   @override
+  String get urgencyLevelLabel => 'Urgency Level';
+
+  @override
+  String get urgencyLevelNormal => 'Normal';
+
+  @override
+  String get urgencyLevelLow => 'Low';
+
+  @override
+  String get urgencyLevelMedium => 'Medium';
+
+  @override
+  String get urgencyLevelHigh => 'High';
+
+  @override
+  String get selectDateHint => 'Select Date';
+
+  @override
+  String get receivedAtLabel => 'Received At';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get receivedAtEmptyWarning => 'The received_at field is empty. Do you want to continue?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get continueText => 'Continue';
+
+  @override
   String get settings => 'Settings';
 
   @override
@@ -293,9 +326,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get edit => 'Edit';
-
-  @override
-  String get cancel => 'Cancel';
 
   @override
   String get saveChanges => 'Save Changes';
@@ -572,4 +602,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get studentIdLabel => 'Student ID';
+
+  @override
+  String get exitAppDialogTitle => 'Exit App';
+
+  @override
+  String get exitAppDialogContent => 'Are you sure you want to exit the app?';
+
+  @override
+  String get exitAppDialogCancel => 'Cancel';
+
+  @override
+  String get exitAppDialogConfirm => 'Confirm';
 }

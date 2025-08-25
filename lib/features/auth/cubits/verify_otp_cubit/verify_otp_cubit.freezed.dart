@@ -12,7 +12,7 @@ part of 'verify_otp_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$VerifyOtpState {
+mixin _$VerifyOtpState implements DiagnosticableTreeMixin {
 
  SubmissionStatus get status; VerifyOtpResponseModel? get data; Failure? get failure;
 /// Create a copy of VerifyOtpState
@@ -22,6 +22,12 @@ mixin _$VerifyOtpState {
 $VerifyOtpStateCopyWith<VerifyOtpState> get copyWith => _$VerifyOtpStateCopyWithImpl<VerifyOtpState>(this as VerifyOtpState, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'VerifyOtpState'))
+    ..add(DiagnosticsProperty('status', status))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('failure', failure));
+}
 
 @override
 bool operator ==(Object other) {
@@ -33,7 +39,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,status,data,failure);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'VerifyOtpState(status: $status, data: $data, failure: $failure)';
 }
 
@@ -219,7 +225,7 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// @nodoc
 
 
-class _CreateTeacherState implements VerifyOtpState {
+class _CreateTeacherState with DiagnosticableTreeMixin implements VerifyOtpState {
   const _CreateTeacherState({this.status = SubmissionStatus.initial, this.data, this.failure});
   
 
@@ -234,6 +240,12 @@ class _CreateTeacherState implements VerifyOtpState {
 _$CreateTeacherStateCopyWith<_CreateTeacherState> get copyWith => __$CreateTeacherStateCopyWithImpl<_CreateTeacherState>(this, _$identity);
 
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'VerifyOtpState'))
+    ..add(DiagnosticsProperty('status', status))..add(DiagnosticsProperty('data', data))..add(DiagnosticsProperty('failure', failure));
+}
 
 @override
 bool operator ==(Object other) {
@@ -245,7 +257,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,status,data,failure);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'VerifyOtpState(status: $status, data: $data, failure: $failure)';
 }
 

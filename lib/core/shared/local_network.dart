@@ -1,13 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:charity/features/auth/models/user_model.dart';
 
-class CacheNetwork { // Renamed from CashNetwork
+class CacheNetwork {
   static late SharedPreferences sharedPreferences;
 
-  static Future<void> cacheInit() async { // Renamed from cashNetworkInit
+  static Future<void> cacheInit() async {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  // Used by LocalizationCubit
   static Future<bool> saveString({
     required String key,
     required String value,
@@ -15,12 +16,11 @@ class CacheNetwork { // Renamed from CashNetwork
     return await sharedPreferences.setString(key, value);
   }
 
-  static String? getString({required String key}) { // Allow null return
+  static String? getString({required String key}) {
     return sharedPreferences.getString(key);
   }
 
-  // Your existing methods (can be kept if used elsewhere)
-  static Future<bool> insertToCash({ // Consider renaming to align
+  static Future<bool> insertToCash({
     required String key,
     required String value,
   }) async {
@@ -37,5 +37,26 @@ class CacheNetwork { // Renamed from CashNetwork
 
   static Future<bool> cleanCash() async {
     return await sharedPreferences.clear();
+  }
+
+  static String? getToken() {
+    return sharedPreferences.getString('token');
+  }
+
+  static String? getBeneficiaryId() {
+    return sharedPreferences.getString('beneficiary_id');
+  }
+
+  static Future<bool> saveUser({required UserModel user}) async {
+    String userJson = jsonEncode(user.toJson());
+    return await sharedPreferences.setString('user_info', userJson);
+  }
+
+  static UserModel? getUser() {
+    String? userJson = sharedPreferences.getString('user_info');
+    if (userJson != null && userJson.isNotEmpty) {
+      return UserModel.fromJson(jsonDecode(userJson));
+    }
+    return null;
   }
 }

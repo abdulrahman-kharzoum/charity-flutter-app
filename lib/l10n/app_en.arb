@@ -6,7 +6,6 @@
   "@organizationName": {
     "description": "The name of the charitable organization"
   },
-
   "loginWelcomeBack": "Welcome Back!",
   "loginPhoneNumberLabel": "Phone Number",
   "loginPhoneNumberHint": "9XXXXXXXX",
@@ -20,12 +19,9 @@
   "loginValidationPhoneNumberStartsWith9": "Phone number must start with 9.",
   "loginValidationPhoneNumberLength": "Phone number must be 9 digits long.",
   "loginValidationPasswordMinLength": "Password must be at least 8 characters.",
-
-
   "loginErrorNoInternet": "No internet connection. Please check your network.",
   "loginErrorGeneric": "Login failed. Please try again.",
   "loginErrorInvalidCredentials": "Invalid phone number or password. Please try again.",
-
   "loginSuccessMessage": "Login Successful!",
   "otpConfirmAccount": "Confirm account",
   "otpMessage": "We sent an OTP code to the number you entered",
@@ -37,9 +33,7 @@
   "otpVerificationCodeSent": "Verification code sent successfully!",
   "otpErrorInvalidCode": "Invalid OTP code. Please try again.",
   "otpResendCodeSuccess": "OTP code re-sent successfully!",
-
   "language": "Language",
-
   "homeScreenTitle": "Home Page",
   "homeQuickAccess": "Quick Access",
   "homeServiceDispensaryTitle": "Clinic Section",
@@ -65,9 +59,7 @@
     "description": "Sorry no requests to display! Add a request"
   },
   "myRequestsErrorPrefix": "Error: ",
-  "@myRequestsErrorPrefix": {
-    "description": "Network Error"
-  },
+  "@myRequestsErrorPrefix": {"description": "Network Error"},
   "myRequestsUnknownState": "Unknown state",
   "@myRequestsUnknownState": {
     "description": "unknown state on My Requests screen"
@@ -96,23 +88,28 @@
   "@reasonTooShortError": {
     "description": "Validation error for reason being too short.",
     "placeholders": {
-      "minLength": {
-        "type": "int",
-        "example": "10"
-      }
+      "minLength": {"type": "int", "example": "10"}
     }
   },
   "descriptionTooShortError": "Description must be at least {minLength} characters long.",
   "@descriptionTooShortError": {
     "description": "Validation error for description being too short.",
     "placeholders": {
-      "minLength": {
-        "type": "int",
-        "example": "10"
-      }
+      "minLength": {"type": "int", "example": "10"}
     }
   },
   "amountValidationErrorPositive": "Amount must be a positive number.",
+  "urgencyLevelLabel": "Urgency Level",
+  "urgencyLevelNormal": "Normal",
+  "urgencyLevelLow": "Low",
+  "urgencyLevelMedium": "Medium",
+  "urgencyLevelHigh": "High",
+  "selectDateHint": "Select Date",
+  "receivedAtLabel": "Received At",
+  "warning": "Warning",
+  "receivedAtEmptyWarning": "The received_at field is empty. Do you want to continue?",
+  "cancel": "Cancel",
+  "continueText": "Continue",
   "settings": "Settings",
   "profile": "Profile",
   "notifications": "Notifications",
@@ -133,7 +130,6 @@
   "location": "Location",
   "save": "Save",
   "edit": "Edit",
-  "cancel": "Cancel",
   "saveChanges": "Save Changes",
   "personalInfo": "Personal Info",
   "addresses": "Addresses",
@@ -169,14 +165,9 @@
     "description": "Error message when the QR code fails to generate or display"
   },
   "dateLabel": "Date",
-  "@dateLabel": {
-    "description": "Label for the date field"
-  },
+  "@dateLabel": {"description": "Label for the date field"},
   "providedByLabel": "Provided by",
-  "@providedByLabel": {
-    "description": "Label for the provider of an aid item"
-  },
-
+  "@providedByLabel": {"description": "Label for the provider of an aid item"},
   "bottomNavMyRequests": "My Requests",
   "bottomNavAids": "Aids",
   "appName": "Education and Courses ",
@@ -184,10 +175,7 @@
   "@greeting": {
     "description": "Greeting message on the home screen",
     "placeholders": {
-      "userName": {
-        "type": "String",
-        "example": "Sophia"
-      }
+      "userName": {"type": "String", "example": "Sophia"}
     }
   },
   "myChildren": "My Children",
@@ -200,17 +188,13 @@
   "coursesLabel": "{count} Courses",
   "@coursesLabel": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
+      "count": {"type": "int"}
     }
   },
   "balanceLabel": "Balance: ${amount}",
   "@balanceLabel": {
     "placeholders": {
-      "amount": {
-        "type": "String"
-      }
+      "amount": {"type": "String"}
     }
   },
   "agesLabel": "Ages {range}",
@@ -234,10 +218,7 @@
   "childIdLabel": "ID: {studentId}",
   "@childIdLabel": {
     "placeholders": {
-      "studentId": {
-        "type": "String",
-        "example": "123456"
-      }
+      "studentId": {"type": "String", "example": "123456"}
     }
   },
   "coursesTab": "Courses",
@@ -250,10 +231,7 @@
   "gradeLevelLabel": "Grade {level}",
   "@gradeLevelLabel": {
     "placeholders": {
-      "level": {
-        "type": "String",
-        "example": "5"
-      }
+      "level": {"type": "String", "example": "5"}
     }
   },
   "attendanceRecordTitle": "Attendance Record",
@@ -276,7 +254,9 @@
   "fridayShort": "Fri",
   "noAcademicData": "No academic data available for this child.",
   "noFinancialData": "No financial data available for this child.",
-  "studentIdLabel": "Student ID"
-
-
+  "studentIdLabel": "Student ID",
+  "exitAppDialogTitle": "Exit App",
+  "exitAppDialogContent": "Are you sure you want to exit the app?",
+  "exitAppDialogCancel": "Cancel",
+  "exitAppDialogConfirm": "Confirm"
 }

@@ -9,6 +9,8 @@ import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.d
 import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
 import 'package:charity/features/auth/models/verify_otp_request_body_model.dart';
 import 'package:charity/core/services/status.dart'; // Import for SubmissionStatus
+import 'package:charity/core/shared/dialogs/loading_dialog.dart'; // Import loading dialog
+import 'package:charity/core/shared/dialogs/error_dialog.dart'; // Import error dialog
 
 
 class OtpScreen extends StatefulWidget {
@@ -44,10 +46,14 @@ class _OtpScreenState extends State<OtpScreen> {
       listeners: [
         BlocListener<VerifyOtpCubit, VerifyOtpState>(
           listener: (context, state) {
-            if (state.status == SubmissionStatus.success) {
+            if (state.status == SubmissionStatus.loading) {
+              showLoadingDialog(context);
+            } else if (state.status == SubmissionStatus.success) {
+              Navigator.of(context).pop();
               showSuccessSnackBar(context, l10n.otpVerificationSuccess);
               Navigator.pushReplacementNamed(context, '/home_screen'); // Adjust as needed
             } else if (state.status == SubmissionStatus.error) {
+              Navigator.of(context).pop();
               String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
                if (errorMessage.toLowerCase().contains("no internet")) {
                 errorMessage = l10n.loginErrorNoInternet;
@@ -56,20 +62,24 @@ class _OtpScreenState extends State<OtpScreen> {
                       errorMessage.toLowerCase().contains("otp"))) {
                 errorMessage = l10n.otpErrorInvalidCode;
               }
-              showErrorSnackBar(context, errorMessage);
+              showErrorDialog(context, errorMessage);
             }
           },
         ),
         BlocListener<ResendOtpCubit, ResendOtpState>(
           listener: (context, state) {
-            if (state.status == SubmissionStatus.success) {
+            if (state.status == SubmissionStatus.loading) {
+              showLoadingDialog(context);
+            } else if (state.status == SubmissionStatus.success) {
+              Navigator.of(context).pop(); // Dismiss loading dialog
               showSuccessSnackBar(context, l10n.otpResendCodeSuccess);
             } else if (state.status == SubmissionStatus.error) {
+              Navigator.of(context).pop(); // Dismiss loading dialog
               String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
               if (errorMessage.toLowerCase().contains("no internet")) {
                 errorMessage = l10n.loginErrorNoInternet;
               }
-              showErrorSnackBar(context, errorMessage);
+              showErrorDialog(context, errorMessage);
             }
           },
         ),
@@ -78,8 +88,6 @@ class _OtpScreenState extends State<OtpScreen> {
         builder: (context, verifyOtpState) {
           final verifyOtpCubit = context.read<VerifyOtpCubit>();
           final resendOtpCubit = context.read<ResendOtpCubit>();
-          bool isVerifying = verifyOtpState.status == SubmissionStatus.loading;
-          bool isResending = resendOtpCubit.state.status == SubmissionStatus.loading;
 
           return Scaffold(
             backgroundColor: AppColors.white,
@@ -184,20 +192,10 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         const SizedBox(height: 24),
                         TextButton(
-                          onPressed: isResending
-                              ? null
-                              : () {
+                          onPressed: () {
                                   resendOtpCubit.resendOtp(attemptId: widget.attemptId);
                                 },
-                          child: isResending
-                              ? const SizedBox(
-                                  height: 16,
-                                  width: 16,
-                                  child: CircularProgressIndicator(
-                                      strokeWidth: 2,
-                                      color: AppColors.primary500),
-                                )
-                              : Text(
+                          child: Text(
                                   l10n.otpResendCode,
                                   style: const TextStyle(
                                     fontFamily: 'Lexend',
@@ -226,9 +224,7 @@ class _OtpScreenState extends State<OtpScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          onPressed: isVerifying
-                              ? null
-                              : () {
+                          onPressed: () {
                                   if (_pinController.length == 6) {
                                     verifyOtpCubit.verifyOtp(
                                       body: VerifyOtpRequestBodyModel(
@@ -238,15 +234,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                     );
                                   }
                                 },
-                          child: isVerifying
-                              ? const SizedBox(
-                                  height: 22,
-                                  width: 22,
-                                  child: CircularProgressIndicator(
-                                      strokeWidth: 2.5,
-                                      color: AppColors.loginButtonText),
-                                )
-                              : Text(l10n.otpSubmitButton),
+                          child: Text(l10n.otpSubmitButton),
                         ),
                       ],
                     ),

@@ -539,6 +539,72 @@ abstract class AppLocalizations {
   /// **'Amount must be a positive number.'**
   String get amountValidationErrorPositive;
 
+  /// No description provided for @urgencyLevelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgency Level'**
+  String get urgencyLevelLabel;
+
+  /// No description provided for @urgencyLevelNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal'**
+  String get urgencyLevelNormal;
+
+  /// No description provided for @urgencyLevelLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get urgencyLevelLow;
+
+  /// No description provided for @urgencyLevelMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get urgencyLevelMedium;
+
+  /// No description provided for @urgencyLevelHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get urgencyLevelHigh;
+
+  /// No description provided for @selectDateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Date'**
+  String get selectDateHint;
+
+  /// No description provided for @receivedAtLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Received At'**
+  String get receivedAtLabel;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @receivedAtEmptyWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'The received_at field is empty. Do you want to continue?'**
+  String get receivedAtEmptyWarning;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @continueText.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueText;
+
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
@@ -658,12 +724,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit'**
   String get edit;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
 
   /// No description provided for @saveChanges.
   ///
@@ -1192,6 +1252,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Student ID'**
   String get studentIdLabel;
+
+  /// No description provided for @exitAppDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit App'**
+  String get exitAppDialogTitle;
+
+  /// No description provided for @exitAppDialogContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to exit the app?'**
+  String get exitAppDialogContent;
+
+  /// No description provided for @exitAppDialogCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get exitAppDialogCancel;
+
+  /// No description provided for @exitAppDialogConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get exitAppDialogConfirm;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

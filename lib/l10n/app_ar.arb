@@ -16,13 +16,14 @@
   "loginValidationPhoneNumberStartsWith9": "يجب أن يبدأ رقم الهاتف بالرقم 9.",
   "loginValidationPhoneNumberLength": "يجب أن يتكون رقم الهاتف من 9 أرقام.",
   "loginValidationPasswordMinLength": "يجب أن لا تقل كلمة المرور عن 8 أحرف.",
-
-
   "loginErrorNoInternet": "لا يوجد اتصال بالإنترنت. يرجى التحقق من شبكتك.",
   "loginErrorGeneric": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
   "loginErrorInvalidCredentials": "رقم الهاتف أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.",
-
   "loginSuccessMessage": "تم تسجيل الدخول بنجاح!",
+  "loginVerificationCodeSent": "تم إرسال رمز التحقق بنجاح!",
+  "@loginVerificationCodeSent": {
+    "description": "رسالة Snackbar تظهر بعد محاولة تسجيل دخول ناجحة لإعلام المستخدم بأنه تم إرسال رمز OTP."
+  },
   "otpConfirmAccount": "تأكيد الحساب",
   "otpMessage": "لقد أرسلنا رمز OTP إلى الرقم الذي أدخلته",
   "otpResendCode": "إعادة إرسال الرمز",
@@ -33,7 +34,6 @@
   "otpVerificationCodeSent": "تم إرسال رمز التحقق بنجاح!",
   "otpErrorInvalidCode": "رمز OTP غير صالح. يرجى المحاولة مرة أخرى.",
   "otpResendCodeSuccess": "تم إعادة إرسال رمز OTP بنجاح!",
-
   "language": "اللغة",
   "homeScreenTitle": "الصفحة الرئيسية",
   "homeQuickAccess": "وصول سريع",
@@ -51,26 +51,12 @@
   "bottomNavScan": "مسح",
   "bottomNavNotifications": "المساعدات",
   "homeNoImages": "لا توجد صور لعرضها",
-
   "myRequestsTitle": "طلباتي",
-  "requestHistoryLabel": "سجل الطلبات",
-  "@myRequestsTitle": {
-    "description": "Title for the My Requests screen"
-  },
   "myRequestsNoRequests": "لا يوجد طلبات حالياً",
-  "@myRequestsNoRequests": {
-    "description": "عذرًا، لا توجد طلبات لعرضها! أضف طلبًا"
-  },
   "myRequestsErrorPrefix": "خطأ: ",
-  "@myRequestsErrorPrefix": {
-    "description": "خطأ في الشبكة"
-  },
   "myRequestsUnknownState": "حالة غير معروفة",
-  "@myRequestsUnknownState": {
-    "description": "حالة غير معروفة على شاشة طلباتي"
-  },
   "addRequestButtonLabel": "إضافة طلب",
-
+  "requestHistoryLabel": "سجل الطلبات",
   "addRequestScreenTitle": "طلب مساعدة مالية",
   "amountLabel": "المبلغ",
   "amountHint": "أدخل المبلغ",
@@ -82,7 +68,7 @@
   "reasonHint": "أذكر سبب طلبك للمساعدة...",
   "reasonValidationError": "الرجاء إدخال سبب الطلب",
   "descriptionLabel": "الوصف",
-  "descriptionHint": "أضف وصفاً تفصيليلاً...",
+  "descriptionHint": "أضف وصفاً تفصيلياً...",
   "descriptionValidationError": "الرجاء إدخال الوصف",
   "notesLabel": "ملاحظات",
   "notesHint": "أي ملاحظات إضافية...",
@@ -90,26 +76,19 @@
   "requestSuccessMessage": "تم إرسال طلبك بنجاح!",
   "requestFailureMessageGeneric": "فشل إرسال الطلب. حاول مرة أخرى.",
   "reasonTooShortError": "يجب أن يكون سبب الطلب {minLength} أحرف على الأقل.",
-  "@reasonTooShortError": {
-    "description": "رسالة خطأ التحقق من أن سبب الطلب قصير جداً.",
-    "placeholders": {
-      "minLength": {
-        "type": "int",
-        "example": "10"
-      }
-    }
-  },
   "descriptionTooShortError": "يجب أن يكون الوصف التفصيلي {minLength} أحرف على الأقل.",
-  "@descriptionTooShortError": {
-    "description": "رسالة خطأ التحقق من أن الوصف التفصيلي قصير جداً.",
-    "placeholders": {
-      "minLength": {
-        "type": "int",
-        "example": "10"
-      }
-    }
-  },
   "amountValidationErrorPositive": "يجب أن يكون المبلغ رقماً موجباً.",
+  "urgencyLevelLabel": "مستوى الاستعجال",
+  "urgencyLevelNormal": "عادي",
+  "urgencyLevelLow": "منخفض",
+  "urgencyLevelMedium": "متوسط",
+  "urgencyLevelHigh": "عالي",
+  "selectDateHint": "اختر التاريخ",
+  "receivedAtLabel": "تاريخ الاستلام",
+  "warning": "تحذير",
+  "receivedAtEmptyWarning": "التاريخ والوقت فارغان. هل تريد المتابعة؟",
+  "cancel": "إلغاء",
+  "continueText": "متابعة",
   "settings": "الإعدادات",
   "profile": "الملف الشخصي",
   "notifications": "الإشعارات",
@@ -130,7 +109,6 @@
   "location": "الموقع",
   "save": "حفظ",
   "edit": "تعديل",
-  "cancel": "إلغاء",
   "saveChanges": "حفظ التغييرات",
   "personalInfo": "المعلومات الشخصية",
   "addresses": "العناوين",
@@ -154,39 +132,14 @@
   "aidsErrorPrefix": "خطأ في تحميل المساعدات: ",
   "aidsUnknownState": "حالة مساعدات غير معروفة.",
   "requestDetailsTitle": "تفاصيل الطلب",
-  "@requestDetailsTitle": {
-    "description": "عنوان شاشة عرض تفاصيل طلب واحد"
-  },
   "aidDetailsTitle": "تفاصيل المساعدة",
-  "@aidDetailsTitle": {
-    "description": "عنوان شاشة عرض تفاصيل عنصر مساعدة واحد"
-  },
   "qrError": "خطأ في عرض رمز الاستجابة السريعة. يرجى المحاولة مرة أخرى.",
-  "@qrError": {
-    "description": "رسالة خطأ عند فشل إنشاء أو عرض رمز الاستجابة السريعة"
-  },
   "dateLabel": "التاريخ",
-  "@dateLabel": {
-    "description": "تسمية حقل التاريخ"
-  },
   "providedByLabel": "مقدمة من",
-  "@providedByLabel": {
-    "description": "تسمية لمقدم عنصر المساعدة"
-  },
-
   "bottomNavMyRequests": "طلباتي",
   "bottomNavAids": "المساعدات",
   "appName": "قسم التعليم والدورات",
   "greeting": "مرحباً، {userName}",
-  "@greeting": {
-    "description": "رسالة ترحيب على الشاشة الرئيسية",
-    "placeholders": {
-      "userName": {
-        "type": "String",
-        "example": "صوفيا"
-      }
-    }
-  },
   "myChildren": "أطفالي",
   "newCourses": "دورات جديدة",
   "viewAllNewCourses": "عرض كل الدورات الجديدة",
@@ -195,21 +148,7 @@
   "courses": "الدورات",
   "chat": "الدردشة",
   "coursesLabel": "{count} دورات",
-  "@coursesLabel": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "balanceLabel": "الرصيد: ${amount}",
-  "@balanceLabel": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
   "agesLabel": "الأعمار {range}",
   "noItemsAvailable": "لا توجد عناصر متاحة في الوقت الحالي.",
   "allCoursesScreenTitle": "دورات جديدة",
@@ -229,14 +168,6 @@
   "errorLabel": "خطأ",
   "childProfileTitle": "ملف الطفل",
   "childIdLabel": "المعرف: {studentId}",
-  "@childIdLabel": {
-    "placeholders": {
-      "studentId": {
-        "type": "String",
-        "example": "123456"
-      }
-    }
-  },
   "coursesTab": "الدورات",
   "academicProgressTab": "التقدم الأكاديمي",
   "financialStatementTab": "البيان المالي",
@@ -245,14 +176,6 @@
   "noCoursesAvailable": "لا توجد دورات متاحة لهذا القسم.",
   "noDataAvailable": "لا توجد بيانات متاحة.",
   "gradeLevelLabel": "الصف {level}",
-  "@gradeLevelLabel": {
-    "placeholders": {
-      "level": {
-        "type": "String",
-        "example": "الخامس"
-      }
-    }
-  },
   "attendanceRecordTitle": "سجل الحضور",
   "attendanceLabel": "الحضور",
   "last30DaysLabel": "آخر ٣٠ يومًا",
@@ -266,12 +189,16 @@
   "amountPaidLabel": "المبلغ المدفوع",
   "paymentHistoryTitle": "سجل المدفوعات",
   "paymentReceivedLabel": "تم استلام الدفعة",
-  "mondayShort": "إثن",
-  "tuesdayShort": "ثلا",
-  "wednesdayShort": "أرب",
-  "thursdayShort": "خمي",
+  "mondayShort": "إثنين",
+  "tuesdayShort": "ثلاثاء",
+  "wednesdayShort": "أربعاء",
+  "thursdayShort": "خميس",
   "fridayShort": "جمعة",
   "noAcademicData": "لا توجد بيانات أكاديمية متاحة لهذا الطفل.",
   "noFinancialData": "لا توجد بيانات مالية متاحة لهذا الطفل.",
-  "studentIdLabel": "رقم الطالب"
+  "studentIdLabel": "رقم الطالب",
+  "exitAppDialogTitle": "الخروج من التطبيق",
+  "exitAppDialogContent": "هل أنت متأكد أنك تريد الخروج من التطبيق؟",
+  "exitAppDialogCancel": "إلغاء",
+  "exitAppDialogConfirm": "تأكيد"
 }

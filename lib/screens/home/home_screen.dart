@@ -49,7 +49,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   // Replace with your actual image URLs or asset paths
   final List<String> _imageUrls = [
     "https://lh3.googleusercontent.com/aida-public/AB6AXuD2s8VWEpKcV1K9a9BqOd52j8-SP0FGYKDlmoC9xAGaDr0p3gb8NIjv8fRJb8xWNjEFD-FDZxdISYu4V5Pzo_NKqdm4bELj1TZjtCn8PUSf5DwZiBAmIKwHiVtgKI9o5QyeTYUogAMPUDiwwm_2ORmxb8MgPNFdVJ459MI0FDjyu08fZwI9qxhgU016d93lPDF346gYDOv0halNR8WtxbCBMNauIfQaIgMlQi5rR-xn6hxhBAyYXoXJ_n5NLLo1hKW-gmD4X_8Sai0k",
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuC5LGKxZF3C5yPZN6J9dtjz-jKTCnz7Vky2UfMMYaxiocOeBEJbLVtVFmUoz6QBGZ7zn3iq86piURZ9Kn9GYxjPvM1a5xiNcCbDFP8-v7z7_wYv6BFW_DMtbSnN0ZpYnshwNkEhNUzv13YwjWPDiRTfOtJebelNhh61NGxHZvqPwBtzVoZcGsIv8Mbvy-kgNofJZ8MrahAHp63a37wwddwb-p1Xy3lXkxY7FABhRGgAyxQlvKX3mXbqv4iNnBS2EVyDIF8w9qZvnYh3",
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuC5LGKxZF3C5yPZN6J9dtjz-jKTCnz7Vky2UfMMYaxiocOeBEJbLVjVFmUoz6QBGZ7zn3iq86piURZ9Kn9GYxjPvM1a5xiNcCbDFP8-v7z7_wYv6BFW_DMtbSnN0ZpYnshwNkEhNUzv13YwjWPDiRTfOtJebelNhh61NGxHZvqPwBtzVoZcGsIv8Mbvy-kgNofJZ8MrahAHp63a37wwddwb-p1Xy3lXkxY7FABhRGgAyxQlvKX3mXbqv4iNnBS2EVyDIF8w9qZvnYh3",
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAfnxHG2gWtbUZ3qeBchjLlCgiSl0pFBYNCbg7li95Lp3tKm2f1AVBXy47ZA0skgSGczL1_x9WsyOWatMVC_3osGFGPIEwRKwcbvqQTZ1fcLpxITXgfdn1diB3XyDmS2EXdk_RpQTpC3OZdlC33u6nPAphn_eaicUTtinklD9fKagUHkvlTlfj5rij_NA_hpUVcPIsQmnsGI_UXyPJgRXo7UQ0MsgTwNUrjXaZ1gGQM8s36wJbwKdb2yeB6e0guyTReK8i6OwctFAyM",
     "https://lh3.googleusercontent.com/aida-public/AB6AXuCf2ktVQ9njbRLrJWTwVzfC0AimJ_Y52z5s66jcdqjJO2ZzS4tZlzU5kDkeQYp8ViX5Y8bPxzBa93CS8xQJSUN0RkfQhU_LIA7agYHNfoBIP41MiV0tGjlvAr_z9B-3xvfrtbpVI6Q-QzLdMPn7KTPimQSsMiG-GxxTpHCp5KQPvI6Pl2uQ7VAVLgAaGIFX3pM9innVIbExoGCsPN_GrN1zn2QRDO7Z4rYz7QPe046TLyEkg9iZT1LM-reiGva-39MaoGrb-LhAKCfb",
   ];
@@ -95,30 +95,67 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildImageCarousel(l10n),
-            const SizedBox(height: 10),
-            _buildServiceSections(context, l10n),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 12.0),
-              child: Text(
-                l10n.homeQuickAccess,
-                style: const TextStyle(
-                  color: AppColors.slate900,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Lexend',
+    return PopScope(
+      canPop: false, // Prevents popping the route
+      onPopInvoked: (didPop) async {
+        if (didPop) {
+          return;
+        }
+        final bool shouldQuit = await _showExitConfirmationDialog(context, l10n) ?? false;
+        if (shouldQuit) {
+          // This allows the app to be truly exited.
+          // In a real app, you might use SystemNavigator.pop() or exit(0).
+          // For Flutter Web, this might close the browser tab.
+          Navigator.of(context).pop(); // Pops the route if confirmed.
+        }
+      },
+      child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildImageCarousel(l10n),
+              const SizedBox(height: 10),
+              _buildServiceSections(context, l10n),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 24.0, 20.0, 12.0),
+                child: Text(
+                  l10n.homeQuickAccess,
+                  style: const TextStyle(
+                    color: AppColors.slate900,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Lexend',
+                  ),
                 ),
               ),
-            ),
-            _buildQuickAccessGrid(context, l10n),
-            const SizedBox(height: 20),
-          ],
+              _buildQuickAccessGrid(context, l10n),
+              const SizedBox(height: 20),
+            ],
+          ),
         ),
-      );
+    );
+  }
+
+  Future<bool?> _showExitConfirmationDialog(BuildContext context, AppLocalizations l10n) async {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(l10n.exitAppDialogTitle),
+          content: Text(l10n.exitAppDialogContent),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false), // Don't quit
+              child: Text(l10n.exitAppDialogCancel),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true), // Quit
+              child: Text(l10n.exitAppDialogConfirm),
+            ),
+          ],
+        );
+      },
+    );
   }
 
 
@@ -508,5 +545,4 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
     );
   }
 }
-
 
