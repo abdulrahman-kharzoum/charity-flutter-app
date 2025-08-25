@@ -38,6 +38,7 @@ class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    bool isArabic = l10n.localeName == 'ar';
 
     return MultiBlocListener(
       listeners: [
@@ -85,9 +86,18 @@ class _OtpScreenState extends State<OtpScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
+                  Container(
                     width: double.infinity,
                     height: 250,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
@@ -99,9 +109,11 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         Positioned(
                           top: 40, // Adjust for status bar
-                          left: 10,
+                          left: isArabic ? null : 10,
+                          right: isArabic ? 10 : null,
                           child: IconButton(
-                            icon: const Icon(Icons.arrow_back,
+                            icon: Icon(
+                                isArabic ? Icons.arrow_forward : Icons.arrow_back,
                                 color: AppColors.white),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
@@ -160,6 +172,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         Pinput(
                           controller: _pinController,
                           length: 6,
+
                           onCompleted: (pin) {
                             verifyOtpCubit.verifyOtp(
                               body: VerifyOtpRequestBodyModel(
@@ -183,7 +196,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                   child: CircularProgressIndicator(
                                       strokeWidth: 2,
                                       color: AppColors.primary500),
-                                ) 
+                                )
                               : Text(
                                   l10n.otpResendCode,
                                   style: const TextStyle(
@@ -236,6 +249,13 @@ class _OtpScreenState extends State<OtpScreen> {
                               : Text(l10n.otpSubmitButton),
                         ),
                       ],
+                    ),
+                  ),
+                  Transform.flip(
+                    flipY: true,
+                    child: SvgPicture.asset(
+                      "assets/images/header.svg",
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ],

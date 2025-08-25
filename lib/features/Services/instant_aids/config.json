@@ -1,0 +1,23 @@
+{
+  "feature_name": "InstantAids",
+  "apis": [
+    {
+      "name": "createInstantAd",
+      "endpoint": "mobile/instant-ads/create",
+      "request_type": "POST",
+      "body": {
+        "amount": "int",
+        "reason": "String",
+        "beneficiary_id": "int",
+        "received_at": "String?",
+        "urgency_level": "String"
+      },
+      "response_model": {
+        "name": "CreateInstantAdResponseModel",
+        "fields": [
+          { "name": "message", "type": "String" }
+        ]
+      }
+    }
+  ]
+}

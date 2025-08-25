@@ -1,3 +1,13 @@
+import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
+
+import 'package:charity/features/Services/instant_aids/cubits/create_instant_ad_cubit/create_instant_ad_cubit.dart';
+
+import 'package:charity/features/education/repo/education_repository.dart';
+
+import 'package:charity/features/education/cubits/get_all_new_courses_cubit/get_all_new_courses_cubit.dart';
+
+import 'package:charity/features/education/cubits/get_education_home_cubit/get_education_home_cubit.dart';
+
 import 'package:charity/features/auth/repo/auth_repository.dart';
 
 import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
@@ -20,7 +30,6 @@ import 'package:get_it/get_it.dart';
 final sl = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
-  // It will be created only ONCE
 
   sl.registerSingletonAsync<SharedPreferences>(
     () => SharedPreferences.getInstance(),
@@ -63,4 +72,11 @@ Future<void> setupServiceLocator() async {
   sl.registerFactory(() => VerifyOtpCubit(sl()));
   sl.registerFactory(() => ResendOtpCubit(sl()));
   sl.registerLazySingleton(() => AuthRepository(sl()));
+
+  sl.registerFactory(() => GetEducationHomeCubit(sl()));
+  sl.registerFactory(() => GetAllNewCoursesCubit(sl()));
+  sl.registerLazySingleton(() => EducationRepository(sl()));
+
+  sl.registerFactory(() => CreateInstantAdCubit(sl()));
+  sl.registerLazySingleton(() => InstantAidsRepository(sl()));
 }

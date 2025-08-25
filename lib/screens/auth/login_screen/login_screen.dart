@@ -164,43 +164,54 @@ class _LoginScreenState extends State<LoginScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
-                    // Header
-                    width: double.infinity,
-                    height: 250,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned.fill(
-                          child: SvgPicture.asset(
-                            "assets/images/header.svg",
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                l10n.organizationName,
-                                style: TextStyle(
-                                  fontFamily: 'Amiri',
-                                  fontSize: l10n.localeName == 'ar' ? 32 : 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            Image.asset(
-                              'assets/images/logo.png',
-                              height: 120,
-                              width: 120,
-                            ),
-                          ],
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
                         ),
                       ],
+                    ),
+                    child: SizedBox(
+                      // Header
+                      width: double.infinity,
+                      height: 250,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned.fill(
+                            child: SvgPicture.asset(
+                              "assets/images/header.svg",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  l10n.organizationName,
+                                  style: TextStyle(
+                                    fontFamily: 'Amiri',
+                                    fontSize: l10n.localeName == 'ar' ? 32 : 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Image.asset(
+                                'assets/images/logo.png',
+                                height: 120,
+                                width: 120,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
@@ -358,6 +369,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 32),
                         ],
                       ),
+                    ),
+                  ),
+                  Transform.flip(
+                    flipY: true,
+                    child: SvgPicture.asset(
+                      "assets/images/header.svg",
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ],

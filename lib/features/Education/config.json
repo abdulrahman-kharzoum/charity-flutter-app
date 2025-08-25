@@ -1,0 +1,106 @@
+{
+  "feature_name": "Education",
+  "apis": [
+    {
+      "name": "getEducationHome",
+      "endpoint": "mobile/education/home",
+      "request_type": "GET",
+      "response_model": {
+        "name": "EducationHomeModel",
+        "fields": [
+          { "name": "children", "type": "List<ChildModel>" },
+          { "name": "newCourses", "type": "List<CourseModel>", "json_key": "newCourses" }
+        ]
+      },
+      "list_response_model": [
+        {
+          "name": "ChildModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" },
+            { "name": "birthDate", "type": "String", "json_key": "birth_date" },
+            { "name": "age", "type": "int" },
+            { "name": "gender", "type": "String" },
+            { "name": "isAlive", "type": "bool", "json_key": "is_alive" },
+            { "name": "partnerName", "type": "String", "json_key": "partner_name" },
+            { "name": "residencePlace", "type": "String", "json_key": "residence_place" },
+            { "name": "coursesCount", "type": "int", "json_key": "courses_count" },
+            { "name": "activeCoursesCount", "type": "int", "json_key": "active_courses_count" }
+          ]
+        },
+        {
+          "name": "CourseModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" },
+            { "name": "status", "type": "String" },
+            { "name": "startDate", "type": "String?", "json_key": "start_date" },
+            { "name": "finishDate", "type": "String?", "json_key": "finish_date" },
+            { "name": "firstPaymentAmount", "type": "int", "json_key": "first_payment_amount" },
+            { "name": "price", "type": "int" },
+            { "name": "paymentDeadlineDays", "type": "int", "json_key": "payment_deadline_days" },
+            { "name": "subject", "type": "SubjectModel" },
+            { "name": "teacher", "type": "TeacherModel?" }
+          ]
+        },
+        {
+          "name": "SubjectModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" }
+          ]
+        },
+        {
+          "name": "TeacherModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "fullName", "type": "String", "json_key": "full_name" },
+            { "name": "phoneNumber", "type": "String", "json_key": "phone_number" },
+            { "name": "email", "type": "String" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "getAllNewCourses",
+      "endpoint": "mobile/education/new-courses/all",
+      "request_type": "GET",
+      "query_parameters": [
+        { "type": "String?", "name": "status" }
+      ],
+      "list_response_model": [
+        {
+          "name": "CourseModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" },
+            { "name": "status", "type": "String" },
+            { "name": "startDate", "type": "String?", "json_key": "start_date" },
+            { "name": "finishDate", "type": "String?", "json_key": "finish_date" },
+            { "name": "firstPaymentAmount", "type": "int", "json_key": "first_payment_amount" },
+            { "name": "price", "type": "int" },
+            { "name": "paymentDeadlineDays", "type": "int", "json_key": "payment_deadline_days" },
+            { "name": "subject", "type": "SubjectModel" },
+            { "name": "teacher", "type": "TeacherModel?" }
+          ]
+        },
+        {
+          "name": "SubjectModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" }
+          ]
+        },
+        {
+          "name": "TeacherModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "fullName", "type": "String", "json_key": "full_name" },
+            { "name": "phoneNumber", "type": "String", "json_key": "phone_number" },
+            { "name": "email", "type": "String" }
+          ]
+        }
+      ]
+    }
+  ]
+}
