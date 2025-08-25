@@ -614,4 +614,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get exitAppDialogConfirm => 'تأكيد';
+
+  @override
+  String get dateInPastError => 'لا يمكن أن يكون تاريخ الاستلام في الماضي.';
 }

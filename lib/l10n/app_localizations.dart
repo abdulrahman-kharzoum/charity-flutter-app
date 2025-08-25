@@ -1276,6 +1276,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm'**
   String get exitAppDialogConfirm;
+
+  /// No description provided for @dateInPastError.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected date cannot be in the past.'**
+  String get dateInPastError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

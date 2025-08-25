@@ -22,6 +22,6 @@ Map<String, dynamic> _$CreateInstantAidRequestBodyModelToJson(
   'amount': instance.amount,
   'reason': instance.reason,
   'beneficiary_id': instance.beneficiary_id,
-  'received_at': instance.received_at,
+  'received_at': ?_toNullableNonEmpty(instance.received_at),
   'urgency_level': instance.urgency_level,
 };

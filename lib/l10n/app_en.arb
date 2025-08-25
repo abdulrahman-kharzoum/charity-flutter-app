@@ -258,5 +258,6 @@
   "exitAppDialogTitle": "Exit App",
   "exitAppDialogContent": "Are you sure you want to exit the app?",
   "exitAppDialogCancel": "Cancel",
-  "exitAppDialogConfirm": "Confirm"
+  "exitAppDialogConfirm": "Confirm",
+  "dateInPastError": "Selected date cannot be in the past."
 }

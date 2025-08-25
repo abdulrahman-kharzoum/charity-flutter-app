@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CreateInstantAidRequestBodyModel {
 
- int get amount; String get reason; int get beneficiary_id; String? get received_at; String get urgency_level;
+ int get amount; String get reason; int get beneficiary_id;@JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty) String? get received_at; String get urgency_level;
 /// Create a copy of CreateInstantAidRequestBodyModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $CreateInstantAidRequestBodyModelCopyWith<$Res>  {
   factory $CreateInstantAidRequestBodyModelCopyWith(CreateInstantAidRequestBodyModel value, $Res Function(CreateInstantAidRequestBodyModel) _then) = _$CreateInstantAidRequestBodyModelCopyWithImpl;
 @useResult
 $Res call({
- int amount, String reason, int beneficiary_id, String? received_at, String urgency_level
+ int amount, String reason, int beneficiary_id,@JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty) String? received_at, String urgency_level
 });
 
 
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int amount,  String reason,  int beneficiary_id,  String? received_at,  String urgency_level)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int amount,  String reason,  int beneficiary_id, @JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty)  String? received_at,  String urgency_level)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CreateInstantAidRequestBodyModel() when $default != null:
 return $default(_that.amount,_that.reason,_that.beneficiary_id,_that.received_at,_that.urgency_level);case _:
@@ -178,7 +178,7 @@ return $default(_that.amount,_that.reason,_that.beneficiary_id,_that.received_at
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int amount,  String reason,  int beneficiary_id,  String? received_at,  String urgency_level)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int amount,  String reason,  int beneficiary_id, @JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty)  String? received_at,  String urgency_level)  $default,) {final _that = this;
 switch (_that) {
 case _CreateInstantAidRequestBodyModel():
 return $default(_that.amount,_that.reason,_that.beneficiary_id,_that.received_at,_that.urgency_level);case _:
@@ -198,7 +198,7 @@ return $default(_that.amount,_that.reason,_that.beneficiary_id,_that.received_at
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int amount,  String reason,  int beneficiary_id,  String? received_at,  String urgency_level)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int amount,  String reason,  int beneficiary_id, @JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty)  String? received_at,  String urgency_level)?  $default,) {final _that = this;
 switch (_that) {
 case _CreateInstantAidRequestBodyModel() when $default != null:
 return $default(_that.amount,_that.reason,_that.beneficiary_id,_that.received_at,_that.urgency_level);case _:
@@ -213,13 +213,13 @@ return $default(_that.amount,_that.reason,_that.beneficiary_id,_that.received_at
 @JsonSerializable()
 
 class _CreateInstantAidRequestBodyModel implements CreateInstantAidRequestBodyModel {
-  const _CreateInstantAidRequestBodyModel({required this.amount, required this.reason, required this.beneficiary_id, this.received_at, required this.urgency_level});
+  const _CreateInstantAidRequestBodyModel({required this.amount, required this.reason, required this.beneficiary_id, @JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty) this.received_at, required this.urgency_level});
   factory _CreateInstantAidRequestBodyModel.fromJson(Map<String, dynamic> json) => _$CreateInstantAidRequestBodyModelFromJson(json);
 
 @override final  int amount;
 @override final  String reason;
 @override final  int beneficiary_id;
-@override final  String? received_at;
+@override@JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty) final  String? received_at;
 @override final  String urgency_level;
 
 /// Create a copy of CreateInstantAidRequestBodyModel
@@ -255,7 +255,7 @@ abstract mixin class _$CreateInstantAidRequestBodyModelCopyWith<$Res> implements
   factory _$CreateInstantAidRequestBodyModelCopyWith(_CreateInstantAidRequestBodyModel value, $Res Function(_CreateInstantAidRequestBodyModel) _then) = __$CreateInstantAidRequestBodyModelCopyWithImpl;
 @override @useResult
 $Res call({
- int amount, String reason, int beneficiary_id, String? received_at, String urgency_level
+ int amount, String reason, int beneficiary_id,@JsonKey(includeIfNull: false, toJson: _toNullableNonEmpty) String? received_at, String urgency_level
 });
 
 

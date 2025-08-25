@@ -19,6 +19,7 @@ import 'package:charity/features/auth/models/user_model.dart';
 
 import '../../features/Services/instant_aids/cubits/create_instant_aid_cubit/create_instant_aid_cubit.dart';
 import '../../features/Services/instant_aids/models/create_instant_aid_request_body_model.dart';
+import '../../features/Services/instant_aids/models/instant_aid_api_full_response.dart';
 
 class AddRequestScreen extends StatelessWidget {
   const AddRequestScreen({super.key});
@@ -52,7 +53,7 @@ class AddRequestScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                    state.data?.message ?? l10n.requestSuccessMessage,
+                  l10n.requestSuccessMessage,
                     style: TextStyle(fontFamily: 'Lexend', color: AppColors.white)
                 ),
                 backgroundColor: AppColors.requestStatusAccepted,
@@ -116,23 +117,6 @@ class AddRequestScreen extends StatelessWidget {
                           }
                           if (value.trim().length < 10) {
                             return l10n.reasonTooShortError(10);
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 24),
-                      _buildTextField(
-                        context: context,
-                        controller: addRequestCubit.descriptionController,
-                        label: l10n.descriptionLabel,
-                        hint: l10n.descriptionHint,
-                        maxLines: 3,
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return l10n.descriptionValidationError;
-                          }
-                          if (value.trim().length < 10) {
-                            return l10n.descriptionTooShortError(10);
                           }
                           return null;
                         },
@@ -225,7 +209,7 @@ class AddRequestScreen extends StatelessWidget {
                     if (addRequestCubit.selectedDate != null) {
                       receivedAt = intl_lib.DateFormat("yyyy-MM-ddTHH:mm:ss.000000'Z'").format(addRequestCubit.selectedDate!.toUtc());
                     } else {
-                      receivedAt = null; // Explicitly set to null if the date is not selected
+                      receivedAt = null; // Set to null if no date is selected
                     }
 
                     final body = CreateInstantAidRequestBodyModel(
@@ -233,7 +217,10 @@ class AddRequestScreen extends StatelessWidget {
                       reason: addRequestCubit.reasonController.text.trim(),
                       beneficiary_id: beneficiaryId,
                       urgency_level: addRequestCubit.selectedUrgencyLevel,
-                      received_at: receivedAt,
+                      // Only include received_at if it's not null or empty
+                      received_at: (receivedAt != null && receivedAt.isNotEmpty)
+                          ? receivedAt
+                          : null,
                     );
 
                     createInstantAidCubit.createInstantAid(body: body);
@@ -484,7 +471,7 @@ class AddRequestScreen extends StatelessWidget {
                       final DateTime? pickedDate = await showDatePicker(
                         context: context,
                         initialDate: selectedDate ?? DateTime.now(),
-                        firstDate: DateTime(2000),
+                        firstDate: DateTime.now(), // Prevent picking dates before today
                         lastDate: DateTime(2101),
                         builder: (BuildContext context, Widget? child) {
                           return Theme(
@@ -531,6 +518,7 @@ class AddRequestScreen extends StatelessWidget {
                           },
                         );
                         if (pickedTime != null) {
+                          final DateTime now = DateTime.now();
                           final DateTime fullPickedDate = DateTime(
                             pickedDate.year,
                             pickedDate.month,
@@ -538,7 +526,20 @@ class AddRequestScreen extends StatelessWidget {
                             pickedTime.hour,
                             pickedTime.minute,
                           );
-                          cubit.changeDate(fullPickedDate);
+
+                          if (fullPickedDate.isBefore(now)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  l10n.dateInPastError,
+                                  style: TextStyle(fontFamily: 'Lexend', color: AppColors.white),
+                                ),
+                                backgroundColor: AppColors.requestStatusRejected,
+                              ),
+                            );
+                          } else {
+                            cubit.changeDate(fullPickedDate);
+                          }
                         }
                       }
                     },
@@ -560,7 +561,15 @@ class AddRequestScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Icon(Icons.calendar_today, color: AppColors.gray500),
+                const SizedBox(width: 8),
+                IconButton(
+                  icon: Icon(Icons.calendar_today, color: AppColors.gray500),
+                  onPressed: () { /* This will trigger the onTap of GestureDetector */ },
+                ),
+                if (selectedDate != null)
+                  IconButton(onPressed: (){
+                    cubit.changeDate(null);
+                  }, icon: Icon(Icons.delete_forever, color: AppColors.darkRed))
               ],
             );
           },

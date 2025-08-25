@@ -614,4 +614,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exitAppDialogConfirm => 'Confirm';
+
+  @override
+  String get dateInPastError => 'Selected date cannot be in the past.';
 }

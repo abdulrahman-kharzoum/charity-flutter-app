@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:charity/core/services/status.dart';
 import 'package:dio/dio.dart';
 import 'package:charity/core/services/failure_service/failure.dart';
@@ -18,6 +19,7 @@ class CreateInstantAidCubit extends Cubit<CreateInstantAidState> {
   CreateInstantAidCubit(this._repository) : super(const CreateInstantAidState());
 
   Future<void> createInstantAid({ required CreateInstantAidRequestBodyModel body,  }) async {
+    print(body.toJson().toString());
     emit(state.copyWith(status: SubmissionStatus.loading));
     final result = await _repository.createInstantAid(body: body, );
     result.fold(

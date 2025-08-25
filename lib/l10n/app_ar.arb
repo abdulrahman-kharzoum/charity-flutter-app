@@ -85,6 +85,7 @@
   "urgencyLevelHigh": "عالي",
   "selectDateHint": "اختر التاريخ",
   "receivedAtLabel": "تاريخ الاستلام",
+  "dateInPastError": "لا يمكن أن يكون تاريخ الاستلام في الماضي.",
   "warning": "تحذير",
   "receivedAtEmptyWarning": "التاريخ والوقت فارغان. هل تريد المتابعة؟",
   "cancel": "إلغاء",

@@ -10,7 +10,6 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   final formKey = GlobalKey<FormState>();
   final amountController = TextEditingController();
   final reasonController = TextEditingController();
-  final descriptionController = TextEditingController();
   final notesController = TextEditingController();
 
   String _selectedCurrencyUnit = "thousand";
@@ -51,7 +50,6 @@ class AddRequestCubit extends Cubit<AddRequestState> {
   Future<void> close() {
     amountController.dispose();
     reasonController.dispose();
-    descriptionController.dispose();
     notesController.dispose();
     return super.close();
   }
