@@ -1,15 +1,18 @@
+import 'package:charity/core/notification_config/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/cubits/localization/localization_cubit.dart';
 import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
 import 'package:charity/cubits/profile_cubit/profile_cubit.dart';
 import 'package:charity/core/shared/settings_repository.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/routes/routes.dart' as app_routes;
 import 'package:charity/theme/theme.dart';
 
 import 'core/shared/local_network.dart';
+import 'firebase_options.dart';
 
 import 'core/services/service_locator.dart';
 
@@ -18,9 +21,9 @@ import 'core/services/service_locator.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheNetwork.cacheInit();
-  WidgetsFlutterBinding.ensureInitialized();
   await setupServiceLocator();
-
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseApi().initNotification();
   runApp(const MyApp());
 }
 
@@ -31,7 +34,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-
         // BlocProvider<LoginCubit>(
         //   create: (context) => LoginCubit(),
         // ),
@@ -41,9 +43,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<SettingsCubit>(
           create: (context) => SettingsCubit(SettingsRepository()),
         ),
-        BlocProvider<ProfileCubit>(
-          create: (context) => ProfileCubit(),
-        ),
+        BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
       ],
       child: BlocBuilder<LocalizationCubit, LocalizationState>(
         builder: (context, localizationState) {
