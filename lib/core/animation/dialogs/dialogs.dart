@@ -21,6 +21,7 @@ void loadingDialog({
               SizedBox(height: mediaQuery.height / 90),
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -89,8 +90,8 @@ void errorDialog({required BuildContext context, required String text}) {
     builder:
         (context) => AlertDialog(
           backgroundColor: AppColors.dark,
-          title: Text(l10n.errorTitle),
-          content: Text(text),
+          title: Text(l10n.errorTitle, textAlign: TextAlign.center,),
+          content: Text(text, textAlign: TextAlign.center,),
           actions: [
             TextButton(
               style: ButtonStyle(
@@ -101,7 +102,7 @@ void errorDialog({required BuildContext context, required String text}) {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text(l10n.cancel, style: textStyle),
+              child: Text(l10n.okButton, style: textStyle),
             ),
           ],
         ),
@@ -115,8 +116,8 @@ void successDialog({required BuildContext context, required String text}) {
     builder:
         (context) => AlertDialog(
           backgroundColor: Colors.white,
-          title: Text(l10n.successTitle),
-          content: Text(text),
+          title: Text(l10n.successTitle, textAlign: TextAlign.center,),
+          content: Text(text, textAlign: TextAlign.center,),
           actions: [
             TextButton(
               style: ButtonStyle(
@@ -152,8 +153,8 @@ void confirmationDialog({
     context: context,
     builder: (context) => AlertDialog(
       backgroundColor: AppColors.dark,
-      title: Text(title),
-      content: Text(content),
+      title: Text(title, textAlign: TextAlign.center,),
+      content: Text(content, textAlign: TextAlign.center,),
       actions: [
         TextButton(
           style: ButtonStyle(
@@ -162,7 +163,7 @@ void confirmationDialog({
             ),
           ),
           onPressed: onCancel,
-          child: Text(l10n.cancel, style: textStyle),
+          child: Text(cancelText, style: textStyle),
         ),
         TextButton(
           style: ButtonStyle(
@@ -171,7 +172,7 @@ void confirmationDialog({
             ),
           ),
           onPressed: onConfirm,
-          child: Text(l10n.confirm, style: textStyle),
+          child: Text(confirmText, style: textStyle),
         ),
       ],
     ),
@@ -196,8 +197,8 @@ void warningDialog({
     context: context,
     builder: (context) => AlertDialog(
       backgroundColor: AppColors.dark,
-      title: Text(title),
-      content: Text(content),
+      title: Text(title, textAlign: TextAlign.center,),
+      content: Text(content, textAlign: TextAlign.center,),
       actions: [
         TextButton(
           style: ButtonStyle(
@@ -206,7 +207,7 @@ void warningDialog({
             ),
           ),
           onPressed: onCancel,
-          child: Text(l10n.cancel, style: textStyle),
+          child: Text(cancelText, style: textStyle),
         ),
         TextButton(
           style: ButtonStyle(
@@ -215,7 +216,7 @@ void warningDialog({
             ),
           ),
           onPressed: onConfirm,
-          child: Text(l10n.confirm, style: textStyle),
+          child: Text(confirmText, style: textStyle),
         ),
       ],
     ),

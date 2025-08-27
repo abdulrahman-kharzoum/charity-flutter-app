@@ -152,14 +152,6 @@ class _LoginScreenState extends State<LoginScreen> {
             }
           } else if (state.status == SubmissionStatus.error) {
             String errorMessage = state.failure?.message ?? l10n.loginErrorGeneric;
-            if (errorMessage.toLowerCase().contains("no internet")) {
-              errorMessage = l10n.loginErrorNoInternet;
-            } else if (errorMessage.toLowerCase().contains("invalid") &&
-                (errorMessage.toLowerCase().contains("credential") ||
-                    errorMessage.toLowerCase().contains("phone") ||
-                    errorMessage.toLowerCase().contains("password"))) {
-              errorMessage = l10n.loginErrorInvalidCredentials;
-            }
             showErrorDialog(context, errorMessage);
           }
         },

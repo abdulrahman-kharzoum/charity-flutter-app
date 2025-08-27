@@ -18,9 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../services/cache_service.dart';
 import '../services/end_points.dart';
 import '../services/interceptors/auth_interceptor.dart';
+import 'package:charity/cubits/settings_cubit/settings_cubit.dart'; // Import SettingsCubit
+import 'package:charity/core/services/interceptors/language_interceptor.dart'; // Import LanguageInterceptor
+import 'package:charity/cubits/localization/localization_cubit.dart'; // Import LocalizationCubit
 
 import 'api_services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:charity/core/shared/settings_repository.dart';
 
 final sl = GetIt.instance;
 
@@ -36,6 +40,13 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
     () => AuthInterceptor(cacheService: sl()),
   );
 
+  // Register SettingsRepository before SettingsCubit
+  sl.registerLazySingleton<SettingsRepository>(() => SettingsRepository());
+  sl.registerLazySingleton<SettingsCubit>(() => SettingsCubit(sl())); // Register SettingsCubit
+  sl.registerLazySingleton<LocalizationCubit>(() => LocalizationCubit(sl())); // Register LocalizationCubit
+
+  sl.registerLazySingleton<LanguageInterceptor>(() => LanguageInterceptor()); // Register LanguageInterceptor
+
   sl.registerLazySingleton<Dio>(() {
     final dio = Dio(
       BaseOptions(
@@ -46,6 +57,7 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
       ),
     );
     dio.interceptors.add(sl<AuthInterceptor>());
+    dio.interceptors.add(sl<LanguageInterceptor>()); // Add LanguageInterceptor
     dio.interceptors.add(
       LogInterceptor(
         requestBody: true,

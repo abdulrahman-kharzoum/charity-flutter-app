@@ -671,4 +671,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get finished => 'Finished';
+
+  @override
+  String get courseDetailsTitle => 'Course Details';
+
+  @override
+  String get statusLabel => 'Status';
+
+  @override
+  String get startDateLabel => 'Start Date';
+
+  @override
+  String get priceLabel => 'Price';
+
+  @override
+  String get paymentDeadlineLabel => 'Payment Deadline';
+
+  @override
+  String get teacher => 'Teacher';
+
+  @override
+  String get subject => 'Subject';
+
+  @override
+  String get enrollButton => 'Enroll';
+
+  @override
+  String get notAvailable => 'N/A';
+
+  @override
+  String get days => 'days';
+
+  @override
+  String get noTeacherBio => 'No teacher biography available.';
+
+  @override
+  String get genericErrorMessage => 'Something went wrong on the server. Please try again later.';
+
+  @override
+  String tooManyAttemptsMessage(Object time) {
+    return 'Too many attempts. Please try again after $time.';
+  }
+
+  @override
+  String get tooManyAttemptsGenericMessage => 'Too many attempts. Please try again later.';
+
+  @override
+  String get connectionTimeoutError => 'The connection timed out. Please check your internet connection and try again.';
+
+  @override
+  String get offlineError => 'Oops! It looks like you are offline. Please check your connection and try again.';
+
+  @override
+  String get unauthorizedAccessError => 'Unauthorized access. Please log in again.';
+
+  @override
+  String serverErrorWithMessage(Object message) {
+    return 'Something went wrong, Please try again later. $message';
+  }
+
+  @override
+  String get unexpectedError => 'An unexpected error occurred. Please try again.';
 }

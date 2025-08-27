@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         //   create: (context) => LoginCubit(),
         // ),
         BlocProvider<LocalizationCubit>(
-          create: (context) => LocalizationCubit(),
+          create: (context) => sl<LocalizationCubit>(),
         ),
         BlocProvider<SettingsCubit>(
           create: (context) => SettingsCubit(SettingsRepository()),

@@ -9,7 +9,8 @@ Dio dio() {
   // Update with your API base URL
   dio.options.baseUrl = EndPoints.baseUrl;
   dio.options.headers['Accept'] = 'application/json';
-  dio.options.headers['Accept-Language'] = 'en';
+  // Language header is now handled by LanguageInterceptor
+    // Language header is now handled by LanguageInterceptor
 
   final cacheService = CacheService(sharedPreferences: CacheNetwork.sharedPreferences);
   dio.interceptors.add(AuthInterceptor(cacheService: cacheService));

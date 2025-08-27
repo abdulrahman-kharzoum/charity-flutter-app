@@ -1390,6 +1390,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finished'**
   String get finished;
+
+  /// No description provided for @courseDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Course Details'**
+  String get courseDetailsTitle;
+
+  /// No description provided for @statusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get statusLabel;
+
+  /// No description provided for @startDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get startDateLabel;
+
+  /// No description provided for @priceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get priceLabel;
+
+  /// No description provided for @paymentDeadlineLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Deadline'**
+  String get paymentDeadlineLabel;
+
+  /// No description provided for @teacher.
+  ///
+  /// In en, this message translates to:
+  /// **'Teacher'**
+  String get teacher;
+
+  /// No description provided for @subject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get subject;
+
+  /// No description provided for @enrollButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Enroll'**
+  String get enrollButton;
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'N/A'**
+  String get notAvailable;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get days;
+
+  /// No description provided for @noTeacherBio.
+  ///
+  /// In en, this message translates to:
+  /// **'No teacher biography available.'**
+  String get noTeacherBio;
+
+  /// No description provided for @genericErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong on the server. Please try again later.'**
+  String get genericErrorMessage;
+
+  /// No description provided for @tooManyAttemptsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Please try again after {time}.'**
+  String tooManyAttemptsMessage(Object time);
+
+  /// No description provided for @tooManyAttemptsGenericMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Please try again later.'**
+  String get tooManyAttemptsGenericMessage;
+
+  /// No description provided for @connectionTimeoutError.
+  ///
+  /// In en, this message translates to:
+  /// **'The connection timed out. Please check your internet connection and try again.'**
+  String get connectionTimeoutError;
+
+  /// No description provided for @offlineError.
+  ///
+  /// In en, this message translates to:
+  /// **'Oops! It looks like you are offline. Please check your connection and try again.'**
+  String get offlineError;
+
+  /// No description provided for @unauthorizedAccessError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unauthorized access. Please log in again.'**
+  String get unauthorizedAccessError;
+
+  /// No description provided for @serverErrorWithMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong, Please try again later. {message}'**
+  String serverErrorWithMessage(Object message);
+
+  /// No description provided for @unexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again.'**
+  String get unexpectedError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

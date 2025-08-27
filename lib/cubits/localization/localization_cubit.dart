@@ -1,8 +1,7 @@
 import 'dart:ui'; // For Locale
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-// import 'package:shared_preferences/shared_preferences.dart'; // No longer directly needed here
-
+import 'package:charity/cubits/settings_cubit/settings_cubit.dart'; // Import SettingsCubit
 import '../../core/shared/local_network.dart'; // Import CacheNetwork
 
 part 'localization_state.dart';
@@ -10,13 +9,13 @@ part 'localization_state.dart';
 class LocalizationCubit extends Cubit<LocalizationState> {
   static const String _appLocaleKey = 'app_locale';
   static const Locale defaultLocale = Locale('en');
+  final SettingsCubit _settingsCubit;
 
-  LocalizationCubit() : super(LocalizationInitial(defaultLocale)) {
+  LocalizationCubit(this._settingsCubit) : super(LocalizationInitial(defaultLocale)) {
     _loadSavedLocale();
   }
 
   Future<void> _loadSavedLocale() async {
-    // Ensure CacheNetwork is initialized if not already (e.g., in main.dart)
     final String? savedLanguageCode = CacheNetwork.getString(key: _appLocaleKey);
     if (savedLanguageCode != null) {
       emit(LocalizationChanged(Locale(savedLanguageCode)));
@@ -33,6 +32,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
     if (state.locale.languageCode != languageCode) {
       _saveLocale(languageCode);
       emit(LocalizationChanged(Locale(languageCode)));
+      _settingsCubit.changeLanguage(); // Call SettingsCubit's changeLanguage
     }
   }
 

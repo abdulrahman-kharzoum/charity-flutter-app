@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:charity/l10n/app_localizations.dart'; // Import AppLocalizations
+import 'package:charity/l10n/app_localizations.dart'; 
 
 // ignore: must_be_immutable
 class ShowErrorWidget extends StatelessWidget {
@@ -7,16 +7,16 @@ class ShowErrorWidget extends StatelessWidget {
   void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+    final l10n = AppLocalizations.of(context)!; 
     return Center(
       child: Column(
         children: [
-          Text(l10n.anErrorHappened), // Use localized string
+          Text(l10n.anErrorHappened, textAlign: TextAlign.center,),
           SizedBox(height: 20),
           FilledButton.icon(
             onPressed: onPressed,
             icon: const Icon(Icons.add),
-            label: Text(l10n.tryAgain), // Use localized string
+            label: Text(l10n.tryAgain), 
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               shape: RoundedRectangleBorder(

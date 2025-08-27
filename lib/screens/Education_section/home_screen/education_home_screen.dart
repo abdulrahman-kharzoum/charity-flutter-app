@@ -16,6 +16,7 @@ import 'package:charity/features/Education/cubits/get_all_new_courses_cubit/get_
 import '../../../cubits/education/child_profile/child_profile_cubit.dart';
 import '../all_courses_screen/all_courses_screen.dart';
 import '../child_profile_screen/child_profile_screen.dart';
+import '../course_details_screen/course_details_screen.dart';
 
 class EduHomeScreen extends StatefulWidget {
   const EduHomeScreen({super.key});
@@ -97,7 +98,16 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
                         context,
                         l10n,
                         educationHomeModel.newCourses, // Access newCourses from model
-                            (course) => _buildCourseCard(context, l10n, course),
+                            (course) => GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CourseDetailsScreen(course: course),
+                                    ),
+                                  );
+                                },
+                                child: _buildCourseCard(context, l10n, course)),
                       ),
                       _buildViewAllButton(context, l10n),
                       const SizedBox(height: 20),
@@ -122,18 +132,13 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              width: 48,
-              height: 48,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: CircleAvatar(
-                  radius: 16,
-                  backgroundColor: AppColors.lightGreyBackground,
-                  backgroundImage: const NetworkImage(
-                      "https://lh3.googleusercontent.com/aida-public/AB6AXuAxxemeKv1q4vXWk0wQf_5jqYuoNCmXfZzO1Kv1edZtp16AlCIvIf8LNGrCE_nzlasCo6Fv8PWgye59ZCF-UI5UCEzuDnUlSITzXVkz8BHcP-KKF2E-_pjg7yj19gRZWwXU8BX91vPe-37sodJXq8yMmy6lD79zH14SZd-GtG_RVIEGFLYe7UgxZc5-z2RjBrFz_4TTs6hD2ElVTxQzBObKMTxTfLXV4IgWtLPPpk9LtOI9-GNhnUzcIuyFFadWp5StNIb3bnmYQ8lu"),
-                  onBackgroundImageError: (_, __) {},
-                ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back, color: AppColors.textPrimary),
+                onPressed: () => Navigator.of(context).pop(),
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
               ),
             ),
             Text(

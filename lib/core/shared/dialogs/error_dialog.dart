@@ -4,6 +4,23 @@ import 'package:charity/l10n/app_localizations.dart'; // Import AppLocalizations
 
 void showErrorDialog(BuildContext context, String errorMessage) {
   final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
+  String displayMessage = errorMessage;
+
+  // Check for specific error messages and use localized strings
+  if (errorMessage.contains("Too many attempts")) {
+    // Extract the time from the error message, e.g., "1 minute 51 seconds"
+    final RegExp timeRegExp = RegExp(r"after (\d+ (minute|minutes|second|seconds)( \d+ (second|seconds))?)");
+    final Match? match = timeRegExp.firstMatch(errorMessage);
+    if (match != null) {
+      final String time = match.group(1)!;
+      displayMessage = l10n.tooManyAttemptsMessage(time);
+    } else {
+      displayMessage = l10n.tooManyAttemptsGenericMessage;
+    }
+  } else {
+    displayMessage = errorMessage;
+  }
+
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
@@ -29,8 +46,9 @@ void showErrorDialog(BuildContext context, String errorMessage) {
                   size: 60,
                 ),
                 const SizedBox(height: 10),
-                Text(
+               Text(
                   l10n.somethingWentWrong, // Use localized string
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -38,7 +56,7 @@ void showErrorDialog(BuildContext context, String errorMessage) {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  errorMessage,
+                  displayMessage, // Use the processed displayMessage
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
@@ -66,3 +84,4 @@ void showErrorDialog(BuildContext context, String errorMessage) {
     },
   );
 }
+

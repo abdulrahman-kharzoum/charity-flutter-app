@@ -671,4 +671,65 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get finished => 'انتهى';
+
+  @override
+  String get courseDetailsTitle => 'تفاصيل الدورة';
+
+  @override
+  String get statusLabel => 'الحالة';
+
+  @override
+  String get startDateLabel => 'تاريخ البدء';
+
+  @override
+  String get priceLabel => 'السعر';
+
+  @override
+  String get paymentDeadlineLabel => 'الموعد النهائي للدفع';
+
+  @override
+  String get teacher => 'المعلم';
+
+  @override
+  String get subject => 'الموضوع';
+
+  @override
+  String get enrollButton => 'تسجيل';
+
+  @override
+  String get notAvailable => 'غير متاح';
+
+  @override
+  String get days => 'أيام';
+
+  @override
+  String get noTeacherBio => 'لا توجد سيرة ذاتية للمعلم متاحة.';
+
+  @override
+  String get genericErrorMessage => 'حدث خطأ ما على الخادم. يرجى المحاولة مرة أخرى لاحقاً.';
+
+  @override
+  String tooManyAttemptsMessage(Object time) {
+    return 'عدد كبير جداً من المحاولات. يرجى المحاولة مرة أخرى بعد $time.';
+  }
+
+  @override
+  String get tooManyAttemptsGenericMessage => 'عدد كبير جداً من المحاولات. يرجى المحاولة مرة أخرى لاحقاً.';
+
+  @override
+  String get connectionTimeoutError => 'انتهت مهلة الاتصال. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
+
+  @override
+  String get offlineError => 'عذرًا! يبدو أنك غير متصل بالإنترنت. يرجى التحقق من اتصالك والمحاولة مرة أخرى.';
+
+  @override
+  String get unauthorizedAccessError => 'وصول غير مصرح به. يرجى تسجيل الدخول مرة أخرى.';
+
+  @override
+  String serverErrorWithMessage(Object message) {
+    return 'حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقاً. $message';
+  }
+
+  @override
+  String get unexpectedError => 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
 }

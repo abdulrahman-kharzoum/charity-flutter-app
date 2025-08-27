@@ -6,6 +6,7 @@ import 'package:charity/features/Education/models/course_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/theme/color.dart';
 import 'package:charity/core/shared/components/spacing.dart';
+import 'package:charity/screens/Education_section/course_details_screen/course_details_screen.dart';
 
 class AllCoursesScreen extends StatefulWidget {
   const AllCoursesScreen({super.key});
@@ -320,12 +321,22 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
 
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Container(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: isArabic
-              ? [imageColumn, const SizedBox(width: 16), textColumn]
-              : [textColumn, const SizedBox(width: 16), imageColumn],
+      child: GestureDetector( // Wrap with GestureDetector
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CourseDetailsScreen(course: course), // Navigate to CourseDetailsScreen
+            ),
+          );
+        },
+        child: Container(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: isArabic
+                ? [imageColumn, const SizedBox(width: 16), textColumn]
+                : [textColumn, const SizedBox(width: 16), imageColumn],
+          ),
         ),
       ),
     );
