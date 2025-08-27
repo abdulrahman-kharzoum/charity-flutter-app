@@ -95,6 +95,18 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
+  /// No description provided for @filter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get filter;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
   /// No description provided for @english.
   ///
   /// In en, this message translates to:
@@ -1127,6 +1139,78 @@ abstract class AppLocalizations {
   /// **'Grade {level}'**
   String gradeLevelLabel(String level);
 
+  /// No description provided for @somethingWentWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong!'**
+  String get somethingWentWrong;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get ok;
+
+  /// No description provided for @anErrorHappened.
+  ///
+  /// In en, this message translates to:
+  /// **'An error happened'**
+  String get anErrorHappened;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
+
+  /// No description provided for @noInternetConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get noInternetConnection;
+
+  /// No description provided for @serverIsDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Server is down'**
+  String get serverIsDown;
+
+  /// No description provided for @internetConnectionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Internet connection failed'**
+  String get internetConnectionFailed;
+
+  /// No description provided for @errorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorTitle;
+
+  /// No description provided for @successTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get successTitle;
+
+  /// No description provided for @okButton.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get okButton;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @serverError.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Error'**
+  String get serverError;
+
   /// No description provided for @attendanceRecordTitle.
   ///
   /// In en, this message translates to:
@@ -1282,6 +1366,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Selected date cannot be in the past.'**
   String get dateInPastError;
+
+  /// No description provided for @created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get created;
+
+  /// No description provided for @announced.
+  ///
+  /// In en, this message translates to:
+  /// **'Announced'**
+  String get announced;
+
+  /// No description provided for @started.
+  ///
+  /// In en, this message translates to:
+  /// **'Started'**
+  String get started;
+
+  /// No description provided for @finished.
+  ///
+  /// In en, this message translates to:
+  /// **'Finished'**
+  String get finished;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

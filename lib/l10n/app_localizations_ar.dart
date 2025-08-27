@@ -9,6 +9,12 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get filter => 'Filter';
+
+  @override
+  String get all => 'All';
+
+  @override
   String get english => 'English';
 
   @override
@@ -541,6 +547,42 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get somethingWentWrong => 'حدث خطأ ما!';
+
+  @override
+  String get ok => 'حسناً';
+
+  @override
+  String get anErrorHappened => 'حدث خطأ';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
+
+  @override
+  String get noInternetConnection => 'لا يوجد اتصال بالإنترنت';
+
+  @override
+  String get serverIsDown => 'الخادم لا يعمل';
+
+  @override
+  String get internetConnectionFailed => 'فشل الاتصال بالإنترنت';
+
+  @override
+  String get errorTitle => 'خطأ';
+
+  @override
+  String get successTitle => 'نجاح';
+
+  @override
+  String get okButton => 'موافق';
+
+  @override
+  String get confirm => 'تأكيد';
+
+  @override
+  String get serverError => 'خطأ في الخادم';
+
+  @override
   String get attendanceRecordTitle => 'سجل الحضور';
 
   @override
@@ -617,4 +659,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dateInPastError => 'لا يمكن أن يكون تاريخ الاستلام في الماضي.';
+
+  @override
+  String get created => 'أنشئت';
+
+  @override
+  String get announced => 'أعلن';
+
+  @override
+  String get started => 'بدأت';
+
+  @override
+  String get finished => 'انتهى';
 }

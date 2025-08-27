@@ -9,6 +9,7 @@ import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/routes/routes.dart' as app_routes;
 import 'package:charity/theme/theme.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'core/shared/local_network.dart';
 
 import 'core/services/service_locator.dart';
@@ -17,9 +18,9 @@ import 'core/services/service_locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheNetwork.cacheInit();
-  WidgetsFlutterBinding.ensureInitialized();
-  await setupServiceLocator();
+  final sharedPreferences = await SharedPreferences.getInstance();
+  await CacheNetwork.cacheInit(); // Keep this for CacheNetwork class
+  await setupServiceLocator(sharedPreferences);
 
   runApp(const MyApp());
 }

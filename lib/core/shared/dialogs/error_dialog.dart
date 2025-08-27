@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:charity/l10n/app_localizations.dart'; // Import AppLocalizations
 
 void showErrorDialog(BuildContext context, String errorMessage) {
+  final l10n = AppLocalizations.of(context)!; // Get AppLocalizations instance
   showGeneralDialog(
     context: context,
     barrierDismissible: true,
-    barrierLabel: "Error",
+    barrierLabel: l10n.errorTitle, // Use localized string
     transitionDuration: const Duration(milliseconds: 300),
     pageBuilder: (context, anim1, anim2) => const SizedBox(),
     transitionBuilder: (context, anim1, anim2, child) {
@@ -28,7 +30,7 @@ void showErrorDialog(BuildContext context, String errorMessage) {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  "Something went wrong!",
+                  l10n.somethingWentWrong, // Use localized string
                   style: GoogleFonts.poppins(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -53,7 +55,7 @@ void showErrorDialog(BuildContext context, String errorMessage) {
                       ),
                     ),
                     onPressed: () => Navigator.of(context).pop(),
-                    child: Text("Ok"),
+                    child: Text(l10n.ok), // Use localized string
                   ),
                 ),
               ],

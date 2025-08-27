@@ -9,6 +9,12 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get filter => 'Filter';
+
+  @override
+  String get all => 'All';
+
+  @override
   String get english => 'English';
 
   @override
@@ -541,6 +547,42 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get somethingWentWrong => 'Something went wrong!';
+
+  @override
+  String get ok => 'Ok';
+
+  @override
+  String get anErrorHappened => 'An error happened';
+
+  @override
+  String get tryAgain => 'Try again';
+
+  @override
+  String get noInternetConnection => 'No internet connection';
+
+  @override
+  String get serverIsDown => 'Server is down';
+
+  @override
+  String get internetConnectionFailed => 'Internet connection failed';
+
+  @override
+  String get errorTitle => 'Error';
+
+  @override
+  String get successTitle => 'Success';
+
+  @override
+  String get okButton => 'OK';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get serverError => 'Server Error';
+
+  @override
   String get attendanceRecordTitle => 'Attendance Record';
 
   @override
@@ -617,4 +659,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dateInPastError => 'Selected date cannot be in the past.';
+
+  @override
+  String get created => 'Created';
+
+  @override
+  String get announced => 'Announced';
+
+  @override
+  String get started => 'Started';
+
+  @override
+  String get finished => 'Finished';
 }

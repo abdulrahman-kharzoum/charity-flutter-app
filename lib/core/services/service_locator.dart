@@ -2,17 +2,6 @@ import 'package:charity/features/Services/instant_aids/repo/instant_aids_reposit
 
 import 'package:charity/features/Services/instant_aids/cubits/create_instant_aid_cubit/create_instant_aid_cubit.dart';
 
-import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
-
-
-import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
-
-
-import 'package:charity/features/education/repo/education_repository.dart';
-
-import 'package:charity/features/education/cubits/get_all_new_courses_cubit/get_all_new_courses_cubit.dart';
-
-import 'package:charity/features/education/cubits/get_education_home_cubit/get_education_home_cubit.dart';
 
 import 'package:charity/features/auth/repo/auth_repository.dart';
 
@@ -22,7 +11,7 @@ import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.d
 
 import 'package:charity/features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
 
-
+import 'package:charity/features/Education/repo/education_repository.dart'; // Import EducationRepository
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,11 +24,9 @@ import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
-Future<void> setupServiceLocator() async {
+Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
 
-  sl.registerSingletonAsync<SharedPreferences>(
-    () => SharedPreferences.getInstance(),
-  );
+  sl.registerSingleton<SharedPreferences>(sharedPreferences);
 
   sl.registerLazySingleton<CacheService>(
     () => CacheService(sharedPreferences: sl()),
@@ -79,9 +66,8 @@ Future<void> setupServiceLocator() async {
   sl.registerFactory(() => ResendOtpCubit(sl()));
   sl.registerLazySingleton(() => AuthRepository(sl()));
 
-  sl.registerFactory(() => GetEducationHomeCubit(sl()));
-  sl.registerFactory(() => GetAllNewCoursesCubit(sl()));
-  sl.registerLazySingleton(() => EducationRepository(sl()));
+  // Register EducationRepository as a lazy singleton, injecting ApiService
+  sl.registerLazySingleton<EducationRepository>(() => EducationRepository(sl()));
 
   sl.registerLazySingleton(() => InstantAidsRepository(sl()));
   sl.registerFactory(() => CreateInstantAidCubit(sl()));

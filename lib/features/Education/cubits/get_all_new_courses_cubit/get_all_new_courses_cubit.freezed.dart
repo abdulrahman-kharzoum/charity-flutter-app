@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetAllNewCoursesState {
 
- SubmissionStatus get status; List<CourseModel>? get data; Failure? get failure;
+ SubmissionStatus get status; CourseModel? get data; Failure? get failure;
 /// Create a copy of GetAllNewCoursesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,12 +25,12 @@ $GetAllNewCoursesStateCopyWith<GetAllNewCoursesState> get copyWith => _$GetAllNe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetAllNewCoursesState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetAllNewCoursesState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(data),failure);
+int get hashCode => Object.hash(runtimeType,status,data,failure);
 
 @override
 String toString() {
@@ -45,11 +45,11 @@ abstract mixin class $GetAllNewCoursesStateCopyWith<$Res>  {
   factory $GetAllNewCoursesStateCopyWith(GetAllNewCoursesState value, $Res Function(GetAllNewCoursesState) _then) = _$GetAllNewCoursesStateCopyWithImpl;
 @useResult
 $Res call({
- SubmissionStatus status, List<CourseModel>? data, Failure? failure
+ SubmissionStatus status, CourseModel? data, Failure? failure
 });
 
 
-
+$CourseModelCopyWith<$Res>? get data;
 
 }
 /// @nodoc
@@ -66,11 +66,23 @@ class _$GetAllNewCoursesStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as List<CourseModel>?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as CourseModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
+/// Create a copy of GetAllNewCoursesState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CourseModelCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
 
+  return $CourseModelCopyWith<$Res>(_self.data!, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
 }
 
 
@@ -88,10 +100,10 @@ extension GetAllNewCoursesStatePatterns on GetAllNewCoursesState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _GetAllNewCoursesState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreateTeacherState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _GetAllNewCoursesState() when $default != null:
+case _CreateTeacherState() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -110,10 +122,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _GetAllNewCoursesState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreateTeacherState value)  $default,){
 final _that = this;
 switch (_that) {
-case _GetAllNewCoursesState():
+case _CreateTeacherState():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -131,10 +143,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _GetAllNewCoursesState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreateTeacherState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _GetAllNewCoursesState() when $default != null:
+case _CreateTeacherState() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -152,9 +164,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  List<CourseModel>? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  CourseModel? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _GetAllNewCoursesState() when $default != null:
+case _CreateTeacherState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return orElse();
 
@@ -173,9 +185,9 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  List<CourseModel>? data,  Failure? failure)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  CourseModel? data,  Failure? failure)  $default,) {final _that = this;
 switch (_that) {
-case _GetAllNewCoursesState():
+case _CreateTeacherState():
 return $default(_that.status,_that.data,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
@@ -193,9 +205,9 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  List<CourseModel>? data,  Failure? failure)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  CourseModel? data,  Failure? failure)?  $default,) {final _that = this;
 switch (_that) {
-case _GetAllNewCoursesState() when $default != null:
+case _CreateTeacherState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return null;
 
@@ -207,38 +219,30 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// @nodoc
 
 
-class _GetAllNewCoursesState implements GetAllNewCoursesState {
-  const _GetAllNewCoursesState({this.status = SubmissionStatus.initial, final  List<CourseModel>? data, this.failure}): _data = data;
+class _CreateTeacherState implements GetAllNewCoursesState {
+  const _CreateTeacherState({this.status = SubmissionStatus.initial, this.data, this.failure});
   
 
 @override@JsonKey() final  SubmissionStatus status;
- final  List<CourseModel>? _data;
-@override List<CourseModel>? get data {
-  final value = _data;
-  if (value == null) return null;
-  if (_data is EqualUnmodifiableListView) return _data;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
+@override final  CourseModel? data;
 @override final  Failure? failure;
 
 /// Create a copy of GetAllNewCoursesState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$GetAllNewCoursesStateCopyWith<_GetAllNewCoursesState> get copyWith => __$GetAllNewCoursesStateCopyWithImpl<_GetAllNewCoursesState>(this, _$identity);
+_$CreateTeacherStateCopyWith<_CreateTeacherState> get copyWith => __$CreateTeacherStateCopyWithImpl<_CreateTeacherState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetAllNewCoursesState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateTeacherState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_data),failure);
+int get hashCode => Object.hash(runtimeType,status,data,failure);
 
 @override
 String toString() {
@@ -249,37 +253,49 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$GetAllNewCoursesStateCopyWith<$Res> implements $GetAllNewCoursesStateCopyWith<$Res> {
-  factory _$GetAllNewCoursesStateCopyWith(_GetAllNewCoursesState value, $Res Function(_GetAllNewCoursesState) _then) = __$GetAllNewCoursesStateCopyWithImpl;
+abstract mixin class _$CreateTeacherStateCopyWith<$Res> implements $GetAllNewCoursesStateCopyWith<$Res> {
+  factory _$CreateTeacherStateCopyWith(_CreateTeacherState value, $Res Function(_CreateTeacherState) _then) = __$CreateTeacherStateCopyWithImpl;
 @override @useResult
 $Res call({
- SubmissionStatus status, List<CourseModel>? data, Failure? failure
+ SubmissionStatus status, CourseModel? data, Failure? failure
 });
 
 
-
+@override $CourseModelCopyWith<$Res>? get data;
 
 }
 /// @nodoc
-class __$GetAllNewCoursesStateCopyWithImpl<$Res>
-    implements _$GetAllNewCoursesStateCopyWith<$Res> {
-  __$GetAllNewCoursesStateCopyWithImpl(this._self, this._then);
+class __$CreateTeacherStateCopyWithImpl<$Res>
+    implements _$CreateTeacherStateCopyWith<$Res> {
+  __$CreateTeacherStateCopyWithImpl(this._self, this._then);
 
-  final _GetAllNewCoursesState _self;
-  final $Res Function(_GetAllNewCoursesState) _then;
+  final _CreateTeacherState _self;
+  final $Res Function(_CreateTeacherState) _then;
 
 /// Create a copy of GetAllNewCoursesState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? data = freezed,Object? failure = freezed,}) {
-  return _then(_GetAllNewCoursesState(
+  return _then(_CreateTeacherState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as SubmissionStatus,data: freezed == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as List<CourseModel>?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as CourseModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
 
+/// Create a copy of GetAllNewCoursesState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CourseModelCopyWith<$Res>? get data {
+    if (_self.data == null) {
+    return null;
+  }
 
+  return $CourseModelCopyWith<$Res>(_self.data!, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
 }
 
 // dart format on

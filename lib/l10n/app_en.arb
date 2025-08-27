@@ -1,4 +1,6 @@
 {
+  "filter": "Filter",
+  "all": "All",
   "@@locale": "en",
   "english": "English",
   "arabic": "Arabic",
@@ -234,6 +236,19 @@
       "level": {"type": "String", "example": "5"}
     }
   },
+  "somethingWentWrong": "Something went wrong!",
+  "ok": "Ok",
+  "anErrorHappened": "An error happened",
+  "tryAgain": "Try again",
+  "noInternetConnection": "No internet connection",
+  "serverIsDown": "Server is down",
+  "internetConnectionFailed": "Internet connection failed",
+  "errorTitle": "Error",
+  "cancel": "Cancel",
+  "successTitle": "Success",
+  "okButton": "OK",
+  "confirm": "Confirm",
+  "serverError": "Server Error",
   "attendanceRecordTitle": "Attendance Record",
   "attendanceLabel": "Attendance",
   "last30DaysLabel": "Last 30 Days",
@@ -259,5 +274,10 @@
   "exitAppDialogContent": "Are you sure you want to exit the app?",
   "exitAppDialogCancel": "Cancel",
   "exitAppDialogConfirm": "Confirm",
-  "dateInPastError": "Selected date cannot be in the past."
+  "dateInPastError": "Selected date cannot be in the past.",
+  "created": "Created",
+  "announced": "Announced",
+  "started": "Started",
+  "finished": "Finished"
+
 }

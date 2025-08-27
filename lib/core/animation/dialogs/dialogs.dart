@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charity/theme/color.dart';
+import 'package:charity/l10n/app_localizations.dart'; // Import AppLocalizations
 
 void loadingDialog({
   required BuildContext context,
@@ -32,18 +33,21 @@ void loadingDialog({
 }
 
 void internetToast({required BuildContext context}) {
+  final l10n = AppLocalizations.of(context)!;
   ScaffoldMessenger.of(
     context,
-  ).showSnackBar(const SnackBar(content: Text('No internet connection')));
+  ).showSnackBar(SnackBar(content: Text(l10n.noInternetConnection)));
 }
 
 void serverToast({required BuildContext context}) {
+  final l10n = AppLocalizations.of(context)!;
   ScaffoldMessenger.of(
     context,
-  ).showSnackBar(const SnackBar(content: Text('Server is down')));
+  ).showSnackBar(SnackBar(content: Text(l10n.serverIsDown)));
 }
 
 void internetDialog({required BuildContext context, required Size mediaQuery}) {
+  final l10n = AppLocalizations.of(context)!;
   showDialog(
     context: context,
     barrierDismissible: false,
@@ -59,8 +63,8 @@ void internetDialog({required BuildContext context, required Size mediaQuery}) {
             children: [
               Icon(Icons.wifi_off, size: 60, color: AppColors.primaryColor),
               const SizedBox(height: 20),
-              const Text(
-                'Internet connection failed',
+              Text(
+                l10n.internetConnectionFailed,
                 softWrap: true,
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -75,6 +79,7 @@ void internetDialog({required BuildContext context, required Size mediaQuery}) {
 }
 
 void errorDialog({required BuildContext context, required String text}) {
+  final l10n = AppLocalizations.of(context)!;
   const textStyle = TextStyle(
     color: AppColors.primaryColor,
     fontWeight: FontWeight.w600,
@@ -84,7 +89,7 @@ void errorDialog({required BuildContext context, required String text}) {
     builder:
         (context) => AlertDialog(
           backgroundColor: AppColors.dark,
-          title: const Text('Error'),
+          title: Text(l10n.errorTitle),
           content: Text(text),
           actions: [
             TextButton(
@@ -96,7 +101,7 @@ void errorDialog({required BuildContext context, required String text}) {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Cancel', style: textStyle),
+              child: Text(l10n.cancel, style: textStyle),
             ),
           ],
         ),
@@ -104,12 +109,13 @@ void errorDialog({required BuildContext context, required String text}) {
 }
 
 void successDialog({required BuildContext context, required String text}) {
+  final l10n = AppLocalizations.of(context)!;
   showDialog(
     context: context,
     builder:
         (context) => AlertDialog(
           backgroundColor: Colors.white,
-          title: const Text('Success'),
+          title: Text(l10n.successTitle),
           content: Text(text),
           actions: [
             TextButton(
@@ -121,7 +127,7 @@ void successDialog({required BuildContext context, required String text}) {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('OK'),
+              child: Text(l10n.okButton),
             ),
           ],
         ),
@@ -137,6 +143,7 @@ void confirmationDialog({
   required String confirmText,
   required String cancelText,
 }) {
+  final l10n = AppLocalizations.of(context)!;
   const textStyle = TextStyle(
     color: AppColors.primaryColor,
     fontWeight: FontWeight.w600,
@@ -155,7 +162,7 @@ void confirmationDialog({
             ),
           ),
           onPressed: onCancel,
-          child: Text(cancelText, style: textStyle),
+          child: Text(l10n.cancel, style: textStyle),
         ),
         TextButton(
           style: ButtonStyle(
@@ -164,7 +171,7 @@ void confirmationDialog({
             ),
           ),
           onPressed: onConfirm,
-          child: Text(confirmText, style: textStyle),
+          child: Text(l10n.confirm, style: textStyle),
         ),
       ],
     ),
@@ -180,6 +187,7 @@ void warningDialog({
   required String confirmText,
   required String cancelText,
 }) {
+  final l10n = AppLocalizations.of(context)!;
   const textStyle = TextStyle(
     color: AppColors.primaryColor,
     fontWeight: FontWeight.w600,
@@ -198,7 +206,7 @@ void warningDialog({
             ),
           ),
           onPressed: onCancel,
-          child: Text(cancelText, style: textStyle),
+          child: Text(l10n.cancel, style: textStyle),
         ),
         TextButton(
           style: ButtonStyle(
@@ -207,7 +215,7 @@ void warningDialog({
             ),
           ),
           onPressed: onConfirm,
-          child: Text(confirmText, style: textStyle),
+          child: Text(l10n.confirm, style: textStyle),
         ),
       ],
     ),

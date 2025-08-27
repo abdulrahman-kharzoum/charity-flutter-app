@@ -28,28 +28,16 @@ class EducationRepository {
     }
   }
 
-
-  Future<Either<Failure, List<CourseModel>>> getAllNewCourses({String? status}) async {
+  Future<Either<Failure, CourseModel>> getAllNewCourses({ required String? status,  }) async {
     try {
-
-      final Map<String, dynamic> queryParams = {};
-
-      if (status != null) {
-        queryParams['status'] = status;
-      }
-
-
       final response = await _apiService.get(
-          'mobile/education/new-courses/all',
-          queryParams: queryParams.isNotEmpty ? queryParams : null
+        EndPoints.mobile_education_new_courses_all,
+        queryParams: {'status': status}
       );
 
+      final data = CourseModel.fromJson(response.data['data']);
 
-      final items = (response.data['data'] as List)
-          .map((itemJson) => CourseModel.fromJson(itemJson))
-          .toList();
-
-      return Right(items);
+      return Right(data);
     } on DioException catch (e) {
       return Left(FailureFactory.fromDioException(e));
     } catch (e) {
