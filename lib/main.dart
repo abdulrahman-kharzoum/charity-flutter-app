@@ -23,8 +23,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
   await CacheNetwork.cacheInit();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseApi().initNotification();
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await FirebaseApi().initNotification();
   await setupServiceLocator(sharedPreferences);
   runApp(const MyApp());
 }

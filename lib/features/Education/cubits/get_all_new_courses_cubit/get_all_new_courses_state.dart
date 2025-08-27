@@ -4,7 +4,7 @@ part of 'get_all_new_courses_cubit.dart';
 abstract class GetAllNewCoursesState with _$GetAllNewCoursesState {
   const factory GetAllNewCoursesState({
     @Default(SubmissionStatus.initial) SubmissionStatus status,
-    CourseModel? data,
+    List<CourseModel>? data,
     Failure? failure,
   }) = _CreateTeacherState; 
 }
