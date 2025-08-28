@@ -296,5 +296,6 @@
   "offlineError": "Oops! It looks like you are offline. Please check your connection and try again.",
   "unauthorizedAccessError": "Unauthorized access. Please log in again.",
   "serverErrorWithMessage": "Something went wrong, Please try again later. {message}",
-  "unexpectedError": "An unexpected error occurred. Please try again."
+  "unexpectedError": "An unexpected error occurred. Please try again.",
+  "scanToConfirmReceived": "Scan to confirm your received"
 }

@@ -1,121 +1,239 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:ui' as ui;
+
 
 import 'package:charity/models/request_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/theme/color.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:charity/core/shared/local_network.dart'; // Import CacheNetwork
+import 'package:charity/features/Services/requests_aids/cubits/get_beneficiary_requests_cubit/get_beneficiary_requests_cubit.dart';
+import 'package:charity/cubits/localization/localization_cubit.dart'; // Import LocalizationCubit
+import 'package:charity/features/Services/qr/cubits/generate_aid_qr_code_cubit/generate_aid_qr_code_cubit.dart'; // Import GenerateAidQrCodeCubit
 
-import '../../cubits/my_requests_cubit/my_requests_cubit.dart';
+import 'package:charity/features/Services/requests_aids/models/beneficiary_requests_model.dart';
+import 'package:charity/features/Services/requests_aids/models/instant_aid_model.dart';
+import 'package:charity/features/Services/requests_aids/models/prescription_model.dart';
+import 'package:charity/core/services/status.dart';
+import 'package:charity/core/services/service_locator.dart'; // Import service_locator for GetIt
+import 'package:intl/intl.dart';
+
+
 import 'package:charity/models/common_item_details_model.dart';
 import 'package:charity/screens/item_details/item_details_screen.dart';
 import '../add_request_screen/add_request_screen.dart';
 
 
-class MyRequestsScreen extends StatelessWidget {
+class MyRequestsScreen extends StatefulWidget {
   const MyRequestsScreen({super.key});
+
+  @override
+  State<MyRequestsScreen> createState() => _MyRequestsScreenState();
+}
+
+class _MyRequestsScreenState extends State<MyRequestsScreen> {
+  @override
+  late ui.TextDirection _currentTextDirection;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentTextDirection = ui.TextDirection.ltr; // Default or initial value
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) => MyRequestsCubit()..fetchMyRequests(),
+      create: (context) => sl<GetBeneficiaryRequestsCubit>()
+        ..getBeneficiaryRequests(beneficiaryId: int.parse(CacheNetwork.getBeneficiaryId() ?? '0')),
 
-      child: Builder(
-          builder: (innerContext) {
-            return Scaffold(
-              backgroundColor: AppColors.myRequestsBackground,
-              body: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
-                    child: Text(
-                      l10n.requestHistoryLabel,
-                      style: TextStyle(
-                        fontFamily: 'Lexend',
-                        color: AppColors.myRequestsTitleText,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+      child: BlocListener<LocalizationCubit, LocalizationState>(
+        listener: (context, state) {
+          setState(() {
+            _currentTextDirection = state.locale.languageCode == 'ar' ? ui.TextDirection.rtl : ui.TextDirection.ltr;
+          });
+        },
+        child: Builder(
+            builder: (innerContext) {
+              return Scaffold(
+                backgroundColor: AppColors.myRequestsBackground,
+                body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
+                      child: Align(
+                        alignment: _currentTextDirection == ui.TextDirection.rtl ? Alignment.centerRight : Alignment.centerLeft,
+                        child: Text(
+                          l10n.requestHistoryLabel,
+                          textDirection: _currentTextDirection,
+                          style: TextStyle(
+                            fontFamily: 'Lexend',
+                            color: AppColors.myRequestsTitleText,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: BlocBuilder<MyRequestsCubit, MyRequestsState>(
-                      builder: (context, state) {
-                        if (state is MyRequestsLoading || state is MyRequestsInitial) {
-
-                          return _buildSkeletonList(context, 3);
-                        } else if (state is MyRequestsLoaded) {
-                          if (state.requests.isEmpty) {
-                            return Center(
-                              child: Text(
-                                l10n.myRequestsNoRequests,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: AppColors.myRequestsDescriptionText,
-                                    fontFamily: 'Lexend'),
-                              ),
-                            );
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                            // Pass innerContext or context from BlocBuilder, both should work
-                            child: _buildRequestsTimeline(context, state.requests, l10n),
-                          );
-                        } else if (state is MyRequestsError) {
-                          return Center(child: Text('${l10n.myRequestsErrorPrefix}${state.message}', style: TextStyle(color: AppColors.requestStatusRejected)));
-                        }
-                        return Center(child: Text(l10n.myRequestsUnknownState));
-                      },
+                    Expanded(
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          innerContext.read<GetBeneficiaryRequestsCubit>()
+                              .getBeneficiaryRequests(beneficiaryId: int.parse(CacheNetwork.getBeneficiaryId() ?? '0'));
+                        },
+                        child: BlocBuilder<GetBeneficiaryRequestsCubit, GetBeneficiaryRequestsState>(
+                          builder: (context, state) {
+                            if (state.status == SubmissionStatus.loading || state.status == SubmissionStatus.initial) {
+                              return _buildSkeletonList(context, 3);
+                            } else if (state.status == SubmissionStatus.success) {
+                              final List<RequestModel> requests = _mapBeneficiaryRequestsToRequestModel(state.data!);
+                              if (requests.isEmpty) {
+                                return Center(
+                                  child: Text(
+                                    l10n.myRequestsNoRequests,
+                                    textDirection: _currentTextDirection,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: AppColors.myRequestsDescriptionText,
+                                        fontFamily: 'Lexend'),
+                                  ),
+                                );
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                                child: _buildRequestsTimeline(context, requests, l10n),
+                              );
+                            } else if (state.status == SubmissionStatus.error) {
+                              return Center(child: Text('${l10n.myRequestsErrorPrefix}${state.failure?.message ?? "Unknown error"}', style: TextStyle(color: AppColors.requestStatusRejected), textDirection: _currentTextDirection,));
+                            }
+                            return Center(child: Text(l10n.myRequestsUnknownState, textDirection: _currentTextDirection,));
+                          },
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-                // In MyRequestsScreen's FAB onPressed:
+                  ],
+                ),
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () {
-                  Navigator.push(
-                    innerContext, // Use the context that's below BlocProvider<MyRequestsCubit>
+                onPressed: () async { // Changed to async to await pop
+                  final result = await Navigator.push(
+                    innerContext,
                     MaterialPageRoute(builder: (_) => const AddRequestScreen()),
-                  ).then((result) { // The 'result' is what AddRequestScreen pops
-                    if (result != null && result is RequestModel) {
-                      // 'result' is the new RequestModel from AddRequestScreen
-                      final newRequest = result;
-                      print("MyRequestsScreen: Received new request - ${newRequest.title}");
-                      innerContext.read<MyRequestsCubit>().addNewRequestLocally(newRequest);
-                    } else if (result == true) {
-                     print("MyRequestsScreen: AddRequestScreen popped 'true', attempting generic fetch.");
-                      innerContext.read<MyRequestsCubit>().fetchMyRequests();
-                    }
-                  });
+                  );
+                  if (result != null && result is RequestModel) {
+                    print("MyRequestsScreen: Received new request - ${result.title}");
+                    // Optionally, re-fetch data or update locally if AddRequestScreen adds data.
+                    // For now, re-fetching to ensure data consistency from the backend.
+                    innerContext.read<GetBeneficiaryRequestsCubit>()
+                        .getBeneficiaryRequests(beneficiaryId: int.parse(CacheNetwork.getBeneficiaryId() ?? '0'));
+                  } else if (result == true) {
+                    print("MyRequestsScreen: AddRequestScreen popped 'true', attempting generic fetch.");
+                    innerContext.read<GetBeneficiaryRequestsCubit>()
+                        .getBeneficiaryRequests(beneficiaryId: int.parse(CacheNetwork.getBeneficiaryId() ?? '0'));
+                  }
                 },
 
-                label: Text(
-                  l10n.addRequestButtonLabel,
-                  style: TextStyle(fontFamily: 'Lexend', color: AppColors.white, fontWeight: FontWeight.bold),
+                  label: Text(
+                    l10n.addRequestButtonLabel,
+                    style: TextStyle(fontFamily: 'Lexend', color: AppColors.white, fontWeight: FontWeight.bold),
+                  ),
+                  icon: Icon(Icons.add, color: AppColors.white),
+                  backgroundColor: AppColors.primaryColor,
+                  elevation: 4.0,
                 ),
-                icon: Icon(Icons.add, color: AppColors.white),
-                backgroundColor: AppColors.primaryColor,
-                elevation: 4.0,
-              ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            );
-          }
+                floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+              );
+            }
+        ),
       ),
     );
+  }
+
+  List<RequestModel> _mapBeneficiaryRequestsToRequestModel(BeneficiaryRequestsModel data) {
+    final List<RequestModel> requests = [];
+
+    // Map InstantAidModel to RequestModel
+    for (var instantAid in data.instantAids) {
+      requests.add(
+        RequestModel(
+          id: instantAid.id.toString(),
+          title: 'Instant Aid: ${instantAid.reason}',
+          description: 'Amount: ${instantAid.amount}, Urgency: ${instantAid.urgencyLevel}',
+          date: DateTime.parse(instantAid.receivedAt), // Assuming receivedAt is a valid date string
+          status: _mapRequestStatus(instantAid.requestStatus),
+          statusText: instantAid.requestStatus,
+          encryptedQrDataField: null, // InstantAids might not have QR data
+          requestType: 'instantAid', // Pass the type for QR generation
+        ),
+      );
+    }
+
+    // Map PrescriptionModel to RequestModel
+    for (var prescription in data.prescriptions) {
+      requests.add(
+        RequestModel(
+          id: prescription.id.toString(),
+          title: 'Prescription: ${prescription.reason}',
+          description: prescription.description,
+          date: DateTime.parse(prescription.createdAt), // Assuming createdAt is a valid date string
+          status: _mapRequestStatus(prescription.requestStatus),
+          statusText: prescription.requestStatus,
+          encryptedQrDataField: null, // Prescriptions might not have QR data
+          requestType: 'prescription', // Pass the type for QR generation
+        ),
+      );
+    }
+
+    // Map NeedRequestModel to RequestModel
+    for (var needRequest in data.needRequests) {
+      requests.add(
+        RequestModel(
+          id: needRequest.id.toString(),
+          title: 'Need Request: ${needRequest.reason}',
+          description: needRequest.description,
+          date: DateTime.parse(needRequest.createdAt), // Assuming createdAt is a valid date string
+          status: _mapRequestStatus(needRequest.requestStatus),
+          statusText: needRequest.requestStatus,
+          encryptedQrDataField: null, // NeedRequests might not have QR data
+          requestType: 'needRequest', // Pass the type for QR generation
+        ),
+      );
+    }
+
+    // Sort requests by date, newest first
+    requests.sort((a, b) => b.date.compareTo(a.date));
+
+    return requests;
+  }
+
+  RequestStatus _mapRequestStatus(String statusText) {
+    switch (statusText.toLowerCase()) {
+      case 'accepted':
+        return RequestStatus.accepted;
+      case 'received':
+        return RequestStatus.received;
+      case 'pending':
+        return RequestStatus.pending;
+      case 'rejected':
+        return RequestStatus.rejected;
+      default:
+        return RequestStatus.pending; // Default or unknown status
+    }
   }
 
 
   Widget _buildRequestsTimeline(BuildContext context, List<RequestModel> requests, AppLocalizations l10n) {
     final String currentLocale = l10n.localeName;
+    final bool isRtl = _currentTextDirection == ui.TextDirection.rtl;
+
     return Stack(
       children: [
         Positioned(
-          left: Directionality.of(context) == TextDirection.rtl ? null : 24.0,
-          right: Directionality.of(context) == TextDirection.rtl ? 24.0 : null,
+          left: isRtl ? null : 24.0,
+          right: isRtl ? 24.0 : null,
           top: 0,
           bottom: 0,
           child: Container(
@@ -124,8 +242,8 @@ class MyRequestsScreen extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: Directionality.of(context) == TextDirection.rtl ? null :336.0,
-          right: Directionality.of(context) == TextDirection.rtl ? 336.0 : null,
+          left: isRtl ? null :336.0,
+          right: isRtl ? 336.0 : null,
           top: 0,
           bottom: 0,
           child: Container(
@@ -134,13 +252,12 @@ class MyRequestsScreen extends StatelessWidget {
           ),
         ),
         ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 24.0),
+          padding: const EdgeInsets.only(top: 24.0, bottom: 100.0),
           itemCount: requests.length,
           separatorBuilder: (context, index) => const SizedBox(height: 24),
           itemBuilder: (context, index) {
             final request = requests[index];
-            // The context here from ListView.builder is also fine as it's a descendant
-            final String formattedDate = context.read<MyRequestsCubit>().getFormattedDate(request.date, currentLocale);
+            final String formattedDate = DateFormat('d MMMM yyyy', currentLocale).format(request.date);
             Color statusColor;
             IconData statusIconData;
             switch (request.status) {
@@ -175,26 +292,29 @@ class MyRequestsScreen extends StatelessWidget {
                     statusColor: statusColor,
                     statusIcon: statusIconData,
                     dateFormatted: formattedDate,
-                    encryptedQRCodeData: request.encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_REQUEST_${request.id}", // Fallback
+                    encryptedQRCodeData: request.encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_REQUEST_${request.id}",
                     itemType: ItemType.request,
+                    requestType: request.requestType, // Pass the requestType
+                    status: request.status, // Pass the RequestStatus enum
                   );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ItemDetailsScreen(itemDetails: details),
+                      builder: (_) => BlocProvider(
+                        create: (context) => sl<GenerateAidQrCodeCubit>(),
+                        child: ItemDetailsScreen(itemDetails: details),
+                      ),
                     ),
                   );
                 },
-                child: _buildRequestItem(context, request, formattedDate, statusColor, statusIconData));
+                child: _buildRequestItem(context, request, formattedDate, statusColor, statusIconData, isRtl));
           },
         ),
       ],
     );
   }
 
-  Widget _buildRequestItem(BuildContext context, RequestModel request, String formattedDate, Color statusColor, IconData statusIconData) {
-
-    const bool isDataRtl = true;
+  Widget _buildRequestItem(BuildContext context, RequestModel request, String formattedDate, Color statusColor, IconData statusIconData, bool isRtl) {
 
     Widget statusIconWidget = Container(
       width: 48,
@@ -243,14 +363,14 @@ class MyRequestsScreen extends StatelessWidget {
           ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: isRtl ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   request.statusText,
-                  textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
+                  textDirection: isRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
                   style: TextStyle(
                     fontFamily: 'Lexend',
                     color: statusColor,
@@ -259,6 +379,7 @@ class MyRequestsScreen extends StatelessWidget {
                 ),
                 Text(
                   formattedDate,
+                  textDirection: isRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
                   style: TextStyle(
                     fontFamily: 'Lexend',
                     color: AppColors.myRequestsDateText,
@@ -270,7 +391,7 @@ class MyRequestsScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               request.title,
-              textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
+              textDirection: isRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
               style: TextStyle(
                 fontFamily: 'Lexend',
                 color: AppColors.myRequestsTitleText,
@@ -281,7 +402,7 @@ class MyRequestsScreen extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               request.description,
-              textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
+              textDirection: isRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
               style: TextStyle(
                 fontFamily: 'Lexend',
                 color: AppColors.myRequestsDescriptionText,
@@ -295,7 +416,7 @@ class MyRequestsScreen extends StatelessWidget {
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: Directionality.of(context) == TextDirection.rtl
+      children: isRtl
           ? [contentWidget, const SizedBox(width: 24), statusIconWidget]
           : [statusIconWidget, const SizedBox(width: 24), contentWidget],
     );
@@ -303,7 +424,7 @@ class MyRequestsScreen extends StatelessWidget {
   }
 
   Widget _buildSkeletonRequestItem(BuildContext context) {
-    final bool isRtl = Directionality.of(context) == TextDirection.rtl;
+    final bool isRtl = _currentTextDirection == ui.TextDirection.rtl;
 
     final Color baseColor = Theme.of(context).brightness == Brightness.dark
         ? AppColors.gray700

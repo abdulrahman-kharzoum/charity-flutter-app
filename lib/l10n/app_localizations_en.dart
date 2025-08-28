@@ -732,4 +732,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unexpectedError => 'An unexpected error occurred. Please try again.';
+
+  @override
+  String get scanToConfirmReceived => 'Scan to confirm your received';
 }

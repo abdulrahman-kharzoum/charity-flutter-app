@@ -1,0 +1,92 @@
+{
+  "feature_name": "Services",
+  "apis": [
+    {
+      "name": "getBeneficiaryAids",
+      "endpoint": "mobile/beneficiaries/aids",
+      "request_type": "GET",
+      "response_model": {
+        "name": "BeneficiaryAidsModel",
+        "fields": [
+          { "name": "plans", "type": "List<PlanModel>" },
+          { "name": "salaries", "type": "List<SalaryModel>" }
+        ]
+      },
+      "list_response_model": [
+        {
+          "name": "PlanModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" },
+            { "name": "type", "type": "String" },
+            { "name": "description", "type": "String" },
+            { "name": "portion", "type": "String" },
+            { "name": "beneficiary", "type": "PlanBeneficiaryModel" }
+          ]
+        },
+        {
+          "name": "PlanBeneficiaryModel",
+          "fields": [
+            { "name": "pivotId", "type": "int", "json_key": "pivot_id" },
+            { "name": "beneficiaryId", "type": "int", "json_key": "beneficiary_id" },
+            { "name": "isTurn", "type": "int", "json_key": "is_turn" },
+            { "name": "turnUntil", "type": "String", "json_key": "turn_until" },
+            { "name": "receivedAt", "type": "String", "json_key": "received_at" },
+            { "name": "hasTaken", "type": "bool", "json_key": "has_taken" }
+          ]
+        },
+        {
+          "name": "SalaryModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "amount", "type": "int" },
+            { "name": "issuedAt", "type": "String", "json_key": "issued_at" },
+            { "name": "receivedAt", "type": "String", "json_key": "received_at" },
+            { "name": "beneficiaryId", "type": "int", "json_key": "beneficiary_id" },
+            { "name": "hasTaken", "type": "bool", "json_key": "has_taken" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "getBeneficiaryRequests",
+      "endpoint": "mobile/beneficiaries",
+      "request_type": "GET",
+      "query_parameters": [
+        { "type": "int", "name": "beneficiaryId" }
+      ],
+      "response_model": {
+        "name": "BeneficiaryRequestsModel",
+        "fields": [
+          { "name": "instantAids", "type": "List<InstantAidModel>", "json_key": "instantAids" },
+          { "name": "needRequests", "type": "List<dynamic>", "json_key": "needRequests" },
+          { "name": "prescriptions", "type": "List<PrescriptionModel>" }
+        ]
+      },
+      "list_response_model": [
+        {
+          "name": "InstantAidModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "amount", "type": "double" },
+            { "name": "reason", "type": "String" },
+            { "name": "requestStatus", "type": "String", "json_key": "request_status" },
+            { "name": "urgencyLevel", "type": "String", "json_key": "urgency_level" },
+            { "name": "receivedAt", "type": "String", "json_key": "received_at" }
+          ]
+        },
+        {
+          "name": "PrescriptionModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "reason", "type": "String" },
+            { "name": "requestStatus", "type": "String", "json_key": "request_status" },
+            { "name": "description", "type": "String" },
+            { "name": "urgencyLevel", "type": "String", "json_key": "urgency_level" },
+            { "name": "createdAt", "type": "String", "json_key": "created_at" }
+          ]
+        }
+      ]
+    }
+  ]
+}

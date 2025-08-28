@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:charity/models/aid_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/theme/color.dart';
+import 'package:charity/models/request_model.dart'; // Import RequestStatus
 
 import '../../cubits/aids_cubit/aids_cubit.dart';
 import '../../models/common_item_details_model.dart';
@@ -122,6 +123,7 @@ class AidsScreen extends StatelessWidget {
                     encryptedQRCodeData: aid.encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_AID_${aid.id}",
                     itemType: ItemType.aid,
                     providerName: aid.providedBy,
+                    status: _mapAidStatusToRequestStatus(aid.status), // Pass the RequestStatus enum
                   );
                   Navigator.push(
                     context,
@@ -374,5 +376,18 @@ class AidsScreen extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(height: 24), // Consistent separator
       ),
     );
+  }
+  RequestStatus _mapAidStatusToRequestStatus(AidStatus status) {
+    switch (status) {
+      case AidStatus.readyForPickup:
+      case AidStatus.received:
+        return RequestStatus.received; // Map to received for both
+      case AidStatus.waiting:
+        return RequestStatus.pending;
+      case AidStatus.rejected:
+        return RequestStatus.rejected;
+      default:
+        return RequestStatus.pending; // Default or unknown status
+    }
   }
 }

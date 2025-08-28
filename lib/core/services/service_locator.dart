@@ -1,3 +1,13 @@
+import 'package:charity/features/Services/qr/repo/qr_repository.dart';
+
+import 'package:charity/features/Services/qr/cubits/generate_aid_qr_code_cubit/generate_aid_qr_code_cubit.dart';
+
+import 'package:charity/features/Services/requests_aids/repo/services_repository.dart';
+
+import 'package:charity/features/Services/requests_aids/cubits/get_beneficiary_requests_cubit/get_beneficiary_requests_cubit.dart';
+
+import 'package:charity/features/Services/requests_aids/cubits/get_beneficiary_aids_cubit/get_beneficiary_aids_cubit.dart';
+
 import 'package:charity/features/Services/instant_aids/repo/instant_aids_repository.dart';
 
 import 'package:charity/features/Services/instant_aids/cubits/create_instant_aid_cubit/create_instant_aid_cubit.dart';
@@ -84,4 +94,9 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
   sl.registerLazySingleton(() => InstantAidsRepository(sl()));
   sl.registerFactory(() => CreateInstantAidCubit(sl()));
 
+  sl.registerFactory(() => GetBeneficiaryAidsCubit(sl()));
+  sl.registerFactory(() => GetBeneficiaryRequestsCubit(sl()));
+  sl.registerLazySingleton(() => ServicesRepository(sl()));
+  sl.registerFactory(() => GenerateAidQrCodeCubit(sl()));
+  sl.registerLazySingleton(() => QrRepository(sl()));
 }

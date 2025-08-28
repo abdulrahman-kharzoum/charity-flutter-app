@@ -732,4 +732,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unexpectedError => 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get scanToConfirmReceived => 'امسح للتأكيد على استلامك';
 }

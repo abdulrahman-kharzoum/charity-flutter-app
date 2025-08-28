@@ -44,7 +44,8 @@ class CacheNetwork {
   }
 
   static String? getBeneficiaryId() {
-    return sharedPreferences.getString('beneficiary_id');
+    final user = getUser();
+    return user?.id.toString();
   }
 
   static Future<bool> saveUser({required UserModel user}) async {

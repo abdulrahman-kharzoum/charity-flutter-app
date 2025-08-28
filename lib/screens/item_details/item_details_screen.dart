@@ -1,54 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart'; // You'll need to add this dependency
 import 'package:charity/models/common_item_details_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
+import 'package:charity/models/request_model.dart'; // Import RequestStatus
 import 'package:charity/theme/color.dart'; // For AppColors if needed
+import 'package:charity/core/services/status.dart'; // For SubmissionStatus
+import 'package:charity/core/services/service_locator.dart'; // For service locator
+import 'package:charity/features/Services/qr/cubits/generate_aid_qr_code_cubit/generate_aid_qr_code_cubit.dart';
 
-class ItemDetailsScreen extends StatelessWidget {
+class ItemDetailsScreen extends StatefulWidget {
   final CommonItemDetailsModel itemDetails;
 
   const ItemDetailsScreen({super.key, required this.itemDetails});
 
-  // Placeholder for symmetric decryption - THIS IS A CRITICAL SECURITY PART
-  // In a real app, this key management and decryption logic would be robust.
-  // DO NOT hardcode keys in production. Fetch securely or derive.
-  String _decryptData(String encryptedData) {
-    // For demonstration, let's assume it's simple Base64 encoded for now
-    // In reality, this would involve a proper symmetric decryption algorithm
-    // using a shared secret key (e.g., AES).
-    //
-    // IMPORTANT: This is NOT secure for production.
-    // You need a proper cryptographic library and secure key management.
-    // Example: using 'encrypt' package (add to pubspec.yaml)
-    //
-    // import 'package:encrypt/encrypt.dart' as enc;
-    //
-    // final keyString = "your-32-byte-secret-key-string"; // MUST BE SECURELY MANAGED
-    // final ivString = "your-16-byte-iv-string";      // MUST BE SECURELY MANAGED
-    //
-    // try {
-    //   final key = enc.Key.fromUtf8(keyString);
-    //   final iv = enc.IV.fromUtf8(ivString);
-    //   final encrypter = enc.Encrypter(enc.AES(key, mode: enc.AESMode.cbc));
-    //   final decrypted = encrypter.decrypt64(encryptedData, iv: iv);
-    //   return decrypted;
-    // } catch (e) {
-    //   print("Decryption error: $e");
-    //   return "Error Decrypting"; // Handle error appropriately
-    // }
-    print("Warning: Using placeholder decryption for QR code data.");
-    return encryptedData; // Placeholder: Pass through if no decryption for now
-  }
+  @override
+  State<ItemDetailsScreen> createState() => _ItemDetailsScreenState();
+}
 
+class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Trigger QR code generation when the screen initializes
+    final qrType = _mapRequestTypeForQrApi(widget.itemDetails.requestType);
+    if (widget.itemDetails.status == RequestStatus.pending ||
+        widget.itemDetails.status == RequestStatus.rejected ||
+        qrType == null) {
+      // If status is pending/rejected or type is prescription, do not generate QR.
+      // Instead, set the state to success with null data to indicate no QR.
+      context.read<GenerateAidQrCodeCubit>().emit(
+          const GenerateAidQrCodeState(
+              status: SubmissionStatus.success, data: null));
+    } else {
+      context.read<GenerateAidQrCodeCubit>().generateAidQrCode(
+            entityId: int.parse(widget.itemDetails.id),
+            type: qrType,
+          );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final String qrDataToDisplay = _decryptData(itemDetails.encryptedQRCodeData);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(itemDetails.itemType == ItemType.request
+        title: Text(widget.itemDetails.itemType == ItemType.request
             ? l10n.requestDetailsTitle
             : l10n.aidDetailsTitle),
         backgroundColor: AppColors.white,
@@ -65,33 +63,75 @@ class ItemDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Centered QR Code
-            Center(
-              child: QrImageView(
-                data: qrDataToDisplay, // The decrypted data
-                version: QrVersions.auto,
-                size: 250.0,
-                gapless: false,
-                // You can add an embedded image to the QR code if desired
-                // embeddedImage: AssetImage('assets/images/logo.png'),
-                // embeddedImageStyle: QrEmbeddedImageStyle(
-                //   size: Size(80, 80),
-                // ),
-                errorStateBuilder: (cxt, err) {
+            BlocBuilder<GenerateAidQrCodeCubit, GenerateAidQrCodeState>(
+              builder: (context, state) {
+                if (state.status == SubmissionStatus.loading || state.status == SubmissionStatus.initial) {
                   return Center(
-                    child: Text(
-                      l10n.qrError,
-                      textAlign: TextAlign.center,
+                    child: CircularProgressIndicator(color: AppColors.primaryColor),
+                  );
+                } else if (state.status == SubmissionStatus.success) {
+                  final String? qrData = state.data?.qrCode;
+                  if (qrData == null || qrData.isEmpty) {
+                    return const SizedBox.shrink(); // Return empty widget if no QR data
+                  }
+                  return Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(color: AppColors.primaryColor, width: 2.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primaryColor.withOpacity(0.3),
+                            spreadRadius: 5,
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            l10n.scanToConfirmReceived,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.myRequestsTitleText,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 16),
+                          QrImageView(
+                            data: qrData,
+                            version: QrVersions.auto,
+                            size: 250.0,
+                            gapless: false,
+                            errorStateBuilder: (cxt, err) {
+                              return Center(
+                                child: Text(
+                                  l10n.qrError,
+                                  textAlign: TextAlign.center,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   );
-                },
-              ),
+                } else if (state.status == SubmissionStatus.error) {
+                  return const SizedBox.shrink(); // Return empty widget on error, as requested
+                }
+                return const SizedBox.shrink(); // Fallback for other states
+              },
             ),
             const SizedBox(height: 24),
 
             // Item Title
             Text(
-              itemDetails.title,
+              widget.itemDetails.title,
               style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -103,15 +143,15 @@ class ItemDetailsScreen extends StatelessWidget {
             // Item Status
             Row(
               children: [
-                Icon(itemDetails.statusIcon, color: itemDetails.statusColor, size: 20),
+                Icon(widget.itemDetails.statusIcon, color: widget.itemDetails.statusColor, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  itemDetails.statusText,
+                  widget.itemDetails.statusText,
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Lexend',
-                      color: itemDetails.statusColor),
+                      color: widget.itemDetails.statusColor),
                 ),
               ],
             ),
@@ -119,7 +159,7 @@ class ItemDetailsScreen extends StatelessWidget {
 
             // Date
             Text(
-              "${l10n.dateLabel}: ${itemDetails.dateFormatted}",
+              "${l10n.dateLabel}: ${widget.itemDetails.dateFormatted}",
               style: TextStyle(
                   fontSize: 14,
                   fontFamily: 'Lexend',
@@ -138,30 +178,33 @@ class ItemDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              itemDetails.description,
+              widget.itemDetails.description,
               style: TextStyle(
                   fontSize: 15,
                   fontFamily: 'Lexend',
                   color: AppColors.myRequestsDescriptionText,
                   height: 1.4),
             ),
-
-            // // Optional Provider Info (for Aids)
-            // if (itemDetails.itemType == ItemType.aid && itemDetails.providerName != null && itemDetails.providerName!.isNotEmpty) ...[
-            //   const SizedBox(height: 16),
-            //   Text(
-            //     "${l10n.providedByLabel}: ${itemDetails.providerName}",
-            //     style: TextStyle(
-            //         fontSize: 14,
-            //         fontFamily: 'Lexend',
-            //         color: AppColors.myRequestsDescriptionText.withOpacity(0.9)),
-            //   ),
-            // ],
-
-            // Add more details as needed based on CommonItemDetailsModel
           ],
         ),
       ),
     );
+  }
+
+  String? _mapRequestTypeForQrApi(String? requestType) {
+    switch (requestType) {
+      case 'instantAid':
+        return 'instant_aid';
+      case 'needRequest':
+        return 'need_request';
+      case 'salary':
+        return 'salary';
+      case 'plan':
+        return 'plan';
+      case 'prescription': // Prescriptions don't have QR codes
+        return null;
+      default:
+        return null;
+    }
   }
 }

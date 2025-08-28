@@ -1,0 +1,20 @@
+{
+  "feature_name": "QR",
+  "apis": [
+    {
+      "name": "generateAidQrCode",
+      "endpoint": "mobile/aids/qr",
+      "request_type": "POST",
+      "query_parameters": [
+        { "type": "int", "name": "entityId" },
+        { "type": "String", "name": "type" }
+      ],
+      "response_model": {
+        "name": "GenerateAidQrCodeResponseModel",
+        "fields": [
+          { "name": "qrCode", "type": "String", "json_key": "qr_code" }
+        ]
+      }
+    }
+  ]
+}

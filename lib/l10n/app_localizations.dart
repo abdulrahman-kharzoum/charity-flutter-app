@@ -1504,6 +1504,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred. Please try again.'**
   String get unexpectedError;
+
+  /// No description provided for @scanToConfirmReceived.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan to confirm your received'**
+  String get scanToConfirmReceived;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

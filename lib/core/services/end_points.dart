@@ -11,4 +11,7 @@ class EndPoints {
   static const String mobile_education_new_courses_all = 'mobile/education/new-courses/all';
   static const String mobile_instant_aids_create = 'mobile/instant-aids/create';
 
+  static const String mobile_beneficiaries_aids = 'mobile/beneficiaries/aids';
+  static const String mobile_beneficiaries = 'mobile/beneficiaries';
+  static const String mobile_aids_qr = 'mobile/aids/qr';
 }

@@ -13,6 +13,7 @@ class RequestModel {
   final RequestStatus status;
   final String statusText;
   final String? encryptedQrDataField;
+  final String? requestType; // Added to differentiate between request types (e.g., 'instantAid', 'prescription')
 
   RequestModel({
     required this.id,
@@ -22,6 +23,7 @@ class RequestModel {
     required this.status,
     required this.statusText,
     this.encryptedQrDataField,
+    this.requestType,
   });
 
 }

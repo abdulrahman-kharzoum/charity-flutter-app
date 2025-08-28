@@ -59,7 +59,7 @@ class AddRequestScreen extends StatelessWidget {
                 backgroundColor: AppColors.requestStatusAccepted,
               ),
             );
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           } else if (state.status == SubmissionStatus.error) {
             showErrorDialog(context, state.failure?.message ?? l10n.requestFailureMessageGeneric);
           }
@@ -78,7 +78,7 @@ class AddRequestScreen extends StatelessWidget {
                     color: AppColors.gray700,
                     size: 24
                 ),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).pop(true),
               ),
               title: Text(
                 l10n.addRequestScreenTitle,
