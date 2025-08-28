@@ -1510,6 +1510,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scan to confirm your received'**
   String get scanToConfirmReceived;
+
+  /// No description provided for @received.
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get received;
+
+  /// No description provided for @readyForPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for Pickup'**
+  String get readyForPickup;
+
+  /// No description provided for @salaryAidTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary Aid'**
+  String get salaryAidTitle;
+
+  /// No description provided for @amount.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get amount;
+
+  /// No description provided for @unknownAid.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Aid'**
+  String get unknownAid;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

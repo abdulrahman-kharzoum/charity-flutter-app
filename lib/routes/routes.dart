@@ -19,7 +19,7 @@ import 'package:charity/features/Education/repo/education_repository.dart'; // I
 import 'package:charity/screens/Education_section/all_courses_screen/all_courses_screen.dart'; // Import the screen
 
 import '../core/services/service_locator.dart';
-import '../cubits/aids_cubit/aids_cubit.dart';
+import '../features/Services/requests_aids/cubits/get_beneficiary_aids_cubit/get_beneficiary_aids_cubit.dart';
 import '../features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
 import '../screens/Education_section/home_screen/education_home_screen.dart';
 import '../screens/aids_screen/aids_screen.dart';
@@ -60,7 +60,7 @@ final Map<String, WidgetBuilder> routes = {
   ),
   // ====== Aids Screen =====//
   '/aids_screen': (context) => BlocProvider(
-    create: (context) => AidsCubit()..fetchAids(),
+    create: (context) => sl<GetBeneficiaryAidsCubit>()..getBeneficiaryAids(),
     child: const AidsScreen(),
   ),
   // ====== Education Home Screen =====//

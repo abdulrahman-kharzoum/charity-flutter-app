@@ -735,4 +735,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get scanToConfirmReceived => 'امسح للتأكيد على استلامك';
+
+  @override
+  String get received => 'تم الاستلام';
+
+  @override
+  String get readyForPickup => 'جاهز للاستلام';
+
+  @override
+  String get salaryAidTitle => 'مساعدة راتب';
+
+  @override
+  String get amount => 'المبلغ';
+
+  @override
+  String get unknownAid => 'مساعدة غير معروفة';
 }

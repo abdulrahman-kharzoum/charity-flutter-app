@@ -3,16 +3,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 
-import 'package:charity/models/aid_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/theme/color.dart';
 import 'package:charity/models/request_model.dart'; // Import RequestStatus
+import 'package:charity/core/services/status.dart';
+import 'package:charity/core/services/failure_service/failure.dart';
+import 'package:charity/core/services/service_locator.dart';
+import 'package:charity/features/Services/qr/cubits/generate_aid_qr_code_cubit/generate_aid_qr_code_cubit.dart';
 
-import '../../cubits/aids_cubit/aids_cubit.dart';
+import 'package:charity/features/Services/requests_aids/cubits/get_beneficiary_aids_cubit/get_beneficiary_aids_cubit.dart';
+import 'package:charity/features/Services/requests_aids/models/beneficiary_aids_model.dart';
+import 'package:charity/features/Services/requests_aids/models/plan_model.dart';
+import 'package:charity/features/Services/requests_aids/models/salary_model.dart';
+
 import '../../models/common_item_details_model.dart';
 import '../item_details/item_details_screen.dart';
-// No AddRequestScreen equivalent needed for Aids, so no corresponding import.
 
 class AidsScreen extends StatelessWidget {
   const AidsScreen({super.key});
@@ -22,7 +30,7 @@ class AidsScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) => AidsCubit()..fetchAids(),
+      create: (context) => GetBeneficiaryAidsCubit(sl())..getBeneficiaryAids(),
       child: Builder(builder: (innerContext) { // Added Builder for consistent context if needed
         return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,12 +48,18 @@ class AidsScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: BlocBuilder<AidsCubit, AidsState>(
+                child: BlocBuilder<GetBeneficiaryAidsCubit, GetBeneficiaryAidsState>(
                   builder: (context, state) {
-                    if (state is AidsLoading || state is AidsInitial) {
+                    if (state.status == SubmissionStatus.loading || state.status == SubmissionStatus.initial) {
                       return _buildSkeletonList(context, 3); // Same skeleton
-                    } else if (state is AidsLoaded) {
-                      if (state.aids.isEmpty) {
+                    } else if (state.status == SubmissionStatus.success) {
+                      final allAids = <dynamic>[];
+                      if (state.data != null) {
+                        allAids.addAll(state.data!.plans);
+                        allAids.addAll(state.data!.salaries);
+                      }
+
+                      if (allAids.isEmpty) {
                         return Center(
                           child: Text(
                             l10n.noAidsAvailable, // Specific message for no aids
@@ -59,12 +73,12 @@ class AidsScreen extends StatelessWidget {
                       // Use Padding consistent with MyRequestsScreen's loaded state
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                        child: _buildAidsTimeline(context, state.aids, l10n),
+                        child: _buildAidsTimeline(context, allAids, l10n),
                       );
-                    } else if (state is AidsError) {
+                    } else if (state.status == SubmissionStatus.error) {
                       return Center(
-                          child: Text('${l10n.aidsErrorPrefix}${state.message}', // Specific error prefix
-                              style: TextStyle(color: AppColors.requestStatusRejected)));
+                          child: Text('${l10n.aidsErrorPrefix}${state.failure?.message ?? 'Unknown error'}', // Specific error prefix
+                               style: TextStyle(color: AppColors.requestStatusRejected)));
                     }
                     return Center(child: Text(l10n.aidsUnknownState)); // Specific unknown state
                   },
@@ -77,15 +91,14 @@ class AidsScreen extends StatelessWidget {
     );
   }
 
-  // --- TIMELINE BUILDER (Adapted for AidModel) ---
-  Widget _buildAidsTimeline(BuildContext context, List<AidModel> aids, AppLocalizations l10n) {
+  // --- TIMELINE BUILDER (Adapted for PlanModel and SalaryModel) ---
+  Widget _buildAidsTimeline(BuildContext context, List<dynamic> allAids, AppLocalizations l10n) {
     final String currentLocale = l10n.localeName;
-    // The Stack with Positioned timeline bars, identical to MyRequestsScreen
     return Stack(
       children: [
         Positioned(
-          left: Directionality.of(context) == TextDirection.rtl ? null : 24.0,
-          right: Directionality.of(context) == TextDirection.rtl ? 24.0 : null,
+          left: Directionality.of(context) == ui.TextDirection.rtl ? null : 24.0,
+          right: Directionality.of(context) == ui.TextDirection.rtl ? 24.0 : null,
           top: 0,
           bottom: 0,
           child: Container(
@@ -93,9 +106,9 @@ class AidsScreen extends StatelessWidget {
             color: AppColors.myRequestsTimelineBorder,
           ),
         ),
-        Positioned( // The second timeline bar, ensure its position matches MyRequestsScreen if intended
-          left: Directionality.of(context) == TextDirection.rtl ? null :336.0, // Or the correct offset
-          right: Directionality.of(context) == TextDirection.rtl ? 336.0 : null, // Or the correct offset
+        Positioned(
+          left: Directionality.of(context) == ui.TextDirection.rtl ? null :336.0,
+          right: Directionality.of(context) == ui.TextDirection.rtl ? 336.0 : null,
           top: 0,
           bottom: 0,
           child: Container(
@@ -104,80 +117,140 @@ class AidsScreen extends StatelessWidget {
           ),
         ),
         ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 24.0), // Consistent padding
-          itemCount: aids.length,
-          separatorBuilder: (context, index) => const SizedBox(height: 24), // Consistent separator
+          padding: const EdgeInsets.symmetric(vertical: 24.0),
+          itemCount: allAids.length,
+          separatorBuilder: (context, index) => const SizedBox(height: 24),
           itemBuilder: (context, index) {
+            final item = allAids[index];
+            String id;
+            String title;
+            String description;
+            String statusText;
+            String status;
+            String providedBy = '';
+            DateTime date;
+            String? encryptedQrDataField;
 
-            final aid = aids[index];
+            if (item is PlanModel) {
+              id = item.id.toString();
+              title = item.name;
+              description = item.description;
+              statusText = item.beneficiary.hasTaken ? l10n.received : l10n.readyForPickup; // Assuming these are in l10n
+              status = item.beneficiary.hasTaken ? 'received' : 'readyForPickup';
+              providedBy = item.type; // Using type as provider for plans
+              date = DateTime.parse(item.beneficiary.receivedAt);
+              encryptedQrDataField = null; // Plans don't have QR codes directly
+            } else if (item is SalaryModel) {
+              id = item.id.toString();
+              title = l10n.salaryAidTitle; // A generic title for salary
+              description = '${l10n.amount}: ${item.amount}'; // Display amount in description
+              statusText = item.hasTaken ? l10n.received : l10n.readyForPickup;
+              status = item.hasTaken ? 'received' : 'readyForPickup';
+              providedBy = ''; // No direct provider for salary model
+              date = DateTime.parse(item.receivedAt);
+              encryptedQrDataField = null; // Salaries don't have QR codes directly
+            } else {
+              // Fallback for unexpected types
+              id = 'unknown';
+              title = l10n.unknownAid;
+              description = '';
+              statusText = '';
+              status = '';
+              date = DateTime.now();
+              encryptedQrDataField = null;
+            }
+
             return GestureDetector(
                 onTap: () {
                   final details = CommonItemDetailsModel(
-                    id: aid.id,
-                    title: aid.title,
-                    description: aid.description,
-                    statusText: aid.statusText,
-                    statusColor: _getAidStatusColor(aid.status),
-                    statusIcon: _getAidStatusIcon(aid.status),
-                    dateFormatted: context.read<AidsCubit>().getFormattedDate(aid.date, currentLocale),
-                    encryptedQRCodeData: aid.encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_AID_${aid.id}",
+                    id: id,
+                    title: title,
+                    description: description,
+                    statusText: statusText,
+                    statusColor: _getAidStatusColor(status),
+                    statusIcon: _getAidStatusIcon(status),
+                    dateFormatted: _getFormattedDate(date, currentLocale),
+                    encryptedQRCodeData: encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_AID_$id",
                     itemType: ItemType.aid,
-                    providerName: aid.providedBy,
-                    status: _mapAidStatusToRequestStatus(aid.status), // Pass the RequestStatus enum
+                    providerName: providedBy,
+                    status: _mapAidStatusToRequestStatus(status),
+                    requestType: item is PlanModel ? 'plan' : (item is SalaryModel ? 'salary' : null),
                   );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ItemDetailsScreen(itemDetails: details),
+                      builder: (_) => BlocProvider(
+                        create: (context) => sl<GenerateAidQrCodeCubit>(),
+                        child: ItemDetailsScreen(itemDetails: details),
+                      ),
                     ),
                   );
                 },
-                child: _buildAidItem(context, aid, context.read<AidsCubit>().getFormattedDate(aid.date, currentLocale)));
+                child: _buildAidItem(context, item, _getFormattedDate(date, currentLocale)));
           },
         ),
       ],
     );
   }
 
-  // Helper method to get status color based on AidStatus
-  Color _getAidStatusColor(AidStatus status) {
+  // Helper method to get status color based on a string status
+  Color _getAidStatusColor(String status) {
     switch (status) {
-      case AidStatus.readyForPickup:
-      case AidStatus.received:
+      case 'readyForPickup':
+      case 'received':
         return AppColors.requestStatusAccepted;
-      case AidStatus.waiting:
+      case 'waiting':
         return AppColors.requestStatusPending;
-      case AidStatus.rejected:
+      case 'rejected':
         return AppColors.requestStatusRejected;
       default:
         return AppColors.gray500;
     }
   }
 
-  // Helper method to get status icon based on AidStatus
-  IconData _getAidStatusIcon(AidStatus status) {
+  // Helper method to get status icon based on a string status
+  IconData _getAidStatusIcon(String status) {
     switch (status) {
-      case AidStatus.readyForPickup:
+      case 'readyForPickup':
         return Icons.inventory_2_outlined;
-      case AidStatus.received:
+      case 'received':
         return Icons.task_alt_outlined;
-      case AidStatus.waiting:
+      case 'waiting':
         return Icons.hourglass_empty_rounded;
-      case AidStatus.rejected:
+      case 'rejected':
         return Icons.close_rounded;
       default:
         return Icons.help_outline;
     }
   }
 
-  Widget _buildAidItem(BuildContext context, AidModel aid, String formattedDate) {
-    final Color statusColor = _getAidStatusColor(aid.status);
-    final IconData statusIconData = _getAidStatusIcon(aid.status);
+  Widget _buildAidItem(BuildContext context, dynamic item, String formattedDate) {
+    String title;
+    String description;
+    String statusText;
+    String status;
 
-    // Assuming your data's text directionality.
-    // In MyRequestsScreen, `isDataRtl` was hardcoded to true.
-    // For consistency, if your aid data is also always RTL, keep it. Otherwise, adjust.
-    const bool isDataRtl = true; // Match MyRequestsScreen behavior
+    if (item is PlanModel) {
+      title = item.name;
+      description = item.description;
+      statusText = AppLocalizations.of(context)!.received; // Assuming these are in l10n
+      status = item.beneficiary.hasTaken ? 'received' : 'readyForPickup';
+    } else if (item is SalaryModel) {
+      title = AppLocalizations.of(context)!.salaryAidTitle;
+      description = '${AppLocalizations.of(context)!.amount}: ${item.amount}';
+      statusText = AppLocalizations.of(context)!.received;
+      status = item.hasTaken ? 'received' : 'readyForPickup';
+    } else {
+      title = AppLocalizations.of(context)!.unknownAid;
+      description = '';
+      statusText = '';
+      status = '';
+    }
+
+    final Color statusColor = _getAidStatusColor(status);
+    final IconData statusIconData = _getAidStatusIcon(status);
+
+    const bool isDataRtl = true;
 
     Widget statusIconWidget = Container(
       width: 48,
@@ -185,14 +258,14 @@ class AidsScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: statusColor,
         shape: BoxShape.circle,
-        boxShadow: [ // Identical shadow style
+        boxShadow: [
           BoxShadow(
             color: statusColor.withOpacity(0.4),
             spreadRadius: 1,
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
-          BoxShadow( // Second shadow for depth, identical to MyRequestsScreen
+          BoxShadow(
             color: AppColors.slate900.withOpacity(0.1),
             spreadRadius: 0,
             blurRadius: 4,
@@ -206,18 +279,18 @@ class AidsScreen extends StatelessWidget {
     Widget contentWidget = Expanded(
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration( // Identical decoration
+        decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(12.0),
           border: Border.all(color: AppColors.myRequestsTimelineBorder, width: 1.0),
-          boxShadow: [ // Identical shadow style
+          boxShadow: [
             BoxShadow(
-              color: AppColors.slate900.withOpacity(0.2), // Matched MyRequestsScreen
-              spreadRadius: 2, // Matched MyRequestsScreen
-              blurRadius: 8, // Matched MyRequestsScreen
-              offset: const Offset(0, 4), // Matched MyRequestsScreen
+              color: AppColors.slate900.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 8,
+              offset: const Offset(0, 4),
             ),
-            BoxShadow( // Second shadow, matched MyRequestsScreen
+            BoxShadow(
               color: AppColors.slate900.withOpacity(0.2),
               spreadRadius: 0,
               blurRadius: 3,
@@ -232,8 +305,8 @@ class AidsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  aid.statusText, // From AidModel
-                  textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
+                  statusText,
+                  textDirection: isDataRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
                   style: TextStyle(
                     fontFamily: 'Lexend',
                     color: statusColor,
@@ -252,8 +325,8 @@ class AidsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              aid.title, // From AidModel
-              textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
+              title,
+              textDirection: isDataRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
               style: TextStyle(
                 fontFamily: 'Lexend',
                 color: AppColors.myRequestsTitleText,
@@ -263,48 +336,60 @@ class AidsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              aid.description, // From AidModel
-              textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
+              description,
+              textDirection: isDataRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
               style: TextStyle(
                 fontFamily: 'Lexend',
                 color: AppColors.myRequestsDescriptionText,
                 fontSize: 12,
               ),
-              // Consider maxLines and overflow if descriptions can be long,
-              // MyRequestsScreen did not specify this, so keeping it open.
             ),
-            // If you want to show "Provided By" similar to how you had it commented out
-            // in your original aids_screen.dart, you can add it here.
-            // For exact match with MyRequestsScreen, this section is omitted.
-            // if (aid.providedBy.isNotEmpty) ...[
-            //   const SizedBox(height: 8),
-            //   Text(
-            //     '${l10n.providedByLabel}: ${aid.providedBy}', // Ensure l10n.providedByLabel exists
-            //     textDirection: isDataRtl ? TextDirection.rtl : TextDirection.ltr,
-            //     style: TextStyle(
-            //       fontFamily: 'Lexend',
-            //       color: AppColors.myRequestsDescriptionText.withOpacity(0.8),
-            //       fontSize: 11,
-            //       fontWeight: FontWeight.w500,
-            //     ),
-            //   ),
-            // ]
           ],
         ),
       ),
     );
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center, // Matched MyRequestsScreen
-      children: Directionality.of(context) == TextDirection.rtl
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: Directionality.of(context) == ui.TextDirection.rtl
           ? [contentWidget, const SizedBox(width: 24), statusIconWidget]
           : [statusIconWidget, const SizedBox(width: 24), contentWidget],
     );
   }
 
+  String _getFormattedDate(DateTime date, String localeName) {
+    final day = date.day;
+    final year = date.year;
+
+    if (localeName == 'ar') {
+      final monthNamesAr = [
+        '', 'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
+        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
+      ];
+      return '$day ${monthNamesAr[date.month]} $year';
+    } else {
+      return DateFormat('d MMMM yyyy').format(date);
+    }
+  }
+
+  RequestStatus _mapAidStatusToRequestStatus(String status) {
+    switch (status) {
+      case 'readyForPickup':
+      case 'received':
+        return RequestStatus.received;
+      case 'waiting':
+        return RequestStatus.pending;
+      case 'rejected':
+        return RequestStatus.rejected;
+      default:
+        return RequestStatus.pending;
+    }
+  }
+}
+
   // --- SKELETON LOADER WIDGETS (Identical to MyRequestsScreen) ---
   Widget _buildSkeletonRequestItem(BuildContext context) { // Name kept for direct copy-paste compatibility
-    final bool isRtl = Directionality.of(context) == TextDirection.rtl;
+    final bool isRtl = Directionality.of(context) == ui.TextDirection.rtl;
 
     // Use Theme.of(context).brightness to determine colors, same as MyRequestsScreen
     final Color baseColor = Theme.of(context).brightness == Brightness.dark
@@ -377,17 +462,3 @@ class AidsScreen extends StatelessWidget {
       ),
     );
   }
-  RequestStatus _mapAidStatusToRequestStatus(AidStatus status) {
-    switch (status) {
-      case AidStatus.readyForPickup:
-      case AidStatus.received:
-        return RequestStatus.received; // Map to received for both
-      case AidStatus.waiting:
-        return RequestStatus.pending;
-      case AidStatus.rejected:
-        return RequestStatus.rejected;
-      default:
-        return RequestStatus.pending; // Default or unknown status
-    }
-  }
-}

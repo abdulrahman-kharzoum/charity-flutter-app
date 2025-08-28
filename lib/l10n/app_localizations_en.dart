@@ -735,4 +735,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scanToConfirmReceived => 'Scan to confirm your received';
+
+  @override
+  String get received => 'Received';
+
+  @override
+  String get readyForPickup => 'Ready for Pickup';
+
+  @override
+  String get salaryAidTitle => 'Salary Aid';
+
+  @override
+  String get amount => 'Amount';
+
+  @override
+  String get unknownAid => 'Unknown Aid';
 }

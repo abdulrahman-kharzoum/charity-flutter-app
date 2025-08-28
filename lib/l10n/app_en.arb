@@ -297,5 +297,10 @@
   "unauthorizedAccessError": "Unauthorized access. Please log in again.",
   "serverErrorWithMessage": "Something went wrong, Please try again later. {message}",
   "unexpectedError": "An unexpected error occurred. Please try again.",
-  "scanToConfirmReceived": "Scan to confirm your received"
+  "scanToConfirmReceived": "Scan to confirm your received",
+  "received": "Received",
+  "readyForPickup": "Ready for Pickup",
+  "salaryAidTitle": "Salary Aid",
+  "amount": "Amount",
+  "unknownAid": "Unknown Aid"
 }
