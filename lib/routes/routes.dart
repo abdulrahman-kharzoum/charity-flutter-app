@@ -1,6 +1,6 @@
 import 'package:charity/features/Education/cubits/get_education_home_cubit/get_education_home_cubit.dart';
 import 'package:charity/screens/Education_section/education_main_screen/education_main_screen.dart';
-import 'package:charity/screens/main_screen.dart';
+import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/screens/start/splash_screen.dart';
@@ -10,7 +10,6 @@ import 'package:charity/cubits/splash/splash_cubit.dart';
 import 'package:charity/cubits/auth/login/login_cubit.dart';
 import 'package:charity/cubits/navigation_cubit/navigation_cubit.dart';
 import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
-import 'package:charity/cubits/profile_cubit/profile_cubit.dart';
 import 'package:charity/screens/settings_screen/settings_screen.dart';
 import 'package:charity/screens/profile_screen/profile_screen.dart';
 import 'package:charity/core/shared/settings_repository.dart';
@@ -23,6 +22,7 @@ import '../features/Services/requests_aids/cubits/get_beneficiary_aids_cubit/get
 import '../features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
 import '../screens/Education_section/home_screen/education_home_screen.dart';
 import '../screens/aids_screen/aids_screen.dart';
+import '../screens/main_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   // ======splash Screen=====//
@@ -51,13 +51,9 @@ final Map<String, WidgetBuilder> routes = {
       ),
   // ======Profile Screen=====//
   '/profile': (context) => BlocProvider(
-        create: (context) => ProfileCubit(),
+        create: (context) => sl<GetBeneficiaryProfileCubit>(),
         child: const ProfileScreen(),
       ),
-  '/edit-profile': (context) => BlocProvider(
-    create: (context) => ProfileCubit(),
-    child: const ProfileScreen(),
-  ),
   // ====== Aids Screen =====//
   '/aids_screen': (context) => BlocProvider(
     create: (context) => sl<GetBeneficiaryAidsCubit>()..getBeneficiaryAids(),

@@ -51,9 +51,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get loginValidationPhoneNumberRequired => 'يرجى إدخال رقم هاتفك';
 
   @override
-  String get loginValidationPasswordRequired => 'يرجى إدخال كلمة المرور الخاصة بك';
-
-  @override
   String get loginValidationPhoneNumberStartsWith9 => 'يجب أن يبدأ رقم الهاتف بالرقم 9.';
 
   @override
@@ -750,4 +747,88 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unknownAid => 'مساعدة غير معروفة';
+
+  @override
+  String get fatherName => 'اسم الأب';
+
+  @override
+  String get motherName => 'اسم الأم';
+
+  @override
+  String get birthDate => 'تاريخ الميلاد';
+
+  @override
+  String get birthPlace => 'مكان الميلاد';
+
+  @override
+  String get gender => 'الجنس';
+
+  @override
+  String get healthStatus => 'الحالة الصحية';
+
+  @override
+  String get mobileNumber => 'رقم الجوال';
+
+  @override
+  String get residenceType => 'نوع الإقامة';
+
+  @override
+  String get caseDescription => 'وصف الحالة';
+
+  @override
+  String get medicalHistory => 'السجل الطبي';
+
+  @override
+  String get childLabel => 'طفل';
+
+  @override
+  String get nameLabel => 'اسم';
+
+  @override
+  String get ageLabel => 'العمر';
+
+  @override
+  String get isAlive => 'على قيد الحياة';
+
+  @override
+  String get yes => 'نعم';
+
+  @override
+  String get no => 'لا';
+
+  @override
+  String get partnerName => 'اسم الشريك';
+
+  @override
+  String get residencePlace => 'مكان الإقامة';
+
+  @override
+  String get noChildrenInfo => 'لا توجد معلومات عن الأطفال.';
+
+  @override
+  String get uncleLabel => 'عم';
+
+  @override
+  String get fromLabel => 'من';
+
+  @override
+  String get providedAid => 'المساعدة المقدمة';
+
+  @override
+  String get noDependentsInfo => 'لا توجد معلومات عن المعالين.';
+
+  @override
+  String get job => 'المهنة';
+
+  @override
+  String get nationalNumber => 'الرقم الوطني';
+
+  @override
+  String get phoneNumber => 'رقم الهاتف';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get monthlyIncome => 'الدخل الشهري';
 }

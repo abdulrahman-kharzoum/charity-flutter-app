@@ -1,0 +1,175 @@
+{
+  "feature_name": "Profile",
+  "apis": [
+    {
+      "name": "getBeneficiaryProfile",
+      "endpoint": "mobile/beneficiaries/show",
+      "request_type": "GET",
+      "query_parameters": [
+        { "type": "int", "name": "beneficiaryId" }
+      ],
+      "response_model": {
+        "name": "BeneficiaryProfileModel",
+        "fields": [
+          { "name": "id", "type": "int" },
+          { "name": "firstName", "type": "String", "json_key": "first_name" },
+          { "name": "lastName", "type": "String", "json_key": "last_name" },
+          { "name": "fatherName", "type": "String", "json_key": "father_name" },
+          { "name": "motherName", "type": "String", "json_key": "mother_name" },
+          { "name": "birthDate", "type": "String", "json_key": "birth_date" },
+          { "name": "birthPlace", "type": "String", "json_key": "birth_place" },
+          { "name": "gender", "type": "String" },
+          { "name": "nationalNumber", "type": "String", "json_key": "national_number" },
+          { "name": "job", "type": "String" },
+          { "name": "healthStatus", "type": "String", "json_key": "health_status" },
+          { "name": "phoneNumber", "type": "String", "json_key": "phone_number" },
+          { "name": "mobileNumber", "type": "String", "json_key": "mobile_number" },
+          { "name": "address", "type": "String" },
+          { "name": "residenceType", "type": "String", "json_key": "residence_type" },
+          { "name": "residenceDocumentId", "type": "int", "json_key": "residence_document_id" },
+          { "name": "monthlyIncome", "type": "int", "json_key": "monthly_income" },
+          { "name": "caseDescription", "type": "String", "json_key": "case_description" },
+          { "name": "groupId", "type": "int", "json_key": "group_id" },
+          { "name": "requestId", "type": "int", "json_key": "request_id" },
+          { "name": "requestStatus", "type": "String", "json_key": "request_status" },
+          { "name": "familyMembersNumber", "type": "int", "json_key": "family_members_number" },
+          { "name": "medicalHistory", "type": "String?", "json_key": "medical_history" },
+          { "name": "personalImage", "type": "FileModel" },
+          { "name": "residenceDocument", "type": "FileModel" },
+          { "name": "partners", "type": "List<PartnerModel>" },
+          { "name": "uncles", "type": "List<UncleModel>" },
+          { "name": "children", "type": "List<ProfileChildModel>" },
+          { "name": "group", "type": "GroupModel" },
+          { "name": "request", "type": "RequestModel" },
+          { "name": "salaries", "type": "List<SalaryModel>" },
+          { "name": "appointments", "type": "List<AppointmentModel>" }
+        ]
+      },
+      "list_response_model": [
+        {
+          "name": "FileModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "file", "type": "String" },
+            { "name": "extension", "type": "String" }
+          ]
+        },
+        {
+          "name": "PartnerModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "firstName", "type": "String", "json_key": "first_name" },
+            { "name": "lastName", "type": "String", "json_key": "last_name" },
+            { "name": "job", "type": "String" },
+            { "name": "gender", "type": "String" },
+            { "name": "healthStatus", "type": "String", "json_key": "health_status" }
+          ]
+        },
+        {
+          "name": "UncleModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "from", "type": "String" },
+            { "name": "firstName", "type": "String", "json_key": "first_name" },
+            { "name": "lastName", "type": "String", "json_key": "last_name" },
+            { "name": "job", "type": "String" },
+            { "name": "providedAid", "type": "String", "json_key": "provided_aid" }
+          ]
+        },
+        {
+          "name": "ProfileChildModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" },
+            { "name": "birthDate", "type": "String", "json_key": "birth_date" },
+            { "name": "age", "type": "int" },
+            { "name": "gender", "type": "String" },
+            { "name": "isAlive", "type": "bool", "json_key": "is_alive" },
+            { "name": "partnerName", "type": "String", "json_key": "partner_name" },
+            { "name": "residencePlace", "type": "String", "json_key": "residence_place" }
+          ]
+        },
+        {
+          "name": "GroupModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" },
+            { "name": "salary", "type": "int" },
+            { "name": "color", "type": "String" },
+            { "name": "numberOfBeneficiaries", "type": "int", "json_key": "number_of_beneficiaries" },
+            { "name": "percentageOfBeneficiaries", "type": "int", "json_key": "percentage_of_beneficiaries" },
+            { "name": "conditions", "type": "List<dynamic>" }
+          ]
+        },
+        {
+          "name": "RequestModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "status", "type": "String" },
+            { "name": "reason", "type": "String" },
+            { "name": "requestType", "type": "String", "json_key": "request_type" },
+            { "name": "entity", "type": "EntityModel" }
+          ]
+        },
+        {
+          "name": "EntityModel",
+          "fields": [
+            { "name": "entityType", "type": "String", "json_key": "entity_type" },
+            { "name": "id", "type": "int" },
+            { "name": "firstName", "type": "String", "json_key": "first_name" },
+            { "name": "lastName", "type": "String", "json_key": "last_name" },
+            { "name": "fatherName", "type": "String", "json_key": "father_name" },
+            { "name": "motherName", "type": "String", "json_key": "mother_name" },
+            { "name": "birthDate", "type": "String", "json_key": "birth_date" },
+            { "name": "birthPlace", "type": "String", "json_key": "birth_place" },
+            { "name": "gender", "type": "String" },
+            { "name": "nationalNumber", "type": "String", "json_key": "national_number" },
+            { "name": "job", "type": "String" },
+            { "name": "healthStatus", "type": "String", "json_key": "health_status" },
+            { "name": "phoneNumber", "type": "String", "json_key": "phone_number" },
+            { "name": "mobileNumber", "type": "String", "json_key": "mobile_number" },
+            { "name": "address", "type": "String" },
+            { "name": "residenceType", "type": "String", "json_key": "residence_type" },
+            { "name": "residenceDocumentId", "type": "int", "json_key": "residence_document_id" },
+            { "name": "monthlyIncome", "type": "int", "json_key": "monthly_income" },
+            { "name": "caseDescription", "type": "String", "json_key": "case_description" },
+            { "name": "groupId", "type": "int", "json_key": "group_id" },
+            { "name": "requestId", "type": "int", "json_key": "request_id" },
+            { "name": "requestStatus", "type": "String", "json_key": "request_status" },
+            { "name": "familyMembersNumber", "type": "int", "json_key": "family_members_number" },
+            { "name": "medicalHistory", "type": "String?", "json_key": "medical_history" },
+            { "name": "personalImage", "type": "FileModel" },
+            { "name": "partners", "type": "List<PartnerModel>" },
+            { "name": "children", "type": "List<ProfileChildModel>" }
+          ]
+        },
+        {
+          "name": "SalaryModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "amount", "type": "int" },
+            { "name": "issuedAt", "type": "String", "json_key": "issued_at" },
+            { "name": "receivedAt", "type": "String", "json_key": "received_at" },
+            { "name": "beneficiaryId", "type": "int", "json_key": "beneficiary_id" },
+            { "name": "hasTaken", "type": "bool", "json_key": "has_taken" }
+          ]
+        },
+        {
+          "name": "AppointmentModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "ownerId", "type": "int", "json_key": "owner_id" },
+            { "name": "ownerType", "type": "String", "json_key": "owner_type" },
+            { "name": "date", "type": "String" },
+            { "name": "startTime", "type": "String", "json_key": "start_time" },
+            { "name": "endTime", "type": "String", "json_key": "end_time" },
+            { "name": "price", "type": "int" },
+            { "name": "reason", "type": "String" },
+            { "name": "status", "type": "String" },
+            { "name": "result", "type": "String?" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -179,12 +179,6 @@ abstract class AppLocalizations {
   /// **'Please enter your phone number'**
   String get loginValidationPhoneNumberRequired;
 
-  /// No description provided for @loginValidationPasswordRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your password'**
-  String get loginValidationPasswordRequired;
-
   /// No description provided for @loginValidationPhoneNumberStartsWith9.
   ///
   /// In en, this message translates to:
@@ -1540,6 +1534,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown Aid'**
   String get unknownAid;
+
+  /// No description provided for @fatherName.
+  ///
+  /// In en, this message translates to:
+  /// **'Father\'s Name'**
+  String get fatherName;
+
+  /// No description provided for @motherName.
+  ///
+  /// In en, this message translates to:
+  /// **'Mother\'s Name'**
+  String get motherName;
+
+  /// No description provided for @birthDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Date'**
+  String get birthDate;
+
+  /// No description provided for @birthPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Birth Place'**
+  String get birthPlace;
+
+  /// No description provided for @gender.
+  ///
+  /// In en, this message translates to:
+  /// **'Gender'**
+  String get gender;
+
+  /// No description provided for @healthStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Status'**
+  String get healthStatus;
+
+  /// No description provided for @mobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Number'**
+  String get mobileNumber;
+
+  /// No description provided for @residenceType.
+  ///
+  /// In en, this message translates to:
+  /// **'Residence Type'**
+  String get residenceType;
+
+  /// No description provided for @caseDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Case Description'**
+  String get caseDescription;
+
+  /// No description provided for @medicalHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical History'**
+  String get medicalHistory;
+
+  /// No description provided for @childLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Child'**
+  String get childLabel;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
+
+  /// No description provided for @ageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Age'**
+  String get ageLabel;
+
+  /// No description provided for @isAlive.
+  ///
+  /// In en, this message translates to:
+  /// **'Is Alive'**
+  String get isAlive;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @partnerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner Name'**
+  String get partnerName;
+
+  /// No description provided for @residencePlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Residence Place'**
+  String get residencePlace;
+
+  /// No description provided for @noChildrenInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'No children information available.'**
+  String get noChildrenInfo;
+
+  /// No description provided for @uncleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Uncle'**
+  String get uncleLabel;
+
+  /// No description provided for @fromLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get fromLabel;
+
+  /// No description provided for @providedAid.
+  ///
+  /// In en, this message translates to:
+  /// **'Provided Aid'**
+  String get providedAid;
+
+  /// No description provided for @noDependentsInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'No dependents information available.'**
+  String get noDependentsInfo;
+
+  /// No description provided for @job.
+  ///
+  /// In en, this message translates to:
+  /// **'Job'**
+  String get job;
+
+  /// No description provided for @nationalNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'National Number'**
+  String get nationalNumber;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phoneNumber;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @monthlyIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Income'**
+  String get monthlyIncome;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

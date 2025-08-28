@@ -1,3 +1,7 @@
+import 'package:charity/features/Services/profile/repo/profile_repository.dart';
+
+import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
+
 import 'package:charity/features/Services/qr/repo/qr_repository.dart';
 
 import 'package:charity/features/Services/qr/cubits/generate_aid_qr_code_cubit/generate_aid_qr_code_cubit.dart';
@@ -99,4 +103,6 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
   sl.registerLazySingleton(() => ServicesRepository(sl()));
   sl.registerFactory(() => GenerateAidQrCodeCubit(sl()));
   sl.registerLazySingleton(() => QrRepository(sl()));
+  sl.registerFactory(() => GetBeneficiaryProfileCubit(sl()));
+  sl.registerLazySingleton(() => ProfileRepository(sl()));
 }

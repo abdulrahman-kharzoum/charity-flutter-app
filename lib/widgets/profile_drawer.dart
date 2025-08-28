@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:charity/cubits/profile_cubit/profile_cubit.dart';
-
+import 'package:charity/screens/profile_screen/personal_info_screen.dart';
+import 'package:charity/screens/profile_screen/family_info_screen.dart';
+import 'package:charity/screens/profile_screen/dependents_info_screen.dart';
+import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
+import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
+import 'package:charity/features/Services/profile/models/beneficiary_profile_model.dart';
+import 'package:charity/core/services/status.dart'; // For SubmissionStatus
 import 'package:charity/l10n/app_localizations.dart';
-import 'package:charity/models/user_profile_model.dart' hide UserProfile; // Ensure this path is correct
-import 'package:charity/theme/color.dart'; // Ensure this path is correct
+import 'package:charity/theme/color.dart';
+import 'package:get_it/get_it.dart'; // For sl
 
 class ProfileDrawer extends StatelessWidget {
   final double drawerWidth;
   final Animation<double> contentFadeAnimation;
+  final GetBeneficiaryProfileCubit beneficiaryProfileCubit;
+  final bool isDrawerOpen;
 
   const ProfileDrawer({
     super.key,
     required this.drawerWidth,
     required this.contentFadeAnimation,
+    required this.beneficiaryProfileCubit,
+    required this.isDrawerOpen,
   });
 
-  Widget _buildDrawerHeader(BuildContext context, AppLocalizations l10n, bool isRtl, UserProfile? userProfile) {
-
-    final name = userProfile?.name ?? l10n.profileUserNamePlaceholder;
-    final phone = userProfile?.phone ?? l10n.profileUserPhonePlaceholder;
-    final avatarUrl = userProfile?.avatarUrl;
+  Widget _buildDrawerHeader(BuildContext context, AppLocalizations l10n, bool isRtl, BeneficiaryProfileModel? beneficiaryProfile) {
+    final name = '${beneficiaryProfile?.firstName ?? ''} ${beneficiaryProfile?.lastName ?? ''}'.trim().isEmpty
+        ? l10n.profileUserNamePlaceholder
+        : '${beneficiaryProfile!.firstName} ${beneficiaryProfile.lastName}';
+    final phone = beneficiaryProfile?.mobileNumber ?? l10n.profileUserPhonePlaceholder;
+    final avatarUrl = 'https://preview.redd.it/help-me-find-a-specific-image-of-a-cat-with-glasses-v0-3mxdd5sdeise1.jpeg?auto=webp&s=d8066b8bb285bbb25455baca627be4a393f1d4f4';
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
@@ -58,24 +68,10 @@ class ProfileDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.edit_outlined, color: AppColors.white, size: 22),
-              tooltip: l10n.editProfile,
-              onPressed: () {
-                context.read<ProfileCubit>().toggleEdit();
-                context.read<ProfileCubit>().closeDrawer();
-              },
-            ),
+            // Removed IconButton for editing
           ],
           if (!isRtl) ...[
-            IconButton(
-              icon: const Icon(Icons.edit_outlined, color: AppColors.white, size: 22),
-              tooltip: l10n.editProfile,
-              onPressed: () {
-                context.read<ProfileCubit>().toggleEdit();
-                context.read<ProfileCubit>().closeDrawer();
-              },
-            ),
+            // Removed IconButton for editing
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -162,18 +158,16 @@ class ProfileDrawer extends StatelessWidget {
         child: OutlinedButton.icon(
           icon: Icon(isRtl ? Icons.login_outlined : Icons.exit_to_app, color: AppColors.white, size: 20),
           label: Text(
-            l10n.profileLogout, // Generic "Logout" key
+            l10n.profileLogout,
             style: const TextStyle(color: AppColors.white, fontSize: 15, fontFamily: 'Lexend', fontWeight: FontWeight.w600),
           ),
           style: OutlinedButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             side: BorderSide(color: AppColors.white.withOpacity(0.5)),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
-            foregroundColor: AppColors.white.withOpacity(0.8), // For splash/highlight
+            foregroundColor: AppColors.white.withOpacity(0.8),
           ),
           onPressed: () {
-            // TODO: Implement actual logout logic
-
             Navigator.of(context).pushNamedAndRemoveUntil('/login_screen', (route) => false);
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(l10n.profileLogout))
@@ -189,62 +183,90 @@ class ProfileDrawer extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final bool isRtl = Directionality.of(context) == TextDirection.rtl;
 
-    // Watch the ProfileCubit state for changes
-    final profileState = context.watch<ProfileCubit>().state;
-    UserProfile? userProfile;
-
-    if (profileState is ProfileCurrentState) {
-      userProfile = profileState.userProfile;
-      if (profileState.isLoadingProfile && userProfile == null) {
-        // Optionally show a loading indicator within the drawer header
-
-      }
-    }
-
     return Material(
       color: Colors.transparent,
-      child: Align(
-        alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
-        child: FadeTransition(
-          opacity: contentFadeAnimation,
-          child: Container(
-            width: drawerWidth,
-            height: double.infinity,
+      child: BlocBuilder<GetBeneficiaryProfileCubit, GetBeneficiaryProfileState>(
+        bloc: beneficiaryProfileCubit,
+        builder: (context, profileState) {
+          BeneficiaryProfileModel? beneficiaryProfile;
 
-            decoration: BoxDecoration(
-              color: AppColors.slate800.withOpacity(0.95),
-              // gradient: AppColors.darkDrawerGradient,
-            ),
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 10,
-              left: isRtl ? 15 : 20,
-              right: isRtl ? 20 : 15,
-              bottom: MediaQuery.of(context).padding.bottom + 10,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildDrawerHeader(context, l10n, isRtl, userProfile),
-                Divider(color: AppColors.gray200, height: 20, thickness: 0.5),
-                Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
+          if (profileState.status == SubmissionStatus.success && profileState.data != null) {
+            beneficiaryProfile = profileState.data;
+          }
 
-                      _buildDrawerItem(context, l10n.profilePersonalInfo, Icons.person_outline, () { /* TODO: Navigate or show relevant screen part */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
-                      _buildDrawerItem(context, l10n.profileFamilyInfo, Icons.people_outline, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
-                      _buildDrawerItem(context, l10n.profileDependentsInfo, Icons.child_care_outlined, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
-                      _buildDrawerItem(context, l10n.profileGroupInfo, Icons.group_work_outlined, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
-                      _buildDrawerItem(context, l10n.profileAvailableAid, Icons.healing_outlined, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
-                      _buildDrawerItem(context, l10n.profileRequests, Icons.list_alt_outlined, () { /* TODO: Navigate */ context.read<ProfileCubit>().closeDrawer(); }, isRtl),
-                    ],
-                  ),
+          return Align(
+            alignment: isRtl ? Alignment.centerRight : Alignment.centerLeft,
+            child: FadeTransition(
+              opacity: contentFadeAnimation,
+              child: Container(
+                width: drawerWidth,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColors.slate800.withOpacity(0.95),
                 ),
-                _buildLogoutButton(context, l10n, isRtl),
-              ],
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 10,
+                  left: isRtl ? 15 : 20,
+                  right: isRtl ? 20 : 15,
+                  bottom: MediaQuery.of(context).padding.bottom + 10,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildDrawerHeader(context, l10n, isRtl, beneficiaryProfile),
+                    Divider(color: AppColors.gray200, height: 20, thickness: 0.5),
+                    Expanded(
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        children: [
+                          _buildDrawerItem(context, l10n.profilePersonalInfo, Icons.person_outline, () {
+                            Navigator.of(context).pop(); // Close drawer
+                            if (beneficiaryProfile != null) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PersonalInfoScreen(
+                                  beneficiaryProfile: beneficiaryProfile!,
+                                ),
+                              ));
+                            }
+                          }, isRtl),
+                          _buildDrawerItem(context, l10n.profileFamilyInfo, Icons.people_outline, () {
+                            Navigator.of(context).pop(); // Close drawer
+                            if (beneficiaryProfile != null) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => FamilyInfoScreen(
+                                  beneficiaryProfile: beneficiaryProfile!,
+                                ),
+                              ));
+                            }
+                          }, isRtl),
+                          _buildDrawerItem(context, l10n.profileDependentsInfo, Icons.child_care_outlined, () {
+                            Navigator.of(context).pop(); // Close drawer
+                            if (beneficiaryProfile != null) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => DependentsInfoScreen(
+                                  beneficiaryProfile: beneficiaryProfile!,
+                                ),
+                              ));
+                            }
+                          }, isRtl),
+                          _buildDrawerItem(context, l10n.profileAvailableAid, Icons.healing_outlined, () {
+                            Navigator.of(context).pop(); // Close drawer
+                            // TODO: Implement navigation to Available Aid Screen
+                          }, isRtl),
+                          _buildDrawerItem(context, l10n.profileRequests, Icons.list_alt_outlined, () {
+                            Navigator.of(context).pop(); // Close drawer
+                            // TODO: Implement navigation to Requests Screen
+                          }, isRtl),
+                        ],
+                      ),
+                    ),
+                    _buildLogoutButton(context, l10n, isRtl),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

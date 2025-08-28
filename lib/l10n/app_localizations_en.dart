@@ -51,9 +51,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginValidationPhoneNumberRequired => 'Please enter your phone number';
 
   @override
-  String get loginValidationPasswordRequired => 'Please enter your password';
-
-  @override
   String get loginValidationPhoneNumberStartsWith9 => 'Phone number must start with 9.';
 
   @override
@@ -750,4 +747,88 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unknownAid => 'Unknown Aid';
+
+  @override
+  String get fatherName => 'Father\'s Name';
+
+  @override
+  String get motherName => 'Mother\'s Name';
+
+  @override
+  String get birthDate => 'Birth Date';
+
+  @override
+  String get birthPlace => 'Birth Place';
+
+  @override
+  String get gender => 'Gender';
+
+  @override
+  String get healthStatus => 'Health Status';
+
+  @override
+  String get mobileNumber => 'Mobile Number';
+
+  @override
+  String get residenceType => 'Residence Type';
+
+  @override
+  String get caseDescription => 'Case Description';
+
+  @override
+  String get medicalHistory => 'Medical History';
+
+  @override
+  String get childLabel => 'Child';
+
+  @override
+  String get nameLabel => 'Name';
+
+  @override
+  String get ageLabel => 'Age';
+
+  @override
+  String get isAlive => 'Is Alive';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get partnerName => 'Partner Name';
+
+  @override
+  String get residencePlace => 'Residence Place';
+
+  @override
+  String get noChildrenInfo => 'No children information available.';
+
+  @override
+  String get uncleLabel => 'Uncle';
+
+  @override
+  String get fromLabel => 'From';
+
+  @override
+  String get providedAid => 'Provided Aid';
+
+  @override
+  String get noDependentsInfo => 'No dependents information available.';
+
+  @override
+  String get job => 'Job';
+
+  @override
+  String get nationalNumber => 'National Number';
+
+  @override
+  String get phoneNumber => 'Phone Number';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get monthlyIncome => 'Monthly Income';
 }
