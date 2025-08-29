@@ -9,7 +9,7 @@ abstract class SalaryModel with _$SalaryModel {
     required int id,
     required int amount,
     @JsonKey(name: 'issued_at') required String issuedAt,
-    @JsonKey(name: 'received_at') required String receivedAt,
+    @JsonKey(name: 'received_at') required String? receivedAt,
     @JsonKey(name: 'beneficiary_id') required int beneficiaryId,
     @JsonKey(name: 'has_taken') required bool hasTaken,
   }) = _SalaryModel;
