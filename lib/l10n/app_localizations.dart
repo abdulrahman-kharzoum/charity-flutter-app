@@ -1702,6 +1702,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Monthly Income'**
   String get monthlyIncome;
+
+  /// No description provided for @pending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get pending;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

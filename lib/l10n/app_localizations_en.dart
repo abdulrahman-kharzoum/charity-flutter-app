@@ -831,4 +831,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get monthlyIncome => 'Monthly Income';
+
+  @override
+  String get pending => 'Pending';
 }

@@ -135,19 +135,31 @@ class AidsScreen extends StatelessWidget {
               id = item.id.toString();
               title = item.name;
               description = item.description;
-              statusText = item.beneficiary.hasTaken ? l10n.received : l10n.readyForPickup; // Assuming these are in l10n
-              status = item.beneficiary.hasTaken ? 'received' : 'readyForPickup';
+              statusText = item.beneficiary.hasTaken
+                  ? l10n.received
+                  : (item.beneficiary.receivedAt == null ? l10n.pending : l10n.readyForPickup);
+              status = item.beneficiary.hasTaken
+                  ? 'received'
+                  : (item.beneficiary.receivedAt == null ? 'pending' : 'readyForPickup');
               providedBy = item.type; // Using type as provider for plans
-              date = DateTime.parse(item.beneficiary.receivedAt);
+              date = item.beneficiary.receivedAt != null
+                  ? DateTime.tryParse(item.beneficiary.receivedAt!)!
+                  : DateTime.tryParse(item.beneficiary.turnUntil) ?? DateTime.now(); // Fallback to turnUntil or now
               encryptedQrDataField = null; // Plans don't have QR codes directly
             } else if (item is SalaryModel) {
               id = item.id.toString();
               title = l10n.salaryAidTitle; // A generic title for salary
-              description = '${l10n.amount}: ${item.amount}'; // Display amount in description
-              statusText = item.hasTaken ? l10n.received : l10n.readyForPickup;
-              status = item.hasTaken ? 'received' : 'readyForPickup';
+              description = '${l10n.amount}: ${item.amount.toString()}'; // Convert int to String
+              statusText = item.hasTaken
+                  ? l10n.received
+                  : (item.receivedAt == null ? l10n.pending : l10n.readyForPickup);
+              status = item.hasTaken
+                  ? 'received'
+                  : (item.receivedAt == null ? 'pending' : 'readyForPickup');
               providedBy = ''; // No direct provider for salary model
-              date = DateTime.parse(item.receivedAt);
+              date = item.receivedAt != null
+                  ? DateTime.tryParse(item.receivedAt!)!
+                  : DateTime.tryParse(item.issuedAt) ?? DateTime.now(); // Fallback to issuedAt or now
               encryptedQrDataField = null; // Salaries don't have QR codes directly
             } else {
               // Fallback for unexpected types
@@ -156,7 +168,7 @@ class AidsScreen extends StatelessWidget {
               description = '';
               statusText = '';
               status = '';
-              date = DateTime.now();
+              date = DateTime.now(); // Fallback for unknown types
               encryptedQrDataField = null;
             }
 
@@ -186,7 +198,7 @@ class AidsScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: _buildAidItem(context, item, _getFormattedDate(date, currentLocale)));
+                child: _buildAidItem(context, item, _getFormattedDate(date, currentLocale), statusText, status));
           },
         ),
       ],
@@ -224,27 +236,19 @@ class AidsScreen extends StatelessWidget {
     }
   }
 
-  Widget _buildAidItem(BuildContext context, dynamic item, String formattedDate) {
+  Widget _buildAidItem(BuildContext context, dynamic item, String formattedDate, String statusText, String status) {
     String title;
     String description;
-    String statusText;
-    String status;
 
     if (item is PlanModel) {
       title = item.name;
       description = item.description;
-      statusText = AppLocalizations.of(context)!.received; // Assuming these are in l10n
-      status = item.beneficiary.hasTaken ? 'received' : 'readyForPickup';
     } else if (item is SalaryModel) {
       title = AppLocalizations.of(context)!.salaryAidTitle;
-      description = '${AppLocalizations.of(context)!.amount}: ${item.amount}';
-      statusText = AppLocalizations.of(context)!.received;
-      status = item.hasTaken ? 'received' : 'readyForPickup';
+      description = '${AppLocalizations.of(context)!.amount}: ${item.amount.toString()}';
     } else {
       title = AppLocalizations.of(context)!.unknownAid;
       description = '';
-      statusText = '';
-      status = '';
     }
 
     final Color statusColor = _getAidStatusColor(status);

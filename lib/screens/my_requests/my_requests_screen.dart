@@ -162,7 +162,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
           id: instantAid.id.toString(),
           title: 'Instant Aid: ${instantAid.reason}',
           description: 'Amount: ${instantAid.amount}, Urgency: ${instantAid.urgencyLevel}',
-          date: DateTime.parse(instantAid.receivedAt), // Assuming receivedAt is a valid date string
+          date: DateTime.tryParse(instantAid.receivedAt), // Assuming receivedAt is a valid date string
           status: _mapRequestStatus(instantAid.requestStatus),
           statusText: instantAid.requestStatus,
           encryptedQrDataField: null, // InstantAids might not have QR data
@@ -178,7 +178,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
           id: prescription.id.toString(),
           title: 'Prescription: ${prescription.reason}',
           description: prescription.description,
-          date: DateTime.parse(prescription.createdAt), // Assuming createdAt is a valid date string
+          date: DateTime.tryParse(prescription.createdAt), // Assuming createdAt is a valid date string
           status: _mapRequestStatus(prescription.requestStatus),
           statusText: prescription.requestStatus,
           encryptedQrDataField: null, // Prescriptions might not have QR data
@@ -193,8 +193,8 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
         RequestModel(
           id: needRequest.id.toString(),
           title: 'Need Request: ${needRequest.reason}',
-          description: needRequest.description,
-          date: DateTime.parse(needRequest.createdAt), // Assuming createdAt is a valid date string
+          description: needRequest.description ?? '', // Provide empty string if null
+          date: needRequest.receivedAt != null ? DateTime.tryParse(needRequest.receivedAt!) : null,
           status: _mapRequestStatus(needRequest.requestStatus),
           statusText: needRequest.requestStatus,
           encryptedQrDataField: null, // NeedRequests might not have QR data
@@ -204,7 +204,12 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
     }
 
     // Sort requests by date, newest first
-    requests.sort((a, b) => b.date.compareTo(a.date));
+    requests.sort((a, b) {
+      if (a.date == null && b.date == null) return 0;
+      if (a.date == null) return 1; // Nulls come after non-nulls
+      if (b.date == null) return -1; // Nulls come after non-nulls
+      return b.date!.compareTo(a.date!);
+    });
 
     return requests;
   }
@@ -257,7 +262,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
           separatorBuilder: (context, index) => const SizedBox(height: 24),
           itemBuilder: (context, index) {
             final request = requests[index];
-            final String formattedDate = DateFormat('d MMMM yyyy', currentLocale).format(request.date);
+            final String formattedDate = request.date != null ? DateFormat('d MMMM yyyy', currentLocale).format(request.date!) : 'Unknown Date';
             Color statusColor;
             IconData statusIconData;
             switch (request.status) {

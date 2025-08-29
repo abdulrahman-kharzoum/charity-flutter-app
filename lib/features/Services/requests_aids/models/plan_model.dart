@@ -11,7 +11,7 @@ abstract class PlanModel with _$PlanModel {
     required String name,
     required String type,
     required String description,
-    required String portion,
+    required int portion,
     required PlanBeneficiaryModel beneficiary,
   }) = _PlanModel;
 

@@ -329,5 +329,6 @@
   "nationalNumber": "National Number",
   "phoneNumber": "Phone Number",
   "address": "Address",
-  "monthlyIncome": "Monthly Income"
+  "monthlyIncome": "Monthly Income",
+  "pending": "Pending"
 }

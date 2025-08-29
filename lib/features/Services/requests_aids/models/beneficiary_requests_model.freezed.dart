@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BeneficiaryRequestsModel {
 
-@JsonKey(name: 'instantAids') List<InstantAidModel> get instantAids;@JsonKey(name: 'needRequests') List<dynamic> get needRequests; List<PrescriptionModel> get prescriptions;
+@JsonKey(name: 'instantAids') List<InstantAidModel> get instantAids;@JsonKey(name: 'needRequests') List<NeedRequestModel> get needRequests; List<PrescriptionModel> get prescriptions;
 /// Create a copy of BeneficiaryRequestsModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $BeneficiaryRequestsModelCopyWith<$Res>  {
   factory $BeneficiaryRequestsModelCopyWith(BeneficiaryRequestsModel value, $Res Function(BeneficiaryRequestsModel) _then) = _$BeneficiaryRequestsModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'instantAids') List<InstantAidModel> instantAids,@JsonKey(name: 'needRequests') List<dynamic> needRequests, List<PrescriptionModel> prescriptions
+@JsonKey(name: 'instantAids') List<InstantAidModel> instantAids,@JsonKey(name: 'needRequests') List<NeedRequestModel> needRequests, List<PrescriptionModel> prescriptions
 });
 
 
@@ -69,7 +69,7 @@ class _$BeneficiaryRequestsModelCopyWithImpl<$Res>
   return _then(_self.copyWith(
 instantAids: null == instantAids ? _self.instantAids : instantAids // ignore: cast_nullable_to_non_nullable
 as List<InstantAidModel>,needRequests: null == needRequests ? _self.needRequests : needRequests // ignore: cast_nullable_to_non_nullable
-as List<dynamic>,prescriptions: null == prescriptions ? _self.prescriptions : prescriptions // ignore: cast_nullable_to_non_nullable
+as List<NeedRequestModel>,prescriptions: null == prescriptions ? _self.prescriptions : prescriptions // ignore: cast_nullable_to_non_nullable
 as List<PrescriptionModel>,
   ));
 }
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'instantAids')  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests')  List<dynamic> needRequests,  List<PrescriptionModel> prescriptions)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'instantAids')  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests')  List<NeedRequestModel> needRequests,  List<PrescriptionModel> prescriptions)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _BeneficiaryRequestsModel() when $default != null:
 return $default(_that.instantAids,_that.needRequests,_that.prescriptions);case _:
@@ -176,7 +176,7 @@ return $default(_that.instantAids,_that.needRequests,_that.prescriptions);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'instantAids')  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests')  List<dynamic> needRequests,  List<PrescriptionModel> prescriptions)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'instantAids')  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests')  List<NeedRequestModel> needRequests,  List<PrescriptionModel> prescriptions)  $default,) {final _that = this;
 switch (_that) {
 case _BeneficiaryRequestsModel():
 return $default(_that.instantAids,_that.needRequests,_that.prescriptions);case _:
@@ -196,7 +196,7 @@ return $default(_that.instantAids,_that.needRequests,_that.prescriptions);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'instantAids')  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests')  List<dynamic> needRequests,  List<PrescriptionModel> prescriptions)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'instantAids')  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests')  List<NeedRequestModel> needRequests,  List<PrescriptionModel> prescriptions)?  $default,) {final _that = this;
 switch (_that) {
 case _BeneficiaryRequestsModel() when $default != null:
 return $default(_that.instantAids,_that.needRequests,_that.prescriptions);case _:
@@ -211,7 +211,7 @@ return $default(_that.instantAids,_that.needRequests,_that.prescriptions);case _
 @JsonSerializable()
 
 class _BeneficiaryRequestsModel implements BeneficiaryRequestsModel {
-  const _BeneficiaryRequestsModel({@JsonKey(name: 'instantAids') required final  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests') required final  List<dynamic> needRequests, required final  List<PrescriptionModel> prescriptions}): _instantAids = instantAids,_needRequests = needRequests,_prescriptions = prescriptions;
+  const _BeneficiaryRequestsModel({@JsonKey(name: 'instantAids') required final  List<InstantAidModel> instantAids, @JsonKey(name: 'needRequests') required final  List<NeedRequestModel> needRequests, required final  List<PrescriptionModel> prescriptions}): _instantAids = instantAids,_needRequests = needRequests,_prescriptions = prescriptions;
   factory _BeneficiaryRequestsModel.fromJson(Map<String, dynamic> json) => _$BeneficiaryRequestsModelFromJson(json);
 
  final  List<InstantAidModel> _instantAids;
@@ -221,8 +221,8 @@ class _BeneficiaryRequestsModel implements BeneficiaryRequestsModel {
   return EqualUnmodifiableListView(_instantAids);
 }
 
- final  List<dynamic> _needRequests;
-@override@JsonKey(name: 'needRequests') List<dynamic> get needRequests {
+ final  List<NeedRequestModel> _needRequests;
+@override@JsonKey(name: 'needRequests') List<NeedRequestModel> get needRequests {
   if (_needRequests is EqualUnmodifiableListView) return _needRequests;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_needRequests);
@@ -269,7 +269,7 @@ abstract mixin class _$BeneficiaryRequestsModelCopyWith<$Res> implements $Benefi
   factory _$BeneficiaryRequestsModelCopyWith(_BeneficiaryRequestsModel value, $Res Function(_BeneficiaryRequestsModel) _then) = __$BeneficiaryRequestsModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'instantAids') List<InstantAidModel> instantAids,@JsonKey(name: 'needRequests') List<dynamic> needRequests, List<PrescriptionModel> prescriptions
+@JsonKey(name: 'instantAids') List<InstantAidModel> instantAids,@JsonKey(name: 'needRequests') List<NeedRequestModel> needRequests, List<PrescriptionModel> prescriptions
 });
 
 
@@ -290,7 +290,7 @@ class __$BeneficiaryRequestsModelCopyWithImpl<$Res>
   return _then(_BeneficiaryRequestsModel(
 instantAids: null == instantAids ? _self._instantAids : instantAids // ignore: cast_nullable_to_non_nullable
 as List<InstantAidModel>,needRequests: null == needRequests ? _self._needRequests : needRequests // ignore: cast_nullable_to_non_nullable
-as List<dynamic>,prescriptions: null == prescriptions ? _self._prescriptions : prescriptions // ignore: cast_nullable_to_non_nullable
+as List<NeedRequestModel>,prescriptions: null == prescriptions ? _self._prescriptions : prescriptions // ignore: cast_nullable_to_non_nullable
 as List<PrescriptionModel>,
   ));
 }

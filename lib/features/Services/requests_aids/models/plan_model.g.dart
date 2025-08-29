@@ -11,7 +11,7 @@ _PlanModel _$PlanModelFromJson(Map<String, dynamic> json) => _PlanModel(
   name: json['name'] as String,
   type: json['type'] as String,
   description: json['description'] as String,
-  portion: json['portion'] as String,
+  portion: (json['portion'] as num).toInt(),
   beneficiary: PlanBeneficiaryModel.fromJson(
     json['beneficiary'] as Map<String, dynamic>,
   ),

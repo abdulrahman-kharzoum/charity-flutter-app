@@ -12,7 +12,9 @@ _BeneficiaryRequestsModel _$BeneficiaryRequestsModelFromJson(
   instantAids: (json['instantAids'] as List<dynamic>)
       .map((e) => InstantAidModel.fromJson(e as Map<String, dynamic>))
       .toList(),
-  needRequests: json['needRequests'] as List<dynamic>,
+  needRequests: (json['needRequests'] as List<dynamic>)
+      .map((e) => NeedRequestModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
   prescriptions: (json['prescriptions'] as List<dynamic>)
       .map((e) => PrescriptionModel.fromJson(e as Map<String, dynamic>))
       .toList(),

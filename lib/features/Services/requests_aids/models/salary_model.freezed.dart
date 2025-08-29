@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SalaryModel {
 
- int get id; int get amount;@JsonKey(name: 'issued_at') String get issuedAt;@JsonKey(name: 'received_at') String get receivedAt;@JsonKey(name: 'beneficiary_id') int get beneficiaryId;@JsonKey(name: 'has_taken') bool get hasTaken;
+ int get id; int get amount;@JsonKey(name: 'issued_at') String get issuedAt;@JsonKey(name: 'received_at') String? get receivedAt;@JsonKey(name: 'beneficiary_id') int get beneficiaryId;@JsonKey(name: 'has_taken') bool get hasTaken;
 /// Create a copy of SalaryModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SalaryModelCopyWith<$Res>  {
   factory $SalaryModelCopyWith(SalaryModel value, $Res Function(SalaryModel) _then) = _$SalaryModelCopyWithImpl;
 @useResult
 $Res call({
- int id, int amount,@JsonKey(name: 'issued_at') String issuedAt,@JsonKey(name: 'received_at') String receivedAt,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'has_taken') bool hasTaken
+ int id, int amount,@JsonKey(name: 'issued_at') String issuedAt,@JsonKey(name: 'received_at') String? receivedAt,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'has_taken') bool hasTaken
 });
 
 
@@ -65,13 +65,13 @@ class _$SalaryModelCopyWithImpl<$Res>
 
 /// Create a copy of SalaryModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? amount = null,Object? issuedAt = null,Object? receivedAt = null,Object? beneficiaryId = null,Object? hasTaken = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? amount = null,Object? issuedAt = null,Object? receivedAt = freezed,Object? beneficiaryId = null,Object? hasTaken = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,issuedAt: null == issuedAt ? _self.issuedAt : issuedAt // ignore: cast_nullable_to_non_nullable
-as String,receivedAt: null == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
-as String,beneficiaryId: null == beneficiaryId ? _self.beneficiaryId : beneficiaryId // ignore: cast_nullable_to_non_nullable
+as String,receivedAt: freezed == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
+as String?,beneficiaryId: null == beneficiaryId ? _self.beneficiaryId : beneficiaryId // ignore: cast_nullable_to_non_nullable
 as int,hasTaken: null == hasTaken ? _self.hasTaken : hasTaken // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int amount, @JsonKey(name: 'issued_at')  String issuedAt, @JsonKey(name: 'received_at')  String receivedAt, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  int amount, @JsonKey(name: 'issued_at')  String issuedAt, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SalaryModel() when $default != null:
 return $default(_that.id,_that.amount,_that.issuedAt,_that.receivedAt,_that.beneficiaryId,_that.hasTaken);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.amount,_that.issuedAt,_that.receivedAt,_that.bene
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int amount, @JsonKey(name: 'issued_at')  String issuedAt, @JsonKey(name: 'received_at')  String receivedAt, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'has_taken')  bool hasTaken)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  int amount, @JsonKey(name: 'issued_at')  String issuedAt, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'has_taken')  bool hasTaken)  $default,) {final _that = this;
 switch (_that) {
 case _SalaryModel():
 return $default(_that.id,_that.amount,_that.issuedAt,_that.receivedAt,_that.beneficiaryId,_that.hasTaken);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.amount,_that.issuedAt,_that.receivedAt,_that.bene
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int amount, @JsonKey(name: 'issued_at')  String issuedAt, @JsonKey(name: 'received_at')  String receivedAt, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  int amount, @JsonKey(name: 'issued_at')  String issuedAt, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,) {final _that = this;
 switch (_that) {
 case _SalaryModel() when $default != null:
 return $default(_that.id,_that.amount,_that.issuedAt,_that.receivedAt,_that.beneficiaryId,_that.hasTaken);case _:
@@ -220,7 +220,7 @@ class _SalaryModel implements SalaryModel {
 @override final  int id;
 @override final  int amount;
 @override@JsonKey(name: 'issued_at') final  String issuedAt;
-@override@JsonKey(name: 'received_at') final  String receivedAt;
+@override@JsonKey(name: 'received_at') final  String? receivedAt;
 @override@JsonKey(name: 'beneficiary_id') final  int beneficiaryId;
 @override@JsonKey(name: 'has_taken') final  bool hasTaken;
 
@@ -257,7 +257,7 @@ abstract mixin class _$SalaryModelCopyWith<$Res> implements $SalaryModelCopyWith
   factory _$SalaryModelCopyWith(_SalaryModel value, $Res Function(_SalaryModel) _then) = __$SalaryModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, int amount,@JsonKey(name: 'issued_at') String issuedAt,@JsonKey(name: 'received_at') String receivedAt,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'has_taken') bool hasTaken
+ int id, int amount,@JsonKey(name: 'issued_at') String issuedAt,@JsonKey(name: 'received_at') String? receivedAt,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'has_taken') bool hasTaken
 });
 
 
@@ -274,13 +274,13 @@ class __$SalaryModelCopyWithImpl<$Res>
 
 /// Create a copy of SalaryModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? amount = null,Object? issuedAt = null,Object? receivedAt = null,Object? beneficiaryId = null,Object? hasTaken = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? amount = null,Object? issuedAt = null,Object? receivedAt = freezed,Object? beneficiaryId = null,Object? hasTaken = null,}) {
   return _then(_SalaryModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,issuedAt: null == issuedAt ? _self.issuedAt : issuedAt // ignore: cast_nullable_to_non_nullable
-as String,receivedAt: null == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
-as String,beneficiaryId: null == beneficiaryId ? _self.beneficiaryId : beneficiaryId // ignore: cast_nullable_to_non_nullable
+as String,receivedAt: freezed == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
+as String?,beneficiaryId: null == beneficiaryId ? _self.beneficiaryId : beneficiaryId // ignore: cast_nullable_to_non_nullable
 as int,hasTaken: null == hasTaken ? _self.hasTaken : hasTaken // ignore: cast_nullable_to_non_nullable
 as bool,
   ));

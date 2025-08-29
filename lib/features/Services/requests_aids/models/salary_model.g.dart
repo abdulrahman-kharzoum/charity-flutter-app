@@ -10,7 +10,7 @@ _SalaryModel _$SalaryModelFromJson(Map<String, dynamic> json) => _SalaryModel(
   id: (json['id'] as num).toInt(),
   amount: (json['amount'] as num).toInt(),
   issuedAt: json['issued_at'] as String,
-  receivedAt: json['received_at'] as String,
+  receivedAt: json['received_at'] as String?,
   beneficiaryId: (json['beneficiary_id'] as num).toInt(),
   hasTaken: json['has_taken'] as bool,
 );

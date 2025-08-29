@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PlanModel {
 
- int get id; String get name; String get type; String get description; String get portion; PlanBeneficiaryModel get beneficiary;
+ int get id; String get name; String get type; String get description; int get portion; PlanBeneficiaryModel get beneficiary;
 /// Create a copy of PlanModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PlanModelCopyWith<$Res>  {
   factory $PlanModelCopyWith(PlanModel value, $Res Function(PlanModel) _then) = _$PlanModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String type, String description, String portion, PlanBeneficiaryModel beneficiary
+ int id, String name, String type, String description, int portion, PlanBeneficiaryModel beneficiary
 });
 
 
@@ -72,7 +72,7 @@ as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nu
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,portion: null == portion ? _self.portion : portion // ignore: cast_nullable_to_non_nullable
-as String,beneficiary: null == beneficiary ? _self.beneficiary : beneficiary // ignore: cast_nullable_to_non_nullable
+as int,beneficiary: null == beneficiary ? _self.beneficiary : beneficiary // ignore: cast_nullable_to_non_nullable
 as PlanBeneficiaryModel,
   ));
 }
@@ -167,7 +167,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String type,  String description,  String portion,  PlanBeneficiaryModel beneficiary)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String type,  String description,  int portion,  PlanBeneficiaryModel beneficiary)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PlanModel() when $default != null:
 return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_that.beneficiary);case _:
@@ -188,7 +188,7 @@ return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String type,  String description,  String portion,  PlanBeneficiaryModel beneficiary)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String type,  String description,  int portion,  PlanBeneficiaryModel beneficiary)  $default,) {final _that = this;
 switch (_that) {
 case _PlanModel():
 return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_that.beneficiary);case _:
@@ -208,7 +208,7 @@ return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String type,  String description,  String portion,  PlanBeneficiaryModel beneficiary)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String type,  String description,  int portion,  PlanBeneficiaryModel beneficiary)?  $default,) {final _that = this;
 switch (_that) {
 case _PlanModel() when $default != null:
 return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_that.beneficiary);case _:
@@ -230,7 +230,7 @@ class _PlanModel implements PlanModel {
 @override final  String name;
 @override final  String type;
 @override final  String description;
-@override final  String portion;
+@override final  int portion;
 @override final  PlanBeneficiaryModel beneficiary;
 
 /// Create a copy of PlanModel
@@ -266,7 +266,7 @@ abstract mixin class _$PlanModelCopyWith<$Res> implements $PlanModelCopyWith<$Re
   factory _$PlanModelCopyWith(_PlanModel value, $Res Function(_PlanModel) _then) = __$PlanModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String type, String description, String portion, PlanBeneficiaryModel beneficiary
+ int id, String name, String type, String description, int portion, PlanBeneficiaryModel beneficiary
 });
 
 
@@ -290,7 +290,7 @@ as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nu
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,portion: null == portion ? _self.portion : portion // ignore: cast_nullable_to_non_nullable
-as String,beneficiary: null == beneficiary ? _self.beneficiary : beneficiary // ignore: cast_nullable_to_non_nullable
+as int,beneficiary: null == beneficiary ? _self.beneficiary : beneficiary // ignore: cast_nullable_to_non_nullable
 as PlanBeneficiaryModel,
   ));
 }

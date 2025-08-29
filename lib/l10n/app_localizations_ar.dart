@@ -831,4 +831,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get monthlyIncome => 'الدخل الشهري';
+
+  @override
+  String get pending => 'قيد الانتظار';
 }

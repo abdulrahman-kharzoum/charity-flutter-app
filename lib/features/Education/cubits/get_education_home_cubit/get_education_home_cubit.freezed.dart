@@ -100,10 +100,10 @@ extension GetEducationHomeStatePatterns on GetEducationHomeState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreateTeacherState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _GetEducationHomeState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetEducationHomeState() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -122,10 +122,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreateTeacherState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _GetEducationHomeState value)  $default,){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState():
+case _GetEducationHomeState():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -143,10 +143,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreateTeacherState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _GetEducationHomeState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetEducationHomeState() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -166,7 +166,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  EducationHomeModel? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetEducationHomeState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return orElse();
 
@@ -187,7 +187,7 @@ return $default(_that.status,_that.data,_that.failure);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  EducationHomeModel? data,  Failure? failure)  $default,) {final _that = this;
 switch (_that) {
-case _CreateTeacherState():
+case _GetEducationHomeState():
 return $default(_that.status,_that.data,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
@@ -207,7 +207,7 @@ return $default(_that.status,_that.data,_that.failure);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  EducationHomeModel? data,  Failure? failure)?  $default,) {final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetEducationHomeState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return null;
 
@@ -219,8 +219,8 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// @nodoc
 
 
-class _CreateTeacherState implements GetEducationHomeState {
-  const _CreateTeacherState({this.status = SubmissionStatus.initial, this.data, this.failure});
+class _GetEducationHomeState implements GetEducationHomeState {
+  const _GetEducationHomeState({this.status = SubmissionStatus.initial, this.data, this.failure});
   
 
 @override@JsonKey() final  SubmissionStatus status;
@@ -231,13 +231,13 @@ class _CreateTeacherState implements GetEducationHomeState {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$CreateTeacherStateCopyWith<_CreateTeacherState> get copyWith => __$CreateTeacherStateCopyWithImpl<_CreateTeacherState>(this, _$identity);
+_$GetEducationHomeStateCopyWith<_GetEducationHomeState> get copyWith => __$GetEducationHomeStateCopyWithImpl<_GetEducationHomeState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateTeacherState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetEducationHomeState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
@@ -253,8 +253,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$CreateTeacherStateCopyWith<$Res> implements $GetEducationHomeStateCopyWith<$Res> {
-  factory _$CreateTeacherStateCopyWith(_CreateTeacherState value, $Res Function(_CreateTeacherState) _then) = __$CreateTeacherStateCopyWithImpl;
+abstract mixin class _$GetEducationHomeStateCopyWith<$Res> implements $GetEducationHomeStateCopyWith<$Res> {
+  factory _$GetEducationHomeStateCopyWith(_GetEducationHomeState value, $Res Function(_GetEducationHomeState) _then) = __$GetEducationHomeStateCopyWithImpl;
 @override @useResult
 $Res call({
  SubmissionStatus status, EducationHomeModel? data, Failure? failure
@@ -265,17 +265,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$CreateTeacherStateCopyWithImpl<$Res>
-    implements _$CreateTeacherStateCopyWith<$Res> {
-  __$CreateTeacherStateCopyWithImpl(this._self, this._then);
+class __$GetEducationHomeStateCopyWithImpl<$Res>
+    implements _$GetEducationHomeStateCopyWith<$Res> {
+  __$GetEducationHomeStateCopyWithImpl(this._self, this._then);
 
-  final _CreateTeacherState _self;
-  final $Res Function(_CreateTeacherState) _then;
+  final _GetEducationHomeState _self;
+  final $Res Function(_GetEducationHomeState) _then;
 
 /// Create a copy of GetEducationHomeState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? data = freezed,Object? failure = freezed,}) {
-  return _then(_CreateTeacherState(
+  return _then(_GetEducationHomeState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as EducationHomeModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable

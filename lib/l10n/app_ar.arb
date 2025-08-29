@@ -116,13 +116,13 @@
   "birthDate": "تاريخ الميلاد",
   "birthPlace": "مكان الميلاد",
   "gender": "الجنس",
-  "nationalNumber": "الرقم الوطني",
-  "job": "المهنة",
+
+
   "healthStatus": "الحالة الصحية",
   "mobileNumber": "رقم الجوال",
-  "address": "العنوان",
+
   "residenceType": "نوع الإقامة",
-  "monthlyIncome": "الدخل الشهري",
+
   "currency": "ل.س",
   "caseDescription": "وصف الحالة",
   "medicalHistory": "السجل الطبي",
@@ -260,21 +260,7 @@
   "salaryAidTitle": "مساعدة راتب",
   "amount": "المبلغ",
   "unknownAid": "مساعدة غير معروفة",
-  "fatherName": "اسم الأب",
-  "motherName": "اسم الأم",
-  "birthDate": "تاريخ الميلاد",
-  "birthPlace": "مكان الميلاد",
-  "gender": "الجنس",
-  "nationalNumber": "الرقم الوطني",
-  "job": "المهنة",
-  "healthStatus": "الحالة الصحية",
-  "mobileNumber": "رقم الجوال",
-  "address": "العنوان",
-  "residenceType": "نوع الإقامة",
-  "monthlyIncome": "الدخل الشهري",
-  "currency": "ل.س",
-  "caseDescription": "وصف الحالة",
-  "medicalHistory": "السجل الطبي",
+
   "childLabel": "طفل",
   "nameLabel": "اسم",
   "ageLabel": "العمر",
@@ -292,5 +278,6 @@
   "nationalNumber": "الرقم الوطني",
   "phoneNumber": "رقم الهاتف",
   "address": "العنوان",
-  "monthlyIncome": "الدخل الشهري"
+  "monthlyIncome": "الدخل الشهري",
+  "pending": "قيد الانتظار"
 }

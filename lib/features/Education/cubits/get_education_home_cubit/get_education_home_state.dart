@@ -6,5 +6,5 @@ abstract class GetEducationHomeState with _$GetEducationHomeState {
     @Default(SubmissionStatus.initial) SubmissionStatus status,
     EducationHomeModel? data,
     Failure? failure,
-  }) = _CreateTeacherState; 
+  }) = _GetEducationHomeState;
 }
