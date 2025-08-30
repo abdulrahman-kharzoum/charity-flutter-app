@@ -1,4 +1,5 @@
 import 'package:charity/core/notification_config/notification.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/cubits/localization/localization_cubit.dart';
@@ -16,15 +17,23 @@ import 'firebase_options.dart';
 
 import 'core/services/service_locator.dart';
 
-// final navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await handleBackgroundMessage(message);
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
   await CacheNetwork.cacheInit();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await FirebaseApi().initNotification();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setupServiceLocator(sharedPreferences);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await FirebaseApi().initNotification();
+  FirebaseMessaging.instance.getInitialMessage().then(handleMessageOnOpen);
   runApp(const MyApp());
 }
 
@@ -49,7 +58,7 @@ class MyApp extends StatelessWidget {
         builder: (context, localizationState) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            // navigatorKey: navigatorKey,
+            navigatorKey: navigatorKey,
             title: 'Charity App',
 
             theme: lightThemeData,

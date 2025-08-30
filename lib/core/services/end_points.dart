@@ -15,4 +15,5 @@ class EndPoints {
   static const String mobile_beneficiaries = 'mobile/beneficiaries';
   static const String mobile_aids_qr = 'mobile/aids/qr';
   static const String mobile_beneficiaries_show = 'mobile/beneficiaries/show';
+  static const String mobile_my_notifications = 'mobile/my-notifications';
 }

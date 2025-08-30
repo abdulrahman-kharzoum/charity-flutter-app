@@ -299,7 +299,7 @@ class _MyRequestsScreenState extends State<MyRequestsScreen> {
                     dateFormatted: formattedDate,
                     encryptedQRCodeData: request.encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_REQUEST_${request.id}",
                     itemType: ItemType.request,
-                    requestType: request.requestType, // Pass the requestType
+                    requestType: request.requestType ?? 'unknown', // Pass the requestType
                     status: request.status, // Pass the RequestStatus enum
                   );
                   Navigator.push(

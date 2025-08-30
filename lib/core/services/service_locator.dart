@@ -1,3 +1,7 @@
+import 'package:charity/features/notifications/repo/notifications_repository.dart';
+
+import 'package:charity/features/notifications/cubits/get_my_notifications_cubit/get_my_notifications_cubit.dart';
+
 import 'package:charity/features/services/requests_aids/repo/services_repository.dart' hide ServicesRepository;
 
 import 'package:charity/features/services/requests_aids/cubits/get_beneficiary_requests_cubit/get_beneficiary_requests_cubit.dart' hide GetBeneficiaryRequestsCubit;
@@ -45,16 +49,21 @@ import 'package:charity/cubits/localization/localization_cubit.dart'; // Import 
 import 'api_services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:charity/core/shared/settings_repository.dart';
+import 'package:charity/core/notification_config/notification.dart';
 
 final sl = GetIt.instance;
 
 Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
+  // Register and initialize FirebaseApi first
+  sl.registerLazySingleton(() => FirebaseApi());
 
   sl.registerSingleton<SharedPreferences>(sharedPreferences);
 
-  sl.registerLazySingleton<CacheService>(
-    () => CacheService(sharedPreferences: sl()),
-  );
+  // Register CacheService as a singleton and initialize it
+  final cacheService = CacheService(sharedPreferences: sl());
+  sl.registerSingleton<CacheService>(cacheService);
+
+  await sl<FirebaseApi>().initNotification();
 
   sl.registerLazySingleton<AuthInterceptor>(
     () => AuthInterceptor(cacheService: sl()),
@@ -111,4 +120,6 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
   sl.registerLazySingleton(() => QrRepository(sl()));
   sl.registerFactory(() => GetBeneficiaryProfileCubit(sl()));
   sl.registerLazySingleton(() => ProfileRepository(sl()));
+  sl.registerFactory(() => GetMyNotificationsCubit(sl()));
+  sl.registerLazySingleton(() => NotificationsRepository(sl()));
 }

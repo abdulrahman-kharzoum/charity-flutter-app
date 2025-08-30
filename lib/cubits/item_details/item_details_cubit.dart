@@ -16,7 +16,11 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
       // In a real scenario, the decryption key would not be hardcoded here.
       // It should be securely managed.
       // String decryptedData = _decryptionService.decrypt(item.encryptedQRCodeData, "YOUR_SECRET_KEY");
-      String decryptedData = _placeholderDecrypt(item.encryptedQRCodeData); // Placeholder
+      if (item.encryptedQRCodeData == null) {
+        emit(ItemDetailsLoaded(''));
+        return;
+      }
+      String decryptedData = _placeholderDecrypt(item.encryptedQRCodeData!); // Placeholder
       emit(ItemDetailsLoaded(decryptedData));
     } catch (e) {
       emit(ItemDetailsError("Failed to process item details: ${e.toString()}"));

@@ -3,12 +3,36 @@ import 'dart:io';
 
 import 'package:charity/core/services/cache_service.dart';
 import 'package:charity/core/services/service_locator.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:charity/firebase_options.dart';
+import 'package:flutter/material.dart'; // Import for GlobalKey and Navigator
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
+import '../../main.dart'; // Import the navigatorKey
+
+@pragma('vm:entry-point')
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
+  // Initialize Firebase (if not already done)
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Initialize FlutterLocalNotificationsPlugin for the background isolate
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  // Create Android Notification Channel for the background isolate
+  const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description:
+        'This channel is used for important notifications.', // description
+    importance: Importance.max,
+  );
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
   await showNotification(message);
 }
 
@@ -43,18 +67,18 @@ Future<void> showNotification(RemoteMessage message) async {
     importance: Importance.max,
     styleInformation: imagePath != null
         ? BigPictureStyleInformation(
-            FilePathAndroidBitmap(imagePath),
-            largeIcon: FilePathAndroidBitmap(imagePath),
-            contentTitle: notification.title,
-            summaryText: notification.body,
-          )
+      FilePathAndroidBitmap(imagePath),
+      largeIcon: FilePathAndroidBitmap(imagePath),
+      contentTitle: notification.title,
+      summaryText: notification.body,
+    )
         : null,
   );
 
   final iosNotificationDetails = imagePath != null
       ? DarwinNotificationDetails(
-          attachments: [DarwinNotificationAttachment(imagePath)],
-        )
+    attachments: [DarwinNotificationAttachment(imagePath)],
+  )
       : null;
 
   final notificationDetails = NotificationDetails(
@@ -92,6 +116,11 @@ Future<void> handleMessageOnOpen(RemoteMessage? message) async {
   print('Message From Notification is :=> ${message.toMap()}');
   print(message.notification!.body);
   print(message.notification!.title);
+
+  // Example: Navigate to a specific screen based on notification payload
+  // You would typically parse `message.data` for navigation information
+  // For demonstration, let's assume all notifications navigate to the home screen
+  navigatorKey.currentState?.pushNamed('/home');
 }
 
 const androidChannel = AndroidNotificationChannel(
@@ -122,16 +151,21 @@ class FirebaseApi {
       print("the fcm token is=> $fcm");
       await FirebaseMessaging.instance
           .setForegroundNotificationPresentationOptions(
-            alert: true,
-            badge: true,
-            sound: true,
-          );
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+
+      // Create Android Notification Channel for foreground messages
+      await localNotification
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(androidChannel);
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         showNotification(message);
       });
 
-      FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
 
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
         handleMessageOnOpen(message);

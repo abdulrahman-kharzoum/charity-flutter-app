@@ -23,6 +23,7 @@ import '../features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
 import '../screens/Education_section/home_screen/education_home_screen.dart';
 import '../screens/aids_screen/aids_screen.dart';
 import '../screens/main_screen.dart';
+import '../screens/notifications_screen/notifications_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
   // ======splash Screen=====//
@@ -37,6 +38,8 @@ final Map<String, WidgetBuilder> routes = {
         create: (context) => NavigationCubit(),
         child: const MainScreen(),
       ),
+  // ======Notifications Screen=====//
+  '/notifications': (context) => const NotificationsScreen(),
   // ======Login Screen=====//
   '/login_screen':
       (context) =>

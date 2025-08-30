@@ -19,6 +19,8 @@ import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.d
 import 'package:charity/features/auth/cubits/resend_otp_cubit/resend_otp_cubit.dart';
 import 'package:charity/core/shared/dialogs/loading_dialog.dart'; // Import loading dialog
 import 'package:charity/core/shared/dialogs/error_dialog.dart'; // Import error dialog
+import 'package:charity/core/services/service_locator.dart';
+import 'package:charity/core/services/cache_service.dart';
 
 
 // Convert LoginScreen to a StatefulWidget
@@ -313,12 +315,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                             l10n.loginValidationPhoneNumberRequired);
                                         return;
                                       }
-                                      // Using a placeholder FCM token for now as per instructions
-                                      final fcmToken = "your_fcm_token_here";
+                                      final fcmToken = await sl<CacheService>().getData(key: 'fcm');
                                       context.read<LoginAttemptCubit>().loginAttempt(
                                         body: LoginAttemptRequestBodyModel(
                                           phone_number: _completePhoneNumber,
-                                          fcm_token: fcmToken,
+                                          fcm_token: fcmToken ?? '',
                                         ),
                                       );
                                     }

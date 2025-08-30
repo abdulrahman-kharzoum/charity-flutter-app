@@ -61,23 +61,23 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
   // }
 
   // Define actions for a shared AppBar (e.g., notifications, search)
-  // List<Widget> _getActions(BuildContext context, AppLocalizations l10n) {
-  //   return [
-  //     IconButton(
-  //       icon: const Icon(Icons.notifications_outlined, color: AppColors.white),
-  //       onPressed: () {
-  //         // TODO: Implement notifications action
-  //       },
-  //     ),
-  //     IconButton(
-  //       icon: const Icon(Icons.settings_outlined, color: AppColors.white),
-  //       onPressed: () {
-  //         Navigator.pushNamed(context, '/settings'); // Navigate to global settings
-  //       },
-  //     ),
-  //     const SizedBox(width: 4),
-  //   ];
-  // }
+  List<Widget> _getActions(BuildContext context, AppLocalizations l10n) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.notifications_outlined, color: AppColors.white),
+        onPressed: () {
+          Navigator.pushNamed(context, '/notifications');
+        },
+      ),
+      IconButton(
+        icon: const Icon(Icons.settings_outlined, color: AppColors.white),
+        onPressed: () {
+          Navigator.pushNamed(context, '/settings'); // Navigate to global settings
+        },
+      ),
+      const SizedBox(width: 4),
+    ];
+  }
   // --- End of Optional: Shared AppBar Logic ---
 
 
@@ -98,23 +98,23 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
 
     return Scaffold(
       // --- Optional: Shared AppBar ---
-      // appBar: AppBar(
-      //   backgroundColor: AppColors.primary500, // Or your education section's theme color
-      //   elevation: 0,
-      //   // leading: _getLeadingWidget(context, l10n), // Uncomment if using
-      //   title: Text(
-      //     appBarTitles[_selectedIndex],
-      //     style: const TextStyle(
-      //       color: AppColors.white,
-      //       fontSize: 20,
-      //       fontWeight: FontWeight.bold,
-      //       fontFamily: 'Amiri', // Or your desired font
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   // actions: _getActions(context, l10n), // Uncomment if using
-      //   // automaticallyImplyLeading: false, // Set based on your leading widget needs
-      // ),
+      appBar: AppBar(
+        backgroundColor: AppColors.primary500, // Or your education section's theme color
+        elevation: 0,
+        // leading: _getLeadingWidget(context, l10n), // Uncomment if using
+        title: Text(
+          _getAppBarTitles(l10n)[_selectedIndex],
+          style: const TextStyle(
+            color: AppColors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Amiri', // Or your desired font
+          ),
+        ),
+        centerTitle: true,
+        actions: _getActions(context, l10n), // Uncomment if using
+        automaticallyImplyLeading: false, // Set based on your leading widget needs
+      ),
       // --- End of Optional: Shared AppBar ---
 
       body: IndexedStack(

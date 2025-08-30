@@ -41,8 +41,7 @@ class _MainScreenState extends State<MainScreen> {
       IconButton(
         icon: const Icon(Icons.notifications_outlined, color: AppColors.white, size: 28),
         onPressed: () {
-          // TODO: Implement notifications action for all screens
-          // You might want to navigate to a common notifications screen or show a dialog
+          Navigator.pushNamed(context, '/notifications');
         },
       ),
       const SizedBox(width: 4), // Consistent spacing

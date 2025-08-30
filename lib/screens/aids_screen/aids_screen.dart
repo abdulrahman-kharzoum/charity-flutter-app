@@ -127,7 +127,6 @@ class AidsScreen extends StatelessWidget {
             String status;
             String providedBy = '';
             DateTime date;
-            String? encryptedQrDataField;
 
             if (item is PlanModel) {
               id = item.id.toString();
@@ -143,7 +142,6 @@ class AidsScreen extends StatelessWidget {
               date = item.beneficiary.receivedAt != null
                   ? DateTime.tryParse(item.beneficiary.receivedAt!)!
                   : DateTime.tryParse(item.beneficiary.turnUntil) ?? DateTime.now(); // Fallback to turnUntil or now
-              encryptedQrDataField = null; // Plans don't have QR codes directly
             } else if (item is SalaryModel) {
               id = item.id.toString();
               title = l10n.salaryAidTitle; // A generic title for salary
@@ -154,11 +152,10 @@ class AidsScreen extends StatelessWidget {
               status = item.hasTaken
                   ? 'received'
                   : (item.receivedAt == null ? 'pending' : 'readyForPickup');
-              providedBy = ''; // No direct provider for salary model
+              providedBy = 'Salary'; // No direct provider for salary model
               date = item.receivedAt != null
                   ? DateTime.tryParse(item.receivedAt!)!
                   : DateTime.tryParse(item.issuedAt) ?? DateTime.now(); // Fallback to issuedAt or now
-              encryptedQrDataField = null; // Salaries don't have QR codes directly
             } else {
               // Fallback for unexpected types
               id = 'unknown';
@@ -166,8 +163,8 @@ class AidsScreen extends StatelessWidget {
               description = '';
               statusText = '';
               status = '';
+              providedBy = '';
               date = DateTime.now(); // Fallback for unknown types
-              encryptedQrDataField = null;
             }
 
             return GestureDetector(
@@ -180,11 +177,12 @@ class AidsScreen extends StatelessWidget {
                     statusColor: _getAidStatusColor(status),
                     statusIcon: _getAidStatusIcon(status),
                     dateFormatted: _getFormattedDate(date, currentLocale),
-                    encryptedQRCodeData: encryptedQrDataField ?? "ERROR_NO_QR_DATA_FOR_AID_$id",
                     itemType: ItemType.aid,
                     providerName: providedBy,
                     status: _mapAidStatusToRequestStatus(status),
-                    requestType: item is PlanModel ? 'plan' : (item is SalaryModel ? 'salary' : null),
+                    requestType: item is PlanModel
+                        ? 'plan'
+                        : (item is SalaryModel ? 'salary' : 'unknown'),
                   );
                   Navigator.push(
                     context,
@@ -196,7 +194,7 @@ class AidsScreen extends StatelessWidget {
                     ),
                   );
                 },
-                child: _buildAidItem(context, item, _getFormattedDate(date, currentLocale), statusText, status));
+                child: _buildAidItem(context, item, _getFormattedDate(date, currentLocale), statusText, status, providedBy));
           },
         ),
       ],
@@ -234,7 +232,14 @@ class AidsScreen extends StatelessWidget {
     }
   }
 
-  Widget _buildAidItem(BuildContext context, dynamic item, String formattedDate, String statusText, String status) {
+  Widget _buildAidItem(
+    BuildContext context,
+    dynamic item,
+    String formattedDate,
+    String statusText,
+    String status,
+    String provider,
+  ) {
     String title;
     String description;
 
@@ -344,6 +349,17 @@ class AidsScreen extends StatelessWidget {
                 fontFamily: 'Lexend',
                 color: AppColors.myRequestsDescriptionText,
                 fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              provider,
+              textDirection: isDataRtl ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+              style: TextStyle(
+                fontFamily: 'Lexend',
+                color: AppColors.myRequestsDescriptionText,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

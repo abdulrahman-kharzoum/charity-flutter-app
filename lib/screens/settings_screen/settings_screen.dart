@@ -266,7 +266,11 @@ class SettingsScreen extends StatelessWidget {
         icon: state.notificationsEnabled ? Icons.notifications_active : Icons.notifications_off,
         title: localizations.notifications,
         subtitle: state.notificationsEnabled ? localizations.enabled : localizations.disabled,
-        onTap: () => settingsCubit.toggleNotifications(),
+        onTap: () => Navigator.pushNamed(context, '/notifications'),
+        trailing: Switch(
+          value: state.notificationsEnabled,
+          onChanged: (value) => settingsCubit.toggleNotifications(),
+        ),
       ),
       _buildSettingsTile(
         isDark: isDark,
@@ -293,6 +297,7 @@ class SettingsScreen extends StatelessWidget {
     required String subtitle,
     required VoidCallback onTap,
     bool hasChevron = false,
+    Widget? trailing,
   }) {
     // ... your existing code ...
     return Padding(
@@ -342,7 +347,11 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              if (hasChevron) Icon(Icons.chevron_right, color: isDark ? AppColors.slate400 : AppColors.slate500),
+              if (hasChevron)
+                Icon(Icons.chevron_right,
+                    color: isDark ? AppColors.slate400 : AppColors.slate500)
+              else if (trailing != null)
+                trailing,
             ],
           ),
         ),

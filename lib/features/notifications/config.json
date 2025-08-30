@@ -1,0 +1,31 @@
+{
+  "feature_name": "Notifications",
+  "apis": [
+    {
+      "name": "getMyNotifications",
+      "endpoint": "mobile/my-notifications",
+      "request_type": "GET",
+      "list_response_model": [
+        {
+          "name": "NotificationModel",
+          "fields": [
+            { "name": "id", "type": "String" },
+            { "name": "type", "type": "String" },
+            { "name": "data", "type": "NotificationDataModel" },
+            { "name": "readAt", "type": "String?", "json_key": "read_at" }
+          ]
+        },
+        {
+          "name": "NotificationDataModel",
+          "fields": [
+            { "name": "title", "type": "String" },
+            { "name": "body", "type": "String" },
+            { "name": "payload", "type": "List<dynamic>" },
+            { "name": "url", "type": "String?" },
+            { "name": "notifiedAt", "type": "String", "json_key": "notified_at" }
+          ]
+        }
+      ]
+    }
+  ]
+}
