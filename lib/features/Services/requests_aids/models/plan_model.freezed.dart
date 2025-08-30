@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PlanModel {
 
- int get id; String get name; String get type; String get description; int get portion; PlanBeneficiaryModel get beneficiary;
+ int get id; String get name;@JsonKey(name: 'category_id') int get categoryId; CategoryModel get category; String get description; int get portion; PlanBeneficiaryModel get beneficiary;
 /// Create a copy of PlanModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PlanModelCopyWith<PlanModel> get copyWith => _$PlanModelCopyWithImpl<PlanModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlanModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.type, type) || other.type == type)&&(identical(other.description, description) || other.description == description)&&(identical(other.portion, portion) || other.portion == portion)&&(identical(other.beneficiary, beneficiary) || other.beneficiary == beneficiary));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlanModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.category, category) || other.category == category)&&(identical(other.description, description) || other.description == description)&&(identical(other.portion, portion) || other.portion == portion)&&(identical(other.beneficiary, beneficiary) || other.beneficiary == beneficiary));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,type,description,portion,beneficiary);
+int get hashCode => Object.hash(runtimeType,id,name,categoryId,category,description,portion,beneficiary);
 
 @override
 String toString() {
-  return 'PlanModel(id: $id, name: $name, type: $type, description: $description, portion: $portion, beneficiary: $beneficiary)';
+  return 'PlanModel(id: $id, name: $name, categoryId: $categoryId, category: $category, description: $description, portion: $portion, beneficiary: $beneficiary)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $PlanModelCopyWith<$Res>  {
   factory $PlanModelCopyWith(PlanModel value, $Res Function(PlanModel) _then) = _$PlanModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String name, String type, String description, int portion, PlanBeneficiaryModel beneficiary
+ int id, String name,@JsonKey(name: 'category_id') int categoryId, CategoryModel category, String description, int portion, PlanBeneficiaryModel beneficiary
 });
 
 
-$PlanBeneficiaryModelCopyWith<$Res> get beneficiary;
+$CategoryModelCopyWith<$Res> get category;$PlanBeneficiaryModelCopyWith<$Res> get beneficiary;
 
 }
 /// @nodoc
@@ -65,18 +65,28 @@ class _$PlanModelCopyWithImpl<$Res>
 
 /// Create a copy of PlanModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? type = null,Object? description = null,Object? portion = null,Object? beneficiary = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? categoryId = null,Object? category = null,Object? description = null,Object? portion = null,Object? beneficiary = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as CategoryModel,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,portion: null == portion ? _self.portion : portion // ignore: cast_nullable_to_non_nullable
 as int,beneficiary: null == beneficiary ? _self.beneficiary : beneficiary // ignore: cast_nullable_to_non_nullable
 as PlanBeneficiaryModel,
   ));
 }
 /// Create a copy of PlanModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CategoryModelCopyWith<$Res> get category {
+  
+  return $CategoryModelCopyWith<$Res>(_self.category, (value) {
+    return _then(_self.copyWith(category: value));
+  });
+}/// Create a copy of PlanModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -167,10 +177,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name,  String type,  String description,  int portion,  PlanBeneficiaryModel beneficiary)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'category_id')  int categoryId,  CategoryModel category,  String description,  int portion,  PlanBeneficiaryModel beneficiary)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PlanModel() when $default != null:
-return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_that.beneficiary);case _:
+return $default(_that.id,_that.name,_that.categoryId,_that.category,_that.description,_that.portion,_that.beneficiary);case _:
   return orElse();
 
 }
@@ -188,10 +198,10 @@ return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name,  String type,  String description,  int portion,  PlanBeneficiaryModel beneficiary)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String name, @JsonKey(name: 'category_id')  int categoryId,  CategoryModel category,  String description,  int portion,  PlanBeneficiaryModel beneficiary)  $default,) {final _that = this;
 switch (_that) {
 case _PlanModel():
-return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_that.beneficiary);case _:
+return $default(_that.id,_that.name,_that.categoryId,_that.category,_that.description,_that.portion,_that.beneficiary);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -208,10 +218,10 @@ return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name,  String type,  String description,  int portion,  PlanBeneficiaryModel beneficiary)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String name, @JsonKey(name: 'category_id')  int categoryId,  CategoryModel category,  String description,  int portion,  PlanBeneficiaryModel beneficiary)?  $default,) {final _that = this;
 switch (_that) {
 case _PlanModel() when $default != null:
-return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_that.beneficiary);case _:
+return $default(_that.id,_that.name,_that.categoryId,_that.category,_that.description,_that.portion,_that.beneficiary);case _:
   return null;
 
 }
@@ -223,12 +233,13 @@ return $default(_that.id,_that.name,_that.type,_that.description,_that.portion,_
 @JsonSerializable()
 
 class _PlanModel implements PlanModel {
-  const _PlanModel({required this.id, required this.name, required this.type, required this.description, required this.portion, required this.beneficiary});
+  const _PlanModel({required this.id, required this.name, @JsonKey(name: 'category_id') required this.categoryId, required this.category, required this.description, required this.portion, required this.beneficiary});
   factory _PlanModel.fromJson(Map<String, dynamic> json) => _$PlanModelFromJson(json);
 
 @override final  int id;
 @override final  String name;
-@override final  String type;
+@override@JsonKey(name: 'category_id') final  int categoryId;
+@override final  CategoryModel category;
 @override final  String description;
 @override final  int portion;
 @override final  PlanBeneficiaryModel beneficiary;
@@ -246,16 +257,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlanModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.type, type) || other.type == type)&&(identical(other.description, description) || other.description == description)&&(identical(other.portion, portion) || other.portion == portion)&&(identical(other.beneficiary, beneficiary) || other.beneficiary == beneficiary));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlanModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.category, category) || other.category == category)&&(identical(other.description, description) || other.description == description)&&(identical(other.portion, portion) || other.portion == portion)&&(identical(other.beneficiary, beneficiary) || other.beneficiary == beneficiary));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,type,description,portion,beneficiary);
+int get hashCode => Object.hash(runtimeType,id,name,categoryId,category,description,portion,beneficiary);
 
 @override
 String toString() {
-  return 'PlanModel(id: $id, name: $name, type: $type, description: $description, portion: $portion, beneficiary: $beneficiary)';
+  return 'PlanModel(id: $id, name: $name, categoryId: $categoryId, category: $category, description: $description, portion: $portion, beneficiary: $beneficiary)';
 }
 
 
@@ -266,11 +277,11 @@ abstract mixin class _$PlanModelCopyWith<$Res> implements $PlanModelCopyWith<$Re
   factory _$PlanModelCopyWith(_PlanModel value, $Res Function(_PlanModel) _then) = __$PlanModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String name, String type, String description, int portion, PlanBeneficiaryModel beneficiary
+ int id, String name,@JsonKey(name: 'category_id') int categoryId, CategoryModel category, String description, int portion, PlanBeneficiaryModel beneficiary
 });
 
 
-@override $PlanBeneficiaryModelCopyWith<$Res> get beneficiary;
+@override $CategoryModelCopyWith<$Res> get category;@override $PlanBeneficiaryModelCopyWith<$Res> get beneficiary;
 
 }
 /// @nodoc
@@ -283,12 +294,13 @@ class __$PlanModelCopyWithImpl<$Res>
 
 /// Create a copy of PlanModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? type = null,Object? description = null,Object? portion = null,Object? beneficiary = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? categoryId = null,Object? category = null,Object? description = null,Object? portion = null,Object? beneficiary = null,}) {
   return _then(_PlanModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
+as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as CategoryModel,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,portion: null == portion ? _self.portion : portion // ignore: cast_nullable_to_non_nullable
 as int,beneficiary: null == beneficiary ? _self.beneficiary : beneficiary // ignore: cast_nullable_to_non_nullable
 as PlanBeneficiaryModel,
@@ -296,6 +308,15 @@ as PlanBeneficiaryModel,
 }
 
 /// Create a copy of PlanModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CategoryModelCopyWith<$Res> get category {
+  
+  return $CategoryModelCopyWith<$Res>(_self.category, (value) {
+    return _then(_self.copyWith(category: value));
+  });
+}/// Create a copy of PlanModel
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

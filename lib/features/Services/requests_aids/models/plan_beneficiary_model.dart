@@ -10,7 +10,7 @@ abstract class PlanBeneficiaryModel with _$PlanBeneficiaryModel {
     @JsonKey(name: 'beneficiary_id') required int beneficiaryId,
     @JsonKey(name: 'is_turn') required int isTurn,
     @JsonKey(name: 'turn_until') required String turnUntil,
-    @JsonKey(name: 'received_at') required String receivedAt,
+    @JsonKey(name: 'received_at') required String? receivedAt,
     @JsonKey(name: 'has_taken') required bool hasTaken,
   }) = _PlanBeneficiaryModel;
 

@@ -33,7 +33,7 @@ class ServicesRepository {
       final endpoint = 'mobile/beneficiaries/$beneficiaryId/requests';
 
       final response = await _apiService.get(
-        endpoint,
+          endpoint
       );
       final data = BeneficiaryRequestsModel.fromJson(response.data['data']);
 

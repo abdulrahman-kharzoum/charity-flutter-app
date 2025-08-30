@@ -1,6 +1,6 @@
 import 'instant_aid_model.dart';
-import 'prescription_model.dart';
 import 'need_request_model.dart';
+import 'prescription_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'beneficiary_requests_model.freezed.dart';

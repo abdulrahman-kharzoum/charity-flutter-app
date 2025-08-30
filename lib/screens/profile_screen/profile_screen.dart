@@ -16,9 +16,12 @@ import 'package:charity/l10n/app_localizations.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final Widget? child;
+  final bool showAppBar;
+  const ProfileScreen({super.key, this.child, this.showAppBar = true});
 
-  static final GlobalKey<_ProfileScreenState> profileScreenKey = GlobalKey<_ProfileScreenState>();
+  static final GlobalKey<_ProfileScreenState> profileScreenKey =
+      GlobalKey<_ProfileScreenState>();
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -119,13 +122,23 @@ class _ProfileScreenState extends State<ProfileScreen>
       return const Center(child: CircularProgressIndicator());
     } else if (profileState.status == SubmissionStatus.error) {
       return Center(child: Text('Error: ${profileState.failure?.message ?? "Unknown error"}'));
-    } else if (profileState.status == SubmissionStatus.success && profileState.data != null) {
+    } else if (profileState.status == SubmissionStatus.success &&
+        profileState.data != null) {
       final beneficiaryProfile = profileState.data!;
+
+      // if a child widget is provided, display it. Otherwise, show default content.
+      if (widget.child != null) {
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          body: widget.child,
+        );
+      }
       return Scaffold(
         backgroundColor: Colors.transparent,
         body: CustomScrollView(
           slivers: [
-            _buildAppBar(context, isDark, localizations),
+            if (widget.showAppBar)
+              _buildAppBar(context, isDark, localizations),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -138,12 +151,31 @@ class _ProfileScreenState extends State<ProfileScreen>
                         localizations,
                         isDark),
                     const SizedBox(height: 24),
-                    _buildInfoTile(localizations.nationalNumber, beneficiaryProfile.nationalNumber, Icons.credit_card_outlined, AppColors.amber700),
-                    _buildInfoTile(localizations.phoneNumber, beneficiaryProfile.phoneNumber, Icons.phone_outlined, AppColors.primary600),
-                    _buildInfoTile(localizations.address, beneficiaryProfile.address, Icons.home_outlined, AppColors.slate600),
-                    _buildInfoTile(localizations.job, beneficiaryProfile.job, Icons.work_outlined, AppColors.indigo700),
-                    _buildInfoTile(localizations.monthlyIncome, '${beneficiaryProfile.monthlyIncome} SYP', Icons.attach_money_outlined, AppColors.green),
-                    _buildInfoTile(localizations.medicalHistory, beneficiaryProfile.medicalHistory ?? localizations.notAvailable, Icons.medical_information_outlined, Colors.blue),
+                    _buildInfoTile(
+                        localizations.nationalNumber,
+                        beneficiaryProfile.nationalNumber,
+                        Icons.credit_card_outlined,
+                        AppColors.amber700),
+                    _buildInfoTile(
+                        localizations.phoneNumber,
+                        beneficiaryProfile.phoneNumber,
+                        Icons.phone_outlined,
+                        AppColors.primary600),
+                    _buildInfoTile(localizations.address,
+                        beneficiaryProfile.address, Icons.home_outlined, AppColors.slate600),
+                    _buildInfoTile(localizations.job, beneficiaryProfile.job,
+                        Icons.work_outlined, AppColors.indigo700),
+                    _buildInfoTile(
+                        localizations.monthlyIncome,
+                        '${beneficiaryProfile.monthlyIncome} SYP',
+                        Icons.attach_money_outlined,
+                        AppColors.green),
+                    _buildInfoTile(
+                        localizations.medicalHistory,
+                        beneficiaryProfile.medicalHistory ??
+                            localizations.notAvailable,
+                        Icons.medical_information_outlined,
+                        Colors.blue),
                   ],
                 ),
               ),

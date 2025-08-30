@@ -18,10 +18,18 @@
           "fields": [
             { "name": "id", "type": "int" },
             { "name": "name", "type": "String" },
-            { "name": "type", "type": "String" },
+            { "name": "categoryId", "type": "int", "json_key": "category_id" },
+            { "name": "category", "type": "CategoryModel" },
             { "name": "description", "type": "String" },
-            { "name": "portion", "type": "String" },
+            { "name": "portion", "type": "int" },
             { "name": "beneficiary", "type": "PlanBeneficiaryModel" }
+          ]
+        },
+        {
+          "name": "CategoryModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "name", "type": "String" }
           ]
         },
         {
@@ -31,7 +39,7 @@
             { "name": "beneficiaryId", "type": "int", "json_key": "beneficiary_id" },
             { "name": "isTurn", "type": "int", "json_key": "is_turn" },
             { "name": "turnUntil", "type": "String", "json_key": "turn_until" },
-            { "name": "receivedAt", "type": "String", "json_key": "received_at" },
+            { "name": "receivedAt", "type": "String?", "json_key": "received_at" },
             { "name": "hasTaken", "type": "bool", "json_key": "has_taken" }
           ]
         },
@@ -41,7 +49,7 @@
             { "name": "id", "type": "int" },
             { "name": "amount", "type": "int" },
             { "name": "issuedAt", "type": "String", "json_key": "issued_at" },
-            { "name": "receivedAt", "type": "String", "json_key": "received_at" },
+            { "name": "receivedAt", "type": "String?", "json_key": "received_at" },
             { "name": "beneficiaryId", "type": "int", "json_key": "beneficiary_id" },
             { "name": "hasTaken", "type": "bool", "json_key": "has_taken" }
           ]

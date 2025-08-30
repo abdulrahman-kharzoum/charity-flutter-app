@@ -1,3 +1,4 @@
+import 'category_model.dart';
 import 'plan_beneficiary_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,7 +10,8 @@ abstract class PlanModel with _$PlanModel {
   const factory PlanModel({
     required int id,
     required String name,
-    required String type,
+    @JsonKey(name: 'category_id') required int categoryId,
+    required CategoryModel category,
     required String description,
     required int portion,
     required PlanBeneficiaryModel beneficiary,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:charity/screens/profile_screen/profile_screen.dart'; // Import ProfileScreen
-import 'package:flutter_lucide/flutter_lucide.dart'; // Import LucideIcons
 import 'package:charity/features/Services/profile/models/beneficiary_profile_model.dart';
 import 'package:charity/features/Services/profile/models/profile_child_model.dart'; // Import ProfileChildModel
 import 'package:charity/l10n/app_localizations.dart';
@@ -88,15 +86,10 @@ class FamilyInfoScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.profileFamilyInfo, style: const TextStyle(color: AppColors.white)),
+        title: Text(l10n.profileFamilyInfo,
+            style: const TextStyle(color: AppColors.white)),
         backgroundColor: AppColors.primary500,
         iconTheme: const IconThemeData(color: AppColors.white),
-        leading: IconButton(
-          icon: const Icon(LucideIcons.menu, color: AppColors.white),
-          onPressed: () {
-            ProfileScreen.profileScreenKey.currentState?.toggleDrawer();
-          },
-        ),
       ),
       body: children.isEmpty
           ? Center(

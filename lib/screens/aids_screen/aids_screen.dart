@@ -139,7 +139,7 @@ class AidsScreen extends StatelessWidget {
               status = item.beneficiary.hasTaken
                   ? 'received'
                   : (item.beneficiary.receivedAt == null ? 'pending' : 'readyForPickup');
-              providedBy = item.type; // Using type as provider for plans
+              providedBy = item.category.name; // Using type as provider for plans
               date = item.beneficiary.receivedAt != null
                   ? DateTime.tryParse(item.beneficiary.receivedAt!)!
                   : DateTime.tryParse(item.beneficiary.turnUntil) ?? DateTime.now(); // Fallback to turnUntil or now

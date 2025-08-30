@@ -1,3 +1,4 @@
+import 'package:charity/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/screens/profile_screen/personal_info_screen.dart';
@@ -222,31 +223,46 @@ class ProfileDrawer extends StatelessWidget {
                           _buildDrawerItem(context, l10n.profilePersonalInfo, Icons.person_outline, () {
                             Navigator.of(context).pop(); // Close drawer
                             if (beneficiaryProfile != null) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => PersonalInfoScreen(
-                                  beneficiaryProfile: beneficiaryProfile!,
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileScreen(
+                                    showAppBar: false,
+                                    child: PersonalInfoScreen(
+                                      beneficiaryProfile: beneficiaryProfile!,
+                                    ),
+                                  ),
                                 ),
-                              ));
+                              );
                             }
                           }, isRtl),
                           _buildDrawerItem(context, l10n.profileFamilyInfo, Icons.people_outline, () {
                             Navigator.of(context).pop(); // Close drawer
                             if (beneficiaryProfile != null) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => FamilyInfoScreen(
-                                  beneficiaryProfile: beneficiaryProfile!,
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileScreen(
+                                    showAppBar: false,
+                                    child: FamilyInfoScreen(
+                                      beneficiaryProfile: beneficiaryProfile!,
+                                    ),
+                                  ),
                                 ),
-                              ));
+                              );
                             }
                           }, isRtl),
                           _buildDrawerItem(context, l10n.profileDependentsInfo, Icons.child_care_outlined, () {
                             Navigator.of(context).pop(); // Close drawer
                             if (beneficiaryProfile != null) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => DependentsInfoScreen(
-                                  beneficiaryProfile: beneficiaryProfile!,
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileScreen(
+                                    showAppBar: false,
+                                    child: DependentsInfoScreen(
+                                      beneficiaryProfile: beneficiaryProfile!,
+                                    ),
+                                  ),
                                 ),
-                              ));
+                              );
                             }
                           }, isRtl),
                           _buildDrawerItem(context, l10n.profileAvailableAid, Icons.healing_outlined, () {

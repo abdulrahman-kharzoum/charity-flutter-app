@@ -13,7 +13,7 @@ _PlanBeneficiaryModel _$PlanBeneficiaryModelFromJson(
   beneficiaryId: (json['beneficiary_id'] as num).toInt(),
   isTurn: (json['is_turn'] as num).toInt(),
   turnUntil: json['turn_until'] as String,
-  receivedAt: json['received_at'] as String,
+  receivedAt: json['received_at'] as String?,
   hasTaken: json['has_taken'] as bool,
 );
 

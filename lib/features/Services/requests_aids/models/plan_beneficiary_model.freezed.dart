@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PlanBeneficiaryModel {
 
-@JsonKey(name: 'pivot_id') int get pivotId;@JsonKey(name: 'beneficiary_id') int get beneficiaryId;@JsonKey(name: 'is_turn') int get isTurn;@JsonKey(name: 'turn_until') String get turnUntil;@JsonKey(name: 'received_at') String get receivedAt;@JsonKey(name: 'has_taken') bool get hasTaken;
+@JsonKey(name: 'pivot_id') int get pivotId;@JsonKey(name: 'beneficiary_id') int get beneficiaryId;@JsonKey(name: 'is_turn') int get isTurn;@JsonKey(name: 'turn_until') String get turnUntil;@JsonKey(name: 'received_at') String? get receivedAt;@JsonKey(name: 'has_taken') bool get hasTaken;
 /// Create a copy of PlanBeneficiaryModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PlanBeneficiaryModelCopyWith<$Res>  {
   factory $PlanBeneficiaryModelCopyWith(PlanBeneficiaryModel value, $Res Function(PlanBeneficiaryModel) _then) = _$PlanBeneficiaryModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'pivot_id') int pivotId,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'is_turn') int isTurn,@JsonKey(name: 'turn_until') String turnUntil,@JsonKey(name: 'received_at') String receivedAt,@JsonKey(name: 'has_taken') bool hasTaken
+@JsonKey(name: 'pivot_id') int pivotId,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'is_turn') int isTurn,@JsonKey(name: 'turn_until') String turnUntil,@JsonKey(name: 'received_at') String? receivedAt,@JsonKey(name: 'has_taken') bool hasTaken
 });
 
 
@@ -65,14 +65,14 @@ class _$PlanBeneficiaryModelCopyWithImpl<$Res>
 
 /// Create a copy of PlanBeneficiaryModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pivotId = null,Object? beneficiaryId = null,Object? isTurn = null,Object? turnUntil = null,Object? receivedAt = null,Object? hasTaken = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pivotId = null,Object? beneficiaryId = null,Object? isTurn = null,Object? turnUntil = null,Object? receivedAt = freezed,Object? hasTaken = null,}) {
   return _then(_self.copyWith(
 pivotId: null == pivotId ? _self.pivotId : pivotId // ignore: cast_nullable_to_non_nullable
 as int,beneficiaryId: null == beneficiaryId ? _self.beneficiaryId : beneficiaryId // ignore: cast_nullable_to_non_nullable
 as int,isTurn: null == isTurn ? _self.isTurn : isTurn // ignore: cast_nullable_to_non_nullable
 as int,turnUntil: null == turnUntil ? _self.turnUntil : turnUntil // ignore: cast_nullable_to_non_nullable
-as String,receivedAt: null == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
-as String,hasTaken: null == hasTaken ? _self.hasTaken : hasTaken // ignore: cast_nullable_to_non_nullable
+as String,receivedAt: freezed == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
+as String?,hasTaken: null == hasTaken ? _self.hasTaken : hasTaken // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'pivot_id')  int pivotId, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'is_turn')  int isTurn, @JsonKey(name: 'turn_until')  String turnUntil, @JsonKey(name: 'received_at')  String receivedAt, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'pivot_id')  int pivotId, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'is_turn')  int isTurn, @JsonKey(name: 'turn_until')  String turnUntil, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PlanBeneficiaryModel() when $default != null:
 return $default(_that.pivotId,_that.beneficiaryId,_that.isTurn,_that.turnUntil,_that.receivedAt,_that.hasTaken);case _:
@@ -179,7 +179,7 @@ return $default(_that.pivotId,_that.beneficiaryId,_that.isTurn,_that.turnUntil,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'pivot_id')  int pivotId, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'is_turn')  int isTurn, @JsonKey(name: 'turn_until')  String turnUntil, @JsonKey(name: 'received_at')  String receivedAt, @JsonKey(name: 'has_taken')  bool hasTaken)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'pivot_id')  int pivotId, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'is_turn')  int isTurn, @JsonKey(name: 'turn_until')  String turnUntil, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'has_taken')  bool hasTaken)  $default,) {final _that = this;
 switch (_that) {
 case _PlanBeneficiaryModel():
 return $default(_that.pivotId,_that.beneficiaryId,_that.isTurn,_that.turnUntil,_that.receivedAt,_that.hasTaken);case _:
@@ -199,7 +199,7 @@ return $default(_that.pivotId,_that.beneficiaryId,_that.isTurn,_that.turnUntil,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'pivot_id')  int pivotId, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'is_turn')  int isTurn, @JsonKey(name: 'turn_until')  String turnUntil, @JsonKey(name: 'received_at')  String receivedAt, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'pivot_id')  int pivotId, @JsonKey(name: 'beneficiary_id')  int beneficiaryId, @JsonKey(name: 'is_turn')  int isTurn, @JsonKey(name: 'turn_until')  String turnUntil, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'has_taken')  bool hasTaken)?  $default,) {final _that = this;
 switch (_that) {
 case _PlanBeneficiaryModel() when $default != null:
 return $default(_that.pivotId,_that.beneficiaryId,_that.isTurn,_that.turnUntil,_that.receivedAt,_that.hasTaken);case _:
@@ -221,7 +221,7 @@ class _PlanBeneficiaryModel implements PlanBeneficiaryModel {
 @override@JsonKey(name: 'beneficiary_id') final  int beneficiaryId;
 @override@JsonKey(name: 'is_turn') final  int isTurn;
 @override@JsonKey(name: 'turn_until') final  String turnUntil;
-@override@JsonKey(name: 'received_at') final  String receivedAt;
+@override@JsonKey(name: 'received_at') final  String? receivedAt;
 @override@JsonKey(name: 'has_taken') final  bool hasTaken;
 
 /// Create a copy of PlanBeneficiaryModel
@@ -257,7 +257,7 @@ abstract mixin class _$PlanBeneficiaryModelCopyWith<$Res> implements $PlanBenefi
   factory _$PlanBeneficiaryModelCopyWith(_PlanBeneficiaryModel value, $Res Function(_PlanBeneficiaryModel) _then) = __$PlanBeneficiaryModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'pivot_id') int pivotId,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'is_turn') int isTurn,@JsonKey(name: 'turn_until') String turnUntil,@JsonKey(name: 'received_at') String receivedAt,@JsonKey(name: 'has_taken') bool hasTaken
+@JsonKey(name: 'pivot_id') int pivotId,@JsonKey(name: 'beneficiary_id') int beneficiaryId,@JsonKey(name: 'is_turn') int isTurn,@JsonKey(name: 'turn_until') String turnUntil,@JsonKey(name: 'received_at') String? receivedAt,@JsonKey(name: 'has_taken') bool hasTaken
 });
 
 
@@ -274,14 +274,14 @@ class __$PlanBeneficiaryModelCopyWithImpl<$Res>
 
 /// Create a copy of PlanBeneficiaryModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pivotId = null,Object? beneficiaryId = null,Object? isTurn = null,Object? turnUntil = null,Object? receivedAt = null,Object? hasTaken = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pivotId = null,Object? beneficiaryId = null,Object? isTurn = null,Object? turnUntil = null,Object? receivedAt = freezed,Object? hasTaken = null,}) {
   return _then(_PlanBeneficiaryModel(
 pivotId: null == pivotId ? _self.pivotId : pivotId // ignore: cast_nullable_to_non_nullable
 as int,beneficiaryId: null == beneficiaryId ? _self.beneficiaryId : beneficiaryId // ignore: cast_nullable_to_non_nullable
 as int,isTurn: null == isTurn ? _self.isTurn : isTurn // ignore: cast_nullable_to_non_nullable
 as int,turnUntil: null == turnUntil ? _self.turnUntil : turnUntil // ignore: cast_nullable_to_non_nullable
-as String,receivedAt: null == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
-as String,hasTaken: null == hasTaken ? _self.hasTaken : hasTaken // ignore: cast_nullable_to_non_nullable
+as String,receivedAt: freezed == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
+as String?,hasTaken: null == hasTaken ? _self.hasTaken : hasTaken // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

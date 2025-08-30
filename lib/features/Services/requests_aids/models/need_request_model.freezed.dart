@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NeedRequestModel {
 
- int get id; String get item; int get amount; String get reason;@JsonKey(name: 'urgency_level') String get urgencyLevel;@JsonKey(name: 'request_status') String get requestStatus;@JsonKey(name: 'received_at') String? get receivedAt;@JsonKey(name: 'description') String? get description;
+ int get id; String get reason; String? get description;@JsonKey(name: 'request_status') String get requestStatus;@JsonKey(name: 'received_at') String? get receivedAt;
 /// Create a copy of NeedRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $NeedRequestModelCopyWith<NeedRequestModel> get copyWith => _$NeedRequestModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NeedRequestModel&&(identical(other.id, id) || other.id == id)&&(identical(other.item, item) || other.item == item)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.urgencyLevel, urgencyLevel) || other.urgencyLevel == urgencyLevel)&&(identical(other.requestStatus, requestStatus) || other.requestStatus == requestStatus)&&(identical(other.receivedAt, receivedAt) || other.receivedAt == receivedAt)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NeedRequestModel&&(identical(other.id, id) || other.id == id)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.description, description) || other.description == description)&&(identical(other.requestStatus, requestStatus) || other.requestStatus == requestStatus)&&(identical(other.receivedAt, receivedAt) || other.receivedAt == receivedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,item,amount,reason,urgencyLevel,requestStatus,receivedAt,description);
+int get hashCode => Object.hash(runtimeType,id,reason,description,requestStatus,receivedAt);
 
 @override
 String toString() {
-  return 'NeedRequestModel(id: $id, item: $item, amount: $amount, reason: $reason, urgencyLevel: $urgencyLevel, requestStatus: $requestStatus, receivedAt: $receivedAt, description: $description)';
+  return 'NeedRequestModel(id: $id, reason: $reason, description: $description, requestStatus: $requestStatus, receivedAt: $receivedAt)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $NeedRequestModelCopyWith<$Res>  {
   factory $NeedRequestModelCopyWith(NeedRequestModel value, $Res Function(NeedRequestModel) _then) = _$NeedRequestModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String item, int amount, String reason,@JsonKey(name: 'urgency_level') String urgencyLevel,@JsonKey(name: 'request_status') String requestStatus,@JsonKey(name: 'received_at') String? receivedAt,@JsonKey(name: 'description') String? description
+ int id, String reason, String? description,@JsonKey(name: 'request_status') String requestStatus,@JsonKey(name: 'received_at') String? receivedAt
 });
 
 
@@ -65,16 +65,13 @@ class _$NeedRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of NeedRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? item = null,Object? amount = null,Object? reason = null,Object? urgencyLevel = null,Object? requestStatus = null,Object? receivedAt = freezed,Object? description = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? reason = null,Object? description = freezed,Object? requestStatus = null,Object? receivedAt = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,reason: null == reason ? _self.reason : reason // ignore: cast_nullable_to_non_nullable
-as String,urgencyLevel: null == urgencyLevel ? _self.urgencyLevel : urgencyLevel // ignore: cast_nullable_to_non_nullable
-as String,requestStatus: null == requestStatus ? _self.requestStatus : requestStatus // ignore: cast_nullable_to_non_nullable
+as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,requestStatus: null == requestStatus ? _self.requestStatus : requestStatus // ignore: cast_nullable_to_non_nullable
 as String,receivedAt: freezed == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
-as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -160,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String item,  int amount,  String reason, @JsonKey(name: 'urgency_level')  String urgencyLevel, @JsonKey(name: 'request_status')  String requestStatus, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'description')  String? description)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String reason,  String? description, @JsonKey(name: 'request_status')  String requestStatus, @JsonKey(name: 'received_at')  String? receivedAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NeedRequestModel() when $default != null:
-return $default(_that.id,_that.item,_that.amount,_that.reason,_that.urgencyLevel,_that.requestStatus,_that.receivedAt,_that.description);case _:
+return $default(_that.id,_that.reason,_that.description,_that.requestStatus,_that.receivedAt);case _:
   return orElse();
 
 }
@@ -181,10 +178,10 @@ return $default(_that.id,_that.item,_that.amount,_that.reason,_that.urgencyLevel
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String item,  int amount,  String reason, @JsonKey(name: 'urgency_level')  String urgencyLevel, @JsonKey(name: 'request_status')  String requestStatus, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'description')  String? description)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String reason,  String? description, @JsonKey(name: 'request_status')  String requestStatus, @JsonKey(name: 'received_at')  String? receivedAt)  $default,) {final _that = this;
 switch (_that) {
 case _NeedRequestModel():
-return $default(_that.id,_that.item,_that.amount,_that.reason,_that.urgencyLevel,_that.requestStatus,_that.receivedAt,_that.description);case _:
+return $default(_that.id,_that.reason,_that.description,_that.requestStatus,_that.receivedAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +198,10 @@ return $default(_that.id,_that.item,_that.amount,_that.reason,_that.urgencyLevel
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String item,  int amount,  String reason, @JsonKey(name: 'urgency_level')  String urgencyLevel, @JsonKey(name: 'request_status')  String requestStatus, @JsonKey(name: 'received_at')  String? receivedAt, @JsonKey(name: 'description')  String? description)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String reason,  String? description, @JsonKey(name: 'request_status')  String requestStatus, @JsonKey(name: 'received_at')  String? receivedAt)?  $default,) {final _that = this;
 switch (_that) {
 case _NeedRequestModel() when $default != null:
-return $default(_that.id,_that.item,_that.amount,_that.reason,_that.urgencyLevel,_that.requestStatus,_that.receivedAt,_that.description);case _:
+return $default(_that.id,_that.reason,_that.description,_that.requestStatus,_that.receivedAt);case _:
   return null;
 
 }
@@ -216,17 +213,14 @@ return $default(_that.id,_that.item,_that.amount,_that.reason,_that.urgencyLevel
 @JsonSerializable()
 
 class _NeedRequestModel implements NeedRequestModel {
-  const _NeedRequestModel({required this.id, required this.item, required this.amount, required this.reason, @JsonKey(name: 'urgency_level') required this.urgencyLevel, @JsonKey(name: 'request_status') required this.requestStatus, @JsonKey(name: 'received_at') required this.receivedAt, @JsonKey(name: 'description') this.description});
+  const _NeedRequestModel({required this.id, required this.reason, this.description, @JsonKey(name: 'request_status') required this.requestStatus, @JsonKey(name: 'received_at') this.receivedAt});
   factory _NeedRequestModel.fromJson(Map<String, dynamic> json) => _$NeedRequestModelFromJson(json);
 
 @override final  int id;
-@override final  String item;
-@override final  int amount;
 @override final  String reason;
-@override@JsonKey(name: 'urgency_level') final  String urgencyLevel;
+@override final  String? description;
 @override@JsonKey(name: 'request_status') final  String requestStatus;
 @override@JsonKey(name: 'received_at') final  String? receivedAt;
-@override@JsonKey(name: 'description') final  String? description;
 
 /// Create a copy of NeedRequestModel
 /// with the given fields replaced by the non-null parameter values.
@@ -241,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NeedRequestModel&&(identical(other.id, id) || other.id == id)&&(identical(other.item, item) || other.item == item)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.urgencyLevel, urgencyLevel) || other.urgencyLevel == urgencyLevel)&&(identical(other.requestStatus, requestStatus) || other.requestStatus == requestStatus)&&(identical(other.receivedAt, receivedAt) || other.receivedAt == receivedAt)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NeedRequestModel&&(identical(other.id, id) || other.id == id)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.description, description) || other.description == description)&&(identical(other.requestStatus, requestStatus) || other.requestStatus == requestStatus)&&(identical(other.receivedAt, receivedAt) || other.receivedAt == receivedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,item,amount,reason,urgencyLevel,requestStatus,receivedAt,description);
+int get hashCode => Object.hash(runtimeType,id,reason,description,requestStatus,receivedAt);
 
 @override
 String toString() {
-  return 'NeedRequestModel(id: $id, item: $item, amount: $amount, reason: $reason, urgencyLevel: $urgencyLevel, requestStatus: $requestStatus, receivedAt: $receivedAt, description: $description)';
+  return 'NeedRequestModel(id: $id, reason: $reason, description: $description, requestStatus: $requestStatus, receivedAt: $receivedAt)';
 }
 
 
@@ -261,7 +255,7 @@ abstract mixin class _$NeedRequestModelCopyWith<$Res> implements $NeedRequestMod
   factory _$NeedRequestModelCopyWith(_NeedRequestModel value, $Res Function(_NeedRequestModel) _then) = __$NeedRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String item, int amount, String reason,@JsonKey(name: 'urgency_level') String urgencyLevel,@JsonKey(name: 'request_status') String requestStatus,@JsonKey(name: 'received_at') String? receivedAt,@JsonKey(name: 'description') String? description
+ int id, String reason, String? description,@JsonKey(name: 'request_status') String requestStatus,@JsonKey(name: 'received_at') String? receivedAt
 });
 
 
@@ -278,16 +272,13 @@ class __$NeedRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of NeedRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? item = null,Object? amount = null,Object? reason = null,Object? urgencyLevel = null,Object? requestStatus = null,Object? receivedAt = freezed,Object? description = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? reason = null,Object? description = freezed,Object? requestStatus = null,Object? receivedAt = freezed,}) {
   return _then(_NeedRequestModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as String,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,reason: null == reason ? _self.reason : reason // ignore: cast_nullable_to_non_nullable
-as String,urgencyLevel: null == urgencyLevel ? _self.urgencyLevel : urgencyLevel // ignore: cast_nullable_to_non_nullable
-as String,requestStatus: null == requestStatus ? _self.requestStatus : requestStatus // ignore: cast_nullable_to_non_nullable
+as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String?,requestStatus: null == requestStatus ? _self.requestStatus : requestStatus // ignore: cast_nullable_to_non_nullable
 as String,receivedAt: freezed == receivedAt ? _self.receivedAt : receivedAt // ignore: cast_nullable_to_non_nullable
-as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
