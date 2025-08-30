@@ -837,4 +837,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noNotifications => 'No notifications found.';
+
+  @override
+  String get partnerLabel => 'Partner';
+
+  @override
+  String get partnersInfoTitle => 'Partners Information';
+
+  @override
+  String get unclesInfoTitle => 'Uncles Information';
+
+  @override
+  String get backButton => 'Back';
 }

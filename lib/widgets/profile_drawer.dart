@@ -179,6 +179,30 @@ class ProfileDrawer extends StatelessWidget {
     );
   }
 
+  Widget _buildBackButton(BuildContext context, AppLocalizations l10n, bool isRtl) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+      child: Center(
+        child: OutlinedButton.icon(
+          icon: Icon(isRtl ? Icons.arrow_forward : Icons.arrow_back, color: AppColors.white, size: 20),
+          label: Text(
+            l10n.backButton,
+            style: const TextStyle(color: AppColors.white, fontSize: 15, fontFamily: 'Lexend', fontWeight: FontWeight.w600),
+          ),
+          style: OutlinedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+            side: BorderSide(color: AppColors.white.withOpacity(0.5)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+            foregroundColor: AppColors.white.withOpacity(0.8),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop(); // Navigate back
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -226,10 +250,10 @@ class ProfileDrawer extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ProfileScreen(
-                                    showAppBar: false,
-                                    child: PersonalInfoScreen(
+                                    initialChild: PersonalInfoScreen(
                                       beneficiaryProfile: beneficiaryProfile!,
                                     ),
+                                    titleKey: 'profilePersonalInfo', // Pass title key
                                   ),
                                 ),
                               );
@@ -241,10 +265,10 @@ class ProfileDrawer extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ProfileScreen(
-                                    showAppBar: false,
-                                    child: FamilyInfoScreen(
+                                    initialChild: FamilyInfoScreen(
                                       beneficiaryProfile: beneficiaryProfile!,
                                     ),
+                                    titleKey: 'profileFamilyInfo', // Pass title key
                                   ),
                                 ),
                               );
@@ -256,10 +280,10 @@ class ProfileDrawer extends StatelessWidget {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => ProfileScreen(
-                                    showAppBar: false,
-                                    child: DependentsInfoScreen(
+                                    initialChild: DependentsInfoScreen(
                                       beneficiaryProfile: beneficiaryProfile!,
                                     ),
+                                    titleKey: 'profileDependentsInfo', // Pass title key
                                   ),
                                 ),
                               );
@@ -276,6 +300,7 @@ class ProfileDrawer extends StatelessWidget {
                         ],
                       ),
                     ),
+                    _buildBackButton(context, l10n, isRtl),
                     _buildLogoutButton(context, l10n, isRtl),
                   ],
                 ),

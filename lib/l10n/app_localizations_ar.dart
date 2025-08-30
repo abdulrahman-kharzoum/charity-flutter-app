@@ -837,4 +837,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noNotifications => 'لا توجد إشعارات.';
+
+  @override
+  String get partnerLabel => 'شريك';
+
+  @override
+  String get partnersInfoTitle => 'معلومات الشركاء';
+
+  @override
+  String get unclesInfoTitle => 'معلومات الأعمام';
+
+  @override
+  String get backButton => 'رجوع';
 }

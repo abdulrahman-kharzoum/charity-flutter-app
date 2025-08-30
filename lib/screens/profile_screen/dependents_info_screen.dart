@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:charity/features/Services/profile/models/beneficiary_profile_model.dart';
 import 'package:charity/features/Services/profile/models/uncle_model.dart';
+import 'package:charity/features/Services/profile/models/partner_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
+import 'package:charity/screens/profile_screen/profile_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:charity/theme/color.dart';
 
 class DependentsInfoScreen extends StatelessWidget {
@@ -77,19 +82,46 @@ class DependentsInfoScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildPartnerCard(BuildContext context, PartnerModel partner, int index) {
+    final l10n = AppLocalizations.of(context)!;
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 2,
+      color: AppColors.primary50,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${l10n.partnerLabel} ${index + 1}',
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.primary500,
+              ),
+            ),
+            const Divider(color: AppColors.primary100),
+            _buildInfoRow(l10n.firstName, partner.firstName, Icons.person_outline, AppColors.slate700),
+            _buildInfoRow(l10n.lastName, partner.lastName, Icons.person_outline, AppColors.slate700),
+            _buildInfoRow(l10n.job, partner.job, Icons.work_outline, AppColors.amber700),
+            _buildInfoRow(l10n.gender, partner.gender, Icons.wc_outlined, AppColors.indigo700),
+            _buildInfoRow(l10n.healthStatus, partner.healthStatus, Icons.health_and_safety_outlined, AppColors.green),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final uncles = beneficiaryProfile.uncles;
+    final partners = beneficiaryProfile.partners;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.profileDependentsInfo,
-            style: const TextStyle(color: AppColors.white)),
-        backgroundColor: AppColors.primary500,
-        iconTheme: const IconThemeData(color: AppColors.white),
-      ),
-      body: uncles.isEmpty
+      body: (uncles.isEmpty && partners.isEmpty)
           ? Center(
               child: Text(
                 l10n.noDependentsInfo,
@@ -97,12 +129,43 @@ class DependentsInfoScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             )
-          : ListView.builder(
+          : ListView(
               padding: const EdgeInsets.all(16.0),
-              itemCount: uncles.length,
-              itemBuilder: (context, index) {
-                return _buildUncleCard(context, uncles[index], index);
-              },
+              children: [
+                if (partners.isNotEmpty) ...[
+                  Text(
+                    l10n.partnersInfoTitle,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary500,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ...partners.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final partner = entry.value;
+                    return _buildPartnerCard(context, partner, index);
+                  }).toList(),
+                  const SizedBox(height: 20),
+                ],
+                if (uncles.isNotEmpty) ...[
+                  Text(
+                    l10n.unclesInfoTitle,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary500,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ...uncles.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final uncle = entry.value;
+                    return _buildUncleCard(context, uncle, index);
+                  }).toList(),
+                ],
+              ],
             ),
     );
   }

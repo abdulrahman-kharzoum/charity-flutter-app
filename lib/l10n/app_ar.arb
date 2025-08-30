@@ -280,5 +280,9 @@
   "address": "العنوان",
   "monthlyIncome": "الدخل الشهري",
   "pending": "قيد الانتظار",
-  "noNotifications": "لا توجد إشعارات."
+  "noNotifications": "لا توجد إشعارات.",
+  "partnerLabel": "شريك",
+  "partnersInfoTitle": "معلومات الشركاء",
+  "unclesInfoTitle": "معلومات الأعمام",
+  "backButton": "رجوع"
 }

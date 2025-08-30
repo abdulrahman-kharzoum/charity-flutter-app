@@ -331,5 +331,9 @@
   "address": "Address",
   "monthlyIncome": "Monthly Income",
   "pending": "Pending",
-  "noNotifications": "No notifications found."
+  "noNotifications": "No notifications found.",
+  "partnerLabel": "Partner",
+  "partnersInfoTitle": "Partners Information",
+  "unclesInfoTitle": "Uncles Information",
+  "backButton": "Back"
 }

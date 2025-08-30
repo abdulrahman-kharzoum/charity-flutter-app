@@ -1714,6 +1714,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No notifications found.'**
   String get noNotifications;
+
+  /// No description provided for @partnerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Partner'**
+  String get partnerLabel;
+
+  /// No description provided for @partnersInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Partners Information'**
+  String get partnersInfoTitle;
+
+  /// No description provided for @unclesInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Uncles Information'**
+  String get unclesInfoTitle;
+
+  /// No description provided for @backButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get backButton;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

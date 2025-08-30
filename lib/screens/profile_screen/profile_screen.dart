@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_animate/flutter_animate.dart'; // Keep for other animations if needed
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
-import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
 import 'package:charity/core/shared/local_network.dart';
-import 'package:charity/core/services/status.dart'; // Assuming SubmissionStatus is here
+import 'package:charity/core/services/status.dart';
 import 'package:charity/core/services/service_locator.dart';
 import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
 import 'package:charity/widgets/profile_drawer.dart';
@@ -16,9 +12,9 @@ import 'package:charity/l10n/app_localizations.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final Widget? child;
-  final bool showAppBar;
-  const ProfileScreen({super.key, this.child, this.showAppBar = true});
+  final Widget? initialChild;
+  final String? titleKey; // New optional parameter
+  const ProfileScreen({super.key, this.initialChild, this.titleKey});
 
   static final GlobalKey<_ProfileScreenState> profileScreenKey =
       GlobalKey<_ProfileScreenState>();
@@ -36,18 +32,20 @@ class _ProfileScreenState extends State<ProfileScreen>
   late Animation<double> _mirrorScreenScaleAnimation;
   late Animation<double> _mirrorScreenOpacityAnimation;
 
+  Widget? _currentChild;
+  String _currentTitleKey = 'profileTitle'; // Default title key
+
   final double _drawerWidthFraction = 0.75;
   final double _screenScaleMin = 0.8;
   final Duration _animationDuration = const Duration(milliseconds: 300);
 
-  // Directly use GetBeneficiaryProfileCubit
   late GetBeneficiaryProfileCubit _getBeneficiaryProfileCubit;
 
   @override
   void initState() {
     super.initState();
 
-    _getBeneficiaryProfileCubit = sl<GetBeneficiaryProfileCubit>(); // Get instance from service locator
+    _getBeneficiaryProfileCubit = sl<GetBeneficiaryProfileCubit>();
 
     _drawerAnimationController = AnimationController(
       vsync: this,
@@ -68,7 +66,23 @@ class _ProfileScreenState extends State<ProfileScreen>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
+        if (widget.initialChild != null) {
+          _currentChild = widget.initialChild;
+          if (widget.titleKey != null) {
+            _currentTitleKey = widget.titleKey!;
+          }
+        }
         _fetchProfileData();
+      }
+    });
+  }
+
+  void setProfileChild(Widget newChild, String titleKey) {
+    setState(() {
+      _currentChild = newChild;
+      _currentTitleKey = titleKey;
+      if (_drawerAnimationController.isCompleted) {
+        _drawerAnimationController.reverse(); // Close drawer after navigation
       }
     });
   }
@@ -80,19 +94,15 @@ class _ProfileScreenState extends State<ProfileScreen>
       if (beneficiaryId != null) {
         _getBeneficiaryProfileCubit.getBeneficiaryProfile(beneficiaryId: beneficiaryId);
       } else {
-        // Handle case where beneficiaryId is not a valid integer
         print("Error: Beneficiary ID is not a valid integer.");
       }
     } else {
-      // Handle case where beneficiaryId is null (user not logged in or data missing)
       print("Error: Beneficiary ID not found in cache.");
     }
   }
 
-  // Helper to manage drawer state, independent of profile data fetching
   void _toggleDrawer() {
-    if (!mounted) return; // Add this line
-
+    if (!mounted) return;
     if (_drawerAnimationController.status == AnimationStatus.completed || _drawerAnimationController.status == AnimationStatus.forward) {
       _drawerAnimationController.reverse();
     } else {
@@ -109,6 +119,24 @@ class _ProfileScreenState extends State<ProfileScreen>
     _drawerAnimationController.dispose();
     super.dispose();
   }
+  String _getLocalizedTitle(AppLocalizations localizations, String titleKey) {
+    switch (titleKey) {
+      case 'profilePersonalInfo':
+        return localizations.profilePersonalInfo;
+      case 'profileFamilyInfo':
+        return localizations.profileFamilyInfo;
+      case 'profileDependentsInfo':
+        return localizations.profileDependentsInfo;
+      case 'profileAvailableAid':
+        return localizations.profileAvailableAid;
+      case 'profileRequests':
+        return localizations.profileRequests;
+      case 'profileTitle':
+      default:
+        return localizations.profileTitle;
+    }
+  }
+
 
   Widget _buildProfileContent(BuildContext context, GetBeneficiaryProfileState profileState) {
     final localizations = AppLocalizations.of(context)!;
@@ -126,68 +154,60 @@ class _ProfileScreenState extends State<ProfileScreen>
         profileState.data != null) {
       final beneficiaryProfile = profileState.data!;
 
-      // if a child widget is provided, display it. Otherwise, show default content.
-      if (widget.child != null) {
+      if (_currentChild != null) {
         return Scaffold(
           backgroundColor: Colors.transparent,
-          body: widget.child,
+          appBar: _buildAppBar(context, isDark, localizations, _currentTitleKey),
+          body: _currentChild,
         );
       }
       return Scaffold(
         backgroundColor: Colors.transparent,
-        body: CustomScrollView(
-          slivers: [
-            if (widget.showAppBar)
-              _buildAppBar(context, isDark, localizations),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    _buildProfileHeader(
-                        beneficiaryProfile.firstName,
-                        beneficiaryProfile.lastName,
-                        'https://preview.redd.it/help-me-find-a-specific-image-of-a-cat-with-glasses-v0-3mxdd5sdeise1.jpeg?auto=webp&s=d8066b8bb285bbb25455baca627be4a393f1d4f4', // New network image
-                        localizations,
-                        isDark),
-                    const SizedBox(height: 24),
-                    _buildInfoTile(
-                        localizations.nationalNumber,
-                        beneficiaryProfile.nationalNumber,
-                        Icons.credit_card_outlined,
-                        AppColors.amber700),
-                    _buildInfoTile(
-                        localizations.phoneNumber,
-                        beneficiaryProfile.phoneNumber,
-                        Icons.phone_outlined,
-                        AppColors.primary600),
-                    _buildInfoTile(localizations.address,
-                        beneficiaryProfile.address, Icons.home_outlined, AppColors.slate600),
-                    _buildInfoTile(localizations.job, beneficiaryProfile.job,
-                        Icons.work_outlined, AppColors.indigo700),
-                    _buildInfoTile(
-                        localizations.monthlyIncome,
-                        '${beneficiaryProfile.monthlyIncome} SYP',
-                        Icons.attach_money_outlined,
-                        AppColors.green),
-                    _buildInfoTile(
-                        localizations.medicalHistory,
-                        beneficiaryProfile.medicalHistory ??
-                            localizations.notAvailable,
-                        Icons.medical_information_outlined,
-                        Colors.blue),
-                  ],
-                ),
-              ),
-            ),
-          ],
+        appBar: _buildAppBar(context, isDark, localizations, _currentTitleKey), // Use _currentTitleKey here
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              _buildProfileHeader(
+                  beneficiaryProfile.firstName,
+                  beneficiaryProfile.lastName,
+                  'https://preview.redd.it/help-me-find-a-specific-image-of-a-cat-with-glasses-v0-3mxdd5sdeise1.jpeg?auto=webp&s=d8066b8bb285bbb25455baca627be4a393f1d4f4',
+                  localizations,
+                  isDark),
+              const SizedBox(height: 24),
+              _buildInfoTile(
+                  localizations.nationalNumber,
+                  beneficiaryProfile.nationalNumber,
+                  Icons.credit_card_outlined,
+                  AppColors.amber700),
+              _buildInfoTile(
+                  localizations.phoneNumber,
+                  beneficiaryProfile.phoneNumber,
+                  Icons.phone_outlined,
+                  AppColors.primary600),
+              _buildInfoTile(localizations.address,
+                  beneficiaryProfile.address, Icons.home_outlined, AppColors.slate600),
+              _buildInfoTile(localizations.job, beneficiaryProfile.job,
+                  Icons.work_outlined, AppColors.indigo700),
+              _buildInfoTile(
+                  localizations.monthlyIncome,
+                  '${beneficiaryProfile.monthlyIncome} SYP',
+                  Icons.attach_money_outlined,
+                  AppColors.green),
+              _buildInfoTile(
+                  localizations.medicalHistory,
+                  beneficiaryProfile.medicalHistory ??
+                      localizations.notAvailable,
+                  Icons.medical_information_outlined,
+                  Colors.blue),
+            ],
+          ),
         ),
       );
     }
     return const Center(child: Text("No profile data available."));
   }
 
-  // Helper function to build a colorful info tile for the main screen
   Widget _buildInfoTile(String title, String value, IconData icon, Color color) {
     return Card(
       color: color.withOpacity(0.1),
@@ -260,13 +280,11 @@ class _ProfileScreenState extends State<ProfileScreen>
         if (!isRtl && effectiveSlide < 0) effectiveSlide = 0;
         if (isRtl && effectiveSlide > 0) effectiveSlide = -312;
 
-        // --- Border Logic ---
         Color borderColor = Colors.transparent;
         if (_drawerAnimationController.value > 0.1) {
           borderColor = isDarkTheme ? Colors.white.withOpacity(0.5) : Colors.black.withOpacity(0.1);
         }
 
-        // --- Shadow Logic  ---
         List<BoxShadow> activeShadows = [];
         if (!isMirror && _drawerAnimationController.value > 0.1) {
           activeShadows = [
@@ -323,7 +341,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       child: BlocBuilder<GetBeneficiaryProfileCubit, GetBeneficiaryProfileState>(
         builder: (context, profileState) {
           bool isDrawerOpen = (_drawerAnimationController.status == AnimationStatus.completed || _drawerAnimationController.status == AnimationStatus.forward);
-          ProfileScreen.profileScreenKey; // Associate the key with this build context
+          ProfileScreen.profileScreenKey;
 
           Color baseScreenBackgroundColor = isDark ? AppColors.slate900 : AppColors.slate200;
 
@@ -336,8 +354,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ProfileDrawer(
                   drawerWidth: drawerActualWidth,
                   contentFadeAnimation: CurvedAnimation(parent: _drawerAnimationController, curve: const Interval(0.3, 1.0)),
-                  beneficiaryProfileCubit: _getBeneficiaryProfileCubit, // Pass cubit to drawer
-                  isDrawerOpen: isDrawerOpen, // Pass drawer state
+                  beneficiaryProfileCubit: _getBeneficiaryProfileCubit,
+                  isDrawerOpen: isDrawerOpen,
                 ),
 
                 _buildAnimatedScreen(
@@ -392,8 +410,11 @@ class _ProfileScreenState extends State<ProfileScreen>
     );
   }
 
-  SliverAppBar _buildAppBar(BuildContext context, bool isDark, AppLocalizations localizations) {
-    return SliverAppBar(
+  AppBar _buildAppBar(BuildContext context, bool isDark, AppLocalizations localizations, String titleKey) {
+    return AppBar(
+      title: Text(localizations.profileTitle,
+          style: const TextStyle(color: AppColors.dark)), // Default title
+
       leading: IconButton(
         icon: Icon(LucideIcons.menu, color: isDark ? Colors.white : AppColors.slate800),
         onPressed: () {
@@ -427,7 +448,6 @@ class _ProfileScreenState extends State<ProfileScreen>
               fontWeight: FontWeight.bold,
               color: isDark ? Colors.white : AppColors.slate800),
         ),
-        // Removed email display, if you need it, add it back with actual data
       ],
     );
   }

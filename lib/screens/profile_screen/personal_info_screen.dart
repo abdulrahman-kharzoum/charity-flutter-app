@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:charity/features/Services/profile/models/beneficiary_profile_model.dart';
 import 'package:charity/l10n/app_localizations.dart';
+import 'package:charity/screens/profile_screen/profile_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:charity/theme/color.dart';
 
 class PersonalInfoScreen extends StatelessWidget {
@@ -56,12 +60,6 @@ class PersonalInfoScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.profilePersonalInfo,
-            style: const TextStyle(color: AppColors.white)),
-        backgroundColor: AppColors.primary500,
-        iconTheme: const IconThemeData(color: AppColors.white),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
