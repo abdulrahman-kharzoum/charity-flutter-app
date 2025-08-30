@@ -11,13 +11,16 @@ class NotificationsRepository {
 
   NotificationsRepository(this._apiService);
 
-  Future<Either<Failure, NotificationModel>> getMyNotifications() async {
+  Future<Either<Failure, List<NotificationModel>>> getMyNotifications() async {
     try {
       final response = await _apiService.get(
         EndPoints.mobile_my_notifications
       );
 
-      final data = NotificationModel.fromJson(response.data['data']);
+      final List<dynamic> jsonList = response.data['data'];
+      final List<NotificationModel> data = jsonList
+          .map((json) => NotificationModel.fromJson(json as Map<String, dynamic>))
+          .toList();
 
       return Right(data);
     } on DioException catch (e) {

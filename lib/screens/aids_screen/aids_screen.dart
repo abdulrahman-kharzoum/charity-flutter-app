@@ -30,7 +30,11 @@ class AidsScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => GetBeneficiaryAidsCubit(sl())..getBeneficiaryAids(),
       child: Builder(builder: (innerContext) { // Added Builder for consistent context if needed
-        return Column(
+        return RefreshIndicator(
+          onRefresh: () async {
+            innerContext.read<GetBeneficiaryAidsCubit>().getBeneficiaryAids();
+          },
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
@@ -83,7 +87,8 @@ class AidsScreen extends StatelessWidget {
                 ),
               ),
             ],
-          );
+          ),
+        );
 
       }),
     );
@@ -134,10 +139,10 @@ class AidsScreen extends StatelessWidget {
               description = item.description;
               statusText = item.beneficiary.hasTaken
                   ? l10n.received
-                  : (item.beneficiary.receivedAt == null ? l10n.pending : l10n.readyForPickup);
+                  : l10n.readyForPickup;
               status = item.beneficiary.hasTaken
                   ? 'received'
-                  : (item.beneficiary.receivedAt == null ? 'pending' : 'readyForPickup');
+                  : 'readyForPickup';
               providedBy = item.category.name; // Using type as provider for plans
               date = item.beneficiary.receivedAt != null
                   ? DateTime.tryParse(item.beneficiary.receivedAt!)!
@@ -148,10 +153,10 @@ class AidsScreen extends StatelessWidget {
               description = '${l10n.amount}: ${item.amount.toString()}'; // Convert int to String
               statusText = item.hasTaken
                   ? l10n.received
-                  : (item.receivedAt == null ? l10n.pending : l10n.readyForPickup);
+                  : l10n.readyForPickup;
               status = item.hasTaken
                   ? 'received'
-                  : (item.receivedAt == null ? 'pending' : 'readyForPickup');
+                  : 'readyForPickup';
               providedBy = 'Salary'; // No direct provider for salary model
               date = item.receivedAt != null
                   ? DateTime.tryParse(item.receivedAt!)!
@@ -207,8 +212,8 @@ class AidsScreen extends StatelessWidget {
       case 'readyForPickup':
       case 'received':
         return AppColors.requestStatusAccepted;
-      case 'waiting':
-        return AppColors.requestStatusPending;
+      // case 'waiting': // No longer needed as 'pending' is removed
+      //   return AppColors.requestStatusPending;
       case 'rejected':
         return AppColors.requestStatusRejected;
       default:
@@ -223,8 +228,8 @@ class AidsScreen extends StatelessWidget {
         return Icons.inventory_2_outlined;
       case 'received':
         return Icons.task_alt_outlined;
-      case 'waiting':
-        return Icons.hourglass_empty_rounded;
+      // case 'waiting': // No longer needed as 'pending' is removed
+      //   return Icons.hourglass_empty_rounded;
       case 'rejected':
         return Icons.close_rounded;
       default:
@@ -395,8 +400,8 @@ class AidsScreen extends StatelessWidget {
       case 'readyForPickup':
       case 'received':
         return RequestStatus.received;
-      case 'waiting':
-        return RequestStatus.pending;
+      // case 'waiting': // No longer needed as 'pending' is removed
+      //   return RequestStatus.pending;
       case 'rejected':
         return RequestStatus.rejected;
       default:

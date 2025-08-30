@@ -330,5 +330,6 @@
   "phoneNumber": "Phone Number",
   "address": "Address",
   "monthlyIncome": "Monthly Income",
-  "pending": "Pending"
+  "pending": "Pending",
+  "noNotifications": "No notifications found."
 }

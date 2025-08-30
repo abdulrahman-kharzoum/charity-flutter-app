@@ -834,4 +834,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pending => 'Pending';
+
+  @override
+  String get noNotifications => 'No notifications found.';
 }

@@ -834,4 +834,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pending => 'قيد الانتظار';
+
+  @override
+  String get noNotifications => 'لا توجد إشعارات.';
 }

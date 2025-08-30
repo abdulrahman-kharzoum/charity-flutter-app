@@ -13,6 +13,7 @@ import 'package:charity/features/Education/cubits/get_education_home_cubit/get_e
 import 'package:charity/core/shared/local_network.dart'; // Correct import for CacheNetwork
 import 'package:charity/features/auth/models/user_model.dart'; // Import UserModel
 import 'package:charity/features/Education/cubits/get_all_new_courses_cubit/get_all_new_courses_cubit.dart';
+import 'package:charity/core/services/service_locator.dart' as di;
 import '../../../cubits/education/child_profile/child_profile_cubit.dart';
 import '../all_courses_screen/all_courses_screen.dart';
 import '../child_profile_screen/child_profile_screen.dart';
@@ -52,6 +53,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
+
       body: BlocBuilder<GetEducationHomeCubit, GetEducationHomeState>(
         builder: (context, state) {
           if (state.status == SubmissionStatus.loading || state.status == SubmissionStatus.initial) {
@@ -66,54 +68,47 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
           }
           if (state.status == SubmissionStatus.success && state.data != null) {
             final educationHomeModel = state.data!;
-            return Column(
+            return ListView(
+              padding: EdgeInsets.zero,
               children: [
-                _buildAppBar(context, l10n),
-                Expanded(
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
-                      _buildGreeting(context, l10n, CacheNetwork.getUser()?.firstName ?? ''),
-                      _buildSectionTitle(context, l10n.myChildren),
-                      _buildHorizontalCardList<edu.ChildModel>(
-                        context,
-                        l10n,
-                        educationHomeModel.children, // Access children from model
-                            (child) => GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => BlocProvider(
-                                        create: (context) => ChildProfileCubit(),
-                                        child: ChildProfileScreen(childId: child.id.toString()),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: _buildChildCard(context, l10n, child)),
-                      ),
-                      _buildSectionTitle(context, l10n.newCourses),
-                      _buildHorizontalCardList<edu.CourseModel>( // Use edu.CourseModel
-                        context,
-                        l10n,
-                        educationHomeModel.newCourses, // Access newCourses from model
-                            (course) => GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CourseDetailsScreen(course: course),
-                                    ),
-                                  );
-                                },
-                                child: _buildCourseCard(context, l10n, course)),
-                      ),
-                      _buildViewAllButton(context, l10n),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
+                _buildGreeting(context, l10n, CacheNetwork.getUser()?.firstName ?? ''),
+                _buildSectionTitle(context, l10n.myChildren),
+                _buildHorizontalCardList<edu.ChildModel>(
+                  context,
+                  l10n,
+                  educationHomeModel.children, // Access children from model
+                      (child) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ChildProfileCubit(),
+                                  child: ChildProfileScreen(childId: child.id.toString()),
+                                ),
+                              ),
+                            );
+                          },
+                          child: _buildChildCard(context, l10n, child)),
                 ),
+                _buildSectionTitle(context, l10n.newCourses),
+                _buildHorizontalCardList<edu.CourseModel>( // Use edu.CourseModel
+                  context,
+                  l10n,
+                  educationHomeModel.newCourses, // Access newCourses from model
+                      (course) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CourseDetailsScreen(course: course),
+                              ),
+                            );
+                          },
+                          child: _buildCourseCard(context, l10n, course)),
+                ),
+                _buildViewAllButton(context, l10n),
+                const SizedBox(height: 20),
               ],
             );
           }
@@ -123,54 +118,6 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
     );
   }
 
-  Widget _buildAppBar(BuildContext context, AppLocalizations l10n) {
-    return Container(
-      color: AppColors.white,
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-      child: SafeArea(
-        bottom: false,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back, color: AppColors.textPrimary),
-                onPressed: () => Navigator.of(context).pop(),
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-              ),
-            ),
-            Text(
-              l10n.appName,
-              style: const TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Lexend',
-                letterSpacing: -0.015 * 18,
-              ),
-            ),
-            SizedBox(
-              width: 48,
-              height: 48,
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  icon: const Icon(Icons.settings_outlined, color: AppColors.textPrimary, size: 24),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/settings');
-                  },
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildGreeting(BuildContext context, AppLocalizations l10n, String userName) {
     final isRtl = Directionality.of(context) == TextDirection.rtl;
@@ -353,7 +300,12 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AllCoursesScreen()),
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => di.sl<GetAllNewCoursesCubit>(),
+                  child: const AllCoursesScreen(),
+                ),
+              ),
             );
           },
           style: ElevatedButton.styleFrom(

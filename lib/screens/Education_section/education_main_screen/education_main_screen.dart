@@ -50,16 +50,16 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
   }
 
   // Define a leading widget for a shared AppBar (e.g., drawer icon or back button if appropriate)
-  // Widget _getLeadingWidget(BuildContext context, AppLocalizations l10n) {
-  //   // Example: Could be a menu icon if you have a drawer for the education section
-  //   return IconButton(
-  //     icon: const Icon(Icons.menu, color: AppColors.white),
-  //     onPressed: () {
-  //       // Scaffold.of(context).openDrawer(); // If you have a Drawer
-  //     },
-  //   );
-  // }
-
+  Widget _getLeadingWidget(BuildContext context, AppLocalizations l10n) {
+    // Example: Could be a menu icon if you have a drawer for the education section
+    return IconButton(
+      icon: const Icon(Icons.arrow_back_ios, color: AppColors.white), // Changed to back arrow
+      onPressed: () {
+        Navigator.of(context).pop(); // Standard back navigation
+        // Scaffold.of(context).openDrawer(); // If you have a Drawer
+      },
+    );
+  }
   // Define actions for a shared AppBar (e.g., notifications, search)
   List<Widget> _getActions(BuildContext context, AppLocalizations l10n) {
     return [
@@ -101,7 +101,7 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primary500, // Or your education section's theme color
         elevation: 0,
-        // leading: _getLeadingWidget(context, l10n), // Uncomment if using
+        leading: _getLeadingWidget(context, l10n), // Uncomment if using
         title: Text(
           _getAppBarTitles(l10n)[_selectedIndex],
           style: const TextStyle(
@@ -113,7 +113,7 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
         ),
         centerTitle: true,
         actions: _getActions(context, l10n), // Uncomment if using
-        automaticallyImplyLeading: false, // Set based on your leading widget needs
+        // automaticallyImplyLeading: false, // Set based on your leading widget needs
       ),
       // --- End of Optional: Shared AppBar ---
 

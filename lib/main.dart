@@ -6,6 +6,7 @@ import 'package:charity/cubits/localization/localization_cubit.dart';
 import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
 import 'package:charity/core/shared/settings_repository.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:charity/features/notifications/cubits/get_my_notifications_cubit/get_my_notifications_cubit.dart';
 
 import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/routes/routes.dart' as app_routes;
@@ -52,6 +53,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<SettingsCubit>(
           create: (context) => SettingsCubit(SettingsRepository()),
+        ),
+        BlocProvider<GetMyNotificationsCubit>(
+          create: (context) => sl<GetMyNotificationsCubit>(),
         ),
       ],
       child: BlocBuilder<LocalizationCubit, LocalizationState>(

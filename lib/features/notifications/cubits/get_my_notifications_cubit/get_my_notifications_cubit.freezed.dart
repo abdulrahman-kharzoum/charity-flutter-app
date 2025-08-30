@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetMyNotificationsState {
 
- SubmissionStatus get status; NotificationModel? get data; Failure? get failure;
+ SubmissionStatus get status; List<NotificationModel>? get data; Failure? get failure;
 /// Create a copy of GetMyNotificationsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,12 +25,12 @@ $GetMyNotificationsStateCopyWith<GetMyNotificationsState> get copyWith => _$GetM
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetMyNotificationsState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetMyNotificationsState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,data,failure);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(data),failure);
 
 @override
 String toString() {
@@ -45,11 +45,11 @@ abstract mixin class $GetMyNotificationsStateCopyWith<$Res>  {
   factory $GetMyNotificationsStateCopyWith(GetMyNotificationsState value, $Res Function(GetMyNotificationsState) _then) = _$GetMyNotificationsStateCopyWithImpl;
 @useResult
 $Res call({
- SubmissionStatus status, NotificationModel? data, Failure? failure
+ SubmissionStatus status, List<NotificationModel>? data, Failure? failure
 });
 
 
-$NotificationModelCopyWith<$Res>? get data;
+
 
 }
 /// @nodoc
@@ -66,23 +66,11 @@ class _$GetMyNotificationsStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as NotificationModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as List<NotificationModel>?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
-/// Create a copy of GetMyNotificationsState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NotificationModelCopyWith<$Res>? get data {
-    if (_self.data == null) {
-    return null;
-  }
 
-  return $NotificationModelCopyWith<$Res>(_self.data!, (value) {
-    return _then(_self.copyWith(data: value));
-  });
-}
 }
 
 
@@ -100,10 +88,10 @@ extension GetMyNotificationsStatePatterns on GetMyNotificationsState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _CreateTeacherState value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _GetMyNotificationsState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetMyNotificationsState() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -122,10 +110,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _CreateTeacherState value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _GetMyNotificationsState value)  $default,){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState():
+case _GetMyNotificationsState():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -143,10 +131,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _CreateTeacherState value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _GetMyNotificationsState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetMyNotificationsState() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -164,9 +152,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  NotificationModel? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SubmissionStatus status,  List<NotificationModel>? data,  Failure? failure)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetMyNotificationsState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return orElse();
 
@@ -185,9 +173,9 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  NotificationModel? data,  Failure? failure)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SubmissionStatus status,  List<NotificationModel>? data,  Failure? failure)  $default,) {final _that = this;
 switch (_that) {
-case _CreateTeacherState():
+case _GetMyNotificationsState():
 return $default(_that.status,_that.data,_that.failure);case _:
   throw StateError('Unexpected subclass');
 
@@ -205,9 +193,9 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  NotificationModel? data,  Failure? failure)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SubmissionStatus status,  List<NotificationModel>? data,  Failure? failure)?  $default,) {final _that = this;
 switch (_that) {
-case _CreateTeacherState() when $default != null:
+case _GetMyNotificationsState() when $default != null:
 return $default(_that.status,_that.data,_that.failure);case _:
   return null;
 
@@ -219,30 +207,38 @@ return $default(_that.status,_that.data,_that.failure);case _:
 /// @nodoc
 
 
-class _CreateTeacherState implements GetMyNotificationsState {
-  const _CreateTeacherState({this.status = SubmissionStatus.initial, this.data, this.failure});
+class _GetMyNotificationsState implements GetMyNotificationsState {
+  const _GetMyNotificationsState({this.status = SubmissionStatus.initial, final  List<NotificationModel>? data, this.failure}): _data = data;
   
 
 @override@JsonKey() final  SubmissionStatus status;
-@override final  NotificationModel? data;
+ final  List<NotificationModel>? _data;
+@override List<NotificationModel>? get data {
+  final value = _data;
+  if (value == null) return null;
+  if (_data is EqualUnmodifiableListView) return _data;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
 @override final  Failure? failure;
 
 /// Create a copy of GetMyNotificationsState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$CreateTeacherStateCopyWith<_CreateTeacherState> get copyWith => __$CreateTeacherStateCopyWithImpl<_CreateTeacherState>(this, _$identity);
+_$GetMyNotificationsStateCopyWith<_GetMyNotificationsState> get copyWith => __$GetMyNotificationsStateCopyWithImpl<_GetMyNotificationsState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CreateTeacherState&&(identical(other.status, status) || other.status == status)&&(identical(other.data, data) || other.data == data)&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetMyNotificationsState&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,data,failure);
+int get hashCode => Object.hash(runtimeType,status,const DeepCollectionEquality().hash(_data),failure);
 
 @override
 String toString() {
@@ -253,49 +249,37 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$CreateTeacherStateCopyWith<$Res> implements $GetMyNotificationsStateCopyWith<$Res> {
-  factory _$CreateTeacherStateCopyWith(_CreateTeacherState value, $Res Function(_CreateTeacherState) _then) = __$CreateTeacherStateCopyWithImpl;
+abstract mixin class _$GetMyNotificationsStateCopyWith<$Res> implements $GetMyNotificationsStateCopyWith<$Res> {
+  factory _$GetMyNotificationsStateCopyWith(_GetMyNotificationsState value, $Res Function(_GetMyNotificationsState) _then) = __$GetMyNotificationsStateCopyWithImpl;
 @override @useResult
 $Res call({
- SubmissionStatus status, NotificationModel? data, Failure? failure
+ SubmissionStatus status, List<NotificationModel>? data, Failure? failure
 });
 
 
-@override $NotificationModelCopyWith<$Res>? get data;
+
 
 }
 /// @nodoc
-class __$CreateTeacherStateCopyWithImpl<$Res>
-    implements _$CreateTeacherStateCopyWith<$Res> {
-  __$CreateTeacherStateCopyWithImpl(this._self, this._then);
+class __$GetMyNotificationsStateCopyWithImpl<$Res>
+    implements _$GetMyNotificationsStateCopyWith<$Res> {
+  __$GetMyNotificationsStateCopyWithImpl(this._self, this._then);
 
-  final _CreateTeacherState _self;
-  final $Res Function(_CreateTeacherState) _then;
+  final _GetMyNotificationsState _self;
+  final $Res Function(_GetMyNotificationsState) _then;
 
 /// Create a copy of GetMyNotificationsState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? data = freezed,Object? failure = freezed,}) {
-  return _then(_CreateTeacherState(
+  return _then(_GetMyNotificationsState(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as SubmissionStatus,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as NotificationModel?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
+as SubmissionStatus,data: freezed == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
+as List<NotificationModel>?,failure: freezed == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as Failure?,
   ));
 }
 
-/// Create a copy of GetMyNotificationsState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$NotificationModelCopyWith<$Res>? get data {
-    if (_self.data == null) {
-    return null;
-  }
 
-  return $NotificationModelCopyWith<$Res>(_self.data!, (value) {
-    return _then(_self.copyWith(data: value));
-  });
-}
 }
 
 // dart format on

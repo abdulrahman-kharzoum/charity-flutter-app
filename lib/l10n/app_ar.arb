@@ -279,5 +279,6 @@
   "phoneNumber": "رقم الهاتف",
   "address": "العنوان",
   "monthlyIncome": "الدخل الشهري",
-  "pending": "قيد الانتظار"
+  "pending": "قيد الانتظار",
+  "noNotifications": "لا توجد إشعارات."
 }

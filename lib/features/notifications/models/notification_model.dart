@@ -13,5 +13,14 @@ abstract class NotificationModel with _$NotificationModel {
     @JsonKey(name: 'read_at') required String? readAt,
   }) = _NotificationModel;
 
+  factory NotificationModel.fromListJson(List<dynamic> json) {
+    return NotificationModel(
+      id: json[0] as String,
+      type: json[1] as String,
+      data: NotificationDataModel.fromJson(json[2] as Map<String, dynamic>),
+      readAt: json[3] as String?,
+    );
+  }
+
   factory NotificationModel.fromJson(Map<String, dynamic> json) => _$NotificationModelFromJson(json);
 }
