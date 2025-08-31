@@ -5,6 +5,8 @@ import 'package:charity/cubits/settings_cubit/settings_cubit.dart';
 import 'package:charity/cubits/localization/localization_cubit.dart'; // Import LocalizationCubit
 import 'package:charity/theme/color.dart';
 import 'package:charity/l10n/app_localizations.dart';
+import 'package:charity/core/shared/local_network.dart';
+import 'package:charity/features/auth/models/user_model.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -184,6 +186,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   Widget _buildProfileCard(BuildContext context, bool isDark, AppLocalizations localizations) {
+    final UserModel? user = CacheNetwork.getUser();
     return GestureDetector(
       onTap: () => Navigator.pushNamed(context, '/profile'),
       child: Container(
@@ -229,7 +232,7 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    localizations.johnDoe,
+                    '${user?.firstName ?? ''} ${user?.lastName ?? ''}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -237,7 +240,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'john.doe@example.com',
+                    user?.phoneNumber ?? 'N/A',
                     style: TextStyle(
                       color: isDark ? AppColors.slate400 : AppColors.slate600,
                     ),

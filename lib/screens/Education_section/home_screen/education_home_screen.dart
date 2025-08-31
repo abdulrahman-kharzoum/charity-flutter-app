@@ -19,6 +19,9 @@ import '../all_courses_screen/all_courses_screen.dart';
 import '../child_profile_screen/child_profile_screen.dart';
 import '../course_details_screen/course_details_screen.dart';
 
+const String _femaleImageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCP-H2t-4gRAT_hI_QlN643afsofEKi5vZI0acupQIeMrV2eaYhfUiU7jC5xRCZEFAih_YmGsBqgHu0joDbnuChFf-hXcQX7B6MOBfDJixqz28gM5R4r6t_oxws0MnxNUlDKoXEwyUV9klEVeIpGOqccTdI0s5qKtsSsiorZAcCMq3RbzAadH_Ddh0Fe5-dIbS-Q7Upzo-_Rgzwz3H4ni-E_boGGZKqHBnD7QZ2RhuIrTYIyh6lEHkhiDW3SPWumvQqhwTMJQUCLea6';
+const String _maleImageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBs7lUUoyQRyS3islQErlKBRuPR5Ip4GNkdcuxTrJwt91YAPcdci-YInnbVltEGx3kMWsl6cg4DcK3AEeX0AaW--2nDGuYZJicHFsyz4w8fjLUmHmb3gMY9KCSQzWufNX5S81HgL5Tuucft30DcuaAxzy6IDy0ireQcnrIzdM_xRXKLLQt1yKhoL8QWHyuJ2EnNKsI5FUhDV8R3kKLiu7eBkVW5E20h76_4g-D7lkvSJ-BsxtL3SCXYXaPcEhMj5i9G7rsTsPeWGzdQ';
+
 class EduHomeScreen extends StatefulWidget {
   const EduHomeScreen({super.key});
 
@@ -180,7 +183,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
   }
 
   Widget _buildChildCard(BuildContext context, AppLocalizations l10n, edu.ChildModel child) {
-    final imageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCP-H2t-4gRAT_hI_QlN643afsofEKi5vZI0acupQIeMrV2eaYhfUiU7jC5xRCZEFAih_YmGsBqgHu0joDbnuChFf-hXcQX7B6MOBfDJixqz28gM5R4r6t_oxws0MnxNUlDKoXEwyUV9klEVeIpGOqccTdI0s5qKtsSsiorZAcCMq3RbzAadH_Ddh0Fe5-dIbS-Q7Upzo-_Rgzwz3H4ni-E-boGGZKqHBnD7QZ2RhuIrTYIyh6lEHkhiDW3SPWumvQqhwTMJQUCLea6';
+    final imageUrl = child.gender == 'Female' ? _femaleImageUrl : _maleImageUrl;
     final courseCount = child.coursesCount ?? 0;
 
     return Container(
