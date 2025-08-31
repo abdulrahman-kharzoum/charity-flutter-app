@@ -34,25 +34,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text(
-          l10n.allCoursesScreenTitle,
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontFamily: 'Lexend',
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        actions: [],
-      ),
+    
       body: Column(
         children: [
           Padding(
@@ -306,8 +288,8 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: Image.network(
-              'https://lh3.googleusercontent.com/aida-public/AB6AXuA2PpdnhMXwtHUEeQ1DMQo4slYy7GlB_vJ-ZESzm38W2ITCIdz69cNcNt9TRzgODSTAz7p8b8hFRLmeTRWR-MFwALkcZVU8JYcYfQd7pQs-ooTQBsqvXsRokk7OM4_smL8n01CXHetfIKIfHZne1wkXXHkRzXjB4P3MA7mJbdjc9IXXMzAbVVjdukBitlzitpcz-UNwwlOevnyf39ptXI91Gku7BpspYaWUN61KJ0Baze9r52lwFf8wAbMo8U_PQpGdHHS8GHH_3Yul',
+            child: Image.asset(
+              'assets/images/course_img.png',
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Container(
                 color: AppColors.lightGreyBackground,

@@ -30,9 +30,6 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
   static final List<Widget> _widgetOptions = <Widget>[
     const EduHomeScreen(),
     const AllCoursesScreen(),
-    const AllCoursesScreen()
-
-
   ];
 
   // --- Optional: Shared AppBar Logic (like in your MainScreen example) ---
@@ -42,10 +39,8 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
   // Define titles for each screen if using a shared AppBar
   List<String> _getAppBarTitles(AppLocalizations l10n) {
     return [
-      l10n.appName, // Title for EduHomeScreen tab
-      // l10n.childrenScreenTitle,   // Title for ChildrenScreen tab (define in l10n)
-      // l10n.coursesScreenTitle,    // Title for CoursesScreen tab (define in l10n)
-      // Add other titles if you have more tabs and a shared AppBar
+      l10n.bottomNavHome, // Title for EduHomeScreen tab
+      l10n.courses, // Title for AllCoursesScreen tab
     ];
   }
 
@@ -128,11 +123,6 @@ class _EducationMainScreenState extends State<EducationMainScreen> {
             icon: const Icon(Icons.home_outlined),
             activeIcon: const Icon(Icons.home_filled), // Using filled for active
             label: l10n.bottomNavHome, // General home or education home
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.people_alt_outlined),
-            activeIcon: const Icon(Icons.people_alt),
-            label: l10n.children, // Define in l10n
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.school_outlined),

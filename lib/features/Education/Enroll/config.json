@@ -1,0 +1,26 @@
+{
+  "feature_name": "Enrollment",
+  "apis": [
+    {
+      "name": "enrollInCourse",
+      "endpoint": "mobile/enroll-in-course",
+      "request_type": "POST",
+      "body": {
+        "child_id": "int",
+        "course_id": "int"
+      },
+      "response_model": {
+        "name": "EnrollmentResponseModel",
+        "fields": [
+          { "name": "id", "type": "int" },
+          { "name": "status", "type": "String" },
+          { "name": "enrollmentDate", "type": "String", "json_key": "enrollment_date" },
+          { "name": "finalGrade", "type": "String?", "json_key": "final_grade" },
+          { "name": "aiCourseSummery", "type": "String?", "json_key": "ai_course_summery" },
+          { "name": "childId", "type": "int", "json_key": "child_id" },
+          { "name": "courseId", "type": "int", "json_key": "course_id" }
+        ]
+      }
+    }
+  ]
+}

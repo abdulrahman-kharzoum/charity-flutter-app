@@ -19,8 +19,10 @@ import '../all_courses_screen/all_courses_screen.dart';
 import '../child_profile_screen/child_profile_screen.dart';
 import '../course_details_screen/course_details_screen.dart';
 
-const String _femaleImageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCP-H2t-4gRAT_hI_QlN643afsofEKi5vZI0acupQIeMrV2eaYhfUiU7jC5xRCZEFAih_YmGsBqgHu0joDbnuChFf-hXcQX7B6MOBfDJixqz28gM5R4r6t_oxws0MnxNUlDKoXEwyUV9klEVeIpGOqccTdI0s5qKtsSsiorZAcCMq3RbzAadH_Ddh0Fe5-dIbS-Q7Upzo-_Rgzwz3H4ni-E_boGGZKqHBnD7QZ2RhuIrTYIyh6lEHkhiDW3SPWumvQqhwTMJQUCLea6';
-const String _maleImageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuBs7lUUoyQRyS3islQErlKBRuPR5Ip4GNkdcuxTrJwt91YAPcdci-YInnbVltEGx3kMWsl6cg4DcK3AEeX0AaW--2nDGuYZJicHFsyz4w8fjLUmHmb3gMY9KCSQzWufNX5S81HgL5Tuucft30DcuaAxzy6IDy0ireQcnrIzdM_xRXKLLQt1yKhoL8QWHyuJ2EnNKsI5FUhDV8R3kKLiu7eBkVW5E20h76_4g-D7lkvSJ-BsxtL3SCXYXaPcEhMj5i9G7rsTsPeWGzdQ';
+const String _femaleImageUrl = 'assets/images/female.png';
+const String _maleImageUrl = 'assets/images/male.png';
+
+const String _defaultCourseImageUrl = 'assets/images/course_img.png';
 
 class EduHomeScreen extends StatefulWidget {
   const EduHomeScreen({super.key});
@@ -110,7 +112,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
                           },
                           child: _buildCourseCard(context, l10n, course)),
                 ),
-                _buildViewAllButton(context, l10n),
+                // _buildViewAllButton(context, l10n),
                 const SizedBox(height: 20),
               ],
             );
@@ -196,7 +198,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
             aspectRatio: 1.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
-              child: Image.network(
+              child: Image.asset(
                 imageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Container(
@@ -239,7 +241,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
   }
 
   Widget _buildCourseCard(BuildContext context, AppLocalizations l10n, edu.CourseModel course) {
-    final imageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuA2PpdnhMXwtHUEeQ1DMQo4slYy7GlB_vJ-ZESzm38W2ITCIdz69cNcNt9TRzgODSTAz7p8b8hFRLmeTRWR-MFwALkcZVU8JYcYfQd7pQs-ooTQBsqvXsRokk7OM4_smL8n01CXHetfIKIfHZne1wkXXHkRzXjB4P3MA7mJbdjc9IXXMzAbVVjdukBitlzitpcz-UNwwlOevnyf39ptXI91Gku7BpspYaWUN61KJ0Baze9r52lwFf8wAbMo8U_PQpGdHHS8GHH_3Yul';
+    final imageUrl = _defaultCourseImageUrl;
 
     return Container(
       width: 160,

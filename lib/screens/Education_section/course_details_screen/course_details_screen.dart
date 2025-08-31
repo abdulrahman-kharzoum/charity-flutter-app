@@ -49,6 +49,17 @@ class CourseDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
+          // Add the course image here
+          Container(
+            height: 200, // Or any desired height
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/course_img.png'), // Default image
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
@@ -96,7 +107,7 @@ class CourseDetailsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 28,
                           backgroundColor: AppColors.lightGreyBackground,
                           backgroundImage: null, // TeacherModel does not have imageUrl
@@ -116,7 +127,7 @@ class CourseDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'Email: ${course.teacher!.email ?? l10n.notAvailable} Phone: ${course.teacher!.phoneNumber ?? l10n.notAvailable}', // Use phoneNumber
+                              'Email: ${course.teacher!.email ?? l10n.notAvailable}\n Phone: ${course.teacher!.phoneNumber ?? l10n.notAvailable}', // Use phoneNumber
                               style: const TextStyle(
                                 color: AppColors.textSecondary,
                                 fontSize: 14,

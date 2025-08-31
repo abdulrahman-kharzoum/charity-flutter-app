@@ -1,3 +1,7 @@
+import 'package:charity/features/Education/Enroll/repo/enrollment_repository.dart';
+
+import 'package:charity/features/Education/Enroll/cubits/enroll_in_course_cubit/enroll_in_course_cubit.dart';
+
 import 'package:charity/features/notifications/repo/notifications_repository.dart';
 
 import 'package:charity/features/notifications/cubits/get_my_notifications_cubit/get_my_notifications_cubit.dart';
@@ -122,4 +126,6 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
   sl.registerLazySingleton(() => ProfileRepository(sl()));
   sl.registerFactory(() => GetMyNotificationsCubit(sl()));
   sl.registerLazySingleton(() => NotificationsRepository(sl()));
+  sl.registerFactory(() => EnrollInCourseCubit(sl()));
+  sl.registerLazySingleton(() => EnrollmentRepository(sl()));
 }
