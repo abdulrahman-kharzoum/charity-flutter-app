@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:charity/l10n/app_localizations.dart'; // Import AppLocalizations
 import '../animation/dialogs/dialogs.dart';
+import 'package:charity/core/shared/dialogs/error_dialog.dart';
 import '../shared/connect.dart';
 
 void errorHandler({
@@ -28,7 +29,7 @@ void errorHandler({
     );
     if (e.response!.statusCode! > 500) {
       print('The response code is => ${e.response!.statusCode!}');
-      errorDialog(context: context, text: l10n.serverError);
+      showErrorDialog(context, l10n.serverError);
       return;
     }
   }
@@ -51,7 +52,7 @@ void errorHandlerWithoutInternet({
     );
     // if (e.response!.statusCode! > 500) {
     print('The response code is => ${e.response!.statusCode!}');
-    errorDialog(context: context, text: l10n.serverError);
+    showErrorDialog(context, l10n.serverError);
     return;
   }
 }

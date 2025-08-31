@@ -849,4 +849,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backButton => 'Back';
+
+  @override
+  String get selectChildTitle => 'Select Child';
+
+  @override
+  String get confirmButton => 'Confirm';
+
+  @override
+  String get cancelButton => 'Cancel';
 }

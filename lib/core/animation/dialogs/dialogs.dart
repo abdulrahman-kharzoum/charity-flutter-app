@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charity/theme/color.dart';
-import 'package:charity/l10n/app_localizations.dart'; // Import AppLocalizations
+import 'package:charity/l10n/app_localizations.dart';
+import 'package:charity/features/Education/models/child_model.dart'; // Import ChildModel
 
 void loadingDialog({
   required BuildContext context,
@@ -89,7 +90,7 @@ void errorDialog({required BuildContext context, required String text}) {
     context: context,
     builder:
         (context) => AlertDialog(
-          backgroundColor: AppColors.dark,
+          backgroundColor: AppColors.darkRed,
           title: Text(l10n.errorTitle, textAlign: TextAlign.center,),
           content: Text(text, textAlign: TextAlign.center,),
           actions: [
@@ -221,4 +222,58 @@ void warningDialog({
       ],
     ),
   );
+}
+
+Future<ChildModel?> childSelectionDialog({
+  required BuildContext context,
+  required List<ChildModel> children,
+}) async {
+  final l10n = AppLocalizations.of(context)!;
+  ChildModel? selectedChild;
+
+  // Use a StatefulBuilder to allow updating the dialog's state
+  await showDialog<ChildModel>(
+    context: context,
+    builder: (context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            title: Text(l10n.selectChildTitle, textAlign: TextAlign.center),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: children.map((child) {
+                  return RadioListTile<ChildModel>(
+                    title: Text(child.name), // Use child.name instead of child.fullName
+                    value: child,
+                    groupValue: selectedChild,
+                    onChanged: (ChildModel? value) {
+                      setState(() { // Update the state of the dialog
+                        selectedChild = value;
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Dismiss dialog
+                },
+                child: Text(l10n.cancelButton),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context, selectedChild); // Dismiss dialog with selected child
+                },
+                child: Text(l10n.confirmButton),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+  return selectedChild;
 }

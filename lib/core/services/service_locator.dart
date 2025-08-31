@@ -1,3 +1,7 @@
+import 'package:charity/features/clinic/repo/clinic_repository.dart';
+
+import 'package:charity/features/clinic/cubits/get_clinic_beneficiary_cubit/get_clinic_beneficiary_cubit.dart';
+
 import 'package:charity/features/Education/Enroll/repo/enrollment_repository.dart';
 
 import 'package:charity/features/Education/Enroll/cubits/enroll_in_course_cubit/enroll_in_course_cubit.dart';
@@ -40,6 +44,7 @@ import 'package:charity/features/auth/cubits/verify_otp_cubit/verify_otp_cubit.d
 import 'package:charity/features/auth/cubits/login_attempt_cubit/login_attempt_cubit.dart';
 
 import 'package:charity/features/Education/repo/education_repository.dart'; // Import EducationRepository
+import 'package:charity/features/Education/cubits/get_education_home_cubit/get_education_home_cubit.dart'; // New import
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -110,6 +115,7 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
   sl.registerFactory(() => VerifyOtpCubit(sl()));
   sl.registerFactory(() => ResendOtpCubit(sl()));
   sl.registerLazySingleton(() => AuthRepository(sl()));
+  sl.registerFactory(() => GetEducationHomeCubit(sl())); // Register GetEducationHomeCubit
 
   // Register EducationRepository as a lazy singleton, injecting ApiService
   sl.registerLazySingleton<EducationRepository>(() => EducationRepository(sl()));
@@ -128,4 +134,6 @@ Future<void> setupServiceLocator(SharedPreferences sharedPreferences) async {
   sl.registerLazySingleton(() => NotificationsRepository(sl()));
   sl.registerFactory(() => EnrollInCourseCubit(sl()));
   sl.registerLazySingleton(() => EnrollmentRepository(sl()));
+  sl.registerFactory(() => GetClinicBeneficiaryCubit(sl()));
+  sl.registerLazySingleton(() => ClinicRepository(sl()));
 }

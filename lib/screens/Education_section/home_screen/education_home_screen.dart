@@ -15,6 +15,7 @@ import 'package:charity/features/auth/models/user_model.dart'; // Import UserMod
 import 'package:charity/features/Education/cubits/get_all_new_courses_cubit/get_all_new_courses_cubit.dart';
 import 'package:charity/core/services/service_locator.dart' as di;
 import '../../../cubits/education/child_profile/child_profile_cubit.dart';
+import '../../../features/Education/Enroll/cubits/enroll_in_course_cubit/enroll_in_course_cubit.dart';
 import '../all_courses_screen/all_courses_screen.dart';
 import '../child_profile_screen/child_profile_screen.dart';
 import '../course_details_screen/course_details_screen.dart';
@@ -106,7 +107,17 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CourseDetailsScreen(course: course),
+                                builder: (context) => MultiBlocProvider(
+                                  providers: [
+                                    BlocProvider<GetEducationHomeCubit>(
+                                      create: (context) => di.sl<GetEducationHomeCubit>(),
+                                    ),
+                                    BlocProvider<EnrollInCourseCubit>(
+                                      create: (context) => di.sl<EnrollInCourseCubit>(),
+                                    ),
+                                  ],
+                                  child: CourseDetailsScreen(course: course),
+                                ),
                               ),
                             );
                           },
@@ -253,7 +264,7 @@ class _EduHomeScreenState extends State<EduHomeScreen> {
             aspectRatio: 1.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
-              child: Image.network(
+              child: Image.asset( // Changed to Image.asset
                 imageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Container(

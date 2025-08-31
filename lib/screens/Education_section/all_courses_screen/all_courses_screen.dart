@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:charity/core/services/status.dart';
 import 'package:charity/features/Education/cubits/get_all_new_courses_cubit/get_all_new_courses_cubit.dart';
 import 'package:charity/features/Education/models/course_model.dart';
@@ -7,6 +8,11 @@ import 'package:charity/l10n/app_localizations.dart';
 import 'package:charity/theme/color.dart';
 import 'package:charity/core/shared/components/spacing.dart';
 import 'package:charity/screens/Education_section/course_details_screen/course_details_screen.dart';
+import 'package:charity/features/Education/cubits/get_education_home_cubit/get_education_home_cubit.dart';
+import 'package:charity/features/Education/Enroll/cubits/enroll_in_course_cubit/enroll_in_course_cubit.dart';
+import 'package:charity/features/Education/repo/education_repository.dart';
+import 'package:charity/features/Education/Enroll/repo/enrollment_repository.dart';
+import 'package:charity/core/services/service_locator.dart'; // Import service_locator.dart
 
 class AllCoursesScreen extends StatefulWidget {
   const AllCoursesScreen({super.key});
@@ -34,7 +40,7 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-    
+
       body: Column(
         children: [
           Padding(
@@ -307,9 +313,19 @@ class _AllCoursesScreenState extends State<AllCoursesScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => CourseDetailsScreen(course: course), // Navigate to CourseDetailsScreen
-            ),
+            MaterialPageRoute(builder: (context) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider<GetEducationHomeCubit>(
+                    create: (context) => sl<GetEducationHomeCubit>(),
+                  ),
+                  BlocProvider<EnrollInCourseCubit>(
+                    create: (context) => sl<EnrollInCourseCubit>(),
+                  ),
+                ],
+                child: CourseDetailsScreen(course: course),
+              );
+            }),
           );
         },
         child: Container(

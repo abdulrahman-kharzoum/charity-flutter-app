@@ -284,5 +284,8 @@
   "partnerLabel": "شريك",
   "partnersInfoTitle": "معلومات الشركاء",
   "unclesInfoTitle": "معلومات الأعمام",
-  "backButton": "رجوع"
+  "backButton": "رجوع",
+  "selectChildTitle": "اختر طفل",
+  "confirmButton": "تأكيد",
+  "cancelButton": "إلغاء"
 }

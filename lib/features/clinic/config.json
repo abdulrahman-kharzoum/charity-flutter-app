@@ -1,0 +1,43 @@
+{
+  "feature_name": "Clinic",
+  "apis": [
+    {
+      "name": "getClinicBeneficiary",
+      "endpoint": "mobile/clinic/beneficiary",
+      "request_type": "GET",
+      "response_model": {
+        "name": "ClinicBeneficiaryModel",
+        "fields": [
+          { "name": "id", "type": "int" },
+          { "name": "firstName", "type": "String", "json_key": "first_name" },
+          { "name": "fatherName", "type": "String", "json_key": "father_name" },
+          { "name": "lastName", "type": "String", "json_key": "last_name" },
+          { "name": "birthDate", "type": "String", "json_key": "birth_date" },
+          { "name": "nationalNumber", "type": "String", "json_key": "national_number" },
+          { "name": "phoneNumber", "type": "String", "json_key": "phone_number" },
+          { "name": "address", "type": "String" },
+          { "name": "medicalHistory", "type": "String?", "json_key": "medical_history" },
+          { "name": "appointments", "type": "List<AppointmentModel>" }
+        ]
+      },
+      "list_response_model": [
+        {
+          "name": "AppointmentModel",
+          "fields": [
+            { "name": "id", "type": "int" },
+            { "name": "ownerId", "type": "int", "json_key": "owner_id" },
+            { "name": "ownerType", "type": "String", "json_key": "owner_type" },
+            { "name": "date", "type": "String" },
+            { "name": "startTime", "type": "String", "json_key": "start_time" },
+            { "name": "endTime", "type": "String", "json_key": "end_time" },
+            { "name": "price", "type": "int" },
+            { "name": "reason", "type": "String" },
+            { "name": "status", "type": "String" },
+            { "name": "result", "type": "String?" },
+            { "name": "discount", "type": "int?" }
+          ]
+        }
+      ]
+    }
+  ]
+}

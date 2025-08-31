@@ -335,5 +335,8 @@
   "partnerLabel": "Partner",
   "partnersInfoTitle": "Partners Information",
   "unclesInfoTitle": "Uncles Information",
-  "backButton": "Back"
+  "backButton": "Back",
+  "selectChildTitle": "Select Child",
+  "confirmButton": "Confirm",
+  "cancelButton": "Cancel"
 }
