@@ -287,5 +287,13 @@
   "backButton": "رجوع",
   "selectChildTitle": "اختر طفل",
   "confirmButton": "تأكيد",
-  "cancelButton": "إلغاء"
+  "cancelButton": "إلغاء",
+  "appointmentsTitle": "المواعيد",
+  "pastAppointments": "السابقة",
+  "viewResultsButton": "عرض النتائج",
+  "upcomingAppointments": "المواعيد الماضية",
+  "appointmentDetailsTitle": "تفاصيل الموعد",
+  "appointmentInformationTitle": "معلومات الموعد",
+  "doctorNotesResultsTitle": "ملاحظات/نتائج الطبيب",
+  "prescriptionTitle": "الوصفة الطبية"
 }

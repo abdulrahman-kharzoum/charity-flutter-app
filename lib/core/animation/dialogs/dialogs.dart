@@ -102,6 +102,7 @@ void errorDialog({required BuildContext context, required String text}) {
               ),
               onPressed: () {
                 Navigator.pop(context);
+                Navigator.pop(context);
               },
               child: Text(l10n.okButton, style: textStyle),
             ),

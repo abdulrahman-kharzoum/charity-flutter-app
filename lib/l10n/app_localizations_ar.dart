@@ -858,4 +858,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancelButton => 'إلغاء';
+
+  @override
+  String get appointmentsTitle => 'المواعيد';
+
+  @override
+  String get pastAppointments => 'السابقة';
+
+  @override
+  String get viewResultsButton => 'عرض النتائج';
+
+  @override
+  String get upcomingAppointments => 'المواعيد الماضية';
+
+  @override
+  String get appointmentDetailsTitle => 'تفاصيل الموعد';
+
+  @override
+  String get appointmentInformationTitle => 'معلومات الموعد';
+
+  @override
+  String get doctorNotesResultsTitle => 'ملاحظات/نتائج الطبيب';
+
+  @override
+  String get prescriptionTitle => 'الوصفة الطبية';
 }

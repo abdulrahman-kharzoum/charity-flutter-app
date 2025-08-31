@@ -1,6 +1,8 @@
 import 'package:charity/features/Education/cubits/get_education_home_cubit/get_education_home_cubit.dart';
 import 'package:charity/screens/Education_section/education_main_screen/education_main_screen.dart';
 import 'package:charity/features/Services/profile/cubits/get_beneficiary_profile_cubit/get_beneficiary_profile_cubit.dart';
+import 'package:charity/features/clinic/cubits/get_clinic_beneficiary_cubit/get_clinic_beneficiary_cubit.dart'; // New import
+import 'package:charity/screens/clinic_appointments_screen/clinic_appointments_screen.dart'; // New import
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charity/screens/start/splash_screen.dart';
@@ -89,5 +91,10 @@ final Map<String, WidgetBuilder> routes = {
   '/allCourses': (context) => BlocProvider(
     create: (context) => GetAllNewCoursesCubit(sl<EducationRepository>()),
     child: const AllCoursesScreen(),
+  ),
+  // ====== Clinic Appointments Screen =====//
+  '/clinic_appointments': (context) => BlocProvider(
+    create: (context) => sl<GetClinicBeneficiaryCubit>(),
+    child: const ClinicAppointmentsScreen(),
   ),
 };

@@ -338,5 +338,13 @@
   "backButton": "Back",
   "selectChildTitle": "Select Child",
   "confirmButton": "Confirm",
-  "cancelButton": "Cancel"
+  "cancelButton": "Cancel",
+  "appointmentsTitle": "Appointments",
+  "pastAppointments": "Past",
+  "viewResultsButton": "View Results",
+  "upcomingAppointments": "Past Appointments",
+  "appointmentDetailsTitle": "Appointment Details",
+  "appointmentInformationTitle": "Appointment Information",
+  "doctorNotesResultsTitle": "Doctor's Notes/Results",
+  "prescriptionTitle": "Prescription"
 }

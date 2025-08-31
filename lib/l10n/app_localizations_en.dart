@@ -858,4 +858,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancelButton => 'Cancel';
+
+  @override
+  String get appointmentsTitle => 'Appointments';
+
+  @override
+  String get pastAppointments => 'Past';
+
+  @override
+  String get viewResultsButton => 'View Results';
+
+  @override
+  String get upcomingAppointments => 'Past Appointments';
+
+  @override
+  String get appointmentDetailsTitle => 'Appointment Details';
+
+  @override
+  String get appointmentInformationTitle => 'Appointment Information';
+
+  @override
+  String get doctorNotesResultsTitle => 'Doctor\'s Notes/Results';
+
+  @override
+  String get prescriptionTitle => 'Prescription';
 }

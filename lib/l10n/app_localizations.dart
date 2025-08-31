@@ -1756,6 +1756,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get cancelButton;
+
+  /// No description provided for @appointmentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointments'**
+  String get appointmentsTitle;
+
+  /// No description provided for @pastAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Past'**
+  String get pastAppointments;
+
+  /// No description provided for @viewResultsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'View Results'**
+  String get viewResultsButton;
+
+  /// No description provided for @upcomingAppointments.
+  ///
+  /// In en, this message translates to:
+  /// **'Past Appointments'**
+  String get upcomingAppointments;
+
+  /// No description provided for @appointmentDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment Details'**
+  String get appointmentDetailsTitle;
+
+  /// No description provided for @appointmentInformationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Appointment Information'**
+  String get appointmentInformationTitle;
+
+  /// No description provided for @doctorNotesResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor\'s Notes/Results'**
+  String get doctorNotesResultsTitle;
+
+  /// No description provided for @prescriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Prescription'**
+  String get prescriptionTitle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

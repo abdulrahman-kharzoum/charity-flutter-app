@@ -257,7 +257,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
               bottom: 0, // Pushes image downwards (from bottom, so effectively more visible at bottom)
             ),
             onTap: () {
-              // TODO: Navigate to Dispensary Section
+              Navigator.pushNamed(context, '/clinic_appointments');
             },
           ),
           const SizedBox(height: 20),
@@ -475,7 +475,19 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           backgroundColor: AppColors.teal50,
           iconColor: AppColors.teal700,
           textColor: AppColors.teal800,
-          onTap: () { /* TODO: Action */ },
+          onTap: () {
+            Navigator.pushNamed(context, '/clinic_appointments');
+          },
+        ),
+        _buildQuickAccessButton(
+          icon: Icons.local_hospital_outlined, // New icon for clinic appointments
+          label: l10n.homeServiceDispensaryTitle, // Using existing localization for "Clinic Section"
+          backgroundColor: AppColors.primary50, // Reusing primary color for consistency
+          iconColor: AppColors.primary700,
+          textColor: AppColors.primary800,
+          onTap: () {
+            Navigator.pushNamed(context, '/clinic_appointments');
+          },
         ),
         _buildQuickAccessButton(
           icon: Icons.people_alt_outlined,
