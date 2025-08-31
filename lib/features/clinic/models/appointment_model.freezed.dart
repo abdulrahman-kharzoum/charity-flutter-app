@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AppointmentModel {
 
- int get id;@JsonKey(name: 'owner_id') int get ownerId;@JsonKey(name: 'owner_type') String get ownerType; String get date;@JsonKey(name: 'start_time') String get startTime;@JsonKey(name: 'end_time') String get endTime; int get price; String get reason; String get status; String? get result; int? get discount;
+ int get id;@JsonKey(name: 'owner_id') int get ownerId;@JsonKey(name: 'owner_type') String get ownerType; String get date;@JsonKey(name: 'start_time') String get startTime;@JsonKey(name: 'end_time') String get endTime; int get price; String get reason; String get status; String? get result; int? get discount; String? get doctorName; String? get specialization;
 /// Create a copy of AppointmentModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AppointmentModelCopyWith<AppointmentModel> get copyWith => _$AppointmentModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppointmentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.ownerType, ownerType) || other.ownerType == ownerType)&&(identical(other.date, date) || other.date == date)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.price, price) || other.price == price)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.status, status) || other.status == status)&&(identical(other.result, result) || other.result == result)&&(identical(other.discount, discount) || other.discount == discount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppointmentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.ownerType, ownerType) || other.ownerType == ownerType)&&(identical(other.date, date) || other.date == date)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.price, price) || other.price == price)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.status, status) || other.status == status)&&(identical(other.result, result) || other.result == result)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.doctorName, doctorName) || other.doctorName == doctorName)&&(identical(other.specialization, specialization) || other.specialization == specialization));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ownerId,ownerType,date,startTime,endTime,price,reason,status,result,discount);
+int get hashCode => Object.hash(runtimeType,id,ownerId,ownerType,date,startTime,endTime,price,reason,status,result,discount,doctorName,specialization);
 
 @override
 String toString() {
-  return 'AppointmentModel(id: $id, ownerId: $ownerId, ownerType: $ownerType, date: $date, startTime: $startTime, endTime: $endTime, price: $price, reason: $reason, status: $status, result: $result, discount: $discount)';
+  return 'AppointmentModel(id: $id, ownerId: $ownerId, ownerType: $ownerType, date: $date, startTime: $startTime, endTime: $endTime, price: $price, reason: $reason, status: $status, result: $result, discount: $discount, doctorName: $doctorName, specialization: $specialization)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AppointmentModelCopyWith<$Res>  {
   factory $AppointmentModelCopyWith(AppointmentModel value, $Res Function(AppointmentModel) _then) = _$AppointmentModelCopyWithImpl;
 @useResult
 $Res call({
- int id,@JsonKey(name: 'owner_id') int ownerId,@JsonKey(name: 'owner_type') String ownerType, String date,@JsonKey(name: 'start_time') String startTime,@JsonKey(name: 'end_time') String endTime, int price, String reason, String status, String? result, int? discount
+ int id,@JsonKey(name: 'owner_id') int ownerId,@JsonKey(name: 'owner_type') String ownerType, String date,@JsonKey(name: 'start_time') String startTime,@JsonKey(name: 'end_time') String endTime, int price, String reason, String status, String? result, int? discount, String? doctorName, String? specialization
 });
 
 
@@ -65,7 +65,7 @@ class _$AppointmentModelCopyWithImpl<$Res>
 
 /// Create a copy of AppointmentModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? ownerId = null,Object? ownerType = null,Object? date = null,Object? startTime = null,Object? endTime = null,Object? price = null,Object? reason = null,Object? status = null,Object? result = freezed,Object? discount = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? ownerId = null,Object? ownerType = null,Object? date = null,Object? startTime = null,Object? endTime = null,Object? price = null,Object? reason = null,Object? status = null,Object? result = freezed,Object? discount = freezed,Object? doctorName = freezed,Object? specialization = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,ownerId: null == ownerId ? _self.ownerId : ownerId // ignore: cast_nullable_to_non_nullable
@@ -78,7 +78,9 @@ as int,reason: null == reason ? _self.reason : reason // ignore: cast_nullable_t
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
 as String?,discount: freezed == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,doctorName: freezed == doctorName ? _self.doctorName : doctorName // ignore: cast_nullable_to_non_nullable
+as String?,specialization: freezed == specialization ? _self.specialization : specialization // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -163,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'owner_id')  int ownerId, @JsonKey(name: 'owner_type')  String ownerType,  String date, @JsonKey(name: 'start_time')  String startTime, @JsonKey(name: 'end_time')  String endTime,  int price,  String reason,  String status,  String? result,  int? discount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'owner_id')  int ownerId, @JsonKey(name: 'owner_type')  String ownerType,  String date, @JsonKey(name: 'start_time')  String startTime, @JsonKey(name: 'end_time')  String endTime,  int price,  String reason,  String status,  String? result,  int? discount,  String? doctorName,  String? specialization)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppointmentModel() when $default != null:
-return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTime,_that.endTime,_that.price,_that.reason,_that.status,_that.result,_that.discount);case _:
+return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTime,_that.endTime,_that.price,_that.reason,_that.status,_that.result,_that.discount,_that.doctorName,_that.specialization);case _:
   return orElse();
 
 }
@@ -184,10 +186,10 @@ return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTim
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'owner_id')  int ownerId, @JsonKey(name: 'owner_type')  String ownerType,  String date, @JsonKey(name: 'start_time')  String startTime, @JsonKey(name: 'end_time')  String endTime,  int price,  String reason,  String status,  String? result,  int? discount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id, @JsonKey(name: 'owner_id')  int ownerId, @JsonKey(name: 'owner_type')  String ownerType,  String date, @JsonKey(name: 'start_time')  String startTime, @JsonKey(name: 'end_time')  String endTime,  int price,  String reason,  String status,  String? result,  int? discount,  String? doctorName,  String? specialization)  $default,) {final _that = this;
 switch (_that) {
 case _AppointmentModel():
-return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTime,_that.endTime,_that.price,_that.reason,_that.status,_that.result,_that.discount);case _:
+return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTime,_that.endTime,_that.price,_that.reason,_that.status,_that.result,_that.discount,_that.doctorName,_that.specialization);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +206,10 @@ return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTim
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'owner_id')  int ownerId, @JsonKey(name: 'owner_type')  String ownerType,  String date, @JsonKey(name: 'start_time')  String startTime, @JsonKey(name: 'end_time')  String endTime,  int price,  String reason,  String status,  String? result,  int? discount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id, @JsonKey(name: 'owner_id')  int ownerId, @JsonKey(name: 'owner_type')  String ownerType,  String date, @JsonKey(name: 'start_time')  String startTime, @JsonKey(name: 'end_time')  String endTime,  int price,  String reason,  String status,  String? result,  int? discount,  String? doctorName,  String? specialization)?  $default,) {final _that = this;
 switch (_that) {
 case _AppointmentModel() when $default != null:
-return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTime,_that.endTime,_that.price,_that.reason,_that.status,_that.result,_that.discount);case _:
+return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTime,_that.endTime,_that.price,_that.reason,_that.status,_that.result,_that.discount,_that.doctorName,_that.specialization);case _:
   return null;
 
 }
@@ -219,7 +221,7 @@ return $default(_that.id,_that.ownerId,_that.ownerType,_that.date,_that.startTim
 @JsonSerializable()
 
 class _AppointmentModel implements AppointmentModel {
-  const _AppointmentModel({required this.id, @JsonKey(name: 'owner_id') required this.ownerId, @JsonKey(name: 'owner_type') required this.ownerType, required this.date, @JsonKey(name: 'start_time') required this.startTime, @JsonKey(name: 'end_time') required this.endTime, required this.price, required this.reason, required this.status, required this.result, required this.discount});
+  const _AppointmentModel({required this.id, @JsonKey(name: 'owner_id') required this.ownerId, @JsonKey(name: 'owner_type') required this.ownerType, required this.date, @JsonKey(name: 'start_time') required this.startTime, @JsonKey(name: 'end_time') required this.endTime, required this.price, required this.reason, required this.status, required this.result, required this.discount, this.doctorName, this.specialization});
   factory _AppointmentModel.fromJson(Map<String, dynamic> json) => _$AppointmentModelFromJson(json);
 
 @override final  int id;
@@ -233,6 +235,8 @@ class _AppointmentModel implements AppointmentModel {
 @override final  String status;
 @override final  String? result;
 @override final  int? discount;
+@override final  String? doctorName;
+@override final  String? specialization;
 
 /// Create a copy of AppointmentModel
 /// with the given fields replaced by the non-null parameter values.
@@ -247,16 +251,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppointmentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.ownerType, ownerType) || other.ownerType == ownerType)&&(identical(other.date, date) || other.date == date)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.price, price) || other.price == price)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.status, status) || other.status == status)&&(identical(other.result, result) || other.result == result)&&(identical(other.discount, discount) || other.discount == discount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppointmentModel&&(identical(other.id, id) || other.id == id)&&(identical(other.ownerId, ownerId) || other.ownerId == ownerId)&&(identical(other.ownerType, ownerType) || other.ownerType == ownerType)&&(identical(other.date, date) || other.date == date)&&(identical(other.startTime, startTime) || other.startTime == startTime)&&(identical(other.endTime, endTime) || other.endTime == endTime)&&(identical(other.price, price) || other.price == price)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.status, status) || other.status == status)&&(identical(other.result, result) || other.result == result)&&(identical(other.discount, discount) || other.discount == discount)&&(identical(other.doctorName, doctorName) || other.doctorName == doctorName)&&(identical(other.specialization, specialization) || other.specialization == specialization));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ownerId,ownerType,date,startTime,endTime,price,reason,status,result,discount);
+int get hashCode => Object.hash(runtimeType,id,ownerId,ownerType,date,startTime,endTime,price,reason,status,result,discount,doctorName,specialization);
 
 @override
 String toString() {
-  return 'AppointmentModel(id: $id, ownerId: $ownerId, ownerType: $ownerType, date: $date, startTime: $startTime, endTime: $endTime, price: $price, reason: $reason, status: $status, result: $result, discount: $discount)';
+  return 'AppointmentModel(id: $id, ownerId: $ownerId, ownerType: $ownerType, date: $date, startTime: $startTime, endTime: $endTime, price: $price, reason: $reason, status: $status, result: $result, discount: $discount, doctorName: $doctorName, specialization: $specialization)';
 }
 
 
@@ -267,7 +271,7 @@ abstract mixin class _$AppointmentModelCopyWith<$Res> implements $AppointmentMod
   factory _$AppointmentModelCopyWith(_AppointmentModel value, $Res Function(_AppointmentModel) _then) = __$AppointmentModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id,@JsonKey(name: 'owner_id') int ownerId,@JsonKey(name: 'owner_type') String ownerType, String date,@JsonKey(name: 'start_time') String startTime,@JsonKey(name: 'end_time') String endTime, int price, String reason, String status, String? result, int? discount
+ int id,@JsonKey(name: 'owner_id') int ownerId,@JsonKey(name: 'owner_type') String ownerType, String date,@JsonKey(name: 'start_time') String startTime,@JsonKey(name: 'end_time') String endTime, int price, String reason, String status, String? result, int? discount, String? doctorName, String? specialization
 });
 
 
@@ -284,7 +288,7 @@ class __$AppointmentModelCopyWithImpl<$Res>
 
 /// Create a copy of AppointmentModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? ownerId = null,Object? ownerType = null,Object? date = null,Object? startTime = null,Object? endTime = null,Object? price = null,Object? reason = null,Object? status = null,Object? result = freezed,Object? discount = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? ownerId = null,Object? ownerType = null,Object? date = null,Object? startTime = null,Object? endTime = null,Object? price = null,Object? reason = null,Object? status = null,Object? result = freezed,Object? discount = freezed,Object? doctorName = freezed,Object? specialization = freezed,}) {
   return _then(_AppointmentModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,ownerId: null == ownerId ? _self.ownerId : ownerId // ignore: cast_nullable_to_non_nullable
@@ -297,7 +301,9 @@ as int,reason: null == reason ? _self.reason : reason // ignore: cast_nullable_t
 as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,result: freezed == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
 as String?,discount: freezed == discount ? _self.discount : discount // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,doctorName: freezed == doctorName ? _self.doctorName : doctorName // ignore: cast_nullable_to_non_nullable
+as String?,specialization: freezed == specialization ? _self.specialization : specialization // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

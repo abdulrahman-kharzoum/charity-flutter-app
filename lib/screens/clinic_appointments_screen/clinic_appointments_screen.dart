@@ -8,6 +8,10 @@ import 'package:charity/core/functions/apis_error_handler.dart';
 import 'package:charity/core/services/status.dart';
 import 'package:charity/features/clinic/models/appointment_model.dart';
 import 'package:charity/screens/clinic_appointments_screen/appointment_details_screen.dart'; // Import the new screen
+import 'package:intl/intl.dart';
+import 'package:get_it/get_it.dart';
+import 'package:charity/core/services/service_locator.dart';
+import 'package:charity/features/clinic/repo/clinic_repository.dart';
 
 class ClinicAppointmentsScreen extends StatefulWidget {
   const ClinicAppointmentsScreen({super.key});
@@ -150,10 +154,105 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('Appointment: ${appointment.id} - ${appointment.date}'),
+    final l10n = AppLocalizations.of(context)!;
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlocProvider(
+              create: (context) => GetClinicBeneficiaryCubit(sl<ClinicRepository>()),
+              child: AppointmentDetailsScreen(
+                beneficiaryId: appointment.ownerId, // Assuming ownerId is beneficiaryId
+                appointmentId: appointment.id,
+              ),
+            ),
+          ),
+        );
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Dr. ${appointment.doctorName ?? 'Unknown'}', // Assuming doctorName exists or is added
+                      style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      appointment.specialization ?? l10n.unknownSpecialization,
+                      style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${DateFormat('EEE, MMM d').format(DateTime.parse(appointment.date))} · ${appointment.startTime}',
+                      style: const TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    OutlinedButton(
+                      onPressed: () {
+                        // Handle "View Results" action
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => GetClinicBeneficiaryCubit(sl<ClinicRepository>()),
+                              child: AppointmentDetailsScreen(
+                                beneficiaryId: appointment.ownerId,
+                                appointmentId: appointment.id,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: AppColors.primaryBlue),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      ),
+                      child: Text(
+                        l10n.viewResultsButton,
+                        style: const TextStyle(color: AppColors.primaryBlue),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: AppColors.lightGreyBackground,
+                  borderRadius: BorderRadius.circular(12.0),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/doctor2.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

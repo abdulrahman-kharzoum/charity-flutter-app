@@ -17,6 +17,8 @@ abstract class AppointmentModel with _$AppointmentModel {
     required String status,
     required String? result,
     required int? discount,
+    String? doctorName,
+    String? specialization,
   }) = _AppointmentModel;
 
   factory AppointmentModel.fromJson(Map<String, dynamic> json) => _$AppointmentModelFromJson(json);

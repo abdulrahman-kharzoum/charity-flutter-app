@@ -346,5 +346,6 @@
   "appointmentDetailsTitle": "Appointment Details",
   "appointmentInformationTitle": "Appointment Information",
   "doctorNotesResultsTitle": "Doctor's Notes/Results",
-  "prescriptionTitle": "Prescription"
+  "prescriptionTitle": "Prescription",
+  "unknownSpecialization": "Unknown Specialization"
 }

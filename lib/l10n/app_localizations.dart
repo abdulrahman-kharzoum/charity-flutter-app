@@ -1804,6 +1804,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prescription'**
   String get prescriptionTitle;
+
+  /// No description provided for @unknownSpecialization.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Specialization'**
+  String get unknownSpecialization;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

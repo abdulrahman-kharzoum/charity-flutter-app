@@ -882,4 +882,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get prescriptionTitle => 'الوصفة الطبية';
+
+  @override
+  String get unknownSpecialization => 'Unknown Specialization';
 }

@@ -882,4 +882,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get prescriptionTitle => 'Prescription';
+
+  @override
+  String get unknownSpecialization => 'Unknown Specialization';
 }
